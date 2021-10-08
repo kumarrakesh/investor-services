@@ -11,10 +11,12 @@
   position: fixed;
   background: white;
   width: 80%;
-  height: 200px;
+  height: fit-content;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  display: flex;
+  border-radius: 10px;
 }
 
 .display-block {
@@ -24,15 +26,51 @@
 .display-none {
   display: none;
 }
-#modal-close-button {
-  position: absolute;
+#modal-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  flex-direction: column;
+  gap: 2rem;
+}
+#help-text {
+  color: #0a2e6d;
+  font-weight: 700;
+  font-size: 2rem;
+}
+#login-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+#login-inputs input {
+  border-radius: 0.75rem;
+  border: 3px silver solid;
+  font-size: 1rem;
+  padding: 10px;
+}
+#submit-button {
+  margin-top: 1rem;
   background-color: #0a2e6d;
   border: none;
   border-radius: 8px;
   color: white;
   top: 1rem;
   right: 1rem;
-  padding: 0.15rem 1rem;
+  padding: 0.4rem 1rem;
   font-weight: 600;
-  font-size: 2rem;
+  font-size: 1.2rem;
+}
+#modal-close-button {
+  position: absolute;
+  background-color: #0a2e6d;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  top: 1rem;
+  right: 1rem;
+  padding: 0rem 0.65rem;
+  font-weight: 600;
+  font-size: 1.5rem;
 }
