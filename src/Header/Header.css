@@ -1,0 +1,19 @@
+#header-container {
+  background-color: #000c21;
+  position: relative;
+}
+#header-logo {
+  margin: 1rem 5rem;
+}
+#login-button {
+  position: absolute;
+  background-color: #0a2e6d;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  top: 50%;
+  transform: translate(0px, -50%);
+  right: 2rem;
+  padding: 1rem 2rem;
+  font-weight: 600;
+}
