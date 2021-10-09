@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
-import './Header.css';
-import LoginModal from '../LoginModal/LoginModal';
-const Header = () => {
-  const [modalShow, setModalShow] = useState(false);
-  const handleClose = () => setModalShow(false);
-
+import './Dashboard.css';
+import LoginPage from '../LoginPage/LoginPage';
+const Dashboard = () => {
   return (
     <div id="header-container">
-      <LoginModal handleClose={handleClose} modalShow={modalShow} />
+      <LoginPage />
       <img
         id="header-logo"
         src="https://tiwpe.com/image/tiw-logo.png"
@@ -16,7 +13,7 @@ const Header = () => {
       <button
         id="login-button"
         onClick={() => {
-          setModalShow(true);
+          alert(1);
         }}
       >
         Login
@@ -25,4 +22,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Dashboard;

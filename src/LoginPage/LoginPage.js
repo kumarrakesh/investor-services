@@ -1,6 +1,6 @@
-import './LoginModal.css';
+import './LoginPage.css';
 
-const LoginModal = ({ handleClose, modalShow }) => {
+const LoginPage = ({ handleClose, modalShow }) => {
   const showHideClassName = modalShow
     ? 'modal display-block'
     : 'modal display-none';
@@ -33,4 +33,4 @@ const LoginModal = ({ handleClose, modalShow }) => {
     </div>
   );
 };
-export default LoginModal;
+export default LoginPage;
