@@ -1,10 +1,27 @@
-import Header from './Header/Header';
-import Body from './Body/Body';
+import React from 'react';
+import { Switch, Route } from 'react-router';
+import LoginPage from './LoginPage/LoginPage';
+import Dashboard from './Dashboard/Dashboard';
+import Profile from './Profile/Profile';
+import Statements from './Statements/Statements';
+
 function App() {
   return (
     <>
-      <Header />
-      <Body />
+      <Switch>
+        <Route path="/" exact>
+          <LoginPage />
+        </Route>
+        <Route path="/dashboard">
+          <Dashboard />
+        </Route>
+        <Route path="/profile">
+          <Profile />
+        </Route>
+        <Route path="/statements">
+          <Statements />
+        </Route>
+      </Switch>
     </>
   );
 }
