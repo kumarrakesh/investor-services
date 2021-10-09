@@ -1,15 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Dashboard.css';
-import LoginPage from '../LoginPage/LoginPage';
+import Navbar from '../Navbar/Navbar';
 const Dashboard = () => {
   return (
     <div id="header-container">
-      <LoginPage />
-      <img
-        id="header-logo"
-        src="https://tiwpe.com/image/tiw-logo.png"
-        alt="tiwpe logo"
-      />
+      <Navbar />
+
       <button
         id="login-button"
         onClick={() => {
