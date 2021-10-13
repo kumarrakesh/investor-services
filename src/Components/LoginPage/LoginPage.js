@@ -1,5 +1,5 @@
 import './LoginPage.css';
-import logo from '../assets/images/tiwpe-logo.png';
+import logo from '../../assets/images/tiwpe-logo.png';
 import { useHistory } from 'react-router';
 
 const LoginPage = () => {
