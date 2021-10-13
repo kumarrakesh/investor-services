@@ -1,6 +1,6 @@
 #login-background {
   background-image: linear-gradient(to bottom, #0b1e3fb5, #0b1e3fb5),
-    url('../assets/images/login-bg.png');
+    url('../../assets/images/login-bg.png');
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

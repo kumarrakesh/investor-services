@@ -1,0 +1,312 @@
+.stats{
+position: absolute;
+width: 220px;
+height: 28px;
+left: 76px;
+top: 57px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 28px;
+
+color: #132F5E;
+}
+
+.statement-container{
+    position: absolute;
+    left :300px;
+}
+
+.switches{
+position: absolute;
+width: 1142px;
+height: 54px;
+left: 76px;
+top: 118px;
+
+background: #FFFFFF;
+border: 1px solid #CECECE;
+box-sizing: border-box;
+border-radius: 8px;
+}
+.overall{
+    position: absolute;
+    width: 50px;
+    height: 19px;
+    left: 100px;
+    top: 14px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
+
+
+    color: #E95B3E;
+}
+
+.inv-1{
+    position: absolute;
+width: 93px;
+height: 19px;
+left: 200px;
+top: 14px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+
+
+color: rgba(19, 47, 94, 0.8);
+
+}
+
+.inv-2{
+
+    position: absolute;
+width: 93px;
+height: 19px;
+left: 340px;
+top: 14px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+
+
+color: rgba(19, 47, 94, 0.8);
+
+
+}
+
+.inv-3{
+    position: absolute;
+width: 93px;
+height: 19px;
+left: 480px;
+top: 14px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+
+
+color: rgba(19, 47, 94, 0.8);
+
+}
+
+.inv-4{
+    position: absolute;
+width: 93px;
+height: 19px;
+left: 620px;
+top: 14px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+
+
+color: rgba(19, 47, 94, 0.8);
+
+}
+
+
+.amount{
+    position: absolute;
+    left : 0px;
+    top: 204px;
+}
+
+.inv-amt{
+    position: absolute;
+width: 69px;
+height: 16px;
+left: 76px;
+top: 0px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: 300;
+font-size: 14px;
+line-height: 16px;
+
+color: #132F5E;
+
+}
+
+.total-gain{
+    position: absolute;
+width: 69px;
+height: 16px;
+left: 272px;
+top: 0px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: 300;
+font-size: 14px;
+line-height: 16px;
+
+color: #132F5E;
+
+}
+
+.net-gain{
+    position: absolute;
+width: 69px;
+height: 16px;
+left: 468px;
+top: 0px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: 300;
+font-size: 14px;
+line-height: 16px;
+
+color: #132F5E;
+
+}
+
+.values{
+    position: absolute;
+    left : 0px;
+    top: 230px;
+
+}
+
+.inv-val{
+    position: absolute;
+width: 135px;
+height: 28px;
+left: 76px;
+top: 0px;
+
+
+font-family: Roboto;
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 28px;
+
+color: #132F5E;
+}
+
+.total-gain-val{
+    position: absolute;
+width: 135px;
+height: 28px;
+left: 272px;
+top: 0px;
+
+
+font-family: Roboto;
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 28px;
+
+color: #132F5E;
+}
+
+.net-gain-val{
+    position: absolute;
+width: 135px;
+height: 28px;
+left: 468px;
+top: 0px;
+
+
+font-family: Roboto;
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 28px;
+
+color: #132F5E;
+}
+
+.dates{
+    position: absolute;
+    top : 304px;
+}
+.st-date{
+    position: absolute;
+width: 63px;
+height: 16px;
+left: 78px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 16px;
+
+color: rgba(19, 47, 94, 0.6);
+}
+
+.end-date{
+    position: absolute;
+width: 63px;
+height: 16px;
+left: 284px;
+
+
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 16px;
+
+color: rgba(19, 47, 94, 0.6);
+}
+
+.date-val{
+    position: absolute;
+    top : 308px;
+}
+
+.st-date-val{
+
+    position: absolute;
+    left :76px;
+    width: 184px;
+    height: 44px;
+
+    /* background: #FFFFFF;
+    border: 1px solid #91ACD9;
+    box-sizing: border-box;
+    border-radius: 4px; */
+
+}
+
+.end-date-val{
+    position: absolute;
+    left :324px;
+    width: 184px;
+    height: 44px;
+
+    /* background: #FFFFFF;
+    border: 1px solid #91ACD9;
+    box-sizing: border-box;
+    border-radius: 4px; */
+
+
+}
