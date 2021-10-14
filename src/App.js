@@ -15,14 +15,14 @@ function App() {
         <Route path={LOGIN_ROUTE} exact>
           <LoginPage />
         </Route>
-        <Route path={DASHBOARD_ROUTE}>
+        <Route path={DASHBOARD_ROUTE} >
           <Dashboard />
         </Route>
         <Route path={PROFILE_ROUTE}>
           <Profile />
         </Route>
         <Route path={STATEMENTS_ROUTE}>
-          <Statements />
+          <Statements/>
         </Route>
       </Switch>
     </>
