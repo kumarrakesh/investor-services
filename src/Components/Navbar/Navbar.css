@@ -1,4 +1,4 @@
-#navbar-main {
+#sidebar-main {
   width: 300px;
   height: 100vh;
   display: flex;
@@ -10,4 +10,78 @@
 #header-logo {
   width: 100px;
   margin-top: 2rem;
+}
+
+.prof-btn{
+  width : 300px;
+  height : 100px;
+}
+
+.prof-txt{
+  align-items: left;
+}
+
+.nav-dash{
+
+  width: 300px;
+  height :90px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+/* .dash-icon{
+  position: relative;
+  left:40px;
+  top :24px;
+} */
+
+.nav-dashboard-btn{
+  display: flex ;
+  justify-content: space-evenly !important; 
+  width: 300px;
+}
+
+
+
+.dash-name{
+    
+font-family: Roboto;
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+
+text-align: center;
+color: #E95B3E;
+
+}
+
+.nav-stat-btn{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 300px;
+  border: 1px solid red;
+  
+}
+
+.nav-stat-header{
+  display: flex;
+  justify-content: space-evenly !important;
+}
+
+.acc-statements{
+
+  font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+
+
+color: rgba(19, 47, 94, 0.8);
+  
 }
