@@ -13,8 +13,10 @@ const Profile = () => {
       <div className = "profile-container">
         <div className = "profile-up">
           <h1 className = "profile">Profile</h1>
+          <a href="/dashboard">
           <div className = "image"> 
           </div>
+          </a>
 
           <div className = "edit-btn">
             <div><Button variant="outlined" className = "edit-pic" style={{ color: "#E95B3E" }}>Edit Picture</Button> </div>            
