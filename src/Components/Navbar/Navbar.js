@@ -72,10 +72,7 @@ const Navbar = () => {
             </div>
         </a>         
             
-          <div><Button id = "nav-inv-1"> Investment 1</Button></div>
-          <div><Button id = "nav-inv-2"> Investment 2</Button></div>
-          <div><Button id = "nav-inv-3"> Investment 3</Button></div>
-          <div><Button id = "nav-inv-4"> Investment 4</Button></div>
+         
                          
         </div>     
       
