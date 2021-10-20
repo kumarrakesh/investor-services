@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '@mui/material/Button';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
 import './Navbar.css';
 const Navbar = () => {
   return (
@@ -38,7 +39,7 @@ const Navbar = () => {
         </Button>
       </a>
 
-      <a href="/dashboard" style={{ textDecoration: 'none' }} >
+      <a href="/dashboard" style={{ textDecoration: 'none', color: "#E95B3E"}} >
       
         <Button variant="outlined" className = "nav-dashboard-btn" style={{ color: "#E95B3E"}}>
 
@@ -53,8 +54,7 @@ const Navbar = () => {
              
         </Button>
       </a>
-
-      
+    
      
         <div className = "nav-stat-btn" style={{ color: "#E95B3E"}}>
           
@@ -71,13 +71,26 @@ const Navbar = () => {
                 </div>  
             </div>
         </a>         
-            
-          <div><Button id = "nav-inv-1"> Investment 1</Button></div>
-          <div><Button id = "nav-inv-2"> Investment 2</Button></div>
-          <div><Button id = "nav-inv-3"> Investment 3</Button></div>
-          <div><Button id = "nav-inv-4"> Investment 4</Button></div>
-                         
+                                    
         </div>     
+
+        <div className = "nav-grievances-btn" style={{ color: "#E95B3E"}}>
+          
+        <a href="/grievances" style={{ textDecoration: 'none' }} >
+          <div className = "nav-stat-header">  
+              <div className = "acc-icon">
+              <AccountCircleSharpIcon/>
+              </div>
+              <div className = "acc-statements">Grievances</div>
+                <div className = "right-sign">
+                <svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2.00003 0L0.590027 1.41L5.17003 6L0.590027 10.59L2.00003 12L8.00003 6L2.00003 0Z" fill="#E95B3E"/>
+                </svg>
+                </div>  
+            </div>
+        </a>         
+                                    
+        </div> 
       
 
     
