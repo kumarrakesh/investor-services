@@ -21,30 +21,10 @@
   align-items: left;
 }
 
-.nav-dash{
-
-  width: 300px;
-  height :90px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-}
-
-/* .dash-icon{
-  position: relative;
-  left:40px;
-  top :24px;
-} */
-
 .nav-dashboard-btn{
   width: 300px;
-  height :90px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  height :70px;
 }
-
-
 
 .dash-name{
     
@@ -63,23 +43,20 @@ color: #E95B3E;
 .nav-stat-header{
   display: flex;
   justify-content: space-evenly;
-  width: 300px;
-  height: 90px;
-  border: 1px solid red;
   align-items: center;
-  
+  width: 300px;
+  height :70px;
+  border: 1px solid red;
 }
 
 .acc-statements{
 
-  font-family: Roboto;
+font-family: Roboto;
 font-style: normal;
 font-weight: normal;
 font-size: 16px;
 line-height: 19px;
-/* identical to box height */
 
-
-color: rgba(19, 47, 94, 0.8);
-  
+color: rgba(19, 47, 94, 0.8);  
 }
+

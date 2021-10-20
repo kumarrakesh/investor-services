@@ -26,14 +26,12 @@ color: #132F5E;
 
 .switches{
 
-display: flex;
-justify-content: space-evenly;
-flex-wrap: wrap;
 position: absolute;
-width: 1240px;
-height: 54px;
+width: 157px;
+height: 37px;
 left: 76px;
 top: 118px;
+
 
 background: #FFFFFF;
 border: 1px solid #CECECE;
@@ -214,6 +212,8 @@ color: #132F5E;
 .stat-table{
     position: absolute;
     width: 1240px;
+    height: 350px;
+    overflow: auto;
     top:420px;
     left:78px;
 }

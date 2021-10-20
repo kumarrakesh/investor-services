@@ -1,6 +1,5 @@
 import React from 'react';
 import './Dashboard.css';
-import Navbar from '../Navbar/Navbar'; 
 import Button from '@mui/material/Button';
 import {
   LineChart,
@@ -87,12 +86,10 @@ const data = [
   }
 ];
 
-const Dashboard = () => {
-  return (
-    <div id="header-container">
-      <div><Navbar/></div>     
-
-      <div className = "dash-container">     
+const DashContainer = ()=>{
+    
+    return(
+        <div className = "dash-container">     
         <h1 className="dtitle">Dashboard</h1>
 
         <h1 className = "overview">Overview</h1>         
@@ -154,8 +151,7 @@ const Dashboard = () => {
         </Button>
         </div>
       </div>
-    </div>
-  );
+    )
 };
 
-export default Dashboard;
+export default DashContainer;

@@ -28,26 +28,30 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(Date, Narration, RefNo, InvestmentAmounts,WithdrawAmount, TotalGainAmount, TotalBalanceAmount) {
-  return { Date, Narration, RefNo, InvestmentAmounts,WithdrawAmount,TotalGainAmount, TotalBalanceAmount};
+function createData(Date, Narration, FundName, RefNo, InvestedAmounts,WithdrawAmount, TotalGainAmount, TotalBalanceAmount) {
+  return { Date, Narration,FundName, RefNo, InvestedAmounts,WithdrawAmount,TotalGainAmount, TotalBalanceAmount};
 }
 
 const rows = [
-  createData('21/01/2021', 'Lorem ipsum dolor sit amet', 834238234,  47123, 3452, 412323,13947123),
-  createData('21/01/2021', 'Lorem ipsum dolor sit amet', 834238234,  47123, 3452, 412323,13947123),
-  createData('21/01/2021', 'Lorem ipsum dolor sit amet', 834238234,  47123,3452, 412323,13947123),
-  createData('21/01/2021', 'Lorem ipsum dolor sit amet', 834238234,  47123,3452, 412323,13947123),
-  createData('21/01/2021', 'Lorem ipsum dolor sit amet', 834238234,  47123,3452, 412323,13947123),
+  createData('21/01/2021', 'Lorem ipsum dolor sit amet', 834238234,  47123, 3452, 412323,13947123,13947123),
+  createData('21/01/2021', 'Lorem ipsum dolor sit amet', 834238234,  47123, 3452, 412323,13947123,13947123),
+  createData('21/01/2021', 'Lorem ipsum dolor sit amet', 834238234,  47123,3452, 412323,13947123,13947123),
+  createData('21/01/2021', 'Lorem ipsum dolor sit amet', 834238234,  47123,3452, 412323,13947123,13947123),
+  createData('21/01/2021', 'Lorem ipsum dolor sit amet', 834238234,  47123,3452, 412323,13947123,13947123),
+  createData('21/01/2021', 'Lorem ipsum dolor sit amet', 834238234,  47123,3452, 412323,13947123,13947123),
+  createData('21/01/2021', 'Lorem ipsum dolor sit amet', 834238234,  47123,3452, 412323,13947123,13947123),
+  createData('21/01/2021', 'Lorem ipsum dolor sit amet', 834238234,  47123,3452, 412323,13947123,13947123),
 ];
 
 export default function CustomizedTables() {
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
+    <TableContainer component={Paper} >
+      <Table sx={{ minWidth: 700 ,height:"100px", overflow:"scroll"}} aria-label="customized table">
         <TableHead>
           <TableRow>
             <StyledTableCell>Date</StyledTableCell>
-            <StyledTableCell align="right">Narration</StyledTableCell>
+            <StyledTableCell align="center">Narration</StyledTableCell>
+            <StyledTableCell>Fund Name</StyledTableCell>
             <StyledTableCell align="right">Ref. No.</StyledTableCell>
             <StyledTableCell align="right">Investment Amount</StyledTableCell>
             <StyledTableCell align="right">Withdraw Amount</StyledTableCell>
@@ -60,9 +64,10 @@ export default function CustomizedTables() {
             <StyledTableRow key={row.name}>
               <StyledTableCell component="th" scope="row">{row.Date}</StyledTableCell>
               <StyledTableCell align="right" component="th" scope="row">{row.Narration}</StyledTableCell>
+              <StyledTableCell align="right" component="th" scope="row">{row.FundName}</StyledTableCell>
               <StyledTableCell align="right">{row.RefNo}</StyledTableCell>
-              <StyledTableCell align="right">{row.InvestmentAmounts}</StyledTableCell>
-              <StyledTableCell align="right">{row.WithdrawAmount}</StyledTableCell>
+              <StyledTableCell align="right">{row.InvestedAmounts}</StyledTableCell>
+              <StyledTableCell align="right">{row.WithdrawAmounts}</StyledTableCell>
               <StyledTableCell align="right">{row.TotalGainAmount}</StyledTableCell>
               <StyledTableCell align="right">{row.TotalBalanceAmount}</StyledTableCell>
             </StyledTableRow>
