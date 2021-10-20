@@ -1,13 +1,29 @@
+import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 import './LoginPage.css';
 import logo from '../../assets/images/tiwpe-logo.png';
-import { useHistory } from 'react-router';
 
 const LoginPage = () => {
   const history = useHistory();
-  const handleLogin = () => {
-    history.push('/dashboard');
+  const handleLogin = async () => {
+    console.log(username, password);
+    let response = await fetch(
+      'https://investorbackend.herokuapp.com/api/user/signin',
+      {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify({ username, password })
+      }
+    );
+    let data = await response.json();
+    if (data.status && data.role === 'ADMIN') history.push('/admin/dashboard');
+    else history.push('/dashboard');
   };
-
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   return (
     <div id="login-background">
       <div id="login-page-content">
@@ -18,9 +34,21 @@ const LoginPage = () => {
           <span id="login-welcome-text">Welcome to TIW Private Equity</span>
           <span id="login-login-type">Nominee Login</span>
           <span className="login-input-helper">User name</span>
-          <input type="text" />
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
+          />
           <span className="login-input-helper">Password</span>
-          <input type="password" name="" id="" />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
           <span
             id="login-forgot-password"
             onClick={() => {
