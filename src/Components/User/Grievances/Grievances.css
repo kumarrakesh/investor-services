@@ -1,79 +1,79 @@
-.header-container{
-    display: flex;
+.header-container {
+  display: flex;
 }
 
-.grievances-container{
-    position: absolute;
-    left: 300px;
-    width: 1200px;
+.grievances-container {
+  position: absolute;
+  left: 300px;
+  width: 1200px;
 }
 
-#grievances-header{
-position: absolute;
-width: 420px;
-height: 28px;
-left: 76px;
-top: 57px;
+#grievances-header {
+  position: absolute;
+  width: 420px;
+  height: 28px;
+  left: 76px;
+  top: 57px;
 
-font-family: Roboto;
-font-style: normal;
-font-weight: 500;
-font-size: 24px;
-line-height: 28px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
 
-color: #132F5E;
+  color: #132f5e;
 }
 
-.query-header{
-    position: absolute;
-    width: 174px;
-    height: 21px;
-    left: 76px;
-    top: 128px;
+.query-header {
+  position: absolute;
+  width: 174px;
+  height: 21px;
+  left: 76px;
+  top: 128px;
 
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 21px;
-    color: #132F5E;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  color: #132f5e;
 }
 
-.btns-div{
-    position:absolute;
-    left:77px;
-    top:184px;
-    justify-content: space-between;
-    width: 420px;
-    display: flex;
+.btns-div {
+  position: absolute;
+  left: 77px;
+  top: 184px;
+  justify-content: space-between;
+  width: 420px;
+  display: flex;
 }
 
-.query-subject{
-    position:absolute;
-    left: 76px;
-    top: 280px;
-    width: 90%;
+.query-subject {
+  position: absolute;
+  left: 76px;
+  top: 280px;
+  width: 90%;
 }
 
-.query-box{
-    position: absolute;
-    left: 76px;
-    top: 376px;
-    width: 90%;
+.query-box {
+  position: absolute;
+  left: 76px;
+  top: 376px;
+  width: 90%;
 }
 
-.send-btn-div{
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    left: 76px;
-    top : 700px;
-    width: 1200px;
+.send-btn-div {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 76px;
+  top: 700px;
+  width: 1200px;
 }
 
-.send-btn{
-    display: flex;
-    width:200px;
-    justify-content: space-around;
+.send-btn {
+  display: flex;
+  width: 200px;
+  justify-content: space-around;
 }

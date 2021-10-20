@@ -12,39 +12,58 @@ import AdminGrievances from '../Admin/Grievances/Grievances';
 import AddInvestor from '../Admin/Investors/AddInvestor/AddInvestor';
 import AddFund from '../Admin/Funds/AddFund/AddFund';
 
+const Routes = () => {
+  return (
+    <Switch>
+      <Route path="/" exact>
+        <LoginPage />
+      </Route>
 
-const Routes = ()=>{
+      <Route path="/dashboard">
+        <Dashboard />
+      </Route>
 
-    return(
-        <Switch>
-            <Route path="/" exact><LoginPage /></Route>
-            
-            <Route path="/dashboard" ><Dashboard /></Route>
+      <Route path="/profile">
+        <Profile />
+      </Route>
 
-            <Route path="/profile"><Profile /></Route>
+      <Route path="/statements">
+        <Statements />
+      </Route>
 
-            <Route path="/statements"><Statements/></Route>
-            
-            <Route path = "/grievances"><Grievances/></Route>
+      <Route path="/grievances">
+        <Grievances />
+      </Route>
 
-            <Route path = "/admin/dashboard"><AdminDashboard/></Route>
+      <Route path="/admin/dashboard">
+        <AdminDashboard />
+      </Route>
 
-            <Route path = "/admin/investors"><Investors/></Route>
+      <Route path="/admin/investors">
+        <Investors />
+      </Route>
 
-            <Route path = "/admin/funds"><Funds/></Route>
+      <Route path="/admin/funds">
+        <Funds />
+      </Route>
 
-            <Route path = "/admin/investments"><Investments/></Route>
+      <Route path="/admin/investments">
+        <Investments />
+      </Route>
 
-            <Route path = "/admin/grievances"><AdminGrievances/></Route>
+      <Route path="/admin/grievances">
+        <AdminGrievances />
+      </Route>
 
-            <Route path = "/admin/investor/add"><AddInvestor/></Route>
+      <Route path="/admin/investor/add">
+        <AddInvestor />
+      </Route>
 
-            <Route path = "/admin/funds/add"><AddFund/></Route>
-
-
-        </Switch>
-    );
+      <Route path="/admin/funds/add">
+        <AddFund />
+      </Route>
+    </Switch>
+  );
 };
 
 export default Routes;
-

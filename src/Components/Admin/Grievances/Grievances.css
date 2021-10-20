@@ -1,93 +1,92 @@
-.investors-main{
-    display:flex;
+.investors-main {
+  display: flex;
 }
 
-#investors-container{
-    position: absolute;
-    left: 300px;
-    width: 1240px;
-    height: 850px;
+#investors-container {
+  position: absolute;
+  left: 300px;
+  width: 1240px;
+  height: 850px;
 }
 
-.dtitle{ 
-    position: absolute;
-    width: 117px;
-    height: 28px;
-    left: 76px;
-    top: 57px;    
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 28px;
+.dtitle {
+  position: absolute;
+  width: 117px;
+  height: 28px;
+  left: 76px;
+  top: 57px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
 
-    color: #132F5E;
+  color: #132f5e;
 }
 
-.overview{
-    position: absolute;
-    width: 74px;
-    height: 21px;
-    left: 76px;
-    top: 128px;
+.overview {
+  position: absolute;
+  width: 74px;
+  height: 21px;
+  left: 76px;
+  top: 128px;
 
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 21px;
-    color: #132F5E;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  color: #132f5e;
 }
 
-.total-investors{
-    position: absolute;
-    width: 191px;
-    height: 16px;
-    left: 76px;
-    top: 174px;
+.total-investors {
+  position: absolute;
+  width: 191px;
+  height: 16px;
+  left: 76px;
+  top: 174px;
 
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 16px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 16px;
 
-    color: #132F5E;
+  color: #132f5e;
 }
 
-.total-no{
-    position: absolute;
-    width: 28px;
-    height: 28px;
-    left: 76px;
-    top: 200px;
+.total-no {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  left: 76px;
+  top: 200px;
 
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 28px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
 
-    color: #132F5E;
+  color: #132f5e;
 }
 
-.inv-btns{
-    position: absolute;
-    left:76px;
-    top: 240px;
-    width: 1240px;
-    display: flex;
-    height: 60px;
-    align-items:flex-end;
-    justify-content: space-between;
+.inv-btns {
+  position: absolute;
+  left: 76px;
+  top: 240px;
+  width: 1240px;
+  display: flex;
+  height: 60px;
+  align-items: flex-end;
+  justify-content: space-between;
 }
 
-.inv-table{
-    position: absolute;
-    width: 1240px;
-    height: 350px;
-    overflow: auto;
-    top:360px;
-    left:78px;
+.inv-table {
+  position: absolute;
+  width: 1240px;
+  height: 350px;
+  overflow: auto;
+  top: 360px;
+  left: 78px;
 }
-
