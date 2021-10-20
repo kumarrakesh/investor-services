@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router';
 import './LoginPage.css';
 import logo from '../../assets/images/tiwpe-logo.png';
-
+import { UserContext } from '../../userContext';
 const LoginPage = () => {
   const history = useHistory();
+  const { setUserData } = useContext(UserContext);
   const handleLogin = async () => {
-    console.log(username, password);
     let response = await fetch(
       'https://investorbackend.herokuapp.com/api/user/signin',
       {
@@ -19,9 +19,12 @@ const LoginPage = () => {
       }
     );
     let data = await response.json();
-    if (data.status && data.role === 'ADMIN') history.push('/admin/dashboard');
-    else history.push('/dashboard');
+    if (data.status && data.role === 'ADMIN') {
+      setUserData({ role: data.role, token: data.token });
+      history.push('/admin/dashboard');
+    } else history.push('/dashboard');
   };
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   return (
