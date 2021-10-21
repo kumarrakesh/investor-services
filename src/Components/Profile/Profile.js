@@ -1,9 +1,57 @@
-import React from 'react';
+import React,{useHistory, useEffect, useContext ,useState} from 'react';
+import { UserContext } from '../../userContext';
 import Navbar from '../User/Navbar/Navbar';
 import Button from '@mui/material/Button';
 import './Profile.css';
 
 const Profile = () => {
+  const { userData } = useContext(UserContext);
+  const [token,setToken] = useState(userData.token); 
+  const [profile, setProfile] = useState("");
+  
+  useEffect(() => {
+    setToken(userData.token);
+    console.log(token);
+    getProfileData(); 
+  }, []);
+
+  const getProfileData=async ()=>{ 
+    const  response = await fetch(
+    'https://investorbackend.herokuapp.com/api/profile',
+    {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'x-access-token':token,
+      },
+      method: 'GET',
+    }
+    ); 
+
+    setProfile(await response.json());    
+  }
+
+  console.log(profile);
+  const name = profile?.data?.name;
+  const AmountInv = profile?.data?.amountInvested;
+  const passport =profile?.data?.passport;
+  const currInvVal = profile?.data?.currentInvestedValue;
+  const maturity =   profile?.data?.maturity;
+  const  tdate = new Date (maturity || 0);
+  const maturityDate = tdate.toLocaleDateString('en-gb');
+
+
+  const city = profile?.data?.city;
+  const state = profile?.data?.state;
+  const country = profile?.data?.country;
+  const pin = profile?.data?.pincode;
+
+  const setDate = async()=>{
+
+  }
+
+
+
   return (
     <div id="header-container">
       <div className="nav">
@@ -31,21 +79,21 @@ const Profile = () => {
         </div>
         <div className="profile-down">
           <div className="row">
-            <div className="item1">Name Mr. John Smith</div>
-            <div className="item2">Passport Number XXSDJWE</div>
+            <div className="item1">Name {'\n'}{name}</div>
+            <div className="item2">Passport Number {'\n'} {passport}</div>
             <div className="item3">
-              Address Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Address {'\n'} {city},{state} , {country},PIN - {pin}
             </div>
           </div>
 
           <div className="line"></div>
 
           <div className="row">
-            <div className="item4">Amount Invested ₦ 13947123</div>
+            <div className="item4">Amount Invested {'\n'} ₦ {AmountInv}</div>
 
-            <div className="item5">Investment Date 14 May 2020</div>
+            <div className="item5">Investment Date {'\n'} 14 May 2020</div>
 
-            <div className="item6">Maturity Date 14 June 2020</div>
+            <div className="item6">Maturity Date {'\n'} {maturityDate}</div>
           </div>
         </div>
       </div>

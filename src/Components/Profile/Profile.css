@@ -63,6 +63,8 @@
   height: 243px;
   left: 400px;
   top: 258px;
+  display: flex;
+  white-space: pre-wrap;
 
   background: #ffffff;
 
@@ -76,6 +78,8 @@
   height: 41px;
   left: 36px;
   top: 34px;
+  display: flex;
+  white-space: pre-wrap;
 
   font-family: Roboto;
   font-style: normal;
@@ -163,7 +167,7 @@
 
 .item6 {
   position: absolute;
-  width: 137px;
+  width: 237px;
   height: 41px;
   left: 439px;
   top: 154px;

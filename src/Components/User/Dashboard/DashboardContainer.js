@@ -142,7 +142,7 @@ const DashContainer = () => {
           </div>
           <div className="inv-txt">
             Download
-            {'\n'} Investment Report{' '}
+            {'\n'} Investment Report
           </div>
         </Button>
         <Button

@@ -48,6 +48,10 @@
   display: flex;
 }
 
+Button:visited{
+  background: red;
+}
+
 .query-subject {
   position: absolute;
   left: 76px;
@@ -76,4 +80,13 @@
   display: flex;
   width: 200px;
   justify-content: space-around;
+}
+
+#query-table{
+  position: absolute;
+  width :1200px;
+  height :470px;
+  left : 76px;
+  top :280px !important;
+  overflow: scroll;
 }

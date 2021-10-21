@@ -12,7 +12,7 @@ const AdNavbar = () => {
         <img src="https://tiwpe.com/image/tiw-logo.png" alt="tiwpe logo" />
       </div>
 
-      <a href="/profile" style={{ textDecoration: 'none' }}>
+     
         <Button
           variant="outlined"
           className="prof-btn"
@@ -64,7 +64,7 @@ const AdNavbar = () => {
             <div className="prof-name">Admin</div>
           </div>
         </Button>
-      </a>
+     
 
       <a
         href="/admin/dashboard"

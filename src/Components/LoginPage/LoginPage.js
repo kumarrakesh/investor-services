@@ -3,6 +3,8 @@ import { useHistory } from 'react-router';
 import './LoginPage.css';
 import logo from '../../assets/images/tiwpe-logo.png';
 import { UserContext } from '../../userContext';
+
+
 const LoginPage = () => {
   const history = useHistory();
   const { setUserData } = useContext(UserContext);
@@ -19,14 +21,16 @@ const LoginPage = () => {
       }
     );
     let data = await response.json();
+    console.log(data);
+    setUserData({ role: data.role, token: data.token });
     if (data.status && data.role === 'ADMIN') {
-      setUserData({ role: data.role, token: data.token });
       history.push('/admin/dashboard');
     } else history.push('/dashboard');
   };
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
   return (
     <div id="login-background">
       <div id="login-page-content">

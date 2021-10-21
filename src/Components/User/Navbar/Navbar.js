@@ -1,19 +1,35 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 import Button from '@mui/material/Button';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
 import './Navbar.css';
 const Navbar = () => {
+
+  const history = useHistory();
+
+  const GotoProfile = ()=>{
+    history.push("/profile");
+  }
+
+  const GoToStatments = ()=>{
+    history.push("/statements");
+  }
+
+  const GoToGrievances = ()=>{
+    history.push("/grievances");
+  }
+
   return (
     <div id="sidebar-main">
       <div id="header-logo">
         <img src="https://tiwpe.com/image/tiw-logo.png" alt="tiwpe logo" />
       </div>
 
-      <a href="/profile" style={{ textDecoration: 'none' }}>
-        <Button
+      
+        <Button 
           variant="outlined"
-          className="prof-btn"
+          className="prof-btn" onClick={GotoProfile}
           style={{ color: '#E95B3E' }}
         >
           <div className="pic">
@@ -62,12 +78,12 @@ const Navbar = () => {
             <div className="prof-name">Mr. John Smith</div>
           </div>
         </Button>
-      </a>
+    
 
-      <a href="/dashboard" style={{ textDecoration: 'none', color: '#E95B3E' }}>
+      
         <Button
           variant="outlined"
-          className="nav-dashboard-btn"
+          className="nav-dashboard-btn" onClick = {()=>{history.push("/dashboard");}}
           style={{ color: '#E95B3E' }}
         >
           <div className="dash-icon">
@@ -88,10 +104,10 @@ const Navbar = () => {
 
           <div className="dash-name"> Dashboard </div>
         </Button>
-      </a>
+    
 
-      <div className="nav-stat-btn" style={{ color: '#E95B3E' }}>
-        <a href="/statements" style={{ textDecoration: 'none' }}>
+      <div className="nav-stat-btn" onClick={GoToStatments} style={{ color: '#E95B3E' }} >
+        
           <div className="nav-stat-header">
             <div className="acc-icon">
               <AccountBalanceIcon />
@@ -112,11 +128,9 @@ const Navbar = () => {
               </svg>
             </div>
           </div>
-        </a>
       </div>
 
-      <div className="nav-grievances-btn" style={{ color: '#E95B3E' }}>
-        <a href="/grievances" style={{ textDecoration: 'none' }}>
+      <div className="nav-grievances-btn" onClick={GoToGrievances} style={{ color: '#E95B3E' }}>
           <div className="nav-stat-header">
             <div className="acc-icon">
               <AccountCircleSharpIcon />
@@ -137,7 +151,6 @@ const Navbar = () => {
               </svg>
             </div>
           </div>
-        </a>
       </div>
     </div>
   );
