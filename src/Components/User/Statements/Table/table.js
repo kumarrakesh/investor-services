@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -28,112 +28,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   }
 }));
 
-function createData(
-  Date,
-  Narration,
-  FundName,
-  RefNo,
-  InvestedAmounts,
-  WithdrawAmount,
-  TotalGainAmount,
-  TotalBalanceAmount
-) {
-  return {
-    Date,
-    Narration,
-    FundName,
-    RefNo,
-    InvestedAmounts,
-    WithdrawAmount,
-    TotalGainAmount,
-    TotalBalanceAmount
-  };
-}
-
-const rows = [
-  createData(
-    '21/01/2021',
-    'Lorem ipsum dolor sit amet',
-    834238234,
-    47123,
-    3452,
-    412323,
-    13947123,
-    13947123
-  ),
-  createData(
-    '21/01/2021',
-    'Lorem ipsum dolor sit amet',
-    834238234,
-    47123,
-    3452,
-    412323,
-    13947123,
-    13947123
-  ),
-  createData(
-    '21/01/2021',
-    'Lorem ipsum dolor sit amet',
-    834238234,
-    47123,
-    3452,
-    412323,
-    13947123,
-    13947123
-  ),
-  createData(
-    '21/01/2021',
-    'Lorem ipsum dolor sit amet',
-    834238234,
-    47123,
-    3452,
-    412323,
-    13947123,
-    13947123
-  ),
-  createData(
-    '21/01/2021',
-    'Lorem ipsum dolor sit amet',
-    834238234,
-    47123,
-    3452,
-    412323,
-    13947123,
-    13947123
-  ),
-  createData(
-    '21/01/2021',
-    'Lorem ipsum dolor sit amet',
-    834238234,
-    47123,
-    3452,
-    412323,
-    13947123,
-    13947123
-  ),
-  createData(
-    '21/01/2021',
-    'Lorem ipsum dolor sit amet',
-    834238234,
-    47123,
-    3452,
-    412323,
-    13947123,
-    13947123
-  ),
-  createData(
-    '21/01/2021',
-    'Lorem ipsum dolor sit amet',
-    834238234,
-    47123,
-    3452,
-    412323,
-    13947123,
-    13947123
-  )
-];
-
-export default function CustomizedTables() {
+export default function CustomizedTables({ rows }) {
   return (
     <TableContainer component={Paper}>
       <Table
@@ -155,32 +50,32 @@ export default function CustomizedTables() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
-                {row.Date}
-              </StyledTableCell>
-              <StyledTableCell align="right" component="th" scope="row">
-                {row.Narration}
-              </StyledTableCell>
-              <StyledTableCell align="right" component="th" scope="row">
-                {row.FundName}
-              </StyledTableCell>
-              <StyledTableCell align="right">{row.RefNo}</StyledTableCell>
-              <StyledTableCell align="right">
-                {row.InvestedAmounts}
-              </StyledTableCell>
-              <StyledTableCell align="right">
-                {row.WithdrawAmounts}
-              </StyledTableCell>
-              <StyledTableCell align="right">
-                {row.TotalGainAmount}
-              </StyledTableCell>
-              <StyledTableCell align="right">
-                {row.TotalBalanceAmount}
-              </StyledTableCell>
-            </StyledTableRow>
-          ))}
+          {rows == {} && <h1>Loading...</h1>}
+          {rows != {} &&
+            rows.map((row) => (
+              <StyledTableRow key={row._id}>
+                <StyledTableCell component="th" scope="row">
+                  {new Date(row.date).toLocaleDateString('en-GB')}
+                </StyledTableCell>
+                <StyledTableCell align="right" component="th" scope="row">
+                  {row.narration}
+                </StyledTableCell>
+                <StyledTableCell align="right" component="th" scope="row">
+                  {row.fundname}
+                </StyledTableCell>
+                <StyledTableCell align="right">{row.RefNo}</StyledTableCell>
+                <StyledTableCell align="right">
+                  {row.investedAmount}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  {row.withdrawalAmount}
+                </StyledTableCell>
+                <StyledTableCell align="right">{row.totalGain}</StyledTableCell>
+                <StyledTableCell align="right">
+                  {row.investedAmount - row.withdrawalAmount}
+                </StyledTableCell>
+              </StyledTableRow>
+            ))}
         </TableBody>
       </Table>
     </TableContainer>
