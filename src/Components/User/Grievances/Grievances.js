@@ -1,4 +1,4 @@
-import React, { useState, useContext,useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import './Grievances.css';
 import { UserContext } from '../../../userContext';
 import Navbar from '../Navbar/Navbar';
@@ -10,35 +10,30 @@ import TelegramIcon from '@mui/icons-material/Telegram';
 
 import CustomizedTables from './table';
 
-
-
 const Grievances = () => {
   const { userData } = useContext(UserContext);
   const token = userData.token;
 
-  const [subject, setSubject] = useState("TESTING");
-  const [description, setDescription] = useState("TESTING");
-  const [date, setDate] = useState("18 OCT 2021");
-  const [data, setData] = useState("");
+  const [subject, setSubject] = useState('TESTING');
+  const [description, setDescription] = useState('TESTING');
+  const [date, setDate] = useState('18 OCT 2021');
+  const [data, setData] = useState('');
 
-  const handleSendQuery = async()=>{
-
+  const handleSendQuery = async () => {
     let response = await fetch(
       'https://investorbackend.herokuapp.com/api/add/query',
       {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
-          'x-access-token':token
+          'x-access-token': token
         },
         method: 'POST',
-        body: JSON.stringify({subject,description,date})
+        body: JSON.stringify({ subject, description, date })
       }
     );
     setData(await response.json());
-    
   };
-
 
   const BootstrapInput = styled(InputBase)(({ theme }) => ({
     'label + &': {
@@ -77,7 +72,7 @@ const Grievances = () => {
     }
   }));
 
-  const [value, setValue] = useState("raise");
+  const [value, setValue] = useState('raise');
 
   return (
     <div className="header-container">
@@ -94,7 +89,9 @@ const Grievances = () => {
             <Button
               variant="contained"
               id="apply-btn"
-              onClick ={ ()=>{ setValue("raise")}}
+              onClick={() => {
+                setValue('raise');
+              }}
             >
               Raise Query
             </Button>
@@ -104,50 +101,63 @@ const Grievances = () => {
             <Button
               variant="contained"
               id="apply-btn"
-              onClick = { ()=>{ setValue("response")}}
+              onClick={() => {
+                setValue('response');
+              }}
             >
               Query Response
             </Button>
           </div>
         </div>
 
-        <div >
-          {value === "raise" &&  
-            <div className = "query-container">
-            <div className="query-subject">
-              <TextField fullWidth label="Query Subject" name = "subject" onChange = {(e)=>{setSubject(e.target.value)}} required id="fullWidth" />
-            </div>
-    
-            <div className="query-box">
-              <TextField
-                id="outlined-multiline-static"
-                name = "description"
-                onChange = {(e)=>{setDescription(e.target.value)} }
-                label="Query"
-                fullWidth
-                multiline
-                rows={11}
-                defaultValue="Write your query..."
-              />
-            </div>
-    
-            <div className="send-btn-div">
-              <Button
-                variant="outlined"
-                className="send-btn"
-                onClick = {handleSendQuery}
-                style={{ color: '#E95B3E', textTransform: 'none' }}
-              >
-                <div>
-                  <TelegramIcon />
-                </div>
-                <div>Send Query</div>
-              </Button>
-            </div>
-          </div>}
-          {value === "response" &&   <CustomizedTables data={data}/>}
-        </div>
+        <div>
+          {value === 'raise' && (
+            <div className="query-container">
+              <div className="query-subject">
+                <TextField
+                  fullWidth
+                  label="Query Subject"
+                  name="subject"
+                  onChange={(e) => {
+                    setSubject(e.target.value);
+                  }}
+                  required
+                  id="fullWidth"
+                />
+              </div>
 
+              <div className="query-box">
+                <TextField
+                  id="outlined-multiline-static"
+                  name="description"
+                  onChange={(e) => {
+                    setDescription(e.target.value);
+                  }}
+                  label="Query"
+                  fullWidth
+                  multiline
+                  rows={11}
+                  defaultValue="Write your query..."
+                />
+              </div>
+
+              <div className="send-btn-div">
+                <Button
+                  variant="outlined"
+                  className="send-btn"
+                  onClick={handleSendQuery}
+                  style={{ color: '#E95B3E', textTransform: 'none' }}
+                >
+                  <div>
+                    <TelegramIcon />
+                  </div>
+                  <div>Send Query</div>
+                </Button>
+              </div>
+            </div>
+          )}
+          {value === 'response' && <CustomizedTables data={data} />}
+        </div>
       </div>
     </div>
   );

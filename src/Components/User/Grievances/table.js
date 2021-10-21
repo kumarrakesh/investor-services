@@ -33,38 +33,42 @@ function createData(Date, QuerySub, QueryId, Action) {
   return { Date, QuerySub, QueryId, Action };
 }
 
-
 export default function CustomizedTables(props) {
+  const originalRows = [
+    createData(
+      '21/01/2021',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      '#1012',
+      'Resolved'
+    ),
+    createData(
+      '21/01/2021',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      '#1012',
+      'Resolved'
+    ),
+    createData(
+      '21/01/2021',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      '#1012',
+      'Resolved'
+    ),
+    createData(
+      '21/01/2021',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      '#1012',
+      'Unresolved'
+    )
+  ];
 
-  
-const originalRows = [
-  createData(
-    '21/01/2021',
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    '#1012',
-    'Resolved',
-  ),
-  createData(
-    '21/01/2021',
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    '#1012',
-    'Resolved',
-  ),
-  createData(
-    '21/01/2021',
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    '#1012',
-    'Resolved',
-  ),
-  createData(
-    '21/01/2021',
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    '#1012',
-    'Unresolved',
-  )
-];
-
-originalRows.push(createData(props.date,props.subject,1001+originalRows.length,props.isResolved));
+  originalRows.push(
+    createData(
+      props.date,
+      props.subject,
+      1001 + originalRows.length,
+      props.isResolved
+    )
+  );
 
   const [rows, setRows] = useState(originalRows);
   const [searched, setSearched] = useState('');
@@ -82,7 +86,7 @@ originalRows.push(createData(props.date,props.subject,1001+originalRows.length,p
   };
 
   return (
-    <Paper id ="query-table">
+    <Paper id="query-table">
       <SearchBar
         value={searched}
         onChange={(searchVal) => requestSearch(searchVal)}

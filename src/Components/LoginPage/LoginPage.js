@@ -4,7 +4,6 @@ import './LoginPage.css';
 import logo from '../../assets/images/tiwpe-logo.png';
 import { UserContext } from '../../userContext';
 
-
 const LoginPage = () => {
   const history = useHistory();
   const { setUserData } = useContext(UserContext);
