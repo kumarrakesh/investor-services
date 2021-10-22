@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 import Button from '@mui/material/Button';
 import AdNavbar from '../Navbar/Navbar';
 import './Investments.css';
@@ -13,19 +14,24 @@ import {
 } from '@material-ui/pickers';
 
 const Investments = () => {
+  const history = useHistory();
   const [selectedDate, setSelectedDate] = React.useState(new Date());
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
 
+  const handleAddTranscation = ()=>{
+    history.push("/admin/investments/add");
+  }
+
   return (
-    <div className="investors-main">
+    <div className="investments-main">
       <div>
         <AdNavbar />
       </div>
 
-      <div id="investors-container">
+      <div id="investments-container">
         <h1 className="dtitle">Investments</h1>
         <h1 className="overview">Overview</h1>
 
@@ -37,7 +43,7 @@ const Investments = () => {
             <Button
               variant="contained"
               id="apply-btn"
-              href="#contained-buttons"
+              onClick = {handleAddTranscation}
               style={{ textTransform: 'none' }}
             >
               Record New Transaction +

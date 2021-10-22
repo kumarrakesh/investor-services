@@ -13,12 +13,12 @@ const Funds = () => {
   };
 
   return (
-    <div className="investors-main">
+    <div className="funds-main">
       <div>
         <AdNavbar />
       </div>
 
-      <div id="investors-container">
+      <div id="funds-container">
         <h1 className="dtitle">Funds</h1>
         <h1 className="overview">Overview</h1>
 
@@ -27,14 +27,13 @@ const Funds = () => {
 
         <div className="inv-btns">
           <div>
-            <Button variant="contained" id="apply-btn" onClick={handleAddFunds}>
+            <Button variant="contained" onClick={handleAddFunds}>
               Add New Fund +
             </Button>
           </div>
 
           <Button
             variant="outlined"
-            className="download-btn"
             style={{ color: '#E95B3E' }}
           >
             <svg

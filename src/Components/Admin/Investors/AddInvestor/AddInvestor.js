@@ -5,9 +5,7 @@ import './AddInvestor.css';
 
 import { alpha, styled } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
-import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
-import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 
 const AddInvestor = () => {
@@ -86,12 +84,12 @@ const AddInvestor = () => {
   }));
 
   return (
-    <div className="investors-main">
+    <div className="add-investors-main">
       <div>
         <AdNavbar />
       </div>
 
-      <div id="investors-container">
+      <div id="add-investors-container">
         <h1 className="dtitle">Investors</h1>
         <h1 id="overview">Add Investor</h1>
 

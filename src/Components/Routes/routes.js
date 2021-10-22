@@ -11,57 +11,64 @@ import Investments from '../Admin/Investments/Investments';
 import AdminGrievances from '../Admin/Grievances/Grievances';
 import AddInvestor from '../Admin/Investors/AddInvestor/AddInvestor';
 import AddFund from '../Admin/Funds/AddFund/AddFund';
+import AddTransaction from '../Admin/Investments/AddInvestment/AddTransaction';
 
 const Routes = () => {
   return (
     <Switch>
-      <Route path="/" exact>
+      <Route exact path="/" >
         <LoginPage />
       </Route>
 
-      <Route path="/dashboard">
+      <Route exact path="/dashboard">
         <Dashboard />
       </Route>
 
-      <Route path="/profile">
+      <Route exact path="/profile">
         <Profile />
       </Route>
 
-      <Route path="/statements">
+      <Route exact path="/statements">
         <Statements />
       </Route>
 
-      <Route path="/grievances">
+      <Route exact path="/grievances">
         <Grievances />
       </Route>
 
-      <Route path="/admin/dashboard">
+      <Route exact path="/admin/dashboard">
         <AdminDashboard />
       </Route>
 
-      <Route path="/admin/investors">
+      <Route exact path="/admin/investors">
         <Investors />
       </Route>
 
-      <Route path="/admin/funds">
+      <Route exact path="/admin/funds">
         <Funds />
       </Route>
 
-      <Route path="/admin/investments">
+      <Route exact path="/admin/investments">
         <Investments />
       </Route>
 
-      <Route path="/admin/grievances">
+      <Route exact path="/admin/grievances">
         <AdminGrievances />
       </Route>
 
-      <Route path="/admin/investor/add">
+      <Route exact path="/admin/investor/add">
         <AddInvestor />
       </Route>
 
-      <Route path="/admin/funds/add">
+      <Route exact path="/admin/funds/add">
         <AddFund />
       </Route>
+
+      <Route exact path="/admin/investments/add">
+        <AddTransaction/>
+      </Route>
+
+      
     </Switch>
   );
 };

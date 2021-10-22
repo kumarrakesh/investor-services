@@ -17,12 +17,12 @@ const Investors = () => {
         <AdNavbar />
       </div>
 
-      <div id="investors-container">
-        <h1 className="dtitle">Investors</h1>
-        <h1 className="overview">Overview</h1>
+      <div className="investors-container">
+        <h1 id="dtitle">Investors</h1>
+        <h1 id="overview">Overview</h1>
 
-        <p className="total-investors">Total Investors</p>
-        <p className="total-no">20</p>
+        <p id="total-investors">Total Investors</p>
+        <p id="total-no">20</p>
 
         <div className="inv-btns">
           <div>
@@ -57,7 +57,7 @@ const Investors = () => {
           </Button>
         </div>
 
-        <div className="inv-table">
+        <div >
           <CustomizedTables />
         </div>
       </div>

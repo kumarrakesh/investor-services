@@ -1,12 +1,11 @@
-.investors-main {
+.funds-main {
   display: flex;
 }
 
-#investors-container {
+#funds-container {
   position: absolute;
   left: 300px;
-  width: 1240px;
-  height: 850px;
+  width: 1100px !important;
 }
 
 .dtitle {
@@ -75,14 +74,14 @@
   position: absolute;
   left: 76px;
   top: 262px;
-  width: 1240px;
+  width: 1100px;
   display: flex;
   justify-content: space-between;
 }
 
 .inv-table {
   position: absolute;
-  width: 1240px;
+  width: 1100px;
   height: 350px;
   overflow: auto;
   top: 350px;

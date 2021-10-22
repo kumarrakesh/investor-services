@@ -1,15 +1,14 @@
-.investors-main {
+.investors-main{
   display: flex;
 }
 
-#investors-container {
+.investors-container {
   position: absolute;
   left: 300px;
-  width: 1240px;
-  height: 850px;
+  width: 1100px !important;
 }
 
-.dtitle {
+#dtitle {
   position: absolute;
   width: 117px;
   height: 28px;
@@ -24,7 +23,7 @@
   color: #132f5e;
 }
 
-.overview {
+#overview {
   position: absolute;
   width: 274px;
   height: 21px;
@@ -39,7 +38,7 @@
   color: #132f5e;
 }
 
-.total-investors {
+#total-investors {
   position: absolute;
   width: 91px;
   height: 16px;
@@ -55,7 +54,7 @@
   color: #132f5e;
 }
 
-.total-no {
+#total-no {
   position: absolute;
   width: 28px;
   height: 28px;
@@ -75,16 +74,15 @@
   position: absolute;
   left: 76px;
   top: 262px;
-  width: 1240px;
+  width: 1100px !important;
   display: flex;
   justify-content: space-between;
 }
 
 .inv-table {
   position: absolute;
-  width: 1240px;
+  width: 1100px !important;
   height: 350px;
   overflow: auto;
-  top: 350px;
-  left: 78px;
+  top: 340px !important;
 }

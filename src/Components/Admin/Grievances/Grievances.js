@@ -20,12 +20,12 @@ const AdminGrievances = () => {
   };
 
   return (
-    <div className="investors-main">
+    <div className="grievances-main">
       <div>
         <AdNavbar />
       </div>
 
-      <div id="investors-container">
+      <div id="grievances-container">
         <h1 className="dtitle">Grievances</h1>
         <h1 className="overview">Overview</h1>
 

@@ -3,7 +3,11 @@ import { useHistory } from 'react-router';
 import Button from '@mui/material/Button';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
+import LogoutIcon from '@mui/icons-material/Logout';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import './Navbar.css';
+
 const Navbar = () => {
   const history = useHistory();
 
@@ -87,22 +91,13 @@ const Navbar = () => {
         style={{ color: '#E95B3E' }}
       >
         <div className="dash-icon">
-          <svg
-            width="35"
-            height="35"
-            viewBox="0 0 35 35"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle cx="17.5" cy="17.5" r="17.5" fill="#E95B3E" />
-            <path
-              d="M24 8H10C8.9 8 8 8.9 8 10V24C8 25.1 8.9 26 10 26H24C25.1 26 26 25.1 26 24V10C26 8.9 25.1 8 24 8ZM10 24V10H16V24H10ZM24 24H18V17H24V24ZM24 15H18V10H24V15Z"
-              fill="white"
-            />
-          </svg>
+          <DashboardIcon/>
         </div>
-
+        
         <div className="dash-name"> Dashboard </div>
+        <div className="right-sign">
+          <ChevronRightIcon/>
+        </div>
       </Button>
 
       <div
@@ -116,18 +111,7 @@ const Navbar = () => {
           </div>
           <div className="acc-statements">Account Statements</div>
           <div className="right-sign">
-            <svg
-              width="8"
-              height="12"
-              viewBox="0 0 8 12"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M2.00003 0L0.590027 1.41L5.17003 6L0.590027 10.59L2.00003 12L8.00003 6L2.00003 0Z"
-                fill="#E95B3E"
-              />
-            </svg>
+          <ChevronRightIcon/>
           </div>
         </div>
       </div>
@@ -143,18 +127,7 @@ const Navbar = () => {
           </div>
           <div className="acc-statements">Grievances</div>
           <div className="right-sign">
-            <svg
-              width="8"
-              height="12"
-              viewBox="0 0 8 12"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M2.00003 0L0.590027 1.41L5.17003 6L0.590027 10.59L2.00003 12L8.00003 6L2.00003 0Z"
-                fill="#E95B3E"
-              />
-            </svg>
+          <ChevronRightIcon/>
           </div>
         </div>
       </div>
@@ -168,22 +141,11 @@ const Navbar = () => {
       >
         <div className="nav-stat-header">
           <div className="acc-icon">
-            <AccountCircleSharpIcon />
+            <LogoutIcon />
           </div>
           <div className="acc-statements">Logout</div>
           <div className="right-sign">
-            <svg
-              width="8"
-              height="12"
-              viewBox="0 0 8 12"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M2.00003 0L0.590027 1.41L5.17003 6L0.590027 10.59L2.00003 12L8.00003 6L2.00003 0Z"
-                fill="#E95B3E"
-              />
-            </svg>
+          <ChevronRightIcon/>
           </div>
         </div>
       </div>

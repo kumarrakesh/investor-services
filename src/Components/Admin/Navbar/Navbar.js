@@ -4,6 +4,10 @@ import Button from '@mui/material/Button';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import LogoutIcon from '@mui/icons-material/Logout';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import './Navbar.css';
 
 const AdNavbar = () => {
@@ -66,40 +70,25 @@ const AdNavbar = () => {
         </div>
       </Button>
 
-      <a
-        href="/admin/dashboard"
-        style={{ textDecoration: 'none', color: '#E95B3E' }}
+      <Button
+        variant="outlined"
+        className="nav-dashboard-btn"
+        onClick={() => {
+          history.push('/admin/dashboard');
+        }}
+        style={{ color: '#E95B3E' }}
       >
-        <Button
-          variant="outlined"
-          className="nav-dashboard-btn"
-          style={{ color: '#E95B3E' }}
-        >
-          <div className="dash-icon">
-            <svg
-              width="35"
-              height="35"
-              viewBox="0 0 35 35"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle cx="17.5" cy="17.5" r="17.5" fill="#E95B3E" />
-              <path
-                d="M24 8H10C8.9 8 8 8.9 8 10V24C8 25.1 8.9 26 10 26H24C25.1 26 26 25.1 26 24V10C26 8.9 25.1 8 24 8ZM10 24V10H16V24H10ZM24 24H18V17H24V24ZM24 15H18V10H24V15Z"
-                fill="white"
-              />
-            </svg>
-          </div>
+        <div className="dash-icon">
+          <DashboardIcon/>
+        </div>
 
-          <div className="dash-name"> Dashboard </div>
-          <div className="right-sign">
-            <ChevronRightIcon />
-          </div>
-        </Button>
-      </a>
+        <div className="dash-name"> Dashboard </div>
+        <div className="right-sign">
+          <ChevronRightIcon />
+        </div>
+      </Button>
 
-      <div className="nav-stat-btn" style={{ color: '#E95B3E' }}>
-        <a href="/admin/investors" style={{ textDecoration: 'none' }}>
+      <div className="nav-stat-btn" onClick={()=>{history.push("/admin/investors")}} style={{ color: '#E95B3E' }}>
           <div className="nav-stat-header">
             <div className="acc-icon">
               <AccountBalanceIcon />
@@ -109,49 +98,60 @@ const AdNavbar = () => {
               <ChevronRightIcon />
             </div>
           </div>
-        </a>
       </div>
 
-      <div className="nav-grievances-btn" style={{ color: '#E95B3E' }}>
-        <a href="/admin/funds" style={{ textDecoration: 'none' }}>
-          <div className="nav-stat-header">
-            <div className="acc-icon">
-              <AccountCircleSharpIcon />
-            </div>
-            <div className="acc-statements">Funds</div>
-            <div className="right-sign">
-              <ChevronRightIcon />
-            </div>
+      <div
+        className="nav-grievances-btn"
+        onClick={() => {
+          history.push('/admin/funds');
+        }}
+        style={{ color: '#E95B3E' }}
+      >
+        <div className="nav-stat-header">
+          <div className="acc-icon">
+            <AttachMoneyIcon />
           </div>
-        </a>
+          <div className="acc-statements">Funds</div>
+          <div className="right-sign">
+            <ChevronRightIcon />
+          </div>
+        </div>
       </div>
 
-      <div className="nav-grievances-btn" style={{ color: '#E95B3E' }}>
-        <a href="/admin/investments" style={{ textDecoration: 'none' }}>
-          <div className="nav-stat-header">
-            <div className="acc-icon">
-              <AccountCircleSharpIcon />
-            </div>
-            <div className="acc-statements">Investments</div>
-            <div className="right-sign">
-              <ChevronRightIcon />
-            </div>
+      <div
+        className="nav-grievances-btn"
+        onClick={() => {
+          history.push('/admin/investments');
+        }}
+        style={{ color: '#E95B3E' }}
+      >
+        <div className="nav-stat-header">
+          <div className="acc-icon">
+            <AccountBalanceWalletIcon />
           </div>
-        </a>
+          <div className="acc-statements">Investments</div>
+          <div className="right-sign">
+            <ChevronRightIcon />
+          </div>
+        </div>
       </div>
 
-      <div className="nav-grievances-btn" style={{ color: '#E95B3E' }}>
-        <a href="/admin/grievances" style={{ textDecoration: 'none' }}>
-          <div className="nav-stat-header">
-            <div className="acc-icon">
-              <AccountCircleSharpIcon />
-            </div>
-            <div className="acc-statements">Grievances</div>
-            <div className="right-sign">
-              <ChevronRightIcon />
-            </div>
+      <div
+        className="nav-grievances-btn"
+        onClick={() => {
+          history.push('/admin/grievances');
+        }}
+        style={{ color: '#E95B3E' }}
+      >
+        <div className="nav-stat-header">
+          <div className="acc-icon">
+            <AccountCircleSharpIcon />
           </div>
-        </a>
+          <div className="acc-statements">Grievances</div>
+          <div className="right-sign">
+            <ChevronRightIcon />
+          </div>
+        </div>
       </div>
 
       <div
@@ -163,7 +163,7 @@ const AdNavbar = () => {
       >
         <div className="nav-stat-header">
           <div className="acc-icon">
-            <AccountCircleSharpIcon />
+            <LogoutIcon />
           </div>
           <div className="acc-statements">Logout</div>
           <div className="right-sign">

@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@mui/material/Button';
 import AdNavbar from '../../Navbar/Navbar';
-import './AddFund.css';
+import './AddTransaction.css';
 
 import { alpha, styled } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
@@ -84,55 +84,95 @@ const AddInvestor = () => {
   }));
 
   return (
-    <div className="add-funds-main">
+    <div className="add-transaction-main">
       <div>
         <AdNavbar />
       </div>
 
-      <div id="add-funds-container">
-        <h1 className="dtitle">Funds</h1>
-        <h1 id="overview">Add Fund</h1>
+      <div id="add-transaction-container">
+        <h1 className="dtitle">Investments</h1>
+        <h1 id="overview">Record New Transaction</h1>
 
-        <div className="investor-div" id="inv-id1">
+        <div className="investor-div" id="transcation-id1">
           <FormControl variant="standard">
             <InputLabel shrink htmlFor="bootstrap-input">
-            Fund Name
+              Investor Name
             </InputLabel>
-            <BootstrapInput defaultValue="Axis Securities" id="bootstrap-input" />
+            <BootstrapInput defaultValue="Anil jain" id="bootstrap-input" />
           </FormControl>
 
           <FormControl variant="standard">
             <InputLabel shrink htmlFor="bootstrap-input">
-            Fund ID
+              Fund Name
             </InputLabel>
-            <BootstrapInput defaultValue="1012" id="bootstrap-input" />
+            <BootstrapInput defaultValue="HDFC Securities" id="bootstrap-input" />
           </FormControl>
         </div>
 
-        <div className="investor-div" id="inv-id2">
+        <div className="investor-div" id="transcation-id2">
           <FormControl variant="standard">
             <InputLabel shrink htmlFor="bootstrap-input">
-              Date
+              Date of Transaction
             </InputLabel>
             <BootstrapInput defaultValue="23/10/2021" id="bootstrap-input" />
           </FormControl>
 
           <FormControl variant="standard">
             <InputLabel shrink htmlFor="bootstrap-input">
-              NAV
+              Action
             </InputLabel>
-            <BootstrapInput defaultValue="$3.01" id="bootstrap-input" />
+            <BootstrapInput defaultValue="Invested" id="bootstrap-input" />
           </FormControl>
         </div>
 
-       
-        <div className="investor-div" id="add-inv-btn">
+        <div className="investor-div" id="transcation-id3">
+          <FormControl variant="standard">
+            <InputLabel shrink htmlFor="bootstrap-input">
+              NAV
+            </InputLabel>
+            <BootstrapInput defaultValue="$3.00" id="bootstrap-input" />
+          </FormControl>
+
+          <FormControl variant="standard">
+            <InputLabel shrink htmlFor="bootstrap-input">
+              Number of Units
+            </InputLabel>
+            <BootstrapInput defaultValue="45" id="bootstrap-input" />
+          </FormControl>
+        </div>
+
+        <div className="investor-div" id="transcation-id4" required>
+          <FormControl variant="standard">
+            <InputLabel shrink htmlFor="bootstrap-input">
+              Total Value
+            </InputLabel>
+            <BootstrapInput1
+              defaultValue="$135"
+              id="bootstrap-input"
+              required
+            />
+          </FormControl>
+
+          <FormControl variant="standard">
+            <InputLabel shrink htmlFor="bootstrap-input">
+              Remarks
+            </InputLabel>
+            <BootstrapInput1
+              defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquet tincidunt imperdiet.. "
+              id="bootstrap-input" 
+              required 
+            />
+          </FormControl>
+        </div>
+
+        
+        <div className="investor-div" id="add-transaction-btn">
           <Button
             variant="outlined"
             className="download-btn"
-            style={{ color: '#E95B3E', textTransform: 'none' }}
+            style={{ color: '#E95B3E', textTransform: 'none' , width:'300px'}}
           >
-            Add Fund
+            Record New Transaction
           </Button>
         </div>
       </div>
