@@ -96,14 +96,17 @@ const AddInvestor = () => {
         <div className="investor-div" id="inv-id1">
           <FormControl variant="standard">
             <InputLabel shrink htmlFor="bootstrap-input">
-            Fund Name
+              Fund Name
             </InputLabel>
-            <BootstrapInput defaultValue="Axis Securities" id="bootstrap-input" />
+            <BootstrapInput
+              defaultValue="Axis Securities"
+              id="bootstrap-input"
+            />
           </FormControl>
 
           <FormControl variant="standard">
             <InputLabel shrink htmlFor="bootstrap-input">
-            Fund ID
+              Fund ID
             </InputLabel>
             <BootstrapInput defaultValue="1012" id="bootstrap-input" />
           </FormControl>
@@ -125,7 +128,6 @@ const AddInvestor = () => {
           </FormControl>
         </div>
 
-       
         <div className="investor-div" id="add-inv-btn">
           <Button
             variant="outlined"

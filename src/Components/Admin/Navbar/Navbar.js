@@ -79,7 +79,7 @@ const AdNavbar = () => {
         style={{ color: '#E95B3E' }}
       >
         <div className="dash-icon">
-          <DashboardIcon/>
+          <DashboardIcon />
         </div>
 
         <div className="dash-name"> Dashboard </div>
@@ -88,16 +88,22 @@ const AdNavbar = () => {
         </div>
       </Button>
 
-      <div className="nav-stat-btn" onClick={()=>{history.push("/admin/investors")}} style={{ color: '#E95B3E' }}>
-          <div className="nav-stat-header">
-            <div className="acc-icon">
-              <AccountBalanceIcon />
-            </div>
-            <div className="acc-statements">Investors</div>
-            <div className="right-sign">
-              <ChevronRightIcon />
-            </div>
+      <div
+        className="nav-stat-btn"
+        onClick={() => {
+          history.push('/admin/investors');
+        }}
+        style={{ color: '#E95B3E' }}
+      >
+        <div className="nav-stat-header">
+          <div className="acc-icon">
+            <AccountBalanceIcon />
           </div>
+          <div className="acc-statements">Investors</div>
+          <div className="right-sign">
+            <ChevronRightIcon />
+          </div>
+        </div>
       </div>
 
       <div

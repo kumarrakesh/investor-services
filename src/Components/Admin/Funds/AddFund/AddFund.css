@@ -13,12 +13,12 @@
   color: #132f5e;
 }
 
-.add-funds-main{
+.add-funds-main {
   display: flex !important;
   flex-direction: row !important;
 }
 
-#add-funds-container{
+#add-funds-container {
   position: absolute;
   left: 300px;
   width: 1100px !important;

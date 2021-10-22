@@ -21,9 +21,9 @@ const Investments = () => {
     setSelectedDate(date);
   };
 
-  const handleAddTranscation = ()=>{
-    history.push("/admin/investments/add");
-  }
+  const handleAddTranscation = () => {
+    history.push('/admin/investments/add');
+  };
 
   return (
     <div className="investments-main">
@@ -43,7 +43,7 @@ const Investments = () => {
             <Button
               variant="contained"
               id="apply-btn"
-              onClick = {handleAddTranscation}
+              onClick={handleAddTranscation}
               style={{ textTransform: 'none' }}
             >
               Record New Transaction +

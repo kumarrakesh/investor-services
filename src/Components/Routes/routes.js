@@ -16,7 +16,7 @@ import AddTransaction from '../Admin/Investments/AddInvestment/AddTransaction';
 const Routes = () => {
   return (
     <Switch>
-      <Route exact path="/" >
+      <Route exact path="/">
         <LoginPage />
       </Route>
 
@@ -65,10 +65,8 @@ const Routes = () => {
       </Route>
 
       <Route exact path="/admin/investments/add">
-        <AddTransaction/>
+        <AddTransaction />
       </Route>
-
-      
     </Switch>
   );
 };

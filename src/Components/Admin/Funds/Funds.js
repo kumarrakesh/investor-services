@@ -32,10 +32,7 @@ const Funds = () => {
             </Button>
           </div>
 
-          <Button
-            variant="outlined"
-            style={{ color: '#E95B3E' }}
-          >
+          <Button variant="outlined" style={{ color: '#E95B3E' }}>
             <svg
               width="24"
               height="24"

@@ -1,63 +1,61 @@
 #overview {
-    position: absolute;
-    width: 274px;
-    height: 21px;
-    left: 76px;
-    top: 128px;
-  
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 21px;
-    color: #132f5e;
-  }
-  
-  .add-transaction-main{
-    display: flex;
-    flex-direction: row !important;
-  }
-  
-  #add-transaction-container{
-    position: absolute;
-    left: 300px;
-    width: 1000px !important;
-  }
-  
-  .investor-div {
-    width: 1000px !important;
-    display: flex;
-    left: 76px;
-    justify-content: space-between;
-  }
-  
-  #transcation-id1 {
-    position: absolute;
-    top: 190px !important;
-  }
-  
-  #transcation-id2 {
-    position: absolute;
-    top: 280px !important;
-  }
-  
-  #transcation-id3 {
-    position: absolute;
-    top: 370px !important;
-  }
-  
-  #transcation-id4 {
-    position: absolute;
-    top: 460px !important;
-    height: 160px;
-    align-content: space-between;
-    flex-direction: column !important;
-  }
-  
- 
-  #add-transaction-btn {
-    position: absolute;
-    top: 665px !important;
-    justify-content: center;
-  }
-  
+  position: absolute;
+  width: 274px;
+  height: 21px;
+  left: 76px;
+  top: 128px;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  color: #132f5e;
+}
+
+.add-transaction-main {
+  display: flex;
+  flex-direction: row !important;
+}
+
+#add-transaction-container {
+  position: absolute;
+  left: 300px;
+  width: 1000px !important;
+}
+
+.investor-div {
+  width: 1000px !important;
+  display: flex;
+  left: 76px;
+  justify-content: space-between;
+}
+
+#transcation-id1 {
+  position: absolute;
+  top: 190px !important;
+}
+
+#transcation-id2 {
+  position: absolute;
+  top: 280px !important;
+}
+
+#transcation-id3 {
+  position: absolute;
+  top: 370px !important;
+}
+
+#transcation-id4 {
+  position: absolute;
+  top: 460px !important;
+  height: 160px;
+  align-content: space-between;
+  flex-direction: column !important;
+}
+
+#add-transaction-btn {
+  position: absolute;
+  top: 665px !important;
+  justify-content: center;
+}

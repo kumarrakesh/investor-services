@@ -91,12 +91,12 @@ const Navbar = () => {
         style={{ color: '#E95B3E' }}
       >
         <div className="dash-icon">
-          <DashboardIcon/>
+          <DashboardIcon />
         </div>
-        
+
         <div className="dash-name"> Dashboard </div>
         <div className="right-sign">
-          <ChevronRightIcon/>
+          <ChevronRightIcon />
         </div>
       </Button>
 
@@ -111,7 +111,7 @@ const Navbar = () => {
           </div>
           <div className="acc-statements">Account Statements</div>
           <div className="right-sign">
-          <ChevronRightIcon/>
+            <ChevronRightIcon />
           </div>
         </div>
       </div>
@@ -127,7 +127,7 @@ const Navbar = () => {
           </div>
           <div className="acc-statements">Grievances</div>
           <div className="right-sign">
-          <ChevronRightIcon/>
+            <ChevronRightIcon />
           </div>
         </div>
       </div>
@@ -145,7 +145,7 @@ const Navbar = () => {
           </div>
           <div className="acc-statements">Logout</div>
           <div className="right-sign">
-          <ChevronRightIcon/>
+            <ChevronRightIcon />
           </div>
         </div>
       </div>

@@ -105,7 +105,10 @@ const AddInvestor = () => {
             <InputLabel shrink htmlFor="bootstrap-input">
               Fund Name
             </InputLabel>
-            <BootstrapInput defaultValue="HDFC Securities" id="bootstrap-input" />
+            <BootstrapInput
+              defaultValue="HDFC Securities"
+              id="bootstrap-input"
+            />
           </FormControl>
         </div>
 
@@ -159,18 +162,17 @@ const AddInvestor = () => {
             </InputLabel>
             <BootstrapInput1
               defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquet tincidunt imperdiet.. "
-              id="bootstrap-input" 
-              required 
+              id="bootstrap-input"
+              required
             />
           </FormControl>
         </div>
 
-        
         <div className="investor-div" id="add-transaction-btn">
           <Button
             variant="outlined"
             className="download-btn"
-            style={{ color: '#E95B3E', textTransform: 'none' , width:'300px'}}
+            style={{ color: '#E95B3E', textTransform: 'none', width: '300px' }}
           >
             Record New Transaction
           </Button>

@@ -57,7 +57,7 @@ const Investors = () => {
           </Button>
         </div>
 
-        <div >
+        <div>
           <CustomizedTables />
         </div>
       </div>

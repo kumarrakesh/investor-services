@@ -6,7 +6,7 @@ import { useHistory } from 'react-router';
 
 const AdminDashboard = () => {
   const { userData } = useContext(UserContext);
- 
+
   return (
     <div id="header-container" style={{ display: 'flex' }}>
       <div>
