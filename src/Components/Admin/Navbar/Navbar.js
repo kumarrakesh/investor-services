@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 import Button from '@mui/material/Button';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
@@ -6,6 +7,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import './Navbar.css';
 
 const AdNavbar = () => {
+  const history = useHistory();
   return (
     <div id="sidebar-main">
       <div id="header-logo">
@@ -150,6 +152,24 @@ const AdNavbar = () => {
             </div>
           </div>
         </a>
+      </div>
+
+      <div
+        className="nav-grievances-btn"
+        onClick={() => {
+          history.push('/');
+        }}
+        style={{ color: '#E95B3E' }}
+      >
+        <div className="nav-stat-header">
+          <div className="acc-icon">
+            <AccountCircleSharpIcon />
+          </div>
+          <div className="acc-statements">Logout</div>
+          <div className="right-sign">
+            <ChevronRightIcon />
+          </div>
+        </div>
       </div>
     </div>
   );

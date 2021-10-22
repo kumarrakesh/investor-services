@@ -1,17 +1,14 @@
 import React, { useHistory, useEffect, useContext, useState } from 'react';
-import { UserContext } from '../../userContext';
-import Navbar from '../User/Navbar/Navbar';
+import { UserContext } from '../../../userContext';
+import Navbar from '../Navbar/Navbar';
 import Button from '@mui/material/Button';
 import './Profile.css';
 
 const Profile = () => {
-  const { userData } = useContext(UserContext);
-  const [token, setToken] = useState(userData.token);
+  const token = JSON.parse(localStorage.getItem('token'));
   const [profile, setProfile] = useState('');
 
   useEffect(() => {
-    setToken(userData.token);
-    console.log(token);
     getProfileData();
   }, []);
 

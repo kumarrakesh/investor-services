@@ -1,7 +1,7 @@
 import { Switch, Route } from 'react-router';
 import LoginPage from '../LoginPage/LoginPage';
 import Dashboard from '../User/Dashboard/Dashboard';
-import Profile from '../Profile/Profile';
+import Profile from '../User/Profile/Profile';
 import Statements from '../User/Statements/Statements';
 import Grievances from '../User/Grievances/Grievances';
 import AdminDashboard from '../Admin/Dashboard/Dashboard';

@@ -9,10 +9,10 @@ import TextField from '@mui/material/TextField';
 import TelegramIcon from '@mui/icons-material/Telegram';
 
 import CustomizedTables from './table';
+import Swal from 'sweetalert2';
 
 const Grievances = () => {
-  const { userData } = useContext(UserContext);
-  const token = userData.token;
+  const token = JSON.parse(localStorage.getItem('token'));
 
   const [subject, setSubject] = useState('TESTING');
   const [description, setDescription] = useState('TESTING');
@@ -33,46 +33,32 @@ const Grievances = () => {
       }
     );
     setData(await response.json());
+    Swal.fire('Great!', 'Query sent successfully!', 'success');
   };
 
-  const BootstrapInput = styled(InputBase)(({ theme }) => ({
-    'label + &': {
-      marginTop: theme.spacing(3)
-    },
-    '& .MuiInputBase-input': {
-      borderRadius: 4,
-      position: 'relative',
-      backgroundColor: theme.palette.mode === 'light' ? '#fcfcfb' : '#2b2b2b',
-      border: '1px solid #ced4da',
-      fontSize: 16,
-      width: 'auto',
-      padding: '10px 12px',
-      transition: theme.transitions.create([
-        'border-color',
-        'background-color',
-        'box-shadow'
-      ]),
-      // Use the system font instead of the default Roboto font.
-      fontFamily: [
-        '-apple-system',
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
-        'Roboto',
-        '"Helvetica Neue"',
-        'Arial',
-        'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"'
-      ].join(','),
-      '&:focus': {
-        boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
-        borderColor: theme.palette.primary.main
-      }
-    }
-  }));
-
   const [value, setValue] = useState('raise');
+  const [rows, setRows] = useState([]);
+
+  const handleRespone = async () => {
+    setValue('response');
+    const token = JSON.parse(localStorage.getItem('token'));
+
+    const response = await fetch(
+      'https://investorbackend.herokuapp.com/api/query',
+      {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'x-access-token': token
+        },
+        method: 'GET'
+      }
+    );
+
+    const data = await response.json();
+    console.log(data.data);
+    setRows(data.data);
+  };
 
   return (
     <div className="header-container">
@@ -98,13 +84,7 @@ const Grievances = () => {
           </div>
 
           <div>
-            <Button
-              variant="contained"
-              id="apply-btn"
-              onClick={() => {
-                setValue('response');
-              }}
-            >
+            <Button variant="contained" id="apply-btn" onClick={handleRespone}>
               Query Response
             </Button>
           </div>
@@ -137,7 +117,7 @@ const Grievances = () => {
                   fullWidth
                   multiline
                   rows={11}
-                  defaultValue="Write your query..."
+                  defaultValue=""
                 />
               </div>
 
@@ -156,7 +136,7 @@ const Grievances = () => {
               </div>
             </div>
           )}
-          {value === 'response' && <CustomizedTables data={data} />}
+          {value === 'response' && <CustomizedTables rows={rows} />}
         </div>
       </div>
     </div>

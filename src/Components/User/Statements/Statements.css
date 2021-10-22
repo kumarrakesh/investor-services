@@ -156,9 +156,9 @@
   position: absolute;
   display: flex;
   justify-content: space-between;
-  width: 1240px;
+  width: 1100px;
   height: 44px;
-  top: 308px;
+  top: 280px;
   left: 78px;
 }
 .date-val {
@@ -180,7 +180,7 @@
 .date-btns {
   display: flex;
   justify-content: space-between;
-  width: 770px;
+  width: 600px;
   height: 60px;
   align-items: flex-end;
 }
@@ -198,9 +198,9 @@
 
 .stat-table {
   position: absolute;
-  width: 1240px;
-  height: 350px;
+  width: 1100px;
+  height: 310px;
   overflow: auto;
-  top: 420px;
+  top: 380px;
   left: 78px;
 }

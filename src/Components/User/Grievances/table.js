@@ -29,103 +29,40 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   }
 }));
 
-function createData(Date, QuerySub, QueryId, Action) {
-  return { Date, QuerySub, QueryId, Action };
-}
-
-export default function CustomizedTables(props) {
-  const originalRows = [
-    createData(
-      '21/01/2021',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      '#1012',
-      'Resolved'
-    ),
-    createData(
-      '21/01/2021',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      '#1012',
-      'Resolved'
-    ),
-    createData(
-      '21/01/2021',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      '#1012',
-      'Resolved'
-    ),
-    createData(
-      '21/01/2021',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      '#1012',
-      'Unresolved'
-    )
-  ];
-
-  originalRows.push(
-    createData(
-      props.date,
-      props.subject,
-      1001 + originalRows.length,
-      props.isResolved
-    )
-  );
-
-  const [rows, setRows] = useState(originalRows);
-  const [searched, setSearched] = useState('');
-
-  const requestSearch = (searchedVal) => {
-    const filteredRows = originalRows.filter((row) => {
-      return row.Date.toLowerCase().includes(searchedVal.toLowerCase());
-    });
-    setRows(filteredRows);
-  };
-
-  const cancelSearch = () => {
-    setSearched('');
-    requestSearch(searched);
-  };
-
+export default function CustomizedTables({ rows }) {
   return (
-    <Paper id="query-table">
-      <SearchBar
-        value={searched}
-        onChange={(searchVal) => requestSearch(searchVal)}
-        onCancelSearch={() => cancelSearch()}
-      />
-
-      <TableContainer component={Paper}>
-        <Table
-          sx={{ minWidth: 700, height: '100px', overflow: 'scroll' }}
-          aria-label="customized table"
-        >
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>Date of Query</StyledTableCell>
-              <StyledTableCell align="center">Query Subject</StyledTableCell>
-              <StyledTableCell>Query ID</StyledTableCell>
-              <StyledTableCell align="center">Action</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <StyledTableRow key={row.name}>
-                <StyledTableCell component="th" scope="row">
-                  {row.Date}
-                </StyledTableCell>
-                <StyledTableCell align="center" component="th" scope="row">
-                  {row.QuerySub}
-                </StyledTableCell>
-                <StyledTableCell align="left" component="th" scope="row">
-                  {row.QueryId}
-                </StyledTableCell>
-                <StyledTableCell align="center" component="th" scope="row">
-                  {row.Action}
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Paper>
+    <TableContainer id="query-table" component={Paper}>
+      <Table
+        sx={{ minWidth: 700, height: '100px', overflow: 'scroll' }}
+        aria-label="customized table"
+      >
+        <TableHead>
+          <TableRow>
+            <StyledTableCell>Date of Query</StyledTableCell>
+            <StyledTableCell align="center">Query Subject</StyledTableCell>
+            <StyledTableCell>Query ID</StyledTableCell>
+            <StyledTableCell align="center">Action</StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            <StyledTableRow key={row.name}>
+              <StyledTableCell component="th" scope="row">
+                {new Date(row.date).toLocaleDateString('en-GB')}
+              </StyledTableCell>
+              <StyledTableCell align="center" component="th" scope="row">
+                {row.subject}
+              </StyledTableCell>
+              <StyledTableCell align="left" component="th" scope="row">
+                #{row._id}
+              </StyledTableCell>
+              <StyledTableCell align="center" component="th" scope="row">
+                {String(row.isResolved)}
+              </StyledTableCell>
+            </StyledTableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }

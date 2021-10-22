@@ -3,6 +3,7 @@ import { useHistory } from 'react-router';
 import './LoginPage.css';
 import logo from '../../assets/images/tiwpe-logo.png';
 import { UserContext } from '../../userContext';
+import Swal from 'sweetalert2';
 
 const LoginPage = () => {
   const history = useHistory();
@@ -21,10 +22,19 @@ const LoginPage = () => {
     );
     let data = await response.json();
     console.log(data);
+    localStorage.setItem('token', JSON.stringify(data.token));
     setUserData({ role: data.role, token: data.token });
     if (data.status && data.role === 'ADMIN') {
       history.push('/admin/dashboard');
-    } else history.push('/dashboard');
+    } else if (data.status && data.role === 'USER') {
+      history.push('/dashboard');
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error...',
+        text: 'Username or Password is incorrect'
+      });
+    }
   };
 
   const [username, setUsername] = useState('');

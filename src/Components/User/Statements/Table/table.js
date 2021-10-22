@@ -63,7 +63,7 @@ export default function CustomizedTables({ rows }) {
                 <StyledTableCell align="right" component="th" scope="row">
                   {row.fundname}
                 </StyledTableCell>
-                <StyledTableCell align="right">{row.RefNo}</StyledTableCell>
+                <StyledTableCell align="right">{row.sno}</StyledTableCell>
                 <StyledTableCell align="right">
                   {row.investedAmount}
                 </StyledTableCell>
