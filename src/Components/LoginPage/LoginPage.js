@@ -22,9 +22,11 @@ const LoginPage = () => {
     let data = await response.json();
     console.log(data);
     setUserData({ role: data.role, token: data.token });
-    if (data.status && data.role === 'ADMIN') {
-      history.push('/admin/dashboard');
-    } else history.push('/dashboard');
+    if (data.status) {
+        if ( data.role === 'ADMIN')
+            history.push('/admin/dashboard');
+        else history.push('/dashboard');
+    }
   };
 
   const [username, setUsername] = useState('');
