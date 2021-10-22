@@ -3,13 +3,14 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
-export default function BasicMenu() {
+export default function BasicMenu({ options, setFundname }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleClose = (fundname) => {
+    setFundname(fundname);
     setAnchorEl(null);
   };
 
@@ -33,9 +34,22 @@ export default function BasicMenu() {
           'aria-labelledby': 'basic-button'
         }}
       >
-        <MenuItem onClick={handleClose}>Investment 1</MenuItem>
-        <MenuItem onClick={handleClose}>Investment 2</MenuItem>
-        <MenuItem onClick={handleClose}>Investment 3</MenuItem>
+        <MenuItem
+          onClick={() => {
+            handleClose('');
+          }}
+        >
+          All funds
+        </MenuItem>
+        {options.map((option) => (
+          <MenuItem
+            onClick={() => {
+              handleClose(option.fundname);
+            }}
+          >
+            {option.fundname}
+          </MenuItem>
+        ))}
       </Menu>
     </div>
   );
