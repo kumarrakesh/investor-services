@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
-export default function BasicMenu({ options, setFundname }) {
+export default function BasicMenu({ options, setFundname, fundname }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -23,7 +23,7 @@ export default function BasicMenu({ options, setFundname }) {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        Overall
+        {fundname}
       </Button>
       <Menu
         id="basic-menu"
