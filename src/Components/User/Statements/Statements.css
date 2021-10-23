@@ -1,192 +1,87 @@
 .header-container {
-  display: flex;
-  flex-direction: row;
+  /* display: flex; */
+  /* flex-direction: row; */
+  /* background-color: #f7f9fd; */
 }
 
 .stats {
-  position: absolute;
-  width: 220px;
-  height: 28px;
-  left: 76px;
-  top: 57px;
-
-  font-family: Roboto;
-  font-style: normal;
   font-weight: 500;
-  font-size: 24px;
-  line-height: 28px;
-
+  font-size: 2rem;
+  font-weight: 600;
   color: #132f5e;
 }
 
 .statement-container {
-  position: absolute;
-  left: 300px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: #f7f9fd;
+  width: 100%;
 }
 
-.switches {
-  position: absolute;
-  width: 157px;
-  height: 37px;
-  left: 76px;
-  top: 118px;
-
-  background: #ffffff;
-  border: 1px solid #cecece;
-  box-sizing: border-box;
-  border-radius: 8px;
-
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 19px;
-  color: #e95b3e;
+.MuiMenu-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  width: 100%;
+}
+.MuiMenuItem-gutters {
+  height: 2rem;
+  width: 100%;
+}
+#fund-name-select {
+  width: 14rem !important;
+  margin-left: -5px;
+  margin-right: -5px;
+  background-color: white !important;
+  padding-left: 2rem !important;
+  height: 0.8rem;
+}
+.MuiSelect-root {
+  border-radius: 0.5rem !important;
+  font-weight: 500 !important;
+}
+.MuiSelect-select {
+  color: #e95b3e !important;
+}
+.statement-summary {
+  display: flex;
+  gap: 4rem;
+}
+.statement-summary-col {
+  display: flex;
+  gap: 0.8rem;
+  flex-direction: column;
 }
 
-.amount {
-  position: absolute;
-  left: 0px;
-  top: 204px;
-}
-
-.inv-amt {
-  position: absolute;
-  width: 69px;
-  height: 16px;
-  left: 76px;
-  top: 0px;
-
-  font-family: Roboto;
-  font-style: normal;
+.statement-summary-name {
   font-weight: 300;
-  font-size: 14px;
-  line-height: 16px;
-
+  font-size: 0.875;
   color: #132f5e;
 }
 
-.total-gain {
-  position: absolute;
-  width: 69px;
-  height: 16px;
-  left: 272px;
-  top: 0px;
-
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 16px;
-
-  color: #132f5e;
-}
-
-.net-gain {
-  position: absolute;
-  width: 69px;
-  height: 16px;
-  left: 468px;
-  top: 0px;
-
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 16px;
-
-  color: #132f5e;
-}
-
-.values {
-  position: absolute;
-  left: 0px;
-  top: 230px;
-}
-
-.inv-val {
-  position: absolute;
-  width: 135px;
-  height: 28px;
-  left: 76px;
-  top: 0px;
-
-  font-family: Roboto;
-  font-style: normal;
+.statement-summary-val {
   font-weight: 500;
-  font-size: 24px;
-  line-height: 28px;
-
-  color: #132f5e;
-}
-
-.total-gain-val {
-  position: absolute;
-  width: 135px;
-  height: 28px;
-  left: 272px;
-  top: 0px;
-
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 28px;
-
-  color: #132f5e;
-}
-
-.net-gain-val {
-  position: absolute;
-  width: 135px;
-  height: 28px;
-  left: 468px;
-  top: 0px;
-
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 28px;
-
+  font-size: 1.5rem;
   color: #132f5e;
 }
 
 .date-div {
-  position: absolute;
   display: flex;
-  justify-content: space-between;
-  width: 1100px;
-  height: 44px;
-  top: 280px;
-  left: 78px;
-}
-.date-val {
-  display: flex;
-  justify-content: space-between;
-  width: 420px;
-}
-
-.st-date-val {
-  width: 184px;
-  height: 44px;
-}
-
-.end-date-val {
-  width: 184px;
-  height: 44px;
-}
-
-.date-btns {
-  display: flex;
-  justify-content: space-between;
-  width: 600px;
-  height: 60px;
-  align-items: flex-end;
+  gap: 4rem;
+  justify-content: flex-start;
 }
 #apply-btn {
-  width: 184px;
-  height: 44px;
+  width: 100px;
+  background-color: #e95b3e;
+}
+.date-btns {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .download-btn {
@@ -197,10 +92,6 @@
 }
 
 .stat-table {
-  position: absolute;
-  width: 1100px;
-  height: 310px;
   overflow: auto;
-  top: 380px;
-  left: 78px;
+  height: 300px;
 }

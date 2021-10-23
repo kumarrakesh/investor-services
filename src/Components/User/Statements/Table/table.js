@@ -10,8 +10,8 @@ import Paper from '@mui/material/Paper';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white
+    backgroundColor: '#E6E8EA !important',
+    color: '#132F5E'
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14
@@ -36,7 +36,11 @@ export default function CustomizedTables({ rows }) {
         aria-label="customized table"
       >
         <TableHead>
-          <TableRow>
+          <TableRow
+            style={{
+              border: '1px solid #CECECE'
+            }}
+          >
             <StyledTableCell>Date</StyledTableCell>
             <StyledTableCell align="center">Narration</StyledTableCell>
             <StyledTableCell>Fund Name</StyledTableCell>
@@ -49,8 +53,16 @@ export default function CustomizedTables({ rows }) {
             </StyledTableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
-          {rows == {} && <h1>Loading...</h1>}
+        <TableBody
+          style={{
+            border: '1px solid #CECECE'
+          }}
+        >
+          {!rows.length && (
+            <h3 style={{ marginTop: 8, textAlign: 'center' }}>
+              Nothing to show...
+            </h3>
+          )}
           {rows != {} &&
             rows.map((row) => (
               <StyledTableRow key={row._id}>
