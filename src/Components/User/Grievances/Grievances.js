@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import './Grievances.css';
 import { UserContext } from '../../../userContext';
 import Navbar from '../Navbar/Navbar';
@@ -12,6 +13,7 @@ import CustomizedTables from './table';
 import Swal from 'sweetalert2';
 
 const Grievances = () => {
+  const history = useHistory();
   const token = JSON.parse(localStorage.getItem('token'));
 
   const [subject, setSubject] = useState('TESTING');
@@ -19,6 +21,12 @@ const Grievances = () => {
   const [date, setDate] = useState('18 OCT 2021');
   const [data, setData] = useState('');
 
+  useEffect(()=>{
+    if(!localStorage.getItem('token')){
+      history.push("/");
+    }
+  },[]);
+  
   const handleSendQuery = async () => {
     let response = await fetch(
       'https://investorbackend.herokuapp.com/api/add/query',
@@ -75,6 +83,7 @@ const Grievances = () => {
             <Button
               variant="contained"
               id="apply-btn"
+              style={{ backgroundColor: '#E95B3E', textTransform: 'none' }}
               onClick={() => {
                 setValue('raise');
               }}
@@ -84,8 +93,8 @@ const Grievances = () => {
           </div>
 
           <div>
-            <Button variant="contained" id="apply-btn" onClick={handleRespone}>
-              Query Response
+            <Button variant="contained" style={{ backgroundColor: '#E95B3E', textTransform: 'none' }} id="apply-btn" onClick={handleRespone}>
+              Query History
             </Button>
           </div>
         </div>

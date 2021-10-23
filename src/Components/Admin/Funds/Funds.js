@@ -1,12 +1,25 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React,{useEffect} from 'react';
+import { useHistory } from 'react-router';
 import Button from '@mui/material/Button';
 import AdNavbar from '../Navbar/Navbar';
 import './Funds.css';
 import CustomizedTables from './table';
+import Swal from 'sweetalert2';
 
 const Funds = () => {
   let history = useHistory();
+  
+  useEffect(()=>{
+    if(!localStorage.getItem('token')){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please Login Again!',
+        timer: 3000
+      })
+      history.push("/");
+    }
+  },[]);
 
   const handleAddFunds = () => {
     history.push('/admin/funds/add');
@@ -27,12 +40,13 @@ const Funds = () => {
 
         <div className="inv-btns">
           <div>
-            <Button variant="contained" onClick={handleAddFunds}>
+            <Button variant="contained" onClick={handleAddFunds}
+            style={{ backgroundColor: '#E95B3E' , textTransform:'none'  }}>
               Add New Fund +
             </Button>
           </div>
 
-          <Button variant="outlined" style={{ color: '#E95B3E' }}>
+          {/* <Button variant="outlined" style={{ color: '#E95B3E' }}>
             <svg
               width="24"
               height="24"
@@ -47,7 +61,7 @@ const Funds = () => {
             </svg>
             Download
             {'\n'} List
-          </Button>
+          </Button> */}
         </div>
 
         <div className="inv-table">

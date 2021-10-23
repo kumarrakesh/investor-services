@@ -41,7 +41,7 @@ export default function CustomizedTables({ rows }) {
             <StyledTableCell>Date of Query</StyledTableCell>
             <StyledTableCell align="center">Query Subject</StyledTableCell>
             <StyledTableCell>Query ID</StyledTableCell>
-            <StyledTableCell align="center">Action</StyledTableCell>
+            <StyledTableCell align="center">Status</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>

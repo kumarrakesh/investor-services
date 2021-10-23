@@ -17,6 +17,8 @@
   height: 100px;
   display: flex;
   justify-content: space-around;
+  border: 1px solid lightblue;
+  align-items: center;
 }
 
 .prof-txt {

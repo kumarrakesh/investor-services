@@ -1,14 +1,21 @@
-import React, { useHistory, useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
+import {useHistory } from 'react-router';
 import { UserContext } from '../../../userContext';
 import Navbar from '../Navbar/Navbar';
 import Button from '@mui/material/Button';
 import './Profile.css';
 
 const Profile = () => {
+
+  const history = useHistory();
   const token = JSON.parse(localStorage.getItem('token'));
   const [profile, setProfile] = useState('');
 
   useEffect(() => {
+    
+    if(!localStorage.getItem('token')){
+      history.push("/");
+    }
     getProfileData();
   }, []);
 

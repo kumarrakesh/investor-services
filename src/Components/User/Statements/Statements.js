@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import './Statements.css';
 import Navbar from '../Navbar/Navbar';
 import Button from '@mui/material/Button';
@@ -14,13 +15,18 @@ import CustomizedTables from './Table/table';
 import DropDown from './DropDown';
 
 const Statements = () => {
-  //states
+  const history = useHistory();
   const [selectedDate, setSelectedDate] = React.useState(new Date());
   const [rows, setRows] = useState([]);
   const [fundname, setFundname] = useState('');
   const [uniqueFunds, setUniqueFunds] = useState([]);
   //other hooks
   useEffect(() => {
+    
+    if(!localStorage.getItem('token')){
+      history.push("/");
+    }
+
     fetch('https://investorbackend.herokuapp.com/api/user/fundnames', {
       headers: {
         'x-access-token':

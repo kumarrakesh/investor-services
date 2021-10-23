@@ -1,14 +1,31 @@
-import React from 'react';
+import React,{useEffect} from 'react';
+import { useHistory } from 'react-router';
 import Button from '@mui/material/Button';
 import AdNavbar from '../../Navbar/Navbar';
 import './AddTransaction.css';
+import Swal from 'sweetalert2';
 
 import { alpha, styled } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 
-const AddInvestor = () => {
+const AddTransaction = () => {
+  
+  const history = useHistory();
+  useEffect(()=>{
+    if(!localStorage.getItem('token')){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please Login Again!',
+        timer: 3000
+      })
+      history.replace("/");
+    }
+  });
+
+  
   const BootstrapInput = styled(InputBase)(({ theme }) => ({
     'label + &': {
       marginTop: theme.spacing(3)
@@ -98,7 +115,7 @@ const AddInvestor = () => {
             <InputLabel shrink htmlFor="bootstrap-input">
               Investor Name
             </InputLabel>
-            <BootstrapInput defaultValue="Anil jain" id="bootstrap-input" />
+            <BootstrapInput defaultValue="" id="bootstrap-input" />
           </FormControl>
 
           <FormControl variant="standard">
@@ -106,7 +123,7 @@ const AddInvestor = () => {
               Fund Name
             </InputLabel>
             <BootstrapInput
-              defaultValue="HDFC Securities"
+              defaultValue=""
               id="bootstrap-input"
             />
           </FormControl>
@@ -117,14 +134,14 @@ const AddInvestor = () => {
             <InputLabel shrink htmlFor="bootstrap-input">
               Date of Transaction
             </InputLabel>
-            <BootstrapInput defaultValue="23/10/2021" id="bootstrap-input" />
+            <BootstrapInput defaultValue="" id="bootstrap-input" />
           </FormControl>
 
           <FormControl variant="standard">
             <InputLabel shrink htmlFor="bootstrap-input">
               Action
             </InputLabel>
-            <BootstrapInput defaultValue="Invested" id="bootstrap-input" />
+            <BootstrapInput defaultValue="" id="bootstrap-input" />
           </FormControl>
         </div>
 
@@ -133,14 +150,14 @@ const AddInvestor = () => {
             <InputLabel shrink htmlFor="bootstrap-input">
               NAV
             </InputLabel>
-            <BootstrapInput defaultValue="$3.00" id="bootstrap-input" />
+            <BootstrapInput defaultValue="" id="bootstrap-input" />
           </FormControl>
 
           <FormControl variant="standard">
             <InputLabel shrink htmlFor="bootstrap-input">
               Number of Units
             </InputLabel>
-            <BootstrapInput defaultValue="45" id="bootstrap-input" />
+            <BootstrapInput defaultValue="" id="bootstrap-input" />
           </FormControl>
         </div>
 
@@ -150,7 +167,7 @@ const AddInvestor = () => {
               Total Value
             </InputLabel>
             <BootstrapInput1
-              defaultValue="$135"
+              defaultValue=""
               id="bootstrap-input"
               required
             />
@@ -161,7 +178,7 @@ const AddInvestor = () => {
               Remarks
             </InputLabel>
             <BootstrapInput1
-              defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquet tincidunt imperdiet.. "
+              defaultValue=""
               id="bootstrap-input"
               required
             />
@@ -182,4 +199,4 @@ const AddInvestor = () => {
   );
 };
 
-export default AddInvestor;
+export default AddTransaction;

@@ -1,12 +1,28 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React,{useEffect} from 'react';
+import { useHistory } from 'react-router';
 import Button from '@mui/material/Button';
 import AdNavbar from '../Navbar/Navbar';
 import './Investors.css';
 import CustomizedTables from './table';
+import Swal from 'sweetalert2';
+import IconButton from '@mui/material/IconButton';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 const Investors = () => {
-  let history = useHistory();
+  
+  const history = useHistory();
+  useEffect(()=>{
+      if(!localStorage.getItem('token')){
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Please Login Again!',
+          timer: 3000
+        })
+      history.push("/");
+    }
+  },[]);
+
   const handleAddInvestor = () => {
     history.push('/admin/investor/add');
   };
@@ -18,8 +34,8 @@ const Investors = () => {
       </div>
 
       <div className="investors-container">
-        <h1 id="dtitle">Investors</h1>
-        <h1 id="overview">Overview</h1>
+        <h1 id="inv-title">Investors</h1>
+        <h1 id="inv-overview">Overview</h1>
 
         <p id="total-investors">Total Investors</p>
         <p id="total-no">20</p>
@@ -28,6 +44,7 @@ const Investors = () => {
           <div>
             <Button
               variant="contained"
+              style={{ backgroundColor: '#E95B3E' , textTransform:'none'  }}
               id="apply-btn"
               onClick={handleAddInvestor}
             >
@@ -35,7 +52,7 @@ const Investors = () => {
             </Button>
           </div>
 
-          <Button
+          {/* <Button
             variant="outlined"
             className="download-btn"
             style={{ color: '#E95B3E' }}
@@ -54,7 +71,7 @@ const Investors = () => {
             </svg>
             Download
             {'\n'} List
-          </Button>
+          </Button> */}
         </div>
 
         <div>

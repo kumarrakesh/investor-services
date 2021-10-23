@@ -13,6 +13,29 @@
   color: #132f5e;
 }
 
+#dtitle {
+  
+  width: 117px;
+  height: 28px;
+  
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+
+  color: #132f5e;
+}
+
+.cross-btn{
+  position: absolute;
+  left: 76px;
+  top: 57px;
+  width: 1100px !important;
+  display: flex;
+  justify-content: space-between;
+}
+
 .add-funds-main {
   display: flex !important;
   flex-direction: row !important;
@@ -24,24 +47,24 @@
   width: 1100px !important;
 }
 
-.investor-div {
+.add-funds-div {
   width: 1000px !important;
   display: flex;
   left: 76px;
   justify-content: space-between;
 }
 
-#inv-id1 {
+#add-funds-id1 {
   position: absolute;
   top: 190px !important;
 }
 
-#inv-id2 {
+#add-funds-id2 {
   position: absolute;
   top: 280px !important;
 }
 
-#add-inv-btn {
+#add-funds-btn {
   position: absolute;
   top: 400px !important;
   justify-content: center;
