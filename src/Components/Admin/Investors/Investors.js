@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import Button from '@mui/material/Button';
 import AdNavbar from '../Navbar/Navbar';
@@ -9,19 +9,18 @@ import IconButton from '@mui/material/IconButton';
 import CancelIcon from '@mui/icons-material/Cancel';
 
 const Investors = () => {
-  
   const history = useHistory();
-  useEffect(()=>{
-      if(!localStorage.getItem('token')){
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Please Login Again!',
-          timer: 3000
-        })
-      history.push("/");
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please Login Again!',
+        timer: 3000
+      });
+      history.push('/');
     }
-  },[]);
+  }, []);
 
   const handleAddInvestor = () => {
     history.push('/admin/investor/add');
@@ -44,7 +43,7 @@ const Investors = () => {
           <div>
             <Button
               variant="contained"
-              style={{ backgroundColor: '#E95B3E' , textTransform:'none'  }}
+              style={{ backgroundColor: '#E95B3E', textTransform: 'none' }}
               id="apply-btn"
               onClick={handleAddInvestor}
             >

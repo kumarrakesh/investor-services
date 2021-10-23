@@ -33,7 +33,7 @@ const Navbar = () => {
         variant="outlined"
         className="prof-btn"
         onClick={GotoProfile}
-        style={{ color: '#E95B3E', textTransform:'none' }}
+        style={{ color: '#E95B3E', textTransform: 'none' }}
       >
         <div className="pic">
           <svg
@@ -88,7 +88,7 @@ const Navbar = () => {
         onClick={() => {
           history.push('/dashboard');
         }}
-        style={{ color: '#E95B3E' , textTransform :'none'}}
+        style={{ color: '#E95B3E', textTransform: 'none' }}
       >
         <div className="dash-icon">
           <DashboardIcon />
@@ -104,7 +104,7 @@ const Navbar = () => {
         variant="outlined"
         className="nav-dashboard-btn"
         onClick={GoToStatments}
-        style={{ color: '#E95B3E' , textTransform :'none'}}
+        style={{ color: '#E95B3E', textTransform: 'none' }}
       >
         <div className="dash-icon">
           <AccountBalanceIcon />
@@ -119,7 +119,7 @@ const Navbar = () => {
         variant="outlined"
         className="nav-dashboard-btn"
         onClick={GoToGrievances}
-        style={{ color: '#E95B3E' , textTransform :'none'}}
+        style={{ color: '#E95B3E', textTransform: 'none' }}
       >
         <div className="dash-icon">
           <AccountCircleSharpIcon />
@@ -137,17 +137,16 @@ const Navbar = () => {
           localStorage.clear();
           history.push('/');
         }}
-        style={{ color: '#E95B3E', textTransform :'none' }}
+        style={{ color: '#E95B3E', textTransform: 'none' }}
       >
         <div className="dash-icon">
-        <LogoutIcon />
+          <LogoutIcon />
         </div>
         <div className="dash-name"> Logout </div>
         <div className="right-sign">
           <ChevronRightIcon />
         </div>
       </Button>
-
     </div>
   );
 };

@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 const LoginPage = () => {
   const history = useHistory();
   const { setUserData } = useContext(UserContext);
-  
+
   const handleLogin = async () => {
     let response = await fetch(
       'https://investorbackend.herokuapp.com/api/user/signin',

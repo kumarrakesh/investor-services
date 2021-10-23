@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import Button from '@mui/material/Button';
 import AdNavbar from '../Navbar/Navbar';
@@ -16,17 +16,17 @@ import {
 
 const Investments = () => {
   const history = useHistory();
-  useEffect(()=>{
-    if(!localStorage.getItem('token')){
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: 'Please Login Again!',
         timer: 3000
-      })
-      history.push("/");
+      });
+      history.push('/');
     }
-  },[]);
+  }, []);
 
   const [selectedDate, setSelectedDate] = React.useState(new Date());
 

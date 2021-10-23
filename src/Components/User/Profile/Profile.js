@@ -1,20 +1,25 @@
 import React, { useEffect, useContext, useState } from 'react';
-import {useHistory } from 'react-router';
+import { useHistory } from 'react-router';
 import { UserContext } from '../../../userContext';
 import Navbar from '../Navbar/Navbar';
 import Button from '@mui/material/Button';
 import './Profile.css';
+import Swal from 'sweetalert2';
 
 const Profile = () => {
-
   const history = useHistory();
   const token = JSON.parse(localStorage.getItem('token'));
   const [profile, setProfile] = useState('');
 
   useEffect(() => {
-    
-    if(!localStorage.getItem('token')){
-      history.push("/");
+    if (!localStorage.getItem('token')) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please Login Again!',
+        timer: 3000
+      });
+      history.push('/');
     }
     getProfileData();
   }, []);

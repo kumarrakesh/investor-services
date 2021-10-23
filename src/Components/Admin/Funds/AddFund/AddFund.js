@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import Button from '@mui/material/Button';
 import AdNavbar from '../../Navbar/Navbar';
@@ -15,17 +15,17 @@ import CancelIcon from '@mui/icons-material/Cancel';
 const AddFund = () => {
   let history = useHistory();
 
-  useEffect(()=>{
-    if(!localStorage.getItem('token')){
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: 'Please Login Again!',
         timer: 3000
-      })
-      history.push("/");
+      });
+      history.push('/');
     }
-  },[]);
+  }, []);
 
   const BootstrapInput = styled(InputBase)(({ theme }) => ({
     'label + &': {
@@ -72,13 +72,18 @@ const AddFund = () => {
 
       <div id="add-funds-container">
         <h1 className="dtitle">Funds</h1>
-       
-        <div className = "cross-btn">
-        <h1 id="dtitle">Funds</h1>
-        <IconButton size="large" style={{ color: '#E95B3E'  }} 
-        onClick={()=>{history.push("/admin/funds")}} >
-        <CancelIcon fontSize="inherit"/>
-        </IconButton>
+
+        <div className="cross-btn">
+          <h1 id="dtitle">Funds</h1>
+          <IconButton
+            size="large"
+            style={{ color: '#E95B3E' }}
+            onClick={() => {
+              history.push('/admin/funds');
+            }}
+          >
+            <CancelIcon fontSize="inherit" />
+          </IconButton>
         </div>
 
         <h1 id="overview">Add Fund</h1>
@@ -87,10 +92,7 @@ const AddFund = () => {
             <InputLabel shrink htmlFor="bootstrap-input">
               Fund Name
             </InputLabel>
-            <BootstrapInput
-              defaultValue=""
-              id="bootstrap-input"
-            />
+            <BootstrapInput defaultValue="" id="bootstrap-input" />
           </FormControl>
 
           <FormControl variant="standard">

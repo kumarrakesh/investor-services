@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import Button from '@mui/material/Button';
 import AdNavbar from '../../Navbar/Navbar';
@@ -11,21 +11,19 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 
 const AddTransaction = () => {
-  
   const history = useHistory();
-  useEffect(()=>{
-    if(!localStorage.getItem('token')){
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: 'Please Login Again!',
         timer: 3000
-      })
-      history.replace("/");
+      });
+      history.replace('/');
     }
   });
 
-  
   const BootstrapInput = styled(InputBase)(({ theme }) => ({
     'label + &': {
       marginTop: theme.spacing(3)
@@ -122,10 +120,7 @@ const AddTransaction = () => {
             <InputLabel shrink htmlFor="bootstrap-input">
               Fund Name
             </InputLabel>
-            <BootstrapInput
-              defaultValue=""
-              id="bootstrap-input"
-            />
+            <BootstrapInput defaultValue="" id="bootstrap-input" />
           </FormControl>
         </div>
 
@@ -166,22 +161,14 @@ const AddTransaction = () => {
             <InputLabel shrink htmlFor="bootstrap-input">
               Total Value
             </InputLabel>
-            <BootstrapInput1
-              defaultValue=""
-              id="bootstrap-input"
-              required
-            />
+            <BootstrapInput1 defaultValue="" id="bootstrap-input" required />
           </FormControl>
 
           <FormControl variant="standard">
             <InputLabel shrink htmlFor="bootstrap-input">
               Remarks
             </InputLabel>
-            <BootstrapInput1
-              defaultValue=""
-              id="bootstrap-input"
-              required
-            />
+            <BootstrapInput1 defaultValue="" id="bootstrap-input" required />
           </FormControl>
         </div>
 

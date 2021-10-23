@@ -2,29 +2,48 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import './Statements.css';
 import Navbar from '../Navbar/Navbar';
-import Button from '@mui/material/Button';
+import Swal from 'sweetalert2';
+import {
+  Button,
+  Select,
+  MenuItem,
+  TextField,
+  InputAdornment
+} from '@mui/material';
+import { createTheme } from '@mui/material/styles';
 import 'date-fns';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker
-} from '@material-ui/pickers';
-
+import { LocalizationProvider, DesktopDatePicker } from '@mui/lab';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import CustomizedTables from './Table/table';
-import DropDown from './DropDown';
-
+// import DropDown from './DropDown';
+import { ThemeProvider } from '@mui/styles';
+const theme = createTheme({
+  palette: {
+    type: 'dark'
+  }
+});
 const Statements = () => {
   const history = useHistory();
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
+  //states
+  const [selectedStartDate, setSelectedStartDate] = React.useState(new Date());
+  const [selectedEndDate, setSelectedEndDate] = React.useState(new Date());
   const [rows, setRows] = useState([]);
-  const [fundname, setFundname] = useState('');
+  const [displayRows, setDisplayRows] = useState([]);
+  const [fundname, setFundname] = useState('Overall');
   const [uniqueFunds, setUniqueFunds] = useState([]);
+  const [summaryData, setSummaryData] = useState({});
   //other hooks
   useEffect(() => {
-    
-    if(!localStorage.getItem('token')){
-      history.push("/");
+    if (!localStorage.getItem('token')) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please Login Again!',
+        timer: 3000
+      });
+      history.push('/');
     }
 
     fetch('https://investorbackend.herokuapp.com/api/user/fundnames', {
@@ -48,7 +67,17 @@ const Statements = () => {
     getUserTransactions(fundname);
   }, [fundname]);
   //functions and handlers
+  const handleStartDateChange = (date) => {
+    setSelectedStartDate(date);
+  };
+  const handleEndDateChange = (date) => {
+    setSelectedEndDate(date);
+  };
+  const handleChangeFundname = (e) => {
+    setFundname(e.target.value);
+  };
   const getUserTransactions = async (fundname) => {
+    let modFundName = fundname === 'Overall' ? '' : fundname;
     try {
       const response = await fetch(
         'https://investorbackend.herokuapp.com/api/transactions',
@@ -60,21 +89,33 @@ const Statements = () => {
           },
           method: 'POST',
           body: JSON.stringify({
-            fundname: fundname
+            fundname: modFundName
           })
         }
       );
       const data = await response.json();
-      console.log(data.data);
       setRows(data.data);
+      setDisplayRows(data.data);
+      setSummaryData(data.header);
+      console.log('data.data', data);
     } catch (e) {
       console.log(e);
     }
   };
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
+  const handleDateFilter = async () => {
+    Promise.all([getUserTransactions(fundname)]).then(() => {
+      console.log('rows', rows);
+      let modRows = [...rows];
+      console.log('before', modRows.length);
+      modRows = modRows.filter(
+        (row) =>
+          new Date(row.date) >= new Date(selectedStartDate) &&
+          new Date(row.date) <= new Date(selectedEndDate)
+      );
+      console.log('after', modRows.length);
+      setDisplayRows(modRows);
+    });
   };
-
   return (
     <div className="header-container">
       <div className="sidebar">
@@ -83,101 +124,76 @@ const Statements = () => {
 
       <div className="statement-container">
         <h1 className="stats">Account Statements</h1>
-
-        <div className="switches">
-          <DropDown options={uniqueFunds} setFundname={setFundname} />
-        </div>
-
-        <div className="amount">
-          <div className="inv-amt">Investment</div>
-          <div className="total-gain">Total Gain</div>
-          <div className="net-gain">Net Gain</div>
-        </div>
-
-        <div className="values">
-          <div className="inv-val">₦ 13947123</div>
-          <div className="total-gain-val">₦ 13947123</div>
-          <div className="net-gain-val">₦ 13947123</div>
-        </div>
-
-        <div className="date-div">
-          <div className="date-val">
-            <div className="st-date-val" style={{ marginLeft: '10px' }}>
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <Grid container>
-                  <KeyboardDatePicker
-                    margin="normal"
-                    name="dob"
-                    id="date-picker-dialog"
-                    label="Start Date"
-                    format="dd/MM/yyyy"
-                    value={selectedDate}
-                    onChange={handleDateChange}
-                    KeyboardButtonProps={{
-                      'aria-label': 'change date'
-                    }}
-                  />
-                </Grid>
-              </MuiPickersUtilsProvider>
-            </div>
-
-            <div className="end-date-val" style={{ marginLeft: '10px' }}>
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <Grid container>
-                  <KeyboardDatePicker
-                    margin="normal"
-                    name="dob"
-                    id="date-picker-dialog"
-                    label="End Date"
-                    format="dd/MM/yyyy"
-                    value={selectedDate}
-                    onChange={handleDateChange}
-                    KeyboardButtonProps={{
-                      'aria-label': 'change date'
-                    }}
-                  />
-                </Grid>
-              </MuiPickersUtilsProvider>
+        <Select
+          labelId="fund-name-select-label"
+          id="fund-name-select"
+          value={fundname}
+          style={{ width: '200px', paddingLeft: 5, paddingRight: 5 }}
+          onChange={handleChangeFundname}
+          variant="outlined"
+        >
+          <MenuItem value={'Overall'}>Overall</MenuItem>
+          {uniqueFunds.map((fund) => {
+            return <MenuItem value={fund.fundname}>{fund.fundname}</MenuItem>;
+          })}
+        </Select>
+        <div className="statement-summary">
+          <div className="statement-summary-col">
+            <div className="statement-summary-name">Total Investment</div>
+            <div className="statement-summary-val">
+              ₦ {summaryData?.totalInvested}
             </div>
           </div>
-
-          <div className="date-btns">
-            <div>
-              <Button
-                variant="contained"
-                id="apply-btn"
-                href="#contained-buttons"
-                style={{ textTransform: 'none' }}
-              >
-                Apply
-              </Button>
+          <div className="statement-summary-col">
+            <div className="statement-summary-name">Current Value</div>
+            <div className="statement-summary-val">
+              ₦ {summaryData?.currentValue}
             </div>
-
-            <Button
-              variant="outlined"
-              className="download-btn"
-              style={{ color: '#E95B3E', textTransform: 'none' }}
+          </div>
+          <div className="statement-summary-col">
+            <div className="statement-summary-name">Net Gain/Loss</div>
+            <div
+              className="statement-summary-val"
+              style={{
+                color:
+                  summaryData?.currentValue - summaryData?.totalInvested >= 0
+                    ? '#16D112'
+                    : 'red'
+              }}
             >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M20.5 16.25V20.5H3.49996V16.25H0.666626V20.5C0.666626 22.0583 1.94163 23.3333 3.49996 23.3333H20.5C22.0583 23.3333 23.3333 22.0583 23.3333 20.5V16.25H20.5ZM19.0833 10.5833L17.0858 8.58582L13.4166 12.2408V0.666656H10.5833V12.2408L6.91412 8.58582L4.91663 10.5833L12 17.6667L19.0833 10.5833Z"
-                  fill="#E95B3E"
-                />
-              </svg>
-              Download
-              {'\n'} Report
-            </Button>
+              ₦ {summaryData?.currentValue - summaryData?.totalInvested}
+            </div>
           </div>
+        </div>
+        <div className="date-div">
+          <ThemeProvider theme={theme}>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DesktopDatePicker
+                label="Start Date"
+                inputFormat="dd/MM/yyyy"
+                value={selectedStartDate}
+                onChange={handleStartDateChange}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
+          </ThemeProvider>
+
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DesktopDatePicker
+              label="End Date"
+              inputFormat="dd/MM/yyyy"
+              value={selectedEndDate}
+              onChange={handleEndDateChange}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
+          <Button variant="contained" id="apply-btn" onClick={handleDateFilter}>
+            Apply
+          </Button>
         </div>
 
         <div className="stat-table">
-          <CustomizedTables rows={rows} />
+          <CustomizedTables rows={displayRows} />
         </div>
       </div>
     </div>

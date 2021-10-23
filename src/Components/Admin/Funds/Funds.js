@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import Button from '@mui/material/Button';
 import AdNavbar from '../Navbar/Navbar';
@@ -8,18 +8,18 @@ import Swal from 'sweetalert2';
 
 const Funds = () => {
   let history = useHistory();
-  
-  useEffect(()=>{
-    if(!localStorage.getItem('token')){
+
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: 'Please Login Again!',
         timer: 3000
-      })
-      history.push("/");
+      });
+      history.push('/');
     }
-  },[]);
+  }, []);
 
   const handleAddFunds = () => {
     history.push('/admin/funds/add');
@@ -40,8 +40,11 @@ const Funds = () => {
 
         <div className="inv-btns">
           <div>
-            <Button variant="contained" onClick={handleAddFunds}
-            style={{ backgroundColor: '#E95B3E' , textTransform:'none'  }}>
+            <Button
+              variant="contained"
+              onClick={handleAddFunds}
+              style={{ backgroundColor: '#E95B3E', textTransform: 'none' }}
+            >
               Add New Fund +
             </Button>
           </div>

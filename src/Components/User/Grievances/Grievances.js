@@ -21,12 +21,18 @@ const Grievances = () => {
   const [date, setDate] = useState('18 OCT 2021');
   const [data, setData] = useState('');
 
-  useEffect(()=>{
-    if(!localStorage.getItem('token')){
-      history.push("/");
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please Login Again!',
+        timer: 3000
+      });
+      history.push('/');
     }
-  },[]);
-  
+  }, []);
+
   const handleSendQuery = async () => {
     let response = await fetch(
       'https://investorbackend.herokuapp.com/api/add/query',
@@ -93,7 +99,12 @@ const Grievances = () => {
           </div>
 
           <div>
-            <Button variant="contained" style={{ backgroundColor: '#E95B3E', textTransform: 'none' }} id="apply-btn" onClick={handleRespone}>
+            <Button
+              variant="contained"
+              style={{ backgroundColor: '#E95B3E', textTransform: 'none' }}
+              id="apply-btn"
+              onClick={handleRespone}
+            >
               Query History
             </Button>
           </div>

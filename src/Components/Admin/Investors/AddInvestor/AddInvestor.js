@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import Button from '@mui/material/Button';
 import AdNavbar from '../../Navbar/Navbar';
@@ -14,18 +14,18 @@ import CancelIcon from '@mui/icons-material/Cancel';
 
 const AddInvestor = () => {
   const history = useHistory();
-  useEffect(()=>{
-      if(!localStorage.getItem('token')){
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Please Login Again!',
-          timer: 3000
-        })
-      history.push("/");
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please Login Again!',
+        timer: 3000
+      });
+      history.push('/');
     }
-  },[]);
-  
+  }, []);
+
   const BootstrapInput = styled(InputBase)(({ theme }) => ({
     'label + &': {
       marginTop: theme.spacing(3)
@@ -107,12 +107,17 @@ const AddInvestor = () => {
       </div>
 
       <div id="add-investors-container">
-      <div className = "cross-btn">
-        <h1 id="dtitle">Investors</h1>
-        <IconButton size="large" style={{ color: '#E95B3E'  }} 
-        onClick={()=>{history.push("/admin/investors")}} >
-        <CancelIcon fontSize="inherit"/>
-        </IconButton>
+        <div className="cross-btn">
+          <h1 id="dtitle">Investors</h1>
+          <IconButton
+            size="large"
+            style={{ color: '#E95B3E' }}
+            onClick={() => {
+              history.push('/admin/investors');
+            }}
+          >
+            <CancelIcon fontSize="inherit" />
+          </IconButton>
         </div>
         <h1 id="overview">Add Investor</h1>
 
@@ -153,21 +158,14 @@ const AddInvestor = () => {
             <InputLabel shrink htmlFor="bootstrap-input">
               Address Line-1
             </InputLabel>
-            <BootstrapInput1
-              defaultValue=""
-              id="bootstrap-input"
-              required
-            />
+            <BootstrapInput1 defaultValue="" id="bootstrap-input" required />
           </FormControl>
 
           <FormControl variant="standard">
             <InputLabel shrink htmlFor="bootstrap-input">
               Address Line-2
             </InputLabel>
-            <BootstrapInput1
-              defaultValue=""
-              id="bootstrap-input"
-            />
+            <BootstrapInput1 defaultValue="" id="bootstrap-input" />
           </FormControl>
         </div>
 

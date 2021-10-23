@@ -20,7 +20,7 @@ const AdNavbar = () => {
 
       <div
         className="prof-btn"
-        style={{ color: '#E95B3E' , textTransform:'none' }}
+        style={{ color: '#E95B3E', textTransform: 'none' }}
       >
         <div className="pic">
           <svg
@@ -93,7 +93,7 @@ const AdNavbar = () => {
         onClick={() => {
           history.push('/admin/investors');
         }}
-        style={{ color: '#E95B3E', textTransform:'none'  }}
+        style={{ color: '#E95B3E', textTransform: 'none' }}
       >
         <div className="dash-icon">
           <AccountBalanceIcon />
@@ -111,7 +111,7 @@ const AdNavbar = () => {
         onClick={() => {
           history.push('/admin/funds');
         }}
-        style={{ color: '#E95B3E' , textTransform:'none' }}
+        style={{ color: '#E95B3E', textTransform: 'none' }}
       >
         <div className="dash-icon">
           <AttachMoneyIcon />
@@ -147,10 +147,10 @@ const AdNavbar = () => {
         onClick={() => {
           history.push('/admin/grievances');
         }}
-        style={{ color: '#E95B3E' , textTransform:'none' }}
+        style={{ color: '#E95B3E', textTransform: 'none' }}
       >
         <div className="dash-icon">
-        <AccountCircleSharpIcon />
+          <AccountCircleSharpIcon />
         </div>
 
         <div className="dash-name"> Grievances </div>
@@ -159,7 +159,6 @@ const AdNavbar = () => {
         </div>
       </Button>
 
-
       <Button
         variant="outlined"
         className="nav-dashboard-btn"
@@ -167,10 +166,10 @@ const AdNavbar = () => {
           localStorage.clear();
           history.push('/');
         }}
-        style={{ color: '#E95B3E' , textTransform:'none' }}
+        style={{ color: '#E95B3E', textTransform: 'none' }}
       >
         <div className="dash-icon">
-        <LogoutIcon />
+          <LogoutIcon />
         </div>
 
         <div className="dash-name"> Logout</div>
@@ -178,7 +177,6 @@ const AdNavbar = () => {
           <ChevronRightIcon />
         </div>
       </Button>
-
     </div>
   );
 };
