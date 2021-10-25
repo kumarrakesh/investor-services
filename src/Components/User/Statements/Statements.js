@@ -31,7 +31,7 @@ const Statements = () => {
   const [selectedEndDate, setSelectedEndDate] = React.useState(new Date());
   const [rows, setRows] = useState([]);
   const [displayRows, setDisplayRows] = useState([]);
-  const [fundname, setFundname] = useState('Overall');
+  const [fundname, setFundname] = useState('All');
   const [uniqueFunds, setUniqueFunds] = useState([]);
   const [summaryData, setSummaryData] = useState({
     totalInvested: 0,
@@ -80,7 +80,7 @@ const Statements = () => {
     setFundname(e.target.value);
   };
   const getUserTransactions = async (fundname) => {
-    let modFundName = fundname === 'Overall' ? '' : fundname;
+    let modFundName = fundname === 'All' ? '' : fundname;
     try {
       const response = await fetch(
         'https://investorbackend.herokuapp.com/api/transactions',
@@ -199,14 +199,12 @@ const Statements = () => {
           onChange={handleChangeFundname}
           variant="outlined"
         >
-          <MenuItem value={'Overall'}>Overall</MenuItem>
+          <MenuItem value={'All'}>All</MenuItem>
           {uniqueFunds.map((fund) => {
             return <MenuItem value={fund.fundname}>{fund.fundname}</MenuItem>;
           })}
         </Select>
-        <div className="stat-table">
-          <CustomizedTables rows={displayRows} />
-        </div>
+        <CustomizedTables rows={displayRows} />
       </div>
     </div>
   );
