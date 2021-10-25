@@ -77,14 +77,20 @@ export default function CustomizedTables({ rows }) {
                 </StyledTableCell>
                 <StyledTableCell align="right">{row.sno}</StyledTableCell>
                 <StyledTableCell align="right">
-                  {row.investedAmount}
+                  {Math.round(row.investedAmount * 100 + Number.EPSILON) / 100}
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                  {row.withdrawalAmount}
+                  {Math.round(row.withdrawalAmount * 100 + Number.EPSILON) /
+                    100}
                 </StyledTableCell>
-                <StyledTableCell align="right">{row.totalGain}</StyledTableCell>
                 <StyledTableCell align="right">
-                  {row.investedAmount - row.withdrawalAmount}
+                  {Math.round(row.totalGain * 100 + Number.EPSILON) / 100}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  {Math.round(
+                    (row.investedAmount - row.withdrawalAmount) * 100 +
+                      Number.EPSILON
+                  ) / 100}
                 </StyledTableCell>
               </StyledTableRow>
             ))}

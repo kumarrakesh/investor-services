@@ -30,7 +30,10 @@ const Statements = () => {
   const [displayRows, setDisplayRows] = useState([]);
   const [fundname, setFundname] = useState('Overall');
   const [uniqueFunds, setUniqueFunds] = useState([]);
-  const [summaryData, setSummaryData] = useState({});
+  const [summaryData, setSummaryData] = useState({
+    totalInvested: 0,
+    currentValue: 0
+  });
   //other hooks
   useEffect(() => {
     fetch('https://investorbackend.herokuapp.com/api/user/fundnames', {
@@ -111,30 +114,22 @@ const Statements = () => {
 
       <div className="statement-container">
         <h1 className="stats">Account Statements</h1>
-        <Select
-          labelId="fund-name-select-label"
-          id="fund-name-select"
-          value={fundname}
-          style={{ width: '200px', paddingLeft: 5, paddingRight: 5 }}
-          onChange={handleChangeFundname}
-          variant="outlined"
-        >
-          <MenuItem value={'Overall'}>Overall</MenuItem>
-          {uniqueFunds.map((fund) => {
-            return <MenuItem value={fund.fundname}>{fund.fundname}</MenuItem>;
-          })}
-        </Select>
+
         <div className="statement-summary">
           <div className="statement-summary-col">
             <div className="statement-summary-name">Total Investment</div>
             <div className="statement-summary-val">
-              ₦ {summaryData?.totalInvested}
+              ₦
+              {Math.round(summaryData?.totalInvested * 100 + Number.EPSILON) /
+                100}
             </div>
           </div>
           <div className="statement-summary-col">
             <div className="statement-summary-name">Current Value</div>
             <div className="statement-summary-val">
-              ₦ {summaryData?.currentValue}
+              ₦
+              {Math.round(summaryData?.currentValue * 100 + Number.EPSILON) /
+                100}
             </div>
           </div>
           <div className="statement-summary-col">
@@ -148,10 +143,15 @@ const Statements = () => {
                     : 'red'
               }}
             >
-              ₦ {summaryData?.currentValue - summaryData?.totalInvested}
+              ₦
+              {Math.round(
+                (summaryData?.currentValue - summaryData?.totalInvested) * 100 +
+                  Number.EPSILON
+              ) / 100}
             </div>
           </div>
         </div>
+
         <div className="date-div">
           <ThemeProvider theme={theme}>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -178,7 +178,19 @@ const Statements = () => {
             Apply
           </Button>
         </div>
-
+        <Select
+          labelId="fund-name-select-label"
+          id="fund-name-select"
+          value={fundname}
+          style={{ width: '200px', paddingLeft: 5, paddingRight: 5 }}
+          onChange={handleChangeFundname}
+          variant="outlined"
+        >
+          <MenuItem value={'Overall'}>Overall</MenuItem>
+          {uniqueFunds.map((fund) => {
+            return <MenuItem value={fund.fundname}>{fund.fundname}</MenuItem>;
+          })}
+        </Select>
         <div className="stat-table">
           <CustomizedTables rows={displayRows} />
         </div>
