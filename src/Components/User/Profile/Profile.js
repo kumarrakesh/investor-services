@@ -58,9 +58,7 @@ const Profile = () => {
 
   return (
     <div id="header-container">
-      <div className="nav">
-        <Navbar />
-      </div>
+      <Navbar />
 
       <div className="profile-container">
         <div className="profile-up">
