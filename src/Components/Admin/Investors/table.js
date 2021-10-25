@@ -133,7 +133,7 @@ export default function CustomizedTables() {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+            <StyledTableRow key={row._id}>
               <StyledTableCell component="th" scope="row">
                 {row.Date}
               </StyledTableCell>
