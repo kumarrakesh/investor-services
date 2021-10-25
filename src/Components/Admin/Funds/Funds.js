@@ -67,7 +67,7 @@ const Funds = () => {
           </Button> */}
         </div>
 
-        <div className="inv-table">
+        <div className="inv-table-funds">
           <CustomizedTables />
         </div>
       </div>
