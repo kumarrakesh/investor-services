@@ -35,7 +35,8 @@ const Statements = () => {
   const [uniqueFunds, setUniqueFunds] = useState([]);
   const [summaryData, setSummaryData] = useState({
     totalInvested: 0,
-    currentValue: 0
+    currentValue: 0,
+    totalUnit: 0
   });
   //other hooks
   useEffect(() => {
@@ -161,6 +162,13 @@ const Statements = () => {
                 (summaryData?.currentValue - summaryData?.totalInvested) * 100 +
                   Number.EPSILON
               ) / 100}
+            </div>
+          </div>
+          <div className="statement-summary-col">
+            <div className="statement-summary-name">Total Units</div>
+            <div className="statement-summary-val">
+              {Math.round(summaryData?.totalUnits * 10000 + Number.EPSILON) /
+                10000}
             </div>
           </div>
         </div>
