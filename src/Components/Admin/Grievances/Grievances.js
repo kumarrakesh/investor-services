@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import Button from '@mui/material/Button';
 import AdNavbar from '../Navbar/Navbar';
@@ -9,6 +9,12 @@ import 'date-fns';
 import Swal from 'sweetalert2';
 
 const AdminGrievances = () => {
+  //states
+  const [queries, setQueries] = useState([]);
+  const [displayRows, setDisplayRows] = useState([]);
+  const [selectedDate, setSelectedDate] = React.useState(new Date());
+
+  //hooks
   let history = useHistory();
   useEffect(() => {
     if (!localStorage.getItem('token')) {
@@ -19,15 +25,30 @@ const AdminGrievances = () => {
         timer: 3000
       });
       history.push('/');
+    } else {
+      getAllQueries();
     }
   }, []);
 
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
-
+  //handlers
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
 
+  const getAllQueries = async () => {
+    const response = await fetch(
+      'https://investorbackend.herokuapp.com/api/query/all',
+      {
+        headers: {
+          'x-access-token': JSON.parse(localStorage.getItem('token'))
+        }
+      }
+    );
+    const data = await response.json();
+    console.log(data.data);
+    setQueries(data.data);
+    setDisplayRows(data.data);
+  };
   return (
     <div className="grievances-main">
       <div>
@@ -37,9 +58,12 @@ const AdminGrievances = () => {
       <div id="grievances-container">
         <h1 className="dtitle">Grievances</h1>
         <h1 className="overview">Overview</h1>
-
         <p className="total-investors">Total Queries</p>
-        <p className="total-no">30</p>
+        <p className="total-no">{queries.length}</p>
+        {/* <p className="total-investors">Unresolved Queries</p>
+        <p className="total-no"> */}
+        {/* {queries.filter((el) => !el.isResolved).length} */}
+        {/* </p> */}
 
         {/* <div className="inv-btns">
           <div>
@@ -76,7 +100,11 @@ const AdminGrievances = () => {
         </div> */}
 
         <div className="inv-table-grievances">
-          <CustomizedTables />
+          <CustomizedTables
+            rows={queries}
+            displayRows={displayRows}
+            setDisplayRows={setDisplayRows}
+          />
         </div>
       </div>
     </div>
