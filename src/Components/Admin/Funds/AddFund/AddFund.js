@@ -11,6 +11,15 @@ import FormControl from '@mui/material/FormControl';
 import Swal from 'sweetalert2';
 import IconButton from '@mui/material/IconButton';
 import CancelIcon from '@mui/icons-material/Cancel';
+import { LocalizationProvider, DesktopDatePicker } from '@mui/lab';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import TextField from '@mui/material/TextField';
+
+// const theme = createTheme({
+//   palette: {
+//     type: 'dark'
+//   }
+// });
 
 const AddFund = () => {
   let history = useHistory();
@@ -27,7 +36,13 @@ const AddFund = () => {
     }
   }, []);
 
-  const BootstrapInput = styled(InputBase)(({ theme }) => ({
+  const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
+
+  const handleChange = (newValue) => {
+    setValue(newValue);
+  };
+
+  const BootstrapInput = styled(TextField)(({ theme }) => ({
     'label + &': {
       marginTop: theme.spacing(3)
     },
@@ -37,7 +52,7 @@ const AddFund = () => {
       backgroundColor: theme.palette.mode === 'light' ? '#fcfcfb' : '#2b2b2b',
       border: '1px solid #ced4da',
       fontSize: 16,
-      width: '400px',
+      width: '374px',
       padding: '10px 12px',
       transition: theme.transitions.create([
         'border-color',
@@ -104,12 +119,22 @@ const AddFund = () => {
         </div>
 
         <div className="add-funds-div" id="add-funds-id2">
-          <FormControl variant="standard">
-            <InputLabel shrink htmlFor="bootstrap-input">
-              Date
-            </InputLabel>
-            <BootstrapInput defaultValue="" id="bootstrap-input" />
-          </FormControl>
+          <div id="fund-st-date">
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <small style={{ fontWeight: '300' }}>Start Date</small>
+              <DesktopDatePicker
+                inputFormat="MM/dd/yyyy"
+                value={value}
+                onChange={handleChange}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    sx={{ width: '400px !important', marginTop: '0.5rem' }}
+                  />
+                )}
+              />
+            </LocalizationProvider>
+          </div>
 
           <FormControl variant="standard">
             <InputLabel shrink htmlFor="bootstrap-input">

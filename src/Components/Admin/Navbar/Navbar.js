@@ -123,23 +123,23 @@ const AdNavbar = () => {
         </div>
       </Button>
 
-      {/* <Button
+      <Button
         variant="outlined"
         className="nav-dashboard-btn"
         onClick={() => {
           history.push('/admin/investments');
         }}
-        style={{ color: '#E95B3E', textTransform:'none'  }}
+        style={{ color: '#E95B3E', textTransform: 'none' }}
       >
         <div className="dash-icon">
-        <AccountBalanceWalletIcon />
+          <AccountBalanceWalletIcon />
         </div>
 
         <div className="dash-name">Investments</div>
         <div className="right-sign">
           <ChevronRightIcon />
         </div>
-      </Button> */}
+      </Button>
 
       <Button
         variant="outlined"

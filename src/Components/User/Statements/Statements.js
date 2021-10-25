@@ -3,29 +3,23 @@ import { useHistory } from 'react-router';
 import './Statements.css';
 import Navbar from '../Navbar/Navbar';
 import Swal from 'sweetalert2';
-import {
-  Button,
-  Select,
-  MenuItem,
-  TextField,
-  InputAdornment
-} from '@mui/material';
+import { Button, Select, MenuItem, TextField } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 import 'date-fns';
-import Grid from '@material-ui/core/Grid';
-import DateFnsUtils from '@date-io/date-fns';
 import { LocalizationProvider, DesktopDatePicker } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import CustomizedTables from './Table/table';
-// import DropDown from './DropDown';
 import { ThemeProvider } from '@mui/styles';
+
 const theme = createTheme({
   palette: {
     type: 'dark'
   }
 });
+
 const Statements = () => {
   const history = useHistory();
+  const token = JSON.parse(localStorage.getItem('token'));
   //states
   const [selectedStartDate, setSelectedStartDate] = React.useState(new Date());
   const [selectedEndDate, setSelectedEndDate] = React.useState(new Date());
@@ -48,8 +42,7 @@ const Statements = () => {
 
     fetch('https://investorbackend.herokuapp.com/api/user/fundnames', {
       headers: {
-        'x-access-token':
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYxNmQzOThmMWEwZDkzYTgxZTZlZTA2YSIsInVzZXJuYW1lIjoidXNlckBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMiR4NnUxSlN2dHpZTEN1M28yUkxFT25lRFdMN0FFMUJZdERKQ1l6YmZJUVZyOE1jeGNmeUVweSIsIm5hbWUiOiJ1c2VyIiwicHJvZmlsZVBpYyI6ImU5ZjllM2UxLWNiYmItNDFhMi04MTYzLWJiMjdlYTMzNzQ2Zi5wbmciLCJwYXNzcG9ydCI6InVzZXIiLCJtYXR1cml0eSI6IjIwMDUtMDktMTlUMTg6MzA6MDAuMDAwWiIsImFkZHJlc3MiOiJoZWxsbyIsImNpdHkiOiJndXJnYW9uIiwic3RhdGUiOiJEZWxoaSIsImNvdW50cnkiOiJpbmRpYSIsInBpbmNvZGUiOiIxMjIwMDIiLCJyb2xlIjoiNjE2ZDJmNTg4ZDkwODY0OGMyOGQ2M2ExIiwiYW1vdW50SW52ZXN0ZWQiOjAsImN1cnJlbnRJbnZlc3RlZFZhbHVlIjowLCJfX3YiOjB9LCJpYXQiOjE2MzQ1NTY2MjgsImV4cCI6MTYzNzE0ODYyOH0.bahD4jni57l8AEE3xPyrZfVwCaDEXqg3AwtuuDcjWmE',
+        'x-access-token': token,
         'Content-Type': 'application/json'
       }
     })
@@ -124,6 +117,7 @@ const Statements = () => {
 
       <div className="statement-container">
         <h1 className="stats">Account Statements</h1>
+
         <Select
           labelId="fund-name-select-label"
           id="fund-name-select"
@@ -132,11 +126,12 @@ const Statements = () => {
           onChange={handleChangeFundname}
           variant="outlined"
         >
-          <MenuItem value={'Overall'}>Overall</MenuItem>
+          <MenuItem value={'Overall'}>All</MenuItem>
           {uniqueFunds.map((fund) => {
             return <MenuItem value={fund.fundname}>{fund.fundname}</MenuItem>;
           })}
         </Select>
+
         <div className="statement-summary">
           <div className="statement-summary-col">
             <div className="statement-summary-name">Total Investment</div>

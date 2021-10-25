@@ -66,14 +66,14 @@ const LoginPage = () => {
               setPassword(e.target.value);
             }}
           />
-          <span
+          {/* <span
             id="login-forgot-password"
             onClick={() => {
               alert('action for forgot password');
             }}
           >
             Forgot Password?
-          </span>
+          </span> */}
           <button id="login-submit-button" onClick={handleLogin}>
             Login
           </button>

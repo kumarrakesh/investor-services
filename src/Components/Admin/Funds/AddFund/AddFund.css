@@ -13,7 +13,7 @@
   color: #132f5e;
 }
 
-#dtitle {
+.dtitle {
   width: 117px;
   height: 28px;
 
@@ -38,6 +38,10 @@
 .add-funds-main {
   display: flex !important;
   flex-direction: row !important;
+}
+
+#fund-st-date {
+  width: 400px !important;
 }
 
 #add-funds-container {

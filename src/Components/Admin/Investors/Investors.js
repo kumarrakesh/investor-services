@@ -44,7 +44,6 @@ const Investors = () => {
             <Button
               variant="contained"
               style={{ backgroundColor: '#E95B3E', textTransform: 'none' }}
-              id="apply-btn"
               onClick={handleAddInvestor}
             >
               Add Investor +
