@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import Button from '@mui/material/Button';
 import AdNavbar from '../Navbar/Navbar';
 import './Investments.css';
 import CustomizedTables from './table';
+import Swal from 'sweetalert2';
 
 import 'date-fns';
 import Grid from '@material-ui/core/Grid';
@@ -15,6 +16,18 @@ import {
 
 const Investments = () => {
   const history = useHistory();
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please Login Again!',
+        timer: 3000
+      });
+      history.push('/');
+    }
+  }, []);
+
   const [selectedDate, setSelectedDate] = React.useState(new Date());
 
   const handleDateChange = (date) => {

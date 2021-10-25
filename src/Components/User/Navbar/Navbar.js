@@ -33,7 +33,7 @@ const Navbar = () => {
         variant="outlined"
         className="prof-btn"
         onClick={GotoProfile}
-        style={{ color: '#E95B3E' }}
+        style={{ color: '#E95B3E', textTransform: 'none' }}
       >
         <div className="pic">
           <svg
@@ -88,7 +88,7 @@ const Navbar = () => {
         onClick={() => {
           history.push('/dashboard');
         }}
-        style={{ color: '#E95B3E' }}
+        style={{ color: '#E95B3E', textTransform: 'none' }}
       >
         <div className="dash-icon">
           <DashboardIcon />
@@ -100,55 +100,53 @@ const Navbar = () => {
         </div>
       </Button>
 
-      <div
-        className="nav-stat-btn"
+      <Button
+        variant="outlined"
+        className="nav-dashboard-btn"
         onClick={GoToStatments}
-        style={{ color: '#E95B3E' }}
+        style={{ color: '#E95B3E', textTransform: 'none' }}
       >
-        <div className="nav-stat-header">
-          <div className="acc-icon">
-            <AccountBalanceIcon />
-          </div>
-          <div className="acc-statements">Account Statements</div>
-          <div className="right-sign">
-            <ChevronRightIcon />
-          </div>
+        <div className="dash-icon">
+          <AccountBalanceIcon />
         </div>
-      </div>
+        <div className="dash-name"> Account Statements </div>
+        <div className="right-sign">
+          <ChevronRightIcon />
+        </div>
+      </Button>
 
-      <div
-        className="nav-grievances-btn"
+      <Button
+        variant="outlined"
+        className="nav-dashboard-btn"
         onClick={GoToGrievances}
-        style={{ color: '#E95B3E' }}
+        style={{ color: '#E95B3E', textTransform: 'none' }}
       >
-        <div className="nav-stat-header">
-          <div className="acc-icon">
-            <AccountCircleSharpIcon />
-          </div>
-          <div className="acc-statements">Grievances</div>
-          <div className="right-sign">
-            <ChevronRightIcon />
-          </div>
+        <div className="dash-icon">
+          <AccountCircleSharpIcon />
         </div>
-      </div>
+        <div className="dash-name">Grievances</div>
+        <div className="right-sign">
+          <ChevronRightIcon />
+        </div>
+      </Button>
 
-      <div
-        className="nav-grievances-btn"
+      <Button
+        variant="outlined"
+        className="nav-dashboard-btn"
         onClick={() => {
+          localStorage.clear();
           history.push('/');
         }}
-        style={{ color: '#E95B3E' }}
+        style={{ color: '#E95B3E', textTransform: 'none' }}
       >
-        <div className="nav-stat-header">
-          <div className="acc-icon">
-            <LogoutIcon />
-          </div>
-          <div className="acc-statements">Logout</div>
-          <div className="right-sign">
-            <ChevronRightIcon />
-          </div>
+        <div className="dash-icon">
+          <LogoutIcon />
         </div>
-      </div>
+        <div className="dash-name"> Logout </div>
+        <div className="right-sign">
+          <ChevronRightIcon />
+        </div>
+      </Button>
     </div>
   );
 };

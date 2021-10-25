@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 const LoginPage = () => {
   const history = useHistory();
   const { setUserData } = useContext(UserContext);
+
   const handleLogin = async () => {
     let response = await fetch(
       'https://investorbackend.herokuapp.com/api/user/signin',
@@ -25,7 +26,7 @@ const LoginPage = () => {
     localStorage.setItem('token', JSON.stringify(data.token));
     setUserData({ role: data.role, token: data.token });
     if (data.status && data.role === 'ADMIN') {
-      history.push('/admin/dashboard');
+      history.push('/admin/investors');
     } else if (data.status && data.role === 'USER') {
       history.push('/dashboard');
     } else {

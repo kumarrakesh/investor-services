@@ -18,10 +18,9 @@ const AdNavbar = () => {
         <img src="https://tiwpe.com/image/tiw-logo.png" alt="tiwpe logo" />
       </div>
 
-      <Button
-        variant="outlined"
+      <div
         className="prof-btn"
-        style={{ color: '#E95B3E' }}
+        style={{ color: '#E95B3E', textTransform: 'none' }}
       >
         <div className="pic">
           <svg
@@ -68,15 +67,15 @@ const AdNavbar = () => {
           </div>
           <div className="prof-name">Admin</div>
         </div>
-      </Button>
+      </div>
 
-      <Button
+      {/* <Button
         variant="outlined"
         className="nav-dashboard-btn"
         onClick={() => {
           history.push('/admin/dashboard');
         }}
-        style={{ color: '#E95B3E' }}
+        style={{ color: '#E95B3E', textTransform:'none'  }}
       >
         <div className="dash-icon">
           <DashboardIcon />
@@ -86,97 +85,98 @@ const AdNavbar = () => {
         <div className="right-sign">
           <ChevronRightIcon />
         </div>
-      </Button>
+      </Button> */}
 
-      <div
-        className="nav-stat-btn"
+      <Button
+        variant="outlined"
+        className="nav-dashboard-btn"
         onClick={() => {
           history.push('/admin/investors');
         }}
-        style={{ color: '#E95B3E' }}
+        style={{ color: '#E95B3E', textTransform: 'none' }}
       >
-        <div className="nav-stat-header">
-          <div className="acc-icon">
-            <AccountBalanceIcon />
-          </div>
-          <div className="acc-statements">Investors</div>
-          <div className="right-sign">
-            <ChevronRightIcon />
-          </div>
+        <div className="dash-icon">
+          <AccountBalanceIcon />
         </div>
-      </div>
 
-      <div
-        className="nav-grievances-btn"
+        <div className="dash-name"> Investors </div>
+        <div className="right-sign">
+          <ChevronRightIcon />
+        </div>
+      </Button>
+
+      <Button
+        variant="outlined"
+        className="nav-dashboard-btn"
         onClick={() => {
           history.push('/admin/funds');
         }}
-        style={{ color: '#E95B3E' }}
+        style={{ color: '#E95B3E', textTransform: 'none' }}
       >
-        <div className="nav-stat-header">
-          <div className="acc-icon">
-            <AttachMoneyIcon />
-          </div>
-          <div className="acc-statements">Funds</div>
-          <div className="right-sign">
-            <ChevronRightIcon />
-          </div>
+        <div className="dash-icon">
+          <AttachMoneyIcon />
         </div>
-      </div>
 
-      <div
-        className="nav-grievances-btn"
+        <div className="dash-name"> Funds </div>
+        <div className="right-sign">
+          <ChevronRightIcon />
+        </div>
+      </Button>
+
+      {/* <Button
+        variant="outlined"
+        className="nav-dashboard-btn"
         onClick={() => {
           history.push('/admin/investments');
         }}
-        style={{ color: '#E95B3E' }}
+        style={{ color: '#E95B3E', textTransform:'none'  }}
       >
-        <div className="nav-stat-header">
-          <div className="acc-icon">
-            <AccountBalanceWalletIcon />
-          </div>
-          <div className="acc-statements">Investments</div>
-          <div className="right-sign">
-            <ChevronRightIcon />
-          </div>
+        <div className="dash-icon">
+        <AccountBalanceWalletIcon />
         </div>
-      </div>
 
-      <div
-        className="nav-grievances-btn"
+        <div className="dash-name">Investments</div>
+        <div className="right-sign">
+          <ChevronRightIcon />
+        </div>
+      </Button> */}
+
+      <Button
+        variant="outlined"
+        className="nav-dashboard-btn"
         onClick={() => {
           history.push('/admin/grievances');
         }}
-        style={{ color: '#E95B3E' }}
+        style={{ color: '#E95B3E', textTransform: 'none' }}
       >
-        <div className="nav-stat-header">
-          <div className="acc-icon">
-            <AccountCircleSharpIcon />
-          </div>
-          <div className="acc-statements">Grievances</div>
-          <div className="right-sign">
-            <ChevronRightIcon />
-          </div>
+        <div className="dash-icon">
+          <AccountCircleSharpIcon />
         </div>
-      </div>
 
-      <div
-        className="nav-grievances-btn"
+        <div className="dash-name"> Grievances </div>
+        <div className="right-sign">
+          <ChevronRightIcon />
+        </div>
+      </Button>
+
+      <Button
+        variant="outlined"
+        className="nav-dashboard-btn"
         onClick={() => {
+          localStorage.clear();
           history.push('/');
         }}
-        style={{ color: '#E95B3E' }}
+        style={{ color: '#E95B3E', textTransform: 'none' }}
       >
-        <div className="nav-stat-header">
-          <div className="acc-icon">
-            <LogoutIcon />
-          </div>
-          <div className="acc-statements">Logout</div>
-          <div className="right-sign">
-            <ChevronRightIcon />
-          </div>
+        <div className="dash-icon">
+          <LogoutIcon />
         </div>
-      </div>
+
+        <div className="dash-name"> Logout</div>
+        <div className="right-sign">
+          <ChevronRightIcon />
+        </div>
+      </Button>
     </div>
   );
 };

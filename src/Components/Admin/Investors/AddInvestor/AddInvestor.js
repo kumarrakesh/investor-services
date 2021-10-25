@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router';
 import Button from '@mui/material/Button';
 import AdNavbar from '../../Navbar/Navbar';
 import './AddInvestor.css';
@@ -7,8 +8,24 @@ import { alpha, styled } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
+import Swal from 'sweetalert2';
+import IconButton from '@mui/material/IconButton';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 const AddInvestor = () => {
+  const history = useHistory();
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please Login Again!',
+        timer: 3000
+      });
+      history.push('/');
+    }
+  }, []);
+
   const BootstrapInput = styled(InputBase)(({ theme }) => ({
     'label + &': {
       marginTop: theme.spacing(3)
@@ -90,7 +107,18 @@ const AddInvestor = () => {
       </div>
 
       <div id="add-investors-container">
-        <h1 className="dtitle">Investors</h1>
+        <div className="cross-btn">
+          <h1 id="dtitle">Investors</h1>
+          <IconButton
+            size="large"
+            style={{ color: '#E95B3E' }}
+            onClick={() => {
+              history.push('/admin/investors');
+            }}
+          >
+            <CancelIcon fontSize="inherit" />
+          </IconButton>
+        </div>
         <h1 id="overview">Add Investor</h1>
 
         <div className="investor-div" id="inv-id1">
@@ -98,14 +126,14 @@ const AddInvestor = () => {
             <InputLabel shrink htmlFor="bootstrap-input">
               Investor Name
             </InputLabel>
-            <BootstrapInput defaultValue="Anil jain" id="bootstrap-input" />
+            <BootstrapInput defaultValue="" id="bootstrap-input" />
           </FormControl>
 
           <FormControl variant="standard">
             <InputLabel shrink htmlFor="bootstrap-input">
               Investor ID
             </InputLabel>
-            <BootstrapInput defaultValue="1012" id="bootstrap-input" />
+            <BootstrapInput defaultValue="" id="bootstrap-input" />
           </FormControl>
         </div>
 
@@ -114,14 +142,14 @@ const AddInvestor = () => {
             <InputLabel shrink htmlFor="bootstrap-input">
               Date
             </InputLabel>
-            <BootstrapInput defaultValue="23/10/2021" id="bootstrap-input" />
+            <BootstrapInput defaultValue="" id="bootstrap-input" />
           </FormControl>
 
           <FormControl variant="standard">
             <InputLabel shrink htmlFor="bootstrap-input">
               Passport Number
             </InputLabel>
-            <BootstrapInput defaultValue="XXJDEW" id="bootstrap-input" />
+            <BootstrapInput defaultValue="" id="bootstrap-input" />
           </FormControl>
         </div>
 
@@ -130,21 +158,14 @@ const AddInvestor = () => {
             <InputLabel shrink htmlFor="bootstrap-input">
               Address Line-1
             </InputLabel>
-            <BootstrapInput1
-              defaultValue="C-20"
-              id="bootstrap-input"
-              required
-            />
+            <BootstrapInput1 defaultValue="" id="bootstrap-input" required />
           </FormControl>
 
           <FormControl variant="standard">
             <InputLabel shrink htmlFor="bootstrap-input">
               Address Line-2
             </InputLabel>
-            <BootstrapInput1
-              defaultValue="Bandra Kurla complex"
-              id="bootstrap-input"
-            />
+            <BootstrapInput1 defaultValue="" id="bootstrap-input" />
           </FormControl>
         </div>
 
@@ -153,14 +174,14 @@ const AddInvestor = () => {
             <InputLabel shrink htmlFor="bootstrap-input">
               City
             </InputLabel>
-            <BootstrapInput defaultValue="Mumbai" id="bootstrap-input" />
+            <BootstrapInput defaultValue="" id="bootstrap-input" />
           </FormControl>
 
           <FormControl variant="standard">
             <InputLabel shrink htmlFor="bootstrap-input">
               State
             </InputLabel>
-            <BootstrapInput defaultValue="Maharastra" id="bootstrap-input" />
+            <BootstrapInput defaultValue="" id="bootstrap-input" />
           </FormControl>
         </div>
 

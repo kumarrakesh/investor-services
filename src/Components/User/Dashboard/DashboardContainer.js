@@ -119,7 +119,7 @@ const DashContainer = () => {
         </div>
       </div>
 
-      <div className="btns">
+      {/* <div className="btns">
         <Button
           variant="outlined"
           className="inv-btn"
@@ -185,7 +185,7 @@ const DashContainer = () => {
           Download
           {'\n'} Overall Report
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 };

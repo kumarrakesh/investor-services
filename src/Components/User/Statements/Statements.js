@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import './Statements.css';
 import Navbar from '../Navbar/Navbar';
+import Swal from 'sweetalert2';
 import {
   Button,
   Select,
@@ -23,6 +25,7 @@ const theme = createTheme({
   }
 });
 const Statements = () => {
+  const history = useHistory();
   //states
   const [selectedStartDate, setSelectedStartDate] = React.useState(new Date());
   const [selectedEndDate, setSelectedEndDate] = React.useState(new Date());
@@ -36,6 +39,16 @@ const Statements = () => {
   });
   //other hooks
   useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please Login Again!',
+        timer: 3000
+      });
+      history.push('/');
+    }
+
     fetch('https://investorbackend.herokuapp.com/api/user/fundnames', {
       headers: {
         'x-access-token':

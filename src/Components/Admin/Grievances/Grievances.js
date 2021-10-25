@@ -1,18 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router';
 import Button from '@mui/material/Button';
 import AdNavbar from '../Navbar/Navbar';
 import './Grievances.css';
 import CustomizedTables from './table';
 
 import 'date-fns';
-import Grid from '@material-ui/core/Grid';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker
-} from '@material-ui/pickers';
+import Swal from 'sweetalert2';
 
 const AdminGrievances = () => {
+  let history = useHistory();
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please Login Again!',
+        timer: 3000
+      });
+      history.push('/');
+    }
+  }, []);
+
   const [selectedDate, setSelectedDate] = React.useState(new Date());
 
   const handleDateChange = (date) => {
@@ -32,7 +41,7 @@ const AdminGrievances = () => {
         <p className="total-investors">Total Queries</p>
         <p className="total-no">30</p>
 
-        <div className="inv-btns">
+        {/* <div className="inv-btns">
           <div>
             <Button
               variant="contained"
@@ -64,7 +73,7 @@ const AdminGrievances = () => {
             Download
             {'\n'} List
           </Button>
-        </div>
+        </div> */}
 
         <div className="inv-table">
           <CustomizedTables />
