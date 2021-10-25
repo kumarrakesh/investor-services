@@ -1,5 +1,6 @@
 .header-container {
   display: flex;
+  background-color: var(--light-blue-bg) !important;
 }
 
 .grievances-container {
@@ -88,5 +89,4 @@ Button:visited {
   height: 430px;
   left: 76px;
   top: 280px !important;
-  overflow: scroll;
 }
