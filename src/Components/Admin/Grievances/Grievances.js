@@ -13,6 +13,7 @@ const AdminGrievances = () => {
   const [queries, setQueries] = useState([]);
   const [displayRows, setDisplayRows] = useState([]);
   const [selectedDate, setSelectedDate] = React.useState(new Date());
+  const [update, setUpdate] = React.useState(0);
 
   //hooks
   let history = useHistory();
@@ -29,7 +30,9 @@ const AdminGrievances = () => {
       getAllQueries();
     }
   }, []);
-
+  useEffect(() => {
+    getAllQueries();
+  }, [update]);
   //handlers
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -58,13 +61,10 @@ const AdminGrievances = () => {
       <div id="grievances-container">
         <h1 className="dtitle">Grievances</h1>
         <h1 className="overview">Overview</h1>
-        <p className="total-investors">Total Queries</p>
-        <p className="total-no">{queries.length}</p>
-        {/* <p className="total-investors">Unresolved Queries</p>
-        <p className="total-no"> */}
-        {/* {queries.filter((el) => !el.isResolved).length} */}
-        {/* </p> */}
-
+        <p className="total-investors">Unresolved Queries</p>
+        <p className="total-no">
+          {queries.filter((el) => !el.isResolved).length}
+        </p>
         {/* <div className="inv-btns">
           <div>
             <Button
@@ -104,6 +104,7 @@ const AdminGrievances = () => {
             rows={queries}
             displayRows={displayRows}
             setDisplayRows={setDisplayRows}
+            setUpdate={setUpdate}
           />
         </div>
       </div>

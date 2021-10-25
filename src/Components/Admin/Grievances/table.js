@@ -7,10 +7,9 @@ import {
   DialogContent,
   DialogActions,
   DialogTitle,
-  DialogContentText,
   Button,
   TextField
-} from '@mui/material/';
+} from '@mui/material';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
@@ -46,7 +45,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function CustomizedTables({
   rows,
   displayRows,
-  setDisplayRows
+  setDisplayRows,
+  setUpdate
 }) {
   //states
   const [searched, setSearched] = useState('');
@@ -60,7 +60,7 @@ export default function CustomizedTables({
     console.log(row);
     setDialogData(row);
     setDialogOpen(true);
-    setMessage('');
+    setMessage(row.reply || '');
   };
   const handleCloseDialog = (row) => {
     setDialogOpen(false);
@@ -78,13 +78,15 @@ export default function CustomizedTables({
           isResolved: true
         }),
         headers: {
+          'Content-Type': 'application/json',
           'x-access-token': JSON.parse(localStorage.getItem('token'))
         }
       }
     );
     const data = await response.json();
-    if (data.status) alert('Updated');
-    else alert('Error while updating');
+    if (data.status) {
+      setUpdate((state) => state + 1);
+    } else alert('Error while updating');
     console.log(data);
   };
   const handleChangeMessage = (e) => {
@@ -181,9 +183,16 @@ export default function CustomizedTables({
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleCloseDialog}>Cancel</Button>
-            <Button onClick={handleSaveQuery} disabled={!message.length}>
-              Mark as resolved
+            <Button onClick={handleCloseDialog} variant="outlined">
+              Cancel
+            </Button>
+            <Button
+              onClick={handleSaveQuery}
+              disabled={!message.length}
+              variant="outlined"
+              style={{ color: 'var(--primary-color)' }}
+            >
+              {dialogData?.reply ? 'Update Message' : 'Mark as resolved'}
             </Button>
           </DialogActions>
         </Dialog>
