@@ -72,16 +72,19 @@ export default function CustomizedTables({
       'https://investorbackend.herokuapp.com/api/query/update',
       {
         method: 'POST',
-        body: {
-          queryId: row.queryId,
+        body: JSON.stringify({
+          queryId: dialogData._id,
           reply: message,
           isResolved: true
-        },
-        'x-access-token': JSON.parse(localStorage.getItem('token'))
+        }),
+        headers: {
+          'x-access-token': JSON.parse(localStorage.getItem('token'))
+        }
       }
     );
     const data = await response.json();
-    // if(data.status)
+    if (data.status) alert('Updated');
+    else alert('Error while updating');
     console.log(data);
   };
   const handleChangeMessage = (e) => {
