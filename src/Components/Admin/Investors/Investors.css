@@ -1,5 +1,6 @@
 .investors-main {
   display: flex;
+  background-color: var(--light-blue-bg);
 }
 
 .investors-container {
@@ -14,13 +15,10 @@
   height: 28px;
   left: 76px;
   top: 57px;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 28px;
 
-  color: #132f5e;
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: var(--secondary-color);
 }
 
 #inv-overview {
@@ -29,13 +27,9 @@
   height: 21px;
   left: 76px;
   top: 128px;
-
-  font-family: Roboto;
-  font-style: normal;
   font-weight: 500;
-  font-size: 18px;
-  line-height: 21px;
-  color: #132f5e;
+  font-size: 1.125rem;
+  color: var(--secondary-color);
 }
 
 #total-investors {
@@ -45,13 +39,9 @@
   left: 76px;
   top: 174px;
 
-  font-family: Roboto;
-  font-style: normal;
   font-weight: 300;
   font-size: 14px;
-  line-height: 16px;
-
-  color: #132f5e;
+  color: var(--secondary-color);
 }
 
 #total-no {
@@ -61,13 +51,11 @@
   left: 76px;
   top: 200px;
 
-  font-family: Roboto;
-  font-style: normal;
   font-weight: 500;
   font-size: 24px;
   line-height: 28px;
 
-  color: #132f5e;
+  color: var(--secondary-color);
 }
 
 .inv-btns {

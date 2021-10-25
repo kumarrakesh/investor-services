@@ -20,7 +20,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover
+    backgroundColor: 'white !important'
+  },
+  '&:nth-of-type(even)': {
+    backgroundColor: 'var(--light-blue-bg)'
   },
   // hide last border
   '&:last-child td, &:last-child th': {
@@ -30,11 +33,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function CustomizedTables({ rows }) {
   return (
-    <TableContainer component={Paper}>
-      <Table
-        sx={{ minWidth: 700, height: '100px', overflow: 'scroll' }}
-        aria-label="customized table"
-      >
+    <TableContainer component={Paper} sx={{ maxHeight: '40vh' }}>
+      <Table stickyHeader aria-label="customized table">
         <TableHead>
           <TableRow
             style={{

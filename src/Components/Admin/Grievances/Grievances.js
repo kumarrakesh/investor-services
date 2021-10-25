@@ -75,7 +75,7 @@ const AdminGrievances = () => {
           </Button>
         </div> */}
 
-        <div className="inv-table">
+        <div className="inv-table-grievances">
           <CustomizedTables />
         </div>
       </div>
