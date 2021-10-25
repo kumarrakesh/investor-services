@@ -11,17 +11,21 @@ import SearchBar from 'material-ui-search-bar';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white
+    backgroundColor: '#E6E8EA !important',
+    color: 'var(--secondary-color)'
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 14
+    fontSize: 14,
+    color: 'var(--secondary-color)'
   }
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover
+    backgroundColor: 'white !important'
+  },
+  '&:nth-of-type(even)': {
+    backgroundColor: 'var(--light-blue-bg)'
   },
   // hide last border
   '&:last-child td, &:last-child th': {
@@ -31,11 +35,17 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function CustomizedTables({ rows }) {
   return (
-    <TableContainer id="query-table" component={Paper}>
-      <Table
-        sx={{ minWidth: 700, height: '100px', overflow: 'scroll' }}
-        aria-label="customized table"
-      >
+    <TableContainer
+      id="query-table"
+      component={Paper}
+      sx={{
+        maxHeight: '500px',
+        border: '1px solid #CECECE',
+        borderRadius: '8px',
+        overflowX: 'hidden'
+      }}
+    >
+      <Table stickyHeader aria-label="customized table">
         <TableHead>
           <TableRow>
             <StyledTableCell>Date of Query</StyledTableCell>
@@ -46,7 +56,7 @@ export default function CustomizedTables({ rows }) {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+            <StyledTableRow key={row._id}>
               <StyledTableCell component="th" scope="row">
                 {new Date(row.date).toLocaleDateString('en-GB')}
               </StyledTableCell>
@@ -57,7 +67,7 @@ export default function CustomizedTables({ rows }) {
                 #{row._id}
               </StyledTableCell>
               <StyledTableCell align="center" component="th" scope="row">
-                {String(row.isResolved)}
+                {row.isResolved ? 'Resolved' : 'Not Resolved'}
               </StyledTableCell>
             </StyledTableRow>
           ))}

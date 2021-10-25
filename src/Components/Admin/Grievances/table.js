@@ -11,17 +11,21 @@ import SearchBar from 'material-ui-search-bar';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white
+    backgroundColor: '#E6E8EA !important',
+    color: 'var(--secondary-color)'
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 14
+    fontSize: 14,
+    color: 'var(--secondary-color)'
   }
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover
+    backgroundColor: 'white !important'
+  },
+  '&:nth-of-type(even)': {
+    backgroundColor: 'var(--light-blue-bg)'
   },
   // hide last border
   '&:last-child td, &:last-child th': {
@@ -123,50 +127,51 @@ export default function CustomizedTables() {
   };
 
   return (
-    <Paper>
+    <>
       <SearchBar
         value={searched}
         onChange={(searchVal) => requestSearch(searchVal)}
         onCancelSearch={() => cancelSearch()}
       />
-
-      <TableContainer component={Paper}>
-        <Table
-          sx={{ minWidth: 700, height: '100px', overflow: 'scroll' }}
-          aria-label="customized table"
+      <Paper>
+        <TableContainer
+          component={Paper}
+          sx={{ minWidth: 700, maxHeight: '350px' }}
         >
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>Date Added</StyledTableCell>
-              <StyledTableCell align="center">Query Subject</StyledTableCell>
-              <StyledTableCell>Query ID</StyledTableCell>
-              <StyledTableCell align="center">Investor Name</StyledTableCell>
-              <StyledTableCell align="center">Action</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <StyledTableRow key={row.name}>
-                <StyledTableCell component="th" scope="row">
-                  {row.Date}
-                </StyledTableCell>
-                <StyledTableCell align="center" component="th" scope="row">
-                  {row.QuerySub}
-                </StyledTableCell>
-                <StyledTableCell align="left" component="th" scope="row">
-                  {row.QueryId}
-                </StyledTableCell>
-                <StyledTableCell align="center" component="th" scope="row">
-                  {row.InvName}
-                </StyledTableCell>
-                <StyledTableCell align="center" component="th" scope="row">
-                  {row.Action}
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Paper>
+          <Table stickyHeader aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Date Added</StyledTableCell>
+                <StyledTableCell align="center">Query Subject</StyledTableCell>
+                <StyledTableCell>Query ID</StyledTableCell>
+                <StyledTableCell align="center">Investor Name</StyledTableCell>
+                <StyledTableCell align="center">Action</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <StyledTableRow key={row.name}>
+                  <StyledTableCell component="th" scope="row">
+                    {row.Date}
+                  </StyledTableCell>
+                  <StyledTableCell align="center" component="th" scope="row">
+                    {row.QuerySub}
+                  </StyledTableCell>
+                  <StyledTableCell align="left" component="th" scope="row">
+                    {row.QueryId}
+                  </StyledTableCell>
+                  <StyledTableCell align="center" component="th" scope="row">
+                    {row.InvName}
+                  </StyledTableCell>
+                  <StyledTableCell align="center" component="th" scope="row">
+                    {row.Action}
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
+    </>
   );
 }

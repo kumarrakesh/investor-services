@@ -1,5 +1,6 @@
 .grievances-main {
   display: flex;
+  background-color: var(--light-blue-bg);
 }
 
 #grievances-container {
@@ -14,8 +15,7 @@
   height: 28px;
   left: 76px;
   top: 57px;
-  font-family: Roboto;
-  font-style: normal;
+
   font-weight: 500;
   font-size: 24px;
   line-height: 28px;
@@ -30,8 +30,6 @@
   left: 76px;
   top: 128px;
 
-  font-family: Roboto;
-  font-style: normal;
   font-weight: 500;
   font-size: 18px;
   line-height: 21px;
@@ -45,8 +43,6 @@
   left: 76px;
   top: 174px;
 
-  font-family: Roboto;
-  font-style: normal;
   font-weight: 300;
   font-size: 14px;
   line-height: 16px;
@@ -61,8 +57,6 @@
   left: 76px;
   top: 200px;
 
-  font-family: Roboto;
-  font-style: normal;
   font-weight: 500;
   font-size: 24px;
   line-height: 28px;
@@ -81,11 +75,10 @@
   justify-content: space-between;
 }
 
-.inv-table {
+.inv-table-grievances {
   position: absolute;
   width: 1100px;
-  height: 350px;
-  overflow: auto;
-  top: 360px;
+  /* overflow: auto; */
+  top: 300px;
   left: 78px;
 }
