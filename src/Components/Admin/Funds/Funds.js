@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import Button from '@mui/material/Button';
 import AdNavbar from '../Navbar/Navbar';
@@ -8,9 +8,12 @@ import Swal from 'sweetalert2';
 
 const Funds = () => {
   let history = useHistory();
+  const [displayRows, setDisplayRows] = useState([]);
+  const [update, setUpdate] = useState(0);
+  const token = JSON.parse(localStorage.getItem('token'));
 
   useEffect(() => {
-    if (!localStorage.getItem('token')) {
+    if (!token) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -19,7 +22,26 @@ const Funds = () => {
       });
       history.push('/');
     }
+
+    getAllFunds();
   }, []);
+
+  useEffect(() => {
+    getAllFunds();
+  }, [update]);
+
+  const getAllFunds = async () => {
+    const response = await fetch(
+      'https://investorbackend.herokuapp.com/api/funds',
+      {
+        headers: {
+          'x-access-token': token
+        }
+      }
+    );
+    const data = await response.json();
+    setDisplayRows(data.data);
+  };
 
   const handleAddFunds = () => {
     history.push('/admin/funds/add');
@@ -36,7 +58,7 @@ const Funds = () => {
         <h1 className="overview">Overview</h1>
 
         <p className="total-investors">Total Funds</p>
-        <p className="total-no">5</p>
+        <p className="total-no">{displayRows.length}</p>
 
         <div className="inv-btns">
           <div>
@@ -67,8 +89,8 @@ const Funds = () => {
           </Button> */}
         </div>
 
-        <div className="inv-table-funds">
-          <CustomizedTables />
+        <div>
+          <CustomizedTables displayRows={displayRows} setUpdate={setUpdate} />
         </div>
       </div>
     </div>

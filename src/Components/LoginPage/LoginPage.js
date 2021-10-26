@@ -4,12 +4,18 @@ import './LoginPage.css';
 import logo from '../../assets/images/tiwpe-logo.png';
 import { UserContext } from '../../userContext';
 import Swal from 'sweetalert2';
+import CircularProgress from '@mui/material/CircularProgress';
+import Button from '@mui/material/Button';
 
 const LoginPage = () => {
   const history = useHistory();
   const { setUserData } = useContext(UserContext);
+  const [progress, setProgress] = useState(false);
+  const [disability, setDisability] = useState(false);
 
   const handleLogin = async () => {
+    setProgress(true);
+    setDisability(true);
     let response = await fetch(
       'https://investorbackend.herokuapp.com/api/user/signin',
       {
@@ -30,6 +36,7 @@ const LoginPage = () => {
     } else if (data.status && data.role === 'USER') {
       history.push('/dashboard');
     } else {
+      setProgress(false);
       Swal.fire({
         icon: 'error',
         title: 'Error...',
@@ -74,9 +81,14 @@ const LoginPage = () => {
           >
             Forgot Password?
           </span> */}
-          <button id="login-submit-button" onClick={handleLogin}>
+          <Button
+            id="login-submit-button"
+            onClick={handleLogin}
+            disabled={disability}
+          >
             Login
-          </button>
+          </Button>
+          {progress === true && <CircularProgress />}
         </div>
       </div>
     </div>

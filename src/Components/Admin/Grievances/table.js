@@ -62,6 +62,7 @@ export default function CustomizedTables({
     setDialogOpen(true);
     setMessage(row.reply || '');
   };
+
   const handleCloseDialog = (row) => {
     setDialogOpen(false);
   };

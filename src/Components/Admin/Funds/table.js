@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -14,6 +14,12 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import Input from '@mui/material/Input';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import FormControl from '@mui/material/FormControl';
+import { LocalizationProvider, DesktopDatePicker } from '@mui/lab';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -39,99 +45,58 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   }
 }));
 
-function createData(Date, FundName, FundId, NAV, InvAmount, CurrInvVal) {
-  return { Date, FundName, FundId, NAV, InvAmount, CurrInvVal };
-}
-
-const rows = [
-  createData(
-    '21/01/2021',
-    'Axis Securities',
-    '#1012',
-    '$25.67',
-    '$10000.00',
-    '$10000.00'
-  ),
-  createData(
-    '21/01/2021',
-    'Axis Securities',
-    '#1012',
-    '$25.67',
-    '$10000.00',
-    '$10000.00'
-  ),
-  createData(
-    '21/01/2021',
-    'Axis Securities',
-    '#1012',
-    '$25.67',
-    '$10000.00',
-    '$10000.00'
-  ),
-  createData(
-    '21/01/2021',
-    'Axis Securities',
-    '#1012',
-    '$25.67',
-    '$10000.00',
-    '$10000.00'
-  ),
-  createData(
-    '21/01/2021',
-    'Axis Securities',
-    '#1012',
-    '$25.67',
-    '$10000.00',
-    '$10000.00'
-  ),
-  createData(
-    '21/01/2021',
-    'Axis Securities',
-    '#1012',
-    '$25.67',
-    '$10000.00',
-    '$10000.00'
-  ),
-  createData(
-    '21/01/2021',
-    'Axis Securities',
-    '#1012',
-    '$25.67',
-    '$10000.00',
-    '$10000.00'
-  ),
-  createData(
-    '21/01/2021',
-    'Axis Securities',
-    '#1012',
-    '$25.67',
-    '$10000.00',
-    '$10000.00'
-  ),
-  createData(
-    '21/01/2021',
-    'Axis Securities',
-    '#1012',
-    '$25.67',
-    '$10000.00',
-    '$10000.00'
-  )
-];
-
-export default function CustomizedTables() {
+export default function CustomizedTables({ displayRows, setUpdate }) {
   const [open, setOpen] = React.useState(false);
+  const [values, setValues] = React.useState({ amount: '' });
+  const [dialogData, setDialogData] = useState({});
 
-  const handleClickOpen = () => {
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+
+  const [selectedDate, setSelectedDate] = React.useState(new Date());
+
+  const handleDateChange = (newValue) => {
+    setSelectedDate(newValue);
+  };
+
+  const handleClickOpen = (row) => {
+    setDialogData(row);
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleCancel = () => {
     setOpen(false);
+  };
+
+  const handleUpdate = async () => {
+    setOpen(false);
+    const response = await fetch(
+      'https://investorbackend.herokuapp.com/api/update/fund',
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          fundname: dialogData.fundname,
+          nav: values.amount,
+          date: selectedDate
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': JSON.parse(localStorage.getItem('token'))
+        }
+      }
+    );
+    console.log(selectedDate);
+    const data = await response.json();
+    if (data?.status) {
+      setUpdate((state) => state + 1);
+    } else alert('Error while updating');
+    console.log(data);
   };
 
   return (
     <>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} className="inv-table-funds">
         <Table
           sx={{ minWidth: 700, height: '100px', overflow: 'scroll' }}
           aria-label="customized table"
@@ -149,34 +114,39 @@ export default function CustomizedTables() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {!displayRows.length && (
+              <p style={{ padding: 10 }}>No Funds found...</p>
+            )}
+            {displayRows.map((row) => (
               <StyledTableRow key={row.name}>
                 <StyledTableCell component="th" scope="row">
-                  {row.Date}
+                  {new Date(row.dateOfCreation).toLocaleDateString('en-GB')}
                 </StyledTableCell>
                 <StyledTableCell align="center" component="th" scope="row">
-                  {row.FundName}
-                </StyledTableCell>
-                <StyledTableCell align="left" component="th" scope="row">
-                  {row.FundId}
+                  {row.fundname}
                 </StyledTableCell>
                 <StyledTableCell align="center" component="th" scope="row">
-                  {row.NAV}
+                  {row.fundId}
                 </StyledTableCell>
                 <StyledTableCell align="center" component="th" scope="row">
-                  {row.Date}
+                  {row.nav}
                 </StyledTableCell>
                 <StyledTableCell align="center" component="th" scope="row">
-                  {row.InvAmount}
+                  {new Date(row.lastUpdate).toLocaleDateString('en-GB')}
                 </StyledTableCell>
                 <StyledTableCell align="center" component="th" scope="row">
-                  {row.CurrInvVal}
+                  {row.totalInvested.toFixed(2)}
+                </StyledTableCell>
+                <StyledTableCell align="center" component="th" scope="row">
+                  {row.currentValue.toFixed(2)}
                 </StyledTableCell>
                 <StyledTableCell align="center" component="th" scope="row">
                   {
                     <Button
                       variant="contained"
-                      onClick={handleClickOpen}
+                      onClick={() => {
+                        handleClickOpen(row);
+                      }}
                       style={{
                         backgroundColor: '#E95B3E',
                         textTransform: 'none'
@@ -193,26 +163,38 @@ export default function CustomizedTables() {
       </TableContainer>
 
       <div>
-        <Dialog open={open} onClose={handleClose}>
+        <Dialog open={open} onClose={handleCancel}>
           <DialogTitle>Update NAV</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              To subscribe to this website, please enter your email address
-              here. We will send updates occasionally.
-            </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Email Address"
-              type="email"
-              fullWidth
-              variant="standard"
-            />
+          <DialogContent
+            style={{ display: 'flex', flexDirection: 'column', gap: '1.7rem' }}
+          >
+            <FormControl sx={{ m: 1 }} variant="standard">
+              <InputLabel htmlFor="standard-adornment-amount">
+                Amount
+              </InputLabel>
+              <Input
+                id="standard-adornment-amount"
+                value={values.amount}
+                onChange={handleChange('amount')}
+                startAdornment={
+                  <InputAdornment position="start">$</InputAdornment>
+                }
+              />
+            </FormControl>
+
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DesktopDatePicker
+                label="NAV Date"
+                inputFormat="MM/dd/yyyy"
+                value={selectedDate}
+                onChange={handleDateChange}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleClose}>Update</Button>
+            <Button onClick={handleCancel}>Cancel</Button>
+            <Button onClick={handleUpdate}>Update</Button>
           </DialogActions>
         </Dialog>
       </div>

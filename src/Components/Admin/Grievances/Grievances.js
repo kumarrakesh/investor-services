@@ -63,7 +63,7 @@ const AdminGrievances = () => {
         <h1 className="overview">Overview</h1>
         <p className="total-investors">Unresolved Queries</p>
         <p className="total-no">
-          {queries.filter((el) => !el.isResolved).length}
+          {queries?.filter((el) => !el.isResolved).length}
         </p>
         {/* <div className="inv-btns">
           <div>
