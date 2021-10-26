@@ -23,9 +23,7 @@ const Dashboard = () => {
       <div>
         <Navbar />
       </div>
-      <div>
-        <DashContainer />
-      </div>
+      <DashContainer />
     </div>
   );
 };
