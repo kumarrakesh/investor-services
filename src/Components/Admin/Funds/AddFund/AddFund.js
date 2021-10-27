@@ -90,10 +90,8 @@ const AddFund = () => {
       </div>
 
       <div id="add-funds-container">
-        <h1 className="dtitle">Funds</h1>
-
         <div className="cross-btn">
-          <h1 id="dtitle">Funds</h1>
+          <h1 className="add-fund-title">Funds</h1>
           <IconButton
             size="large"
             style={{ color: '#E95B3E' }}

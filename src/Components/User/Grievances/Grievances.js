@@ -43,10 +43,11 @@ const Grievances = () => {
           'x-access-token': token
         },
         method: 'POST',
-        body: JSON.stringify({ subject, description, date })
+        body: JSON.stringify({ subject, description, date: new Date() })
       }
     );
     setData(await response.json());
+    console.log(data);
     Swal.fire('Great!', 'Query sent successfully!', 'success');
   };
 
@@ -126,7 +127,7 @@ const Grievances = () => {
                 />
               </div>
 
-              <div className="query-box">
+              <div className="user-query-box">
                 <TextField
                   id="outlined-multiline-static"
                   name="description"
@@ -136,8 +137,7 @@ const Grievances = () => {
                   label="Query"
                   fullWidth
                   multiline
-                  rows={11}
-                  defaultValue=""
+                  rows={3}
                 />
               </div>
 

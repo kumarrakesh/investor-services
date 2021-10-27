@@ -56,7 +56,7 @@ Button:visited {
   width: 90%;
 }
 
-.query-box {
+.user-query-box {
   position: absolute;
   left: 76px;
   top: 361px;
@@ -69,7 +69,7 @@ Button:visited {
   justify-content: center;
   align-items: center;
   left: 76px;
-  top: 665px;
+  top: 640px;
   width: 1100px;
 }
 
