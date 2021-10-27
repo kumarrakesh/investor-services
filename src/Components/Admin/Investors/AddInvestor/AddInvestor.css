@@ -1,20 +1,24 @@
-#overview {
-  position: absolute;
-  width: 274px;
-  height: 21px;
-  left: 76px;
-  top: 128px;
+.add-investors-main {
+  display: flex !important;
+  flex-direction: row !important;
+}
 
+#add-investors-container {
+  padding: 3rem 5rem;
+  padding-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: var(--light-blue-bg);
+  width: 100%;
+}
+#add-investors-subtitle {
   font-weight: 500;
   font-size: 18px;
-  line-height: 21px;
   color: #132f5e;
 }
 
-#dtitle {
-  width: 117px;
-  height: 28px;
-
+#add-investors-title {
   font-weight: 500;
   font-size: 24px;
   line-height: 28px;
@@ -22,58 +26,38 @@
   color: #132f5e;
 }
 
-.cross-btn {
+.add-investors-cross-btn {
   position: absolute;
-  left: 76px;
-  top: 57px;
-  width: 1100px !important;
+  top: 3rem;
+  right: 100px;
   display: flex;
   justify-content: space-between;
-}
-
-.add-investors-main {
-  display: flex !important;
-  flex-direction: row !important;
-}
-
-#add-investors-container {
-  position: absolute;
-  left: 300px;
-  width: 1100px !important;
 }
 
 .investor-div {
-  width: 1100px !important;
   display: flex;
-  left: 76px;
   justify-content: space-between;
 }
-
+.add-inv-all-inputs {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 #inv-id1 {
-  position: absolute;
-  top: 190px !important;
 }
 
 #inv-id2 {
-  position: absolute;
-  top: 280px !important;
 }
 
 #inv-id3 {
-  position: absolute;
-  top: 370px !important;
-  height: 160px;
   align-content: space-between;
   flex-direction: column !important;
 }
 
 #inv-id4 {
-  position: absolute;
-  top: 550px !important;
 }
 
 #add-inv-btn {
-  position: absolute;
-  top: 665px !important;
   justify-content: center;
 }

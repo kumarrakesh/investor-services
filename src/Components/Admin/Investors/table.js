@@ -112,9 +112,12 @@ const rows = [
 
 export default function CustomizedTables() {
   return (
-    <TableContainer className="inv-table" component={Paper}>
+    <TableContainer
+      component={Paper}
+      sx={{ minWidth: 700, maxHeight: '350px' }}
+    >
       <Table
-        sx={{ minWidth: 700, height: '100px', overflow: 'scroll' }}
+        sx={{ minWidth: 700, maxHeight: '100px', overflow: 'scroll' }}
         aria-label="customized table"
         stickyHeader
       >

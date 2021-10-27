@@ -77,7 +77,7 @@ const Investors = () => {
           </Button> */}
         </div>
 
-        <div>
+        <div className="investors-inv-table">
           <CustomizedTables />
         </div>
       </div>
