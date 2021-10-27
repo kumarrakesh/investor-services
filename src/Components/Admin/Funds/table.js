@@ -114,9 +114,7 @@ export default function CustomizedTables({ displayRows, setUpdate }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {!displayRows.length && (
-              <p style={{ padding: 10 }}>No Funds found...</p>
-            )}
+            {!displayRows.length && <p style={{ padding: 10 }}>Loading...</p>}
             {displayRows.map((row) => (
               <StyledTableRow key={row.name}>
                 <StyledTableCell component="th" scope="row">

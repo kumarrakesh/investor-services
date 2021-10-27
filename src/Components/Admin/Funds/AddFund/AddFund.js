@@ -14,6 +14,8 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import { LocalizationProvider, MobileDatePicker } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import TextField from '@mui/material/TextField';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputAdornment from '@mui/material/InputAdornment';
 
 // const theme = createTheme({
 //   palette: {
@@ -23,6 +25,9 @@ import TextField from '@mui/material/TextField';
 
 const AddFund = () => {
   let history = useHistory();
+  const [values, setValues] = React.useState({
+    amount: ''
+  });
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
@@ -36,10 +41,14 @@ const AddFund = () => {
     }
   }, []);
 
-  const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
+  const [value, setValue] = React.useState(new Date());
 
-  const handleChange = (newValue) => {
+  const handleChangeDate = (newValue) => {
     setValue(newValue);
+  };
+
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
   };
 
   const BootstrapInput = styled(TextField)(({ theme }) => ({
@@ -52,7 +61,7 @@ const AddFund = () => {
       backgroundColor: theme.palette.mode === 'light' ? '#fcfcfb' : '#2b2b2b',
       border: '1px solid #ced4da',
       fontSize: 16,
-      width: '374px',
+
       padding: '10px 12px',
       transition: theme.transitions.create([
         'border-color',
@@ -102,23 +111,29 @@ const AddFund = () => {
         </div>
 
         <h1 id="overview">Add Fund</h1>
+
         <div className="add-funds-div" id="add-funds-id1">
           <FormControl variant="standard">
             <InputLabel shrink htmlFor="bootstrap-input">
               Fund Name
             </InputLabel>
-            <BootstrapInput defaultValue="" id="bootstrap-input" />
+            <BootstrapInput defaultValue="" id="bootstrap-input" required />
           </FormControl>
 
-          <FormControl variant="standard">
-            <InputLabel shrink htmlFor="bootstrap-input">
-              Fund ID
-            </InputLabel>
-            <BootstrapInput defaultValue="" id="bootstrap-input" />
+          <FormControl sx={{ m: 1 }}>
+            <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
+            <OutlinedInput
+              id="outlined-adornment-amount"
+              value={values.amount}
+              onChange={handleChange('amount')}
+              startAdornment={
+                <InputAdornment position="start">$</InputAdornment>
+              }
+              label="NAV"
+              required
+            />
           </FormControl>
-        </div>
 
-        <div className="add-funds-div" id="add-funds-id2">
           <div id="fund-st-date">
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <small style={{ fontWeight: '300' }}>Start Date</small>
@@ -130,29 +145,23 @@ const AddFund = () => {
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    sx={{ width: '400px !important', marginTop: '0.5rem' }}
+                    sx={{ width: '600px !important', marginTop: '0.5rem' }}
                   />
                 )}
               />
             </LocalizationProvider>
           </div>
 
-          <FormControl variant="standard">
-            <InputLabel shrink htmlFor="bootstrap-input">
-              NAV
-            </InputLabel>
-            <BootstrapInput defaultValue="" id="bootstrap-input" />
-          </FormControl>
-        </div>
-
-        <div className="add-funds-div" id="add-funds-btn">
-          <Button
-            variant="outlined"
-            className="download-btn"
-            style={{ color: '#E95B3E', textTransform: 'none' }}
-          >
-            Add Fund
-          </Button>
+          <div className="add-funds-btn-div">
+            <Button
+              id="add-funds-btn"
+              variant="outlined"
+              className="download-btn"
+              style={{ color: '#E95B3E', textTransform: 'none' }}
+            >
+              Add Fund
+            </Button>
+          </div>
         </div>
       </div>
     </div>
