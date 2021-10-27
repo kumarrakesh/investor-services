@@ -4,7 +4,8 @@ import AdNavbar from '../Navbar/Navbar';
 import './Investments.css';
 import CustomizedTables from './table';
 import Swal from 'sweetalert2';
-import { Button, TextField } from '@mui/material';
+import { Button } from '@material-ui/core';
+import { TextField } from '@mui/material';
 import 'date-fns';
 import { LocalizationProvider, MobileDatePicker } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
@@ -53,31 +54,19 @@ const Investments = () => {
 
   return (
     <div className="investments-main">
-      <div>
-        <AdNavbar />
-      </div>
+      <AdNavbar />
 
       <div id="investments-container">
-        <h1 className="dtitle">Investments</h1>
-        <h1 className="overview">Overview</h1>
-
-        <p className="total-investors">Total Investments</p>
-        <p className="total-no">50</p>
-
-        <div className="inv-btns">
-          <div>
-            <Button
-              variant="contained"
-              onClick={handleAddTranscation}
-              style={{ textTransform: 'none' }}
-            >
-              Record New Transaction +
-            </Button>
-          </div>
-
+        <h1 className="investments-heading">Investments</h1>
+        <h1 className="investments-subheading">Overview</h1>
+        <p className="investments-total-investors">Total Investments</p>
+        <p className="investments-total-no">50</p>
+        <div className="investments-inv-btns">
+          <div>Filter by date:</div>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <MobileDatePicker
-              label="Start Date"
+              label="From Date"
+              variant="outlined"
               inputFormat="dd/MM/yyyy"
               value={selectedStartDate}
               onChange={handleStartDateChange}
@@ -88,23 +77,35 @@ const Investments = () => {
 
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <MobileDatePicker
-              label="Start Date"
+              label="To Date"
               inputFormat="dd/MM/yyyy"
               value={selectedEndDate}
               onChange={handleEndDateChange}
               disableCloseOnSelect={false}
+              style={{ padding: '10px 20px !important' }}
               renderInput={(params) => <TextField {...params} />}
             />
           </LocalizationProvider>
 
-          <Button variant="contained" id="apply-btn">
+          <Button
+            variant="contained"
+            id="investors-apply-btn"
+            style={{ padding: '10px 20px !important' }}
+          >
             Apply
           </Button>
         </div>
 
-        <div className="inv-table">
-          <CustomizedTables />
-        </div>
+        {/* <div className="inv-table"> */}
+        <CustomizedTables style={{ marginTop: '-10px !important' }} />
+        {/* </div> */}
+        <Button
+          variant="contained"
+          onClick={handleAddTranscation}
+          style={{ textTransform: 'none' }}
+        >
+          Record New Transaction +
+        </Button>
       </div>
     </div>
   );

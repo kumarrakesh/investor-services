@@ -36,7 +36,7 @@ const Statements = () => {
   const [summaryData, setSummaryData] = useState({
     totalInvested: 0,
     currentValue: 0,
-    totalUnit: 0
+    totalUnits: 0
   });
   const [loading, setLoading] = useState(true);
   //other hooks
@@ -189,15 +189,16 @@ const Statements = () => {
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>
-
-            <MobileDatePicker
-              label="Start Date"
-              inputFormat="dd/MM/yyyy"
-              value={selectedStartDate}
-              onChange={handleStartDateChange}
-              disableCloseOnSelect={false}
-              renderInput={(params) => <TextField {...params} />}
-            />
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <MobileDatePicker
+                label="Start Date"
+                inputFormat="dd/MM/yyyy"
+                value={selectedStartDate}
+                onChange={handleStartDateChange}
+                disableCloseOnSelect={false}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
           </ThemeProvider>
           <Button variant="contained" id="apply-btn" onClick={handleDateFilter}>
             Apply
@@ -211,12 +212,27 @@ const Statements = () => {
           onChange={handleChangeFundname}
           variant="outlined"
         >
-          <MenuItem value={'All'}>All</MenuItem>
+          <MenuItem
+            value={'All'}
+            onClick={() => {
+              getUserTransactions('');
+            }}
+          >
+            All
+          </MenuItem>
           {uniqueFunds.map((fund) => {
-            return <MenuItem value={fund.fundname}>{fund.fundname}</MenuItem>;
+            return (
+              <MenuItem value={fund.fundname} key={fund.fundname}>
+                {fund.fundname}
+              </MenuItem>
+            );
           })}
         </Select>
-        <CustomizedTables rows={displayRows} fundname={fundname} />
+        <CustomizedTables
+          rows={displayRows}
+          fundname={fundname}
+          loading={loading}
+        />
         <Backdrop
           sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
           open={loading}
