@@ -31,7 +31,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   }
 }));
 
-export default function CustomizedTables({ rows, fundname }) {
+export default function CustomizedTables({ rows, fundname, loading }) {
   return (
     <TableContainer component={Paper} sx={{ maxHeight: '40vh' }}>
       <Table stickyHeader aria-label="customized table">
@@ -61,9 +61,19 @@ export default function CustomizedTables({ rows, fundname }) {
           }}
         >
           {!rows.length && (
-            <h3 style={{ padding: '1rem', textAlign: 'center' }}>
-              No such data...
-            </h3>
+            <StyledTableRow>
+              <StyledTableCell
+                component="th"
+                scope="row"
+                style={{
+                  padding: '1rem',
+                  textAlign: 'center',
+                  fontSize: '2rem'
+                }}
+              >
+                {loading ? 'Loading...' : 'No such data...'}
+              </StyledTableCell>
+            </StyledTableRow>
           )}
           {rows != {} &&
             rows.map((row) => (

@@ -11,17 +11,21 @@ import SearchBar from 'material-ui-search-bar';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white
+    backgroundColor: '#E6E8EA !important',
+    color: 'var(--secondary-color)'
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 14
+    fontSize: 14,
+    color: 'var(--secondary-color)'
   }
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover
+    backgroundColor: 'white !important'
+  },
+  '&:nth-of-type(even)': {
+    backgroundColor: 'var(--light-blue-bg)'
   },
   // hide last border
   '&:last-child td, &:last-child th': {
@@ -122,7 +126,13 @@ export default function CustomizedTables() {
 
   const requestSearch = (searchedVal) => {
     const filteredRows = originalRows.filter((row) => {
-      return row.Date.toLowerCase().includes(searchedVal.toLowerCase());
+      return (
+        row.Date.toLowerCase().includes(searchedVal.toLowerCase()) ||
+        row.FundName.toLowerCase().includes(searchedVal.toLowerCase()) ||
+        row.Date.toLowerCase().includes(searchedVal.toLowerCase()) ||
+        row.Action.toLowerCase().includes(searchedVal.toLowerCase()) ||
+        row.Date.toLowerCase().includes(searchedVal.toLowerCase())
+      );
     });
     setRows(filteredRows);
   };
@@ -133,54 +143,58 @@ export default function CustomizedTables() {
   };
 
   return (
-    <Paper>
+    <>
       <SearchBar
         value={searched}
         onChange={(searchVal) => requestSearch(searchVal)}
         onCancelSearch={() => cancelSearch()}
       />
-
-      <TableContainer component={Paper}>
-        <Table
-          sx={{ minWidth: 700, height: '100px', overflow: 'scroll' }}
-          aria-label="customized table"
+      <Paper>
+        <TableContainer
+          component={Paper}
+          sx={{
+            minWidth: 700,
+            maxHeight: '350px'
+          }}
         >
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>Date Added</StyledTableCell>
-              <StyledTableCell align="center">Fund Name</StyledTableCell>
-              <StyledTableCell>Investor Name</StyledTableCell>
-              <StyledTableCell align="center">NAV</StyledTableCell>
-              <StyledTableCell align="center">Amount</StyledTableCell>
-              <StyledTableCell align="center">Action</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <StyledTableRow key={row.name}>
-                <StyledTableCell component="th" scope="row">
-                  {row.Date}
-                </StyledTableCell>
-                <StyledTableCell align="center" component="th" scope="row">
-                  {row.FundName}
-                </StyledTableCell>
-                <StyledTableCell align="left" component="th" scope="row">
-                  {row.InvName}
-                </StyledTableCell>
-                <StyledTableCell align="center" component="th" scope="row">
-                  {row.NAV}
-                </StyledTableCell>
-                <StyledTableCell align="center" component="th" scope="row">
-                  {row.Amount}
-                </StyledTableCell>
-                <StyledTableCell align="center" component="th" scope="row">
-                  {row.Action}
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Paper>
+          <Table aria-label="customized table" stickyHeader>
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Date Added</StyledTableCell>
+                <StyledTableCell align="center">Fund Name</StyledTableCell>
+                <StyledTableCell>Investor Name</StyledTableCell>
+                <StyledTableCell align="center">NAV</StyledTableCell>
+                <StyledTableCell align="center">Amount</StyledTableCell>
+                <StyledTableCell align="center">Action</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <StyledTableRow key={row.name}>
+                  <StyledTableCell component="th" scope="row">
+                    {row.Date}
+                  </StyledTableCell>
+                  <StyledTableCell align="center" component="th" scope="row">
+                    {row.FundName}
+                  </StyledTableCell>
+                  <StyledTableCell align="left" component="th" scope="row">
+                    {row.InvName}
+                  </StyledTableCell>
+                  <StyledTableCell align="center" component="th" scope="row">
+                    {row.NAV}
+                  </StyledTableCell>
+                  <StyledTableCell align="center" component="th" scope="row">
+                    {row.Amount}
+                  </StyledTableCell>
+                  <StyledTableCell align="center" component="th" scope="row">
+                    {row.Action}
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
+    </>
   );
 }
