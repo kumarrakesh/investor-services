@@ -46,7 +46,9 @@ export default function CustomizedTables({
   rows,
   displayRows,
   setDisplayRows,
-  setUpdate
+  setUpdate,
+  setLoading,
+  loading
 }) {
   //states
   const [searched, setSearched] = useState('');
@@ -67,6 +69,7 @@ export default function CustomizedTables({
     setDialogOpen(false);
   };
   const handleSaveQuery = async (e, row) => {
+    setLoading(true);
     console.log(row);
     setDialogOpen(false);
     const response = await fetch(
@@ -85,8 +88,10 @@ export default function CustomizedTables({
       }
     );
     const data = await response.json();
+    setLoading(false);
     if (data.status) {
       setUpdate((state) => state + 1);
+      Swal.fire('Updated the query!', '', 'success');
     } else alert('Error while updating');
     console.log(data);
   };
@@ -134,7 +139,9 @@ export default function CustomizedTables({
             </TableHead>
             <TableBody>
               {!displayRows.length && (
-                <p style={{ padding: 10 }}>No such queries...</p>
+                <p style={{ padding: 10 }}>
+                  {loading ? 'Loading...' : 'No such queries...'}
+                </p>
               )}
               {displayRows.map((row) => (
                 <StyledTableRow
@@ -183,19 +190,45 @@ export default function CustomizedTables({
               onChange={handleChangeMessage}
             />
           </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCloseDialog} variant="outlined">
+          <div
+            style={{
+              width: '100%',
+              display: 'flex',
+              alignContent: 'center',
+              justifyContent: 'center',
+              gap: 20,
+              padding: '1rem'
+            }}
+          >
+            <button
+              onClick={handleCloseDialog}
+              variant="outlined"
+              style={{
+                padding: '1rem',
+                borderRadius: '0.5rem',
+                margin: 0,
+                border: 'none',
+                fontSize: '1rem'
+              }}
+            >
               Cancel
-            </Button>
-            <Button
+            </button>
+            <button
               onClick={handleSaveQuery}
               disabled={!message.length}
               variant="outlined"
-              style={{ color: 'var(--primary-color)' }}
+              style={{
+                color: 'var(--primary-color)',
+                padding: '1rem',
+                borderRadius: '0.5rem',
+                margin: 0,
+                border: 'none',
+                fontSize: '1rem'
+              }}
             >
               {dialogData?.reply ? 'Update Message' : 'Mark as resolved'}
-            </Button>
-          </DialogActions>
+            </button>
+          </div>
         </Dialog>
       </Paper>
     </>

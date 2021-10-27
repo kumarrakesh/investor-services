@@ -31,7 +31,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   }
 }));
 
-export default function CustomizedTables({ rows }) {
+export default function CustomizedTables({ rows, fundname }) {
   return (
     <TableContainer component={Paper} sx={{ maxHeight: '40vh' }}>
       <Table stickyHeader aria-label="customized table">
@@ -43,7 +43,9 @@ export default function CustomizedTables({ rows }) {
           >
             <StyledTableCell>Date</StyledTableCell>
             <StyledTableCell align="center">Narration</StyledTableCell>
-            <StyledTableCell>Fund Name</StyledTableCell>
+            {fundname == 'All' ? (
+              <StyledTableCell>Fund Name</StyledTableCell>
+            ) : null}
             <StyledTableCell align="right">Ref. No.</StyledTableCell>
             <StyledTableCell align="right">Investment Amount</StyledTableCell>
             <StyledTableCell align="right">Withdraw Amount</StyledTableCell>
@@ -59,8 +61,8 @@ export default function CustomizedTables({ rows }) {
           }}
         >
           {!rows.length && (
-            <h3 style={{ marginTop: 8, textAlign: 'center' }}>
-              Nothing to show...
+            <h3 style={{ padding: '1rem', textAlign: 'center' }}>
+              No such data...
             </h3>
           )}
           {rows != {} &&
@@ -72,9 +74,11 @@ export default function CustomizedTables({ rows }) {
                 <StyledTableCell align="right" component="th" scope="row">
                   {row.narration}
                 </StyledTableCell>
-                <StyledTableCell align="right" component="th" scope="row">
-                  {row.fundname}
-                </StyledTableCell>
+                {fundname == 'All' ? (
+                  <StyledTableCell align="right" component="th" scope="row">
+                    {row.fundname}
+                  </StyledTableCell>
+                ) : null}
                 <StyledTableCell align="right">{row.sno}</StyledTableCell>
                 <StyledTableCell align="right">
                   {Math.round(row.investedAmount * 100 + Number.EPSILON) / 100}

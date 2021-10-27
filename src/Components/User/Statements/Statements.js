@@ -205,7 +205,7 @@ const Statements = () => {
             return <MenuItem value={fund.fundname}>{fund.fundname}</MenuItem>;
           })}
         </Select>
-        <CustomizedTables rows={displayRows} />
+        <CustomizedTables rows={displayRows} fundname={fundname} />
       </div>
     </div>
   );
