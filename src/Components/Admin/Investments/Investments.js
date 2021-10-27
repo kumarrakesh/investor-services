@@ -72,6 +72,7 @@ const Investments = () => {
               onChange={handleStartDateChange}
               disableCloseOnSelect={false}
               renderInput={(params) => <TextField {...params} />}
+              className="padding-for-inputs"
             />
           </LocalizationProvider>
 
@@ -82,16 +83,12 @@ const Investments = () => {
               value={selectedEndDate}
               onChange={handleEndDateChange}
               disableCloseOnSelect={false}
-              style={{ padding: '10px 20px !important' }}
+              className="padding-for-inputs"
               renderInput={(params) => <TextField {...params} />}
             />
           </LocalizationProvider>
 
-          <Button
-            variant="contained"
-            id="investors-apply-btn"
-            style={{ padding: '10px 20px !important' }}
-          >
+          <Button variant="contained" id="investors-apply-btn">
             Apply
           </Button>
         </div>

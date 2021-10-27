@@ -29,6 +29,7 @@ const LoginPage = () => {
     );
     let data = await response.json();
     console.log(data);
+    setDisability(false);
     localStorage.setItem('token', JSON.stringify(data.token));
     setUserData({ role: data.role, token: data.token });
     if (data.status && data.role === 'ADMIN') {
@@ -57,23 +58,31 @@ const LoginPage = () => {
         <div id="login-box">
           <span id="login-welcome-text">Welcome to TIW Private Equity</span>
           <span id="login-login-type">Nominee Login</span>
-          <span className="login-input-helper">User name</span>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => {
-              setUsername(e.target.value);
+          <form
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1rem',
+              width: '100%'
             }}
-          />
-          <span className="login-input-helper">Password</span>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
-          {/* <span
+          >
+            <span className="login-input-helper">User name</span>
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => {
+                setUsername(e.target.value);
+              }}
+            />
+            <span className="login-input-helper">Password</span>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
+            {/* <span
             id="login-forgot-password"
             onClick={() => {
               alert('action for forgot password');
@@ -81,13 +90,15 @@ const LoginPage = () => {
           >
             Forgot Password?
           </span> */}
-          <Button
-            id="login-submit-button"
-            onClick={handleLogin}
-            disabled={disability}
-          >
-            Login
-          </Button>
+            <Button
+              id="login-submit-button"
+              onClick={handleLogin}
+              disabled={disability}
+              type="submit"
+            >
+              Login
+            </Button>
+          </form>
           {progress === true && <CircularProgress />}
         </div>
       </div>

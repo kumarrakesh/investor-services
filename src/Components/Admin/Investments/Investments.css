@@ -45,4 +45,12 @@
 
 #investors-apply-btn {
   background-color: var(--primary-color);
+  color: white;
+}
+.padding-for-inputs input {
+  padding: 1rem !important;
+  height: 2rem !important;
+}
+.MuiInputBase-input {
+  padding: 1rem 12px !important;
 }
