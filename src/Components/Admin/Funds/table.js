@@ -18,7 +18,7 @@ import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
-import { LocalizationProvider, DesktopDatePicker } from '@mui/lab';
+import { LocalizationProvider, MobileDatePicker } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -183,11 +183,12 @@ export default function CustomizedTables({ displayRows, setUpdate }) {
             </FormControl>
 
             <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <DesktopDatePicker
+              <MobileDatePicker
                 label="NAV Date"
                 inputFormat="MM/dd/yyyy"
                 value={selectedDate}
                 onChange={handleDateChange}
+                disableCloseOnSelect={false}
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>

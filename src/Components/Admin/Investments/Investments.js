@@ -6,7 +6,7 @@ import CustomizedTables from './table';
 import Swal from 'sweetalert2';
 import { Button, TextField } from '@mui/material';
 import 'date-fns';
-import { LocalizationProvider, DesktopDatePicker } from '@mui/lab';
+import { LocalizationProvider, MobileDatePicker } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 
 const Investments = () => {
@@ -76,21 +76,23 @@ const Investments = () => {
           </div>
 
           <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DesktopDatePicker
+            <MobileDatePicker
               label="Start Date"
               inputFormat="dd/MM/yyyy"
               value={selectedStartDate}
               onChange={handleStartDateChange}
+              disableCloseOnSelect={false}
               renderInput={(params) => <TextField {...params} />}
             />
           </LocalizationProvider>
 
           <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DesktopDatePicker
+            <MobileDatePicker
               label="Start Date"
               inputFormat="dd/MM/yyyy"
               value={selectedEndDate}
               onChange={handleEndDateChange}
+              disableCloseOnSelect={false}
               renderInput={(params) => <TextField {...params} />}
             />
           </LocalizationProvider>

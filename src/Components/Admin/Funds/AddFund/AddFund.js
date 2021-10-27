@@ -11,7 +11,7 @@ import FormControl from '@mui/material/FormControl';
 import Swal from 'sweetalert2';
 import IconButton from '@mui/material/IconButton';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { LocalizationProvider, DesktopDatePicker } from '@mui/lab';
+import { LocalizationProvider, MobileDatePicker } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import TextField from '@mui/material/TextField';
 
@@ -122,10 +122,11 @@ const AddFund = () => {
           <div id="fund-st-date">
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <small style={{ fontWeight: '300' }}>Start Date</small>
-              <DesktopDatePicker
+              <MobileDatePicker
                 inputFormat="MM/dd/yyyy"
                 value={value}
                 onChange={handleChange}
+                disableCloseOnSelect={false}
                 renderInput={(params) => (
                   <TextField
                     {...params}

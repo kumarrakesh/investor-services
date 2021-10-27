@@ -3,14 +3,20 @@ import { useHistory } from 'react-router';
 import './Statements.css';
 import Navbar from '../Navbar/Navbar';
 import Swal from 'sweetalert2';
-import { Button, Select, MenuItem, TextField } from '@mui/material';
+import {
+  Button,
+  Select,
+  MenuItem,
+  TextField,
+  Backdrop,
+  CircularProgress
+} from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 import 'date-fns';
-import { LocalizationProvider, DesktopDatePicker } from '@mui/lab';
+import { LocalizationProvider, MobileDatePicker } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import CustomizedTables from './Table/table';
 import { ThemeProvider } from '@mui/styles';
-
 const theme = createTheme({
   palette: {
     type: 'dark'
@@ -32,9 +38,11 @@ const Statements = () => {
     currentValue: 0,
     totalUnit: 0
   });
+  const [loading, setLoading] = useState(true);
   //other hooks
   useEffect(() => {
     if (!localStorage.getItem('token')) {
+      setLoading(false);
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -65,6 +73,7 @@ const Statements = () => {
   }, [fundname]);
   //functions and handlers
   const handleStartDateChange = (date) => {
+    console.log(date);
     setSelectedStartDate(date);
   };
   const handleEndDateChange = (date) => {
@@ -74,6 +83,7 @@ const Statements = () => {
     setFundname(e.target.value);
   };
   const getUserTransactions = async (fundname) => {
+    setLoading(true);
     let modFundName = fundname === 'All' ? '' : fundname;
     try {
       const response = await fetch(
@@ -94,6 +104,7 @@ const Statements = () => {
       setRows(data.data);
       setDisplayRows(data.data);
       setSummaryData(data.header);
+      setLoading(false);
       console.log('data.data', data);
     } catch (e) {
       console.log(e);
@@ -169,25 +180,25 @@ const Statements = () => {
         <div className="date-div">
           <ThemeProvider theme={theme}>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <DesktopDatePicker
+              <MobileDatePicker
                 label="Start Date"
                 inputFormat="dd/MM/yyyy"
                 value={selectedStartDate}
                 onChange={handleStartDateChange}
+                disableCloseOnSelect={false}
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>
-          </ThemeProvider>
 
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DesktopDatePicker
-              label="End Date"
+            <MobileDatePicker
+              label="Start Date"
               inputFormat="dd/MM/yyyy"
-              value={selectedEndDate}
-              onChange={handleEndDateChange}
+              value={selectedStartDate}
+              onChange={handleStartDateChange}
+              disableCloseOnSelect={false}
               renderInput={(params) => <TextField {...params} />}
             />
-          </LocalizationProvider>
+          </ThemeProvider>
           <Button variant="contained" id="apply-btn" onClick={handleDateFilter}>
             Apply
           </Button>
@@ -206,6 +217,13 @@ const Statements = () => {
           })}
         </Select>
         <CustomizedTables rows={displayRows} fundname={fundname} />
+        <Backdrop
+          sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={loading}
+          onClick={() => {}}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
       </div>
     </div>
   );
