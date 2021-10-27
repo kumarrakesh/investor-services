@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import Button from '@mui/material/Button';
+import { Backdrop, CircularProgress } from '@mui/material';
 import AdNavbar from '../Navbar/Navbar';
 import './Funds.css';
 import CustomizedTables from './table';
@@ -10,6 +11,8 @@ const Funds = () => {
   let history = useHistory();
   const [displayRows, setDisplayRows] = useState([]);
   const [update, setUpdate] = useState(0);
+  const [loading, setLoading] = React.useState(true);
+
   const token = JSON.parse(localStorage.getItem('token'));
 
   useEffect(() => {
@@ -31,6 +34,7 @@ const Funds = () => {
   }, [update]);
 
   const getAllFunds = async () => {
+    setLoading(true);
     const response = await fetch(
       'https://investorbackend.herokuapp.com/api/funds',
       {
@@ -41,10 +45,15 @@ const Funds = () => {
     );
     const data = await response.json();
     setDisplayRows(data.data);
+    setLoading(false);
   };
 
   const handleAddFunds = () => {
     history.push('/admin/funds/add');
+  };
+
+  const handleLoadingDone = () => {
+    // setLoading(false);
   };
 
   return (
@@ -90,9 +99,21 @@ const Funds = () => {
         </div>
 
         <div>
-          <CustomizedTables displayRows={displayRows} setUpdate={setUpdate} />
+          <CustomizedTables
+            displayRows={displayRows}
+            setUpdate={setUpdate}
+            setLoading={setLoading}
+            loading={loading}
+          />
         </div>
       </div>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+        onClick={handleLoadingDone}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   );
 };

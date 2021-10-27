@@ -20,6 +20,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import { LocalizationProvider, MobileDatePicker } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import Swal from 'sweetalert2';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -45,7 +46,12 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   }
 }));
 
-export default function CustomizedTables({ displayRows, setUpdate }) {
+export default function CustomizedTables({
+  displayRows,
+  setUpdate,
+  setLoading,
+  loading
+}) {
   const [open, setOpen] = React.useState(false);
   const [values, setValues] = React.useState({ amount: '' });
   const [dialogData, setDialogData] = useState({});
@@ -70,7 +76,9 @@ export default function CustomizedTables({ displayRows, setUpdate }) {
   };
 
   const handleUpdate = async () => {
+    setLoading(true);
     setOpen(false);
+
     const response = await fetch(
       'https://investorbackend.herokuapp.com/api/update/fund',
       {
@@ -86,10 +94,12 @@ export default function CustomizedTables({ displayRows, setUpdate }) {
         }
       }
     );
-    console.log(selectedDate);
+
     const data = await response.json();
+    setLoading(false);
     if (data?.status) {
       setUpdate((state) => state + 1);
+      Swal.fire('NAV value updated!', '', 'success');
     } else alert('Error while updating');
     console.log(data);
   };
@@ -98,6 +108,7 @@ export default function CustomizedTables({ displayRows, setUpdate }) {
     <>
       <TableContainer component={Paper} className="inv-table-funds">
         <Table
+          stickyHeader
           sx={{ minWidth: 700, height: '100px', overflow: 'scroll' }}
           aria-label="customized table"
         >
@@ -105,7 +116,6 @@ export default function CustomizedTables({ displayRows, setUpdate }) {
             <TableRow>
               <StyledTableCell>Date Added</StyledTableCell>
               <StyledTableCell align="center">Fund Name</StyledTableCell>
-              <StyledTableCell>Fund ID</StyledTableCell>
               <StyledTableCell align="center">NAV</StyledTableCell>
               <StyledTableCell align="center">NAV Date</StyledTableCell>
               <StyledTableCell align="center">Invested Amount</StyledTableCell>
@@ -122,9 +132,6 @@ export default function CustomizedTables({ displayRows, setUpdate }) {
                 </StyledTableCell>
                 <StyledTableCell align="center" component="th" scope="row">
                   {row.fundname}
-                </StyledTableCell>
-                <StyledTableCell align="center" component="th" scope="row">
-                  {row.fundId}
                 </StyledTableCell>
                 <StyledTableCell align="center" component="th" scope="row">
                   {row.nav}

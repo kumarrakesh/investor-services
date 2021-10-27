@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import Button from '@mui/material/Button';
+import { Backdrop, CircularProgress } from '@mui/material';
 import AdNavbar from '../../Navbar/Navbar';
 import './AddFund.css';
 
-import { alpha, styled } from '@mui/material/styles';
-import InputBase from '@mui/material/InputBase';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Swal from 'sweetalert2';
@@ -25,9 +24,9 @@ import InputAdornment from '@mui/material/InputAdornment';
 
 const AddFund = () => {
   let history = useHistory();
-  const [values, setValues] = React.useState({
-    amount: ''
-  });
+  const [values, setValues] = React.useState({ amount: '', fname: '' });
+
+  const [loading, setLoading] = useState();
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
@@ -41,52 +40,48 @@ const AddFund = () => {
     }
   }, []);
 
-  const [value, setValue] = React.useState(new Date());
+  const [selectedDate, setSelectedDate] = React.useState(new Date());
 
-  const handleChangeDate = (newValue) => {
-    setValue(newValue);
+  const handleDateChange = (newValue) => {
+    setSelectedDate(newValue);
   };
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
 
-  const BootstrapInput = styled(TextField)(({ theme }) => ({
-    'label + &': {
-      marginTop: theme.spacing(3)
-    },
-    '& .MuiInputBase-input': {
-      borderRadius: 4,
-      position: 'relative',
-      backgroundColor: theme.palette.mode === 'light' ? '#fcfcfb' : '#2b2b2b',
-      border: '1px solid #ced4da',
-      fontSize: 16,
-
-      padding: '10px 12px',
-      transition: theme.transitions.create([
-        'border-color',
-        'background-color',
-        'box-shadow'
-      ]),
-      // Use the system font instead of the default Roboto font.
-      fontFamily: [
-        '-apple-system',
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
-        'Roboto',
-        '"Helvetica Neue"',
-        'Arial',
-        'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"'
-      ].join(','),
-      '&:focus': {
-        boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
-        borderColor: theme.palette.primary.main
+  const submitForm = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const response = await fetch(
+      'https://investorbackend.herokuapp.com/api/add/fund',
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          fundname: values.fname,
+          nav: values.amount,
+          date: selectedDate
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': JSON.parse(localStorage.getItem('token'))
+        }
       }
-    }
-  }));
+    );
+    const data = await response.json();
+    console.log(data);
+    setLoading(false);
+
+    if (data.success) {
+      Swal.fire('Fund added successfully!', '', 'success');
+    } else alert('Error while updating');
+
+    history.push('/admin/funds');
+  };
+
+  const handleLoadingDone = () => {
+    // setLoading(false);
+  };
 
   return (
     <div className="add-funds-main">
@@ -112,40 +107,47 @@ const AddFund = () => {
 
         <h1 id="overview">Add Fund</h1>
 
-        <div className="add-funds-div" id="add-funds-id1">
-          <FormControl variant="standard">
-            <InputLabel shrink htmlFor="bootstrap-input">
-              Fund Name
-            </InputLabel>
-            <BootstrapInput defaultValue="" id="bootstrap-input" required />
-          </FormControl>
+        <form
+          action=""
+          onSubmit={submitForm}
+          className="add-funds-div"
+          id="add-funds-id1"
+        >
+          <TextField
+            required
+            id="outlined-required"
+            value={values.fname}
+            onChange={handleChange('fname')}
+            label="Fund Name"
+          />
 
-          <FormControl sx={{ m: 1 }}>
-            <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
+          <FormControl>
+            <InputLabel htmlFor="outlined-adornment-amount">NAV *</InputLabel>
             <OutlinedInput
+              required
               id="outlined-adornment-amount"
               value={values.amount}
               onChange={handleChange('amount')}
               startAdornment={
                 <InputAdornment position="start">$</InputAdornment>
               }
-              label="NAV"
-              required
+              label="Amount"
             />
           </FormControl>
 
           <div id="fund-st-date">
             <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <small style={{ fontWeight: '300' }}>Start Date</small>
               <MobileDatePicker
+                label="Start Date"
                 inputFormat="MM/dd/yyyy"
-                value={value}
-                onChange={handleChange}
+                value={selectedDate}
+                onChange={handleDateChange}
                 disableCloseOnSelect={false}
                 renderInput={(params) => (
                   <TextField
+                    required
                     {...params}
-                    sx={{ width: '600px !important', marginTop: '0.5rem' }}
+                    sx={{ width: '600px !important', marginTop: '0.3rem' }}
                   />
                 )}
               />
@@ -155,6 +157,7 @@ const AddFund = () => {
           <div className="add-funds-btn-div">
             <Button
               id="add-funds-btn"
+              type="submit"
               variant="outlined"
               className="download-btn"
               style={{ color: '#E95B3E', textTransform: 'none' }}
@@ -162,8 +165,15 @@ const AddFund = () => {
               Add Fund
             </Button>
           </div>
-        </div>
+        </form>
       </div>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+        onClick={handleLoadingDone}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   );
 };

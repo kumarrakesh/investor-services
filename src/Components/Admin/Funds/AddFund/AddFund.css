@@ -52,7 +52,7 @@
   width: 600px !important;
   display: flex;
   flex-direction: column !important;
-  gap: 20px !important;
+  gap: 2rem !important;
   left: 76px;
   /* justify-content: center; */
 }
@@ -68,5 +68,5 @@
 }
 
 #add-funds-btn {
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
