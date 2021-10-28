@@ -16,17 +16,11 @@ import TextField from '@mui/material/TextField';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 
-// const theme = createTheme({
-//   palette: {
-//     type: 'dark'
-//   }
-// });
-
 const AddFund = () => {
   let history = useHistory();
   const [values, setValues] = React.useState({ amount: '', fname: '' });
 
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
