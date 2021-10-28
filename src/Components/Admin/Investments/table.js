@@ -33,108 +33,24 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   }
 }));
 
-function createData(Date, FundName, InvName, NAV, Amount, Action) {
-  return { Date, FundName, InvName, NAV, Amount, Action };
-}
-
-const originalRows = [
-  createData(
-    '21/01/2021',
-    'Axis Securities',
-    'Anil Jain',
-    '$4.56',
-    '$25.67',
-    'Withdraw'
-  ),
-  createData(
-    '21/01/2021',
-    'Axis Securities',
-    'Anil Jain',
-    '$4.56',
-    '$25.67',
-    'Invest'
-  ),
-  createData(
-    '21/01/2021',
-    'Axis Securities',
-    'Anil Jain',
-    '$4.56',
-    '$25.67',
-    'Withdraw'
-  ),
-  createData(
-    '21/01/2021',
-    'Axis Securities',
-    'Anil Jain',
-    '$4.56',
-    '$25.67',
-    'Withdraw'
-  ),
-  createData(
-    '21/01/2021',
-    'Axis Securities',
-    'Anil Jain',
-    '$4.56',
-    '$25.67',
-    'Invest'
-  ),
-  createData(
-    '21/01/2021',
-    'Axis Securities',
-    'Anil Jain',
-    '$4.56',
-    '$25.67',
-    'Invest'
-  ),
-  createData(
-    '21/01/2021',
-    'Axis Securities',
-    'Anil Jain',
-    '$4.56',
-    '$25.67',
-    'Withdraw'
-  ),
-  createData(
-    '21/01/2021',
-    'Axis Securities',
-    'Anil Jain',
-    '$4.56',
-    '$25.67',
-    'Withdraw'
-  ),
-  createData(
-    '21/01/2021',
-    'Axis Securities',
-    'Anil Jain',
-    '$4.56',
-    '$25.67',
-    'Withdraw'
-  ),
-  createData(
-    '21/01/2021',
-    'Axis Securities',
-    'Anil Jain',
-    '$4.56',
-    '$25.67',
-    'Withdraw'
-  )
-];
-
-export default function CustomizedTables() {
-  const [rows, setRows] = useState(originalRows);
+export default function CustomizedTables({
+  rows,
+  setRows,
+  displayRows,
+  setDisplayRows
+}) {
+  // const [rows, setRows] = useState(originalRows);
   const [searched, setSearched] = useState('');
 
   const requestSearch = (searchedVal) => {
-    const filteredRows = originalRows.filter((row) => {
+    const filteredRows = rows.filter((row) => {
       return (
-        row.Date.toLowerCase().includes(searchedVal.toLowerCase()) ||
-        row.FundName.toLowerCase().includes(searchedVal.toLowerCase()) ||
-        row.Date.toLowerCase().includes(searchedVal.toLowerCase()) ||
-        row.Action.toLowerCase().includes(searchedVal.toLowerCase()) ||
-        row.Date.toLowerCase().includes(searchedVal.toLowerCase())
+        row.date?.toLowerCase().includes(searchedVal.toLowerCase()) ||
+        row.fundname?.toLowerCase().includes(searchedVal.toLowerCase()) ||
+        row.user?.name?.toLowerCase().includes(searchedVal.toLowerCase())
       );
     });
-    setRows(filteredRows);
+    setDisplayRows(filteredRows);
   };
 
   const cancelSearch = () => {
@@ -154,7 +70,7 @@ export default function CustomizedTables() {
           component={Paper}
           sx={{
             minWidth: 700,
-            maxHeight: '350px'
+            maxHeight: '300px'
           }}
         >
           <Table aria-label="customized table" stickyHeader>
@@ -166,28 +82,34 @@ export default function CustomizedTables() {
                 <StyledTableCell align="center">NAV</StyledTableCell>
                 <StyledTableCell align="center">Amount</StyledTableCell>
                 <StyledTableCell align="center">Action</StyledTableCell>
+                <StyledTableCell align="center">Narration</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {displayRows.map((row) => (
                 <StyledTableRow key={row.name}>
                   <StyledTableCell component="th" scope="row">
-                    {row.Date}
+                    {new Date(row.date).toLocaleDateString('en-GB')}
                   </StyledTableCell>
                   <StyledTableCell align="center" component="th" scope="row">
-                    {row.FundName}
+                    {row.fundname}
                   </StyledTableCell>
                   <StyledTableCell align="left" component="th" scope="row">
-                    {row.InvName}
+                    {row?.user?.name}
                   </StyledTableCell>
                   <StyledTableCell align="center" component="th" scope="row">
-                    {row.NAV}
+                    {row.nav}
                   </StyledTableCell>
                   <StyledTableCell align="center" component="th" scope="row">
-                    {row.Amount}
+                    {row.investedAmount < 0
+                      ? row.withdrawalAmount
+                      : row.investedAmount}
                   </StyledTableCell>
                   <StyledTableCell align="center" component="th" scope="row">
-                    {row.Action}
+                    {row.investedAmount < 0 ? 'Withdrawn' : 'Invested'}
+                  </StyledTableCell>
+                  <StyledTableCell align="center" component="th" scope="row">
+                    {row.remarks || row.narration || '-'}
                   </StyledTableCell>
                 </StyledTableRow>
               ))}

@@ -82,7 +82,7 @@ export default function CustomizedTables({ rows, fundname, loading }) {
                   {new Date(row.date).toLocaleDateString('en-GB')}
                 </StyledTableCell>
                 <StyledTableCell align="right" component="th" scope="row">
-                  {row.narration}
+                  {row.narration || '-'}
                 </StyledTableCell>
                 {fundname == 'All' ? (
                   <StyledTableCell align="right" component="th" scope="row">

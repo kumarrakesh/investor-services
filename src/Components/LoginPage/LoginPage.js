@@ -31,6 +31,28 @@ const LoginPage = () => {
     console.log(data);
     setDisability(false);
     localStorage.setItem('token', JSON.stringify(data.token));
+    let imgResponse = await fetch(
+      'https://investorbackend.herokuapp.com/api/profile',
+      {
+        headers: {
+          'x-access-token': data.token
+        }
+      }
+    );
+    let imgData = await imgResponse.json();
+    localStorage.setItem('username', imgData.name);
+    let imgURLResponse = await fetch(
+      'https://investorbackend.herokuapp.com/api/profilePic/' +
+        imgData.data.profilePic,
+      {
+        headers: {
+          'x-access-token': data.token
+        }
+      }
+    );
+    let imgURLData = await imgURLResponse.blob();
+    console.log('imgURLData', imgURLResponse);
+    localStorage.setItem('imageURL', imgURLData);
     setUserData({ role: data.role, token: data.token });
     if (data.status && data.role === 'ADMIN') {
       history.push('/admin/investors');
