@@ -1,17 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import Button from '@mui/material/Button';
 import AdNavbar from '../Navbar/Navbar';
 import './Investors.css';
 import CustomizedTables from './table';
 import Swal from 'sweetalert2';
-import IconButton from '@mui/material/IconButton';
-import CancelIcon from '@mui/icons-material/Cancel';
+import { Backdrop, CircularProgress } from '@mui/material';
 
 const Investors = () => {
   const history = useHistory();
+  const token = JSON.parse(localStorage.getItem('token'));
+  const [loading, setLoading] = React.useState(true);
+  const [displayRows, setDisplayRows] = useState([]);
+
   useEffect(() => {
-    if (!localStorage.getItem('token')) {
+    if (!token) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -20,7 +23,23 @@ const Investors = () => {
       });
       history.push('/');
     }
+    getAllUsers();
   }, []);
+
+  const getAllUsers = async () => {
+    setLoading(true);
+    const response = await fetch(
+      'https://investorbackend.herokuapp.com/api/users',
+      {
+        headers: {
+          'x-access-token': token
+        }
+      }
+    );
+    const data = await response.json();
+    setDisplayRows(data.data);
+    setLoading(false);
+  };
 
   const handleAddInvestor = () => {
     history.push('/admin/investor/add');
@@ -37,13 +56,12 @@ const Investors = () => {
         <h1 id="inv-overview">Overview</h1>
 
         <p id="total-investors">Total Investors</p>
-        <p id="total-no">20</p>
+        <p id="total-no">{displayRows.length}</p>
 
         <div className="inv-btns">
           <div>
             <Button
               variant="contained"
-              id="apply-btn"
               style={{
                 backgroundColor: '#E95B3E',
                 textTransform: 'none',
@@ -78,9 +96,19 @@ const Investors = () => {
         </div>
 
         <div className="investors-inv-table">
-          <CustomizedTables />
+          <CustomizedTables
+            displayRows={displayRows}
+            setLoading={setLoading}
+            loading={loading}
+          />
         </div>
       </div>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   );
 };
