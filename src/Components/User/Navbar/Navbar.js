@@ -78,7 +78,7 @@ const Navbar = () => {
           <div className="welcome">
             <h4>Welcome,</h4>
           </div>
-          <div className="prof-name">Mr. John Smith</div>
+          <div className="prof-name">user</div>
         </div>
       </Button>
 
