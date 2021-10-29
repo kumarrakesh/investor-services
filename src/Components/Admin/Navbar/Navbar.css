@@ -17,7 +17,6 @@
   height: 100px;
   display: flex;
   justify-content: space-around;
-  border: 1px solid lightblue;
   align-items: center;
 }
 
@@ -37,9 +36,7 @@
   font-size: 16px;
   line-height: 19px;
   /* identical to box height */
-
   text-align: center;
-  color: #e95b3e;
 }
 
 .nav-stat-header {

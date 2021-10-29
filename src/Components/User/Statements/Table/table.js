@@ -104,10 +104,7 @@ export default function CustomizedTables({ rows, fundname, loading }) {
                   {Math.round(row.totalGain * 100 + Number.EPSILON) / 100}
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                  {Math.round(
-                    (row.investedAmount - row.withdrawalAmount) * 100 +
-                      Number.EPSILON
-                  ) / 100}
+                  {Math.round(row.totalInvested * 100 + Number.EPSILON) / 100}
                 </StyledTableCell>
               </StyledTableRow>
             ))}
