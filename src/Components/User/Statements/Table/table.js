@@ -43,9 +43,9 @@ export default function CustomizedTables({ rows, fundname, loading }) {
           >
             <StyledTableCell>Date</StyledTableCell>
             <StyledTableCell align="center">Narration</StyledTableCell>
-            {fundname == 'All' ? (
-              <StyledTableCell>Fund Name</StyledTableCell>
-            ) : null}
+            {/* {fundname == 'All' ? ( */}
+            <StyledTableCell>Fund Name</StyledTableCell>
+            {/* ) : null} */}
             <StyledTableCell align="right">Ref. No.</StyledTableCell>
             <StyledTableCell align="right">Investment Amount</StyledTableCell>
             <StyledTableCell align="right">Withdraw Amount</StyledTableCell>
@@ -84,14 +84,17 @@ export default function CustomizedTables({ rows, fundname, loading }) {
                 <StyledTableCell align="right" component="th" scope="row">
                   {row.narration || '-'}
                 </StyledTableCell>
-                {fundname == 'All' ? (
-                  <StyledTableCell align="right" component="th" scope="row">
-                    {row.fundname}
-                  </StyledTableCell>
-                ) : null}
+                {/* {fundname == 'All' ? ( */}
+                <StyledTableCell align="right" component="th" scope="row">
+                  {row.fundname}
+                </StyledTableCell>
+                {/* ) : null} */}
                 <StyledTableCell align="right">{row.sno}</StyledTableCell>
                 <StyledTableCell align="right">
-                  {Math.round(row.investedAmount * 100 + Number.EPSILON) / 100}
+                  {row.investedAmount < 0
+                    ? 0
+                    : Math.round(row.investedAmount * 100 + Number.EPSILON) /
+                      100}
                 </StyledTableCell>
                 <StyledTableCell align="right">
                   {Math.round(row.withdrawalAmount * 100 + Number.EPSILON) /

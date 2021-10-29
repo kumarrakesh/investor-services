@@ -54,3 +54,12 @@
 
   color: rgba(19, 47, 94, 0.8);
 }
+.pic {
+  height: 70px;
+  width: 70px;
+}
+.pic > img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}

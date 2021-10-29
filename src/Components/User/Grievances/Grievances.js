@@ -6,6 +6,8 @@ import Navbar from '../Navbar/Navbar';
 import Button from '@mui/material/Button';
 import { alpha, styled } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 import TextField from '@mui/material/TextField';
 import TelegramIcon from '@mui/icons-material/Telegram';
 
@@ -34,27 +36,34 @@ const Grievances = () => {
   }, []);
 
   const handleSendQuery = async () => {
-    let response = await fetch(
-      'https://investorbackend.herokuapp.com/api/add/query',
-      {
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          'x-access-token': token
-        },
-        method: 'POST',
-        body: JSON.stringify({ subject, description, date: new Date() })
-      }
-    );
-    setData(await response.json());
-    console.log(data);
-    Swal.fire('Great!', 'Query sent successfully!', 'success');
+    try {
+      let response = await fetch(
+        'https://investorbackend.herokuapp.com/api/add/query',
+        {
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'x-access-token': token
+          },
+          method: 'POST',
+          body: JSON.stringify({ subject, description, date: new Date() })
+        }
+      );
+      setData(await response.json());
+      // console.log(data);
+      Swal.fire('Great!', 'Query sent successfully!', 'success');
+    } catch (e) {
+      console.log(e);
+      Swal.fire('Something went wrong', '', 'error');
+    }
   };
 
   const [value, setValue] = useState('raise');
   const [rows, setRows] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleRespone = async () => {
+    setLoading(true);
     setValue('response');
     const token = JSON.parse(localStorage.getItem('token'));
 
@@ -71,7 +80,8 @@ const Grievances = () => {
     );
 
     const data = await response.json();
-    console.log(data.data);
+    setLoading(false);
+    // console.log(data.data);
     setRows(data.data);
   };
 
@@ -159,6 +169,13 @@ const Grievances = () => {
           {value === 'response' && <CustomizedTables rows={rows} />}
         </div>
       </div>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+        onClick={() => {}}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   );
 };

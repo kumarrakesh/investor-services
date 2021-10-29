@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Dashboard.css';
-import { Select, MenuItem } from '@mui/material';
+import { Backdrop, CircularProgress, TextField } from '@mui/material';
+import { LocalizationProvider, MobileDatePicker } from '@mui/lab';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { Line } from 'react-chartjs-2';
 
-//constants
-const state = {
-  labels: [
+const DashContainer = () => {
+  const monthLabels = [
     'January',
     'February',
     'March',
@@ -18,107 +19,177 @@ const state = {
     'October',
     'Novemeber',
     'December'
-  ],
-  datasets: [
-    {
-      label: 'Investment',
-      fill: false,
-      backgroundColor: '#16D112',
-      borderColor: '#16D112',
-      borderWidth: 2,
-      // data: monthlyInvestment
-      data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-    },
-    {
-      label: 'Current Value',
-      fill: false,
-      backgroundColor: '#F98701',
-      borderColor: '#F98701',
-      borderWidth: 2,
-      // data: monthlyCurrentValue
-      data: [2, 3, 4, 5, 6, 7, 17, 9, 10, 11, 12, 13]
-    },
-    {
-      label: 'Net Gain/Loss',
-      fill: false,
-      backgroundColor: '#1196FF',
-      borderColor: '#1196FF',
-      borderWidth: 2,
-      // data: monthlyNetAmount
-      data: [5, 6, 7, 8, 9, 10, 11, 32, 13, 14, 15, 16]
-    }
-  ]
-};
-const DashContainer = () => {
+  ];
+
   // states
-  const [year, setYear] = useState(new Date().getFullYear());
+  const [year, setYear] = useState(new Date());
+  const [dashboardData, setDashboardData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  // console.log(new Date(Date.now()).getUTCFullYear());
+  // graphdata
+  const state = {
+    labels: monthLabels,
+
+    datasets: [
+      {
+        label: 'Investment',
+        fill: false,
+        backgroundColor: '#16D112',
+        borderColor: '#16D112',
+        borderWidth: 2,
+        lineTension: 0,
+        data: dashboardData.map(
+          (el) => Math.round(el.investedAmount * 100 + Number.EPSILON) / 100
+        )
+      },
+      {
+        label: 'Current Value',
+        fill: false,
+        backgroundColor: '#F98701',
+        borderColor: '#F98701',
+        borderWidth: 2,
+        lineTension: 0,
+        data: dashboardData.map(
+          (el) => Math.round(el.currentAmount * 100 + Number.EPSILON) / 100
+        )
+      },
+      {
+        label: 'Net Gain/Loss',
+        fill: false,
+        backgroundColor: '#1196FF',
+        borderColor: '#1196FF',
+        borderWidth: 2,
+        lineTension: 0,
+        data: dashboardData.map(
+          (el) =>
+            Math.round(
+              (el.currentAmount - el.investedAmount) * 100 + Number.EPSILON
+            ) / 100
+        )
+      }
+    ]
+  };
   //hooks
+  useEffect(() => {
+    handleGetDashboardData();
+  }, [year]);
   //handlers
-  const handleChangeYear = (e) => {
-    setYear(e.target.value);
+  const handleGetDashboardData = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(
+        'https://investorbackend.herokuapp.com/api/user/dashboard',
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': JSON.parse(localStorage.getItem('token'))
+          },
+          method: 'POST',
+          body: JSON.stringify({
+            year: new Date(year).getUTCFullYear()
+          })
+        }
+      );
+      const data = await response.json();
+      setDashboardData(data.data);
+      // console.log(data.data);
+      setLoading(false);
+    } catch (e) {
+      console.log(e);
+      setLoading(false);
+    }
+  };
+
+  const handleChangeYear = (date) => {
+    setYear(new Date(date));
   };
   const years = [2015, 2016, 2017, 2018, 2019, 2020, 2021];
   return (
     <div className="dash-container">
       <div className="dashboard-title">Dashboard</div>
-      {/* <h1 className="dashboard-subtitle">Overview</h1> */}
-
       <div className="dashboard-graph-container">
         <div className="dashboard-graph-info">
           <div className="dashboard-graph-info-data">
             <div className="dashboard-graph-info-data-label">
               Total Investment
             </div>
-            <div className="dashboard-graph-info-data-value">₦10000.00</div>
+            <div className="dashboard-graph-info-data-value">
+              {Math.round(
+                (dashboardData?.[11]?.investedAmount + Number.EPSILON) * 100
+              ) / 100 || 0}
+            </div>
           </div>
           <div className="dashboard-graph-info-data">
             <div className="dashboard-graph-info-data-label">Current Value</div>
-            <div className="dashboard-graph-info-data-value">₦15000.00</div>
+            <div className="dashboard-graph-info-data-value">
+              {Math.round(
+                (dashboardData?.[11]?.currentAmount + Number.EPSILON) * 100
+              ) / 100 || 0}
+            </div>
           </div>
           <div className="dashboard-graph-info-data">
             <div className="dashboard-graph-info-data-label">Net Gain/Loss</div>
             <div
               className="dashboard-graph-info-data-value"
-              style={{ color: 500 >= 0 ? '#4EF933' : 'red' }}
+              style={{
+                color:
+                  dashboardData?.[11]?.currentAmount -
+                    dashboardData?.[11]?.investedAmount >=
+                  0
+                    ? '#4EF933'
+                    : '#bc2424'
+              }}
             >
-              ₦{5000.0}
+              {Math.round(
+                (dashboardData?.[11]?.currentAmount -
+                  dashboardData?.[11]?.investedAmount +
+                  Number.EPSILON) *
+                  100
+              ) / 100 || 0}
             </div>
           </div>
-          <Select
-            labelId="year-select"
-            id="year-select"
-            value={year}
+          <div
             style={{
-              width: '100px',
-              backgroundColor: 'white',
-              height: '2rem'
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start'
             }}
-            onChange={handleChangeYear}
-            variant="outlined"
           >
-            {years.map((year) => {
-              return (
-                <MenuItem value={year} key={year}>
-                  {year}
-                </MenuItem>
-              );
-            })}
-          </Select>
+            <small style={{ color: 'white', fontWeight: 300, marginLeft: 10 }}>
+              Year filter
+            </small>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <MobileDatePicker
+                maxDate={new Date('12/31/' + new Date().getUTCFullYear())}
+                inputFormat="yyyy"
+                value={new Date(year)}
+                onChange={handleChangeYear}
+                disableCloseOnSelect={false}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    sx={{
+                      backgroundColor: 'white !important',
+                      margin: '10px',
+                      borderRadius: '4px',
+                      width: '15ch'
+                    }}
+                  />
+                )}
+                views={['year']}
+              />
+            </LocalizationProvider>
+          </div>
         </div>
         <div className="dashboard-graph">
           <Line
             data={state}
             options={{
-              title: {
-                display: true,
-                text: 'dashboard',
-                fontSize: 20,
-                color: 'red'
+              scales: {
+                xAxes: [{ stacked: true }]
               },
-              tooltip: {
-                intersect: true,
-                enable: true,
-                display: true
+              tooltips: {
+                mode: 'label'
               }
             }}
           />
@@ -192,6 +263,13 @@ const DashContainer = () => {
           {'\n'} Overall Report
         </Button>
       </div> */}
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+        onClick={() => {}}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   );
 };

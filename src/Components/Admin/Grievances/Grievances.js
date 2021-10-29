@@ -52,7 +52,7 @@ const AdminGrievances = () => {
       }
     );
     const data = await response.json();
-    console.log(data.data);
+    // console.log(data.data);
     setQueries(data.data);
     setDisplayRows(data.data);
     setLoading(false);
