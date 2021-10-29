@@ -90,8 +90,7 @@ const Statements = () => {
         'https://investorbackend.herokuapp.com/api/transactions',
         {
           headers: {
-            'x-access-token':
-              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYxNmQzOThmMWEwZDkzYTgxZTZlZTA2YSIsInVzZXJuYW1lIjoidXNlckBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMiR4NnUxSlN2dHpZTEN1M28yUkxFT25lRFdMN0FFMUJZdERKQ1l6YmZJUVZyOE1jeGNmeUVweSIsIm5hbWUiOiJ1c2VyIiwicHJvZmlsZVBpYyI6ImU5ZjllM2UxLWNiYmItNDFhMi04MTYzLWJiMjdlYTMzNzQ2Zi5wbmciLCJwYXNzcG9ydCI6InVzZXIiLCJtYXR1cml0eSI6IjIwMDUtMDktMTlUMTg6MzA6MDAuMDAwWiIsImFkZHJlc3MiOiJoZWxsbyIsImNpdHkiOiJndXJnYW9uIiwic3RhdGUiOiJEZWxoaSIsImNvdW50cnkiOiJpbmRpYSIsInBpbmNvZGUiOiIxMjIwMDIiLCJyb2xlIjoiNjE2ZDJmNTg4ZDkwODY0OGMyOGQ2M2ExIiwiYW1vdW50SW52ZXN0ZWQiOjAsImN1cnJlbnRJbnZlc3RlZFZhbHVlIjowLCJfX3YiOjB9LCJpYXQiOjE2MzQ1NTY2MjgsImV4cCI6MTYzNzE0ODYyOH0.bahD4jni57l8AEE3xPyrZfVwCaDEXqg3AwtuuDcjWmE',
+            'x-access-token': token,
             'Content-Type': 'application/json'
           },
           method: 'POST',

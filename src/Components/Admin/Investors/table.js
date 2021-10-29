@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -8,13 +9,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-import FormControl from '@mui/material/FormControl';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import AddInvestor from './AddInvestor/AddInvestor';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -41,18 +36,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function CustomizedTables({ displayRows }) {
-  const [dialogData, setDialogData] = useState({});
-  const [open, setOpen] = React.useState(false);
+  const history = useHistory();
   const handleClickOpen = (row) => {
-    setDialogData(row);
-    setOpen(true);
+    return history.push({
+      pathname: '/admin/investor/add',
+      state: { row }
+    });
   };
-
-  const handleCancel = () => {
-    setOpen(false);
-  };
-
-  const handleUpdate = async () => {};
 
   return (
     <>
@@ -89,7 +79,7 @@ export default function CustomizedTables({ displayRows }) {
                   {row.name}
                 </StyledTableCell>
                 <StyledTableCell align="center" component="th" scope="row">
-                  {row.city},{row.state},{row.country}
+                  {row.city},{row.state},{row.country},{row.pincode}
                 </StyledTableCell>
                 <StyledTableCell align="center" component="th" scope="row">
                   {row.passport}
@@ -121,29 +111,6 @@ export default function CustomizedTables({ displayRows }) {
           </TableBody>
         </Table>
       </TableContainer>
-
-      <div>
-        <Dialog open={open} onClose={handleCancel}>
-          <DialogTitle>Update Investor Details</DialogTitle>
-          <DialogContent
-            style={{ display: 'flex', flexDirection: 'column', gap: '1.7rem' }}
-          >
-            <FormControl variant="standard">
-              <TextField
-                required
-                id="outlined-required"
-                value=""
-                label="Password"
-                style={{ width: '24rem' }}
-              />
-            </FormControl>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCancel}>Cancel</Button>
-            <Button onClick={handleUpdate}>Update</Button>
-          </DialogActions>
-        </Dialog>
-      </div>
     </>
   );
 }

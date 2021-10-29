@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import AdNavbar from '../../Navbar/Navbar';
-import { alpha, styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
-import InputBase from '@mui/material/InputBase';
-import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Swal from 'sweetalert2';
 import IconButton from '@mui/material/IconButton';
@@ -16,11 +14,20 @@ import { LocalizationProvider, MobileDatePicker } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { Backdrop, CircularProgress } from '@mui/material';
 
+import Input from '@mui/material/Input';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import OutlinedInput from '@mui/material/OutlinedInput';
+
 const AddInvestor = () => {
   const history = useHistory();
+  const location = useLocation();
 
   const [investorDate, setInvestorDate] = useState(new Date());
   const [loading, setLoading] = useState(false);
+  const [flag, setFlag] = useState(false);
 
   const [values, setValues] = React.useState({
     investorName: '',
@@ -33,6 +40,27 @@ const AddInvestor = () => {
     investorZipCode: '',
     role: '616d2f528d908648c28d639e'
   });
+
+  useEffect(() => {
+    if (location?.state?.row) {
+      setFlag(true);
+    }
+    setInvestorBody();
+  }, [location]);
+
+  const setInvestorBody = async () => {
+    setValues({
+      investorName: location?.state?.row.name,
+      investorPassword: '',
+      investorPassport: location?.state?.row.passport,
+      investorAddress1: location?.state?.row.address,
+      investorCity: location?.state?.row.city,
+      investorState: location?.state?.row.state,
+      investorCountry: location?.state?.row.country,
+      investorZipCode: '',
+      role: '616d2f528d908648c28d639e'
+    });
+  };
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -57,38 +85,81 @@ const AddInvestor = () => {
   const submitForm = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const response = await fetch(
-      'https://investorbackend.herokuapp.com/api/admin/user/register',
-      {
-        method: 'POST',
-        body: JSON.stringify({
-          name: values.investorName,
-          username: values.investorPassport,
-          password: values.password,
-          passport: values.investorPassport,
-          address: values.investorAddress1,
-          city: values.investorCity,
-          state: values.investorState,
-          country: values.investorCountry,
-          pincode: values.investorZipCode,
-          role: values.role,
-          maturity: investorDate
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-          'x-access-token': JSON.parse(localStorage.getItem('token'))
-        }
-      }
-    );
-    const data = await response.json();
-    console.log(data);
-    setLoading(false);
 
-    if (data.success) {
-      Swal.fire('Investor added successfully!', '', 'success');
-    } else alert('Error while Adding');
+    if (flag) {
+      const response = await fetch(
+        'https://investorbackend.herokuapp.com/api/update/profile',
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            name: values.investorName,
+            password: values.investorPassword,
+            passport: values.investorPassport,
+            address: values.investorAddress1,
+            city: values.investorCity,
+            state: values.investorState,
+            country: values.investorCountry,
+            pincode: values.investorZipCode,
+            maturity: investorDate
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': JSON.parse(localStorage.getItem('token'))
+          }
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      setLoading(false);
+
+      if (data.success) {
+        Swal.fire('Updated successfully!', '', 'success');
+      } else alert('Error while Adding');
+    } else {
+      const response = await fetch(
+        'https://investorbackend.herokuapp.com/api/admin/user/register',
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            name: values.investorName,
+            username: values.investorPassport,
+            password: values.investorPassword,
+            passport: values.investorPassport,
+            address: values.investorAddress1,
+            city: values.investorCity,
+            state: values.investorState,
+            country: values.investorCountry,
+            pincode: values.investorZipCode,
+            role: values.role,
+            maturity: investorDate
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': JSON.parse(localStorage.getItem('token'))
+          }
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      setLoading(false);
+
+      if (data.success) {
+        Swal.fire('Added successfully!', '', 'success');
+      } else alert('Error while Adding');
+    }
 
     history.push('/admin/investors');
+  };
+
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword
+    });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
   };
 
   return (
@@ -112,7 +183,7 @@ const AddInvestor = () => {
           </IconButton>
         </div>
 
-        <h1 id="add-investors-subtitle">Add Investor</h1>
+        <h1 id="add-investors-subtitle">{flag ? 'Update' : 'Add'} Investor</h1>
 
         <form action="" onSubmit={submitForm} className="add-inv-all-inputs">
           <div className="investor-div" id="inv-id1">
@@ -127,14 +198,31 @@ const AddInvestor = () => {
               />
             </FormControl>
 
-            <FormControl variant="standard">
-              <TextField
+            <FormControl variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-password">
+                Password *
+              </InputLabel>
+              <OutlinedInput
                 required
-                id="outlined-required"
+                id="outlined-adornment-password"
+                type={values.showPassword ? 'text' : 'password'}
                 value={values.investorPassword}
                 onChange={handleChange('investorPassword')}
-                label="Password"
                 style={{ width: '24rem' }}
+                autoComplete="current-password"
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label="Password"
               />
             </FormControl>
           </div>
@@ -216,11 +304,15 @@ const AddInvestor = () => {
             <FormControl variant="standard">
               <TextField
                 required
-                id="outlined-required"
+                id="outlined-number"
+                label="Zip Code"
+                type="number"
                 value={values.investorZipCode}
                 onChange={handleChange('investorZipCode')}
-                label="Zip Code"
                 style={{ width: '24rem' }}
+                InputLabelProps={{
+                  shrink: true
+                }}
               />
             </FormControl>
           </div>
@@ -232,7 +324,7 @@ const AddInvestor = () => {
               className="download-btn"
               style={{ color: '#E95B3E', textTransform: 'none' }}
             >
-              Add Investor
+              {flag ? 'Update' : 'Add'} Investor
             </Button>
           </div>
         </form>

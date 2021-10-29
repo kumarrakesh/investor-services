@@ -68,10 +68,10 @@ export default function CustomizedTables({ rows, fundname, loading }) {
                 style={{
                   padding: '1rem',
                   textAlign: 'center',
-                  fontSize: '2rem'
+                  fontSize: '1rem'
                 }}
               >
-                {loading ? 'Loading...' : 'No such data...'}
+                {loading ? 'Loading...' : 'No such data'}
               </StyledTableCell>
             </StyledTableRow>
           )}
