@@ -30,6 +30,15 @@ const LoginPage = () => {
     let data = await response.json();
     // console.log(data);
     setDisability(false);
+    if (!data.status) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error...',
+        text: 'Username or Password is incorrect'
+      });
+      setProgress(false);
+      return;
+    }
     localStorage.setItem('token', JSON.stringify(data.token));
     let imgResponse = await fetch(
       'https://investorbackend.herokuapp.com/api/profile',
