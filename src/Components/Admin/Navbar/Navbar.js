@@ -1,6 +1,7 @@
 import React from 'react';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -11,7 +12,10 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import './Navbar.css';
 
 const AdNavbar = () => {
+  //states
+  //hooks
   const history = useHistory();
+  const location = useLocation();
   return (
     <div id="sidebar-main">
       <div id="header-logo">
@@ -68,9 +72,15 @@ const AdNavbar = () => {
           <div className="prof-name">Admin</div>
         </div>
       </div>
-
+      <Divider
+        style={{
+          backgroundColor: '#E6E6E6 ',
+          width: '100%',
+          margin: '2px 0px'
+        }}
+      />
       {/* <Button
-        variant="outlined"
+        
         className="nav-dashboard-btn"
         onClick={() => {
           history.push('/admin/dashboard');
@@ -82,100 +92,133 @@ const AdNavbar = () => {
         </div>
 
         <div className="dash-name"> Dashboard </div>
-        <div className="right-sign">
+        
           <ChevronRightIcon />
-        </div>
       </Button> */}
 
       <Button
-        variant="outlined"
         className="nav-dashboard-btn"
         onClick={() => {
           history.push('/admin/investors');
         }}
-        style={{ color: '#E95B3E', textTransform: 'none' }}
+        style={{
+          color:
+            location.pathname == '/admin/investors' ? '#E95B3E' : '#8997ae',
+          backgroundColor:
+            location.pathname == '/admin/investors' ? '#F7F9FD' : 'inherit',
+          textTransform: 'none'
+        }}
       >
-        <div className="dash-icon">
-          <AccountBalanceIcon />
-        </div>
+        <AccountBalanceIcon />
 
         <div className="dash-name"> Investors </div>
-        <div className="right-sign">
-          <ChevronRightIcon />
-        </div>
+
+        <ChevronRightIcon />
       </Button>
+      <Divider
+        style={{
+          backgroundColor: '#E6E6E6 ',
+          width: '100%',
+          margin: '2px 0px'
+        }}
+      />
 
       <Button
-        variant="outlined"
         className="nav-dashboard-btn"
         onClick={() => {
           history.push('/admin/funds');
         }}
-        style={{ color: '#E95B3E', textTransform: 'none' }}
+        style={{
+          color: location.pathname == '/admin/funds' ? '#E95B3E' : '#8997ae',
+          backgroundColor:
+            location.pathname == '/admin/funds' ? '#F7F9FD' : 'inherit',
+
+          textTransform: 'none'
+        }}
       >
-        <div className="dash-icon">
-          <AttachMoneyIcon />
-        </div>
+        <AttachMoneyIcon />
 
         <div className="dash-name"> Funds </div>
-        <div className="right-sign">
-          <ChevronRightIcon />
-        </div>
+        <ChevronRightIcon />
       </Button>
+      <Divider
+        style={{
+          backgroundColor: '#E6E6E6 ',
+          width: '100%',
+          margin: '2px 0px'
+        }}
+      />
 
       <Button
-        variant="outlined"
         className="nav-dashboard-btn"
         onClick={() => {
           history.push('/admin/investments');
         }}
-        style={{ color: '#E95B3E', textTransform: 'none' }}
+        style={{
+          color:
+            location.pathname == '/admin/investments' ? '#E95B3E' : '#8997ae',
+          backgroundColor:
+            location.pathname == '/admin/investments' ? '#F7F9FD' : 'inherit',
+
+          textTransform: 'none'
+        }}
       >
-        <div className="dash-icon">
-          <AccountBalanceWalletIcon />
-        </div>
+        <AccountBalanceWalletIcon />
 
         <div className="dash-name">Investments</div>
-        <div className="right-sign">
-          <ChevronRightIcon />
-        </div>
-      </Button>
 
+        <ChevronRightIcon />
+      </Button>
+      <Divider
+        style={{
+          backgroundColor: '#E6E6E6 ',
+          width: '100%',
+          margin: '2px 0px'
+        }}
+      />
       <Button
-        variant="outlined"
         className="nav-dashboard-btn"
         onClick={() => {
           history.push('/admin/grievances');
         }}
-        style={{ color: '#E95B3E', textTransform: 'none' }}
-      >
-        <div className="dash-icon">
-          <AccountCircleSharpIcon />
-        </div>
+        style={{
+          color:
+            location.pathname == '/admin/grievances' ? '#E95B3E' : '#8997ae',
+          backgroundColor:
+            location.pathname == '/admin/grievances' ? '#F7F9FD' : 'inherit',
 
+          textTransform: 'none'
+        }}
+      >
+        <AccountCircleSharpIcon />
         <div className="dash-name"> Grievances </div>
-        <div className="right-sign">
-          <ChevronRightIcon />
-        </div>
+        <ChevronRightIcon />
       </Button>
+      <Divider
+        style={{
+          backgroundColor: '#E6E6E6 ',
+          width: '100%',
+          margin: '2px 0px'
+        }}
+      />
 
       <Button
-        variant="outlined"
         className="nav-dashboard-btn"
         onClick={() => {
           localStorage.clear();
           history.push('/');
         }}
-        style={{ color: '#E95B3E', textTransform: 'none' }}
+        style={{
+          color: location.pathname == '/' ? '#E95B3E' : '#8997ae',
+          backgroundColor: location.pathname == '/' ? '#F7F9FD' : 'inherit',
+
+          textTransform: 'none'
+        }}
       >
-        <div className="dash-icon">
-          <LogoutIcon />
-        </div>
+        <LogoutIcon />
 
         <div className="dash-name"> Logout</div>
-        <div className="right-sign">
-          <ChevronRightIcon />
-        </div>
+        <ChevronRightIcon />
       </Button>
     </div>
   );
