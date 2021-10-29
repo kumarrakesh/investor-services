@@ -1,16 +1,25 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useHistory } from 'react-router';
 // import { UserContext } from '../../../userContext';
 import Navbar from '../Navbar/Navbar';
 import Button from '@mui/material/Button';
-import { Backdrop, CircularProgress } from '@mui/material';
+import {
+  Backdrop,
+  CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogTitle,
+  DialogContent
+} from '@mui/material';
 import Swal from 'sweetalert2';
 import './Profile.css';
 
 const Profile = () => {
   const history = useHistory();
   const token = JSON.parse(localStorage.getItem('token'));
+  const [selectedImage, setSelectedImage] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
+  const imageInput = useRef(null);
   const [profile, setProfile] = useState({
     data: {
       name: 'Name',
@@ -25,6 +34,7 @@ const Profile = () => {
     AmountInvested: 0
   });
   const [imgURL, setImgURL] = useState('https://via.placeholder.com/100');
+  const [showImageDialog, setShowImageDialog] = useState(false);
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
@@ -38,7 +48,46 @@ const Profile = () => {
     }
     getProfileData();
   }, []);
+  const handleOpenSelector = () => {
+    imageInput.current.click();
+  };
+  const handleCloseImageDialog = () => {
+    setShowImageDialog(false);
+  };
+  const handleUploadImage = async () => {
+    var formData = new FormData();
+    formData.append('profilePic', selectedImage);
+    formData.append('name', profile?.data?.name);
+    formData.append('passport', profile?.data?.passport);
+    formData.append('city', profile?.data?.city);
+    formData.append('state', profile?.data?.state);
+    formData.append('country', profile?.data?.country);
+    formData.append('pincode', profile?.data?.pincode);
+    formData.append('amountInvested', profile?.data?.amountInvested);
+    formData.append('maturity', profile?.data?.maturity);
 
+    var requestOptions = {
+      method: 'POST',
+      headers: { 'x-access-token': JSON.parse(localStorage.getItem('token')) },
+      body: formData,
+      redirect: 'follow'
+    };
+    try {
+      const response = await fetch(
+        'https://investorbackend.herokuapp.com/api/update/profile',
+        requestOptions
+      );
+      const data = await response.json();
+      if (data.success) {
+        await getProfileData();
+        Swal.fire('Uploaded image!', '', 'success');
+      } else Swal.fire('Something went wrong', '', 'error');
+    } catch (err) {
+      Swal.fire('Something went wrong', '', 'error');
+    }
+
+    setShowImageDialog(false);
+  };
   const getProfileData = async () => {
     setLoading(true);
     const response = await fetch(
@@ -74,7 +123,13 @@ const Profile = () => {
           <div className="profile-image-holder">
             <img src={imgURL} alt="" className="profile-image--img" />
           </div>
-          <Button variant="contained" className="edit-btn">
+          <Button
+            variant="contained"
+            className="edit-btn"
+            onClick={() => {
+              setShowImageDialog(true);
+            }}
+          >
             Edit Picture
           </Button>
         </div>
@@ -142,6 +197,42 @@ const Profile = () => {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
+      <Dialog open={showImageDialog} onClose={handleCloseImageDialog}>
+        <DialogTitle>Select an image to upload</DialogTitle>
+        <DialogContent>
+          <img
+            width={'100%'}
+            src={selectedImage && URL.createObjectURL(selectedImage)}
+          />
+          <input
+            ref={imageInput}
+            type="file"
+            name="myImage"
+            style={{ display: 'none' }}
+            accept="image/png, image/gif, image/jpeg"
+            onChange={(event) => {
+              console.log(event.target.files[0]);
+              setSelectedImage(event.target.files[0]);
+            }}
+          />
+          <Button
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Email Address"
+            type="email"
+            fullWidth
+            variant="outlined"
+            onClick={handleOpenSelector}
+          >
+            Select
+          </Button>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseImageDialog}>Cancel</Button>
+          <Button onClick={handleUploadImage}>Upload</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
