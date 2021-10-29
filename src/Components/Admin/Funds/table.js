@@ -55,7 +55,7 @@ export default function CustomizedTables({
   const [open, setOpen] = React.useState(false);
   const [values, setValues] = React.useState({ amount: '' });
   const [dialogData, setDialogData] = useState({});
-  const [dialogOpen, setDialogOpen] = useState(false);
+
   const [NavHistoryOpen, setNavHistoryOpen] = useState(false);
 
   const handleChange = (prop) => (event) => {
@@ -119,7 +119,11 @@ export default function CustomizedTables({
   console.log(displayRows);
   return (
     <>
-      <TableContainer component={Paper} className="inv-table-funds">
+      <TableContainer
+        sx={{ maxHeight: '40vh' }}
+        component={Paper}
+        className="inv-table-funds"
+      >
         <Table
           stickyHeader
           sx={{ minWidth: 700, height: '100px', overflow: 'scroll' }}

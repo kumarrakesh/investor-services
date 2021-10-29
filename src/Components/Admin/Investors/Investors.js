@@ -12,6 +12,7 @@ const Investors = () => {
   const token = JSON.parse(localStorage.getItem('token'));
   const [loading, setLoading] = React.useState(true);
   const [displayRows, setDisplayRows] = useState([]);
+  const [update, setUpdate] = useState(0);
 
   useEffect(() => {
     if (!token) {
@@ -100,6 +101,7 @@ const Investors = () => {
             displayRows={displayRows}
             setLoading={setLoading}
             loading={loading}
+            setUpdate={setUpdate}
           />
         </div>
       </div>

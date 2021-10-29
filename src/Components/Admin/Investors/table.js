@@ -35,7 +35,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   }
 }));
 
-export default function CustomizedTables({ displayRows }) {
+export default function CustomizedTables({ displayRows, setUpdate }) {
   const history = useHistory();
 
   const handleClickOpen = (row) => {

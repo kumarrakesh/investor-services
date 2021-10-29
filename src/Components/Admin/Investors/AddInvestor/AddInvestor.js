@@ -88,8 +88,21 @@ const AddInvestor = () => {
     setLoading(true);
 
     if (flag) {
+      setLoading(true);
+      console.log('abcd', {
+        name: values.investorName,
+        password: values.investorPassword,
+        passport: values.investorPassport,
+        address: values.investorAddress1,
+        city: values.investorCity,
+        state: values.investorState,
+        country: values.investorCountry,
+        pincode: values.investorZipCode,
+        maturity: investorDate,
+        userId: values.Id
+      });
       const response = await fetch(
-        'https://investorbackend.herokuapp.com/api/update/profile',
+        'https://investorbackend.herokuapp.com/api/update/profile/admin',
         {
           method: 'POST',
           body: JSON.stringify({
@@ -114,10 +127,11 @@ const AddInvestor = () => {
       console.log(data);
       setLoading(false);
 
-      if (data.success) {
+      if (data?.success) {
         Swal.fire('Updated successfully!', '', 'success');
-      } else alert(data.error);
+      } else Swal.fire('Error while updating!', data?.error, 'error');
     } else {
+      setLoading(true);
       const response = await fetch(
         'https://investorbackend.herokuapp.com/api/admin/user/register',
         {
@@ -145,9 +159,9 @@ const AddInvestor = () => {
       console.log(data);
       setLoading(false);
 
-      if (data.success) {
+      if (data?.success) {
         Swal.fire('Added successfully!', '', 'success');
-      } else alert(data.error);
+      } else Swal.fire('Error while updating!', data?.error, 'error');
     }
 
     history.push('/admin/investors');
