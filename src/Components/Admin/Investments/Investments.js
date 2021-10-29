@@ -70,8 +70,10 @@ const Investments = () => {
   const handleApplyDateFilter = () => {
     setLoading(true);
     const filteredRows = rows.filter((row) => {
+      let modStartDate = new Date(selectedStartDate);
+      modStartDate = modStartDate.setDate(modStartDate.getDate() - 1);
       return (
-        new Date(Date.parse(row.date)) >= new Date(selectedStartDate) &&
+        new Date(row.date) >= modStartDate &&
         new Date(row.date) <= new Date(selectedEndDate)
       );
     });

@@ -120,9 +120,6 @@ const AddFund = () => {
               id="outlined-adornment-amount"
               value={values.amount}
               onChange={handleChange('amount')}
-              startAdornment={
-                <InputAdornment position="start">$</InputAdornment>
-              }
               label="Amount"
             />
           </FormControl>

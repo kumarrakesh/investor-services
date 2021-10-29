@@ -115,9 +115,11 @@ const Statements = () => {
       console.log('rows', rows);
       let modRows = [...rows];
       console.log('before', modRows.length);
+      let modStartDate = new Date(selectedStartDate);
+      modStartDate = modStartDate.setDate(modStartDate.getDate() - 1);
       modRows = modRows.filter(
         (row) =>
-          new Date(row.date) >= new Date(selectedStartDate) &&
+          new Date(row.date) >= new Date(modStartDate) &&
           new Date(row.date) <= new Date(selectedEndDate)
       );
       console.log('after', modRows.length);
@@ -137,7 +139,6 @@ const Statements = () => {
           <div className="statement-summary-col">
             <div className="statement-summary-name">Total Investment</div>
             <div className="statement-summary-val">
-              ₦
               {Math.round(summaryData?.totalInvested * 100 + Number.EPSILON) /
                 100}
             </div>
@@ -145,7 +146,6 @@ const Statements = () => {
           <div className="statement-summary-col">
             <div className="statement-summary-name">Current Value</div>
             <div className="statement-summary-val">
-              ₦
               {Math.round(summaryData?.currentValue * 100 + Number.EPSILON) /
                 100}
             </div>
@@ -161,7 +161,6 @@ const Statements = () => {
                     : 'red'
               }}
             >
-              ₦
               {Math.round(
                 (summaryData?.currentValue - summaryData?.totalInvested) * 100 +
                   Number.EPSILON
@@ -191,10 +190,10 @@ const Statements = () => {
             </LocalizationProvider>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <MobileDatePicker
-                label="Start Date"
+                label="End Date"
                 inputFormat="dd/MM/yyyy"
-                value={selectedStartDate}
-                onChange={handleStartDateChange}
+                value={selectedEndDate}
+                onChange={handleEndDateChange}
                 disableCloseOnSelect={false}
                 renderInput={(params) => <TextField {...params} />}
               />

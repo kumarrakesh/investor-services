@@ -73,7 +73,6 @@ const LoginPage = () => {
         </div>
         <div id="login-box">
           <span id="login-welcome-text">Welcome to TIW Private Equity</span>
-          <span id="login-login-type">Nominee Login</span>
           <form
             style={{
               display: 'flex',
