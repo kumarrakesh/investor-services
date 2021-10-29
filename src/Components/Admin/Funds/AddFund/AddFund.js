@@ -63,12 +63,12 @@ const AddFund = () => {
       }
     );
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     setLoading(false);
 
     if (data.success) {
       Swal.fire('Fund added successfully!', '', 'success');
-    } else alert('Error while updating');
+    } else Swal.fire('Something went wrong!', data?.error, 'error');
 
     history.push('/admin/funds');
   };

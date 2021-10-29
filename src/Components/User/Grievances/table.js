@@ -52,6 +52,7 @@ export default function CustomizedTables({ rows }) {
             <StyledTableCell align="center">Query Subject</StyledTableCell>
             <StyledTableCell>Query ID</StyledTableCell>
             <StyledTableCell align="center">Status</StyledTableCell>
+            <StyledTableCell align="center">Resolution Message</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -68,6 +69,9 @@ export default function CustomizedTables({ rows }) {
               </StyledTableCell>
               <StyledTableCell align="center" component="th" scope="row">
                 {row.isResolved ? 'Resolved' : 'Not Resolved'}
+              </StyledTableCell>
+              <StyledTableCell align="center" component="th" scope="row">
+                {row.reply ? row?.reply : 'Not Resolved'}
               </StyledTableCell>
             </StyledTableRow>
           ))}

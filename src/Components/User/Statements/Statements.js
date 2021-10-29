@@ -60,7 +60,7 @@ const Statements = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log('Success:', data);
+        // console.log('Success:', data);
         setUniqueFunds(data.data);
       })
       .catch((error) => {
@@ -73,7 +73,7 @@ const Statements = () => {
   }, [fundname]);
   //functions and handlers
   const handleStartDateChange = (date) => {
-    console.log(date);
+    // console.log(date);
     setSelectedStartDate(date);
   };
   const handleEndDateChange = (date) => {
@@ -105,16 +105,14 @@ const Statements = () => {
       setDisplayRows(data.data);
       setSummaryData(data.header);
       setLoading(false);
-      console.log('data.data', data);
+      // console.log('data.data', data);
     } catch (e) {
-      console.log(e);
+      // console.log(e);
     }
   };
   const handleDateFilter = async () => {
     Promise.all([getUserTransactions(fundname)]).then(() => {
-      console.log('rows', rows);
       let modRows = [...rows];
-      console.log('before', modRows.length);
       let modStartDate = new Date(selectedStartDate);
       modStartDate = modStartDate.setDate(modStartDate.getDate() - 1);
       modRows = modRows.filter(
@@ -122,7 +120,6 @@ const Statements = () => {
           new Date(row.date) >= new Date(modStartDate) &&
           new Date(row.date) <= new Date(selectedEndDate)
       );
-      console.log('after', modRows.length);
       setDisplayRows(modRows);
     });
   };

@@ -25,7 +25,7 @@ const DashContainer = () => {
   const [year, setYear] = useState(new Date());
   const [dashboardData, setDashboardData] = useState([]);
   const [loading, setLoading] = useState(false);
-  console.log(new Date(Date.now()).getUTCFullYear());
+  // console.log(new Date(Date.now()).getUTCFullYear());
   // graphdata
   const state = {
     labels: monthLabels,
@@ -92,7 +92,7 @@ const DashContainer = () => {
       );
       const data = await response.json();
       setDashboardData(data.data);
-      console.log(data.data);
+      // console.log(data.data);
       setLoading(false);
     } catch (e) {
       console.log(e);

@@ -130,9 +130,9 @@ const AddTransaction = () => {
       if (data.status) {
         history.push('/admin/investments');
         Swal.fire('Created Successfully!', '', 'success');
-      } else Swal.fire('Something went wrong', '', 'error');
+      } else Swal.fire('Something went wrong', data.error, 'error');
     } catch (e) {
-      Swal.fire('Something went wrong', '', 'error');
+      Swal.fire('Something went wrong', 'some server issue', 'error');
     }
   };
   const getUserAndFundNames = async () => {
@@ -169,7 +169,7 @@ const AddTransaction = () => {
     if (e.target.name == 'fundname') {
       let navOfFund = fundNames.filter((el) => el.fundname == e.target.value)[0]
         ?.nav;
-      console.log(navOfFund);
+      // console.log(navOfFund);
       setFormData({
         ...formData,
         nav: navOfFund || 0,

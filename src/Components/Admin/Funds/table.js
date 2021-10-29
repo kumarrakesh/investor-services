@@ -100,8 +100,8 @@ export default function CustomizedTables({
     if (data?.status) {
       setUpdate((state) => state + 1);
       Swal.fire('NAV value updated!', '', 'success');
-    } else alert('Error while updating');
-    console.log(data);
+    } else Swal.fire('Error while updating!', data?.error, 'error');
+    // console.log(data);
   };
 
   return (

@@ -28,7 +28,7 @@ const LoginPage = () => {
       }
     );
     let data = await response.json();
-    console.log(data);
+    // console.log(data);
     setDisability(false);
     localStorage.setItem('token', JSON.stringify(data.token));
     let imgResponse = await fetch(
@@ -40,7 +40,7 @@ const LoginPage = () => {
       }
     );
     let imgData = await imgResponse.json();
-    console.log(imgData);
+    // console.log(imgData);
     localStorage.setItem('username', imgData.data.name);
     localStorage.setItem(
       'imageURL',

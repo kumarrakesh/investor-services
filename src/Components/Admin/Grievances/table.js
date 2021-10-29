@@ -59,7 +59,7 @@ export default function CustomizedTables({
   //handlers
 
   const handleOpenDialog = (row) => {
-    console.log(row);
+    // console.log(row);
     setDialogData(row);
     setDialogOpen(true);
     setMessage(row.reply || '');
@@ -70,7 +70,7 @@ export default function CustomizedTables({
   };
   const handleSaveQuery = async (e, row) => {
     setLoading(true);
-    console.log(row);
+    // console.log(row);
     setDialogOpen(false);
     const response = await fetch(
       'https://investorbackend.herokuapp.com/api/query/update',
@@ -92,8 +92,8 @@ export default function CustomizedTables({
     if (data.status) {
       setUpdate((state) => state + 1);
       Swal.fire('Updated the query!', '', 'success');
-    } else alert('Error while updating');
-    console.log(data);
+    } else Swal.fire('Error while updating', data?.error, 'error');
+    // console.log(data);
   };
   const handleChangeMessage = (e) => {
     setMessage(e.target.value);
