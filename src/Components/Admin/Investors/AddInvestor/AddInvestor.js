@@ -38,7 +38,8 @@ const AddInvestor = () => {
     investorState: '',
     investorCountry: '',
     investorZipCode: '',
-    role: '616d2f528d908648c28d639e'
+    role: '616d2f588d908648c28d63a1',
+    Id: ''
   });
 
   useEffect(() => {
@@ -57,8 +58,8 @@ const AddInvestor = () => {
       investorCity: location?.state?.row.city,
       investorState: location?.state?.row.state,
       investorCountry: location?.state?.row.country,
-      investorZipCode: '',
-      role: '616d2f528d908648c28d639e'
+      investorZipCode: location?.state?.row.pincode,
+      Id: location?.state?.row._id
     });
   };
 
@@ -100,7 +101,8 @@ const AddInvestor = () => {
             state: values.investorState,
             country: values.investorCountry,
             pincode: values.investorZipCode,
-            maturity: investorDate
+            maturity: investorDate,
+            userId: values.Id
           }),
           headers: {
             'Content-Type': 'application/json',
@@ -114,7 +116,7 @@ const AddInvestor = () => {
 
       if (data.success) {
         Swal.fire('Updated successfully!', '', 'success');
-      } else alert('Error while Adding');
+      } else alert(data.error);
     } else {
       const response = await fetch(
         'https://investorbackend.herokuapp.com/api/admin/user/register',
@@ -145,7 +147,7 @@ const AddInvestor = () => {
 
       if (data.success) {
         Swal.fire('Added successfully!', '', 'success');
-      } else alert('Error while Adding');
+      } else alert(data.error);
     }
 
     history.push('/admin/investors');

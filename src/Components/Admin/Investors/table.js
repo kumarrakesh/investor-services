@@ -37,7 +37,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function CustomizedTables({ displayRows }) {
   const history = useHistory();
+
   const handleClickOpen = (row) => {
+    console.log(row);
     return history.push({
       pathname: '/admin/investor/add',
       state: { row }
@@ -79,7 +81,7 @@ export default function CustomizedTables({ displayRows }) {
                   {row.name}
                 </StyledTableCell>
                 <StyledTableCell align="center" component="th" scope="row">
-                  {row.city},{row.state},{row.country},{row.pincode}
+                  {row.city},{row.state},{row.country}
                 </StyledTableCell>
                 <StyledTableCell align="center" component="th" scope="row">
                   {row.passport}

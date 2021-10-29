@@ -55,6 +55,8 @@ export default function CustomizedTables({
   const [open, setOpen] = React.useState(false);
   const [values, setValues] = React.useState({ amount: '' });
   const [dialogData, setDialogData] = useState({});
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [NavHistoryOpen, setNavHistoryOpen] = useState(false);
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -66,13 +68,22 @@ export default function CustomizedTables({
     setSelectedDate(newValue);
   };
 
-  const handleClickOpen = (row) => {
+  const handleEditNAV = (row) => {
     setDialogData(row);
     setOpen(true);
   };
 
+  const handleNavHistory = (row) => {
+    setDialogData(row);
+    setNavHistoryOpen(true);
+  };
+
   const handleCancel = () => {
     setOpen(false);
+  };
+
+  const handleNavHistoryCancel = () => {
+    setNavHistoryOpen(false);
   };
 
   const handleUpdate = async () => {
@@ -104,6 +115,8 @@ export default function CustomizedTables({
     // console.log(data);
   };
 
+  console.log(dialogData);
+  console.log(displayRows);
   return (
     <>
       <TableContainer component={Paper} className="inv-table-funds">
@@ -126,23 +139,64 @@ export default function CustomizedTables({
           <TableBody>
             {!displayRows.length && <p style={{ padding: 10 }}>Loading...</p>}
             {displayRows.map((row) => (
-              <StyledTableRow key={row.name}>
-                <StyledTableCell component="th" scope="row">
+              <StyledTableRow key={row._id}>
+                <StyledTableCell
+                  onClick={() => {
+                    handleNavHistory(row);
+                  }}
+                  component="th"
+                  scope="row"
+                >
                   {new Date(row.dateOfCreation).toLocaleDateString('en-GB')}
                 </StyledTableCell>
-                <StyledTableCell align="center" component="th" scope="row">
+                <StyledTableCell
+                  onClick={() => {
+                    handleNavHistory(row);
+                  }}
+                  align="center"
+                  component="th"
+                  scope="row"
+                >
                   {row.fundname}
                 </StyledTableCell>
-                <StyledTableCell align="center" component="th" scope="row">
+                <StyledTableCell
+                  onClick={() => {
+                    handleNavHistory(row);
+                  }}
+                  align="center"
+                  component="th"
+                  scope="row"
+                >
                   {row.nav}
                 </StyledTableCell>
-                <StyledTableCell align="center" component="th" scope="row">
+                <StyledTableCell
+                  onClick={() => {
+                    handleNavHistory(row);
+                  }}
+                  align="center"
+                  component="th"
+                  scope="row"
+                >
                   {new Date(row.lastUpdate).toLocaleDateString('en-GB')}
                 </StyledTableCell>
-                <StyledTableCell align="center" component="th" scope="row">
+                <StyledTableCell
+                  onClick={() => {
+                    handleNavHistory(row);
+                  }}
+                  align="center"
+                  component="th"
+                  scope="row"
+                >
                   {row.totalInvested.toFixed(2)}
                 </StyledTableCell>
-                <StyledTableCell align="center" component="th" scope="row">
+                <StyledTableCell
+                  onClick={() => {
+                    handleNavHistory(row);
+                  }}
+                  align="center"
+                  component="th"
+                  scope="row"
+                >
                   {row.currentValue.toFixed(2)}
                 </StyledTableCell>
                 <StyledTableCell align="center" component="th" scope="row">
@@ -150,7 +204,7 @@ export default function CustomizedTables({
                     <Button
                       variant="contained"
                       onClick={() => {
-                        handleClickOpen(row);
+                        handleEditNAV(row);
                       }}
                       style={{
                         backgroundColor: '#E95B3E',
@@ -201,6 +255,41 @@ export default function CustomizedTables({
           <DialogActions>
             <Button onClick={handleCancel}>Cancel</Button>
             <Button onClick={handleUpdate}>Update</Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+      <div>
+        <Dialog open={NavHistoryOpen} onClose={handleNavHistoryCancel}>
+          <DialogTitle>{dialogData.fundname} </DialogTitle>
+          <DialogContent
+            style={{ display: 'flex', flexDirection: 'column', gap: '1.7rem' }}
+          >
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 400 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Date</TableCell>
+                    <TableCell align="right">NAV</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {dialogData?.history?.map((row) => (
+                    <TableRow
+                      key={row.name}
+                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {new Date(row.date).toLocaleDateString('en-GB')}
+                      </TableCell>
+                      <TableCell align="right">$ {row.nav}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleNavHistoryCancel}>Ok</Button>
           </DialogActions>
         </Dialog>
       </div>

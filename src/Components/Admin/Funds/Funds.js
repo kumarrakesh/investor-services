@@ -44,6 +44,7 @@ const Funds = () => {
       }
     );
     const data = await response.json();
+    console.log(data);
     setDisplayRows(data.data);
     setLoading(false);
   };

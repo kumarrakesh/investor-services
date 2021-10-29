@@ -166,7 +166,9 @@ const Grievances = () => {
               </div>
             </div>
           )}
-          {value === 'response' && <CustomizedTables rows={rows} />}
+          {value === 'response' && (
+            <CustomizedTables rows={rows} loading={loading} />
+          )}
         </div>
       </div>
       <Backdrop

@@ -33,7 +33,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   }
 }));
 
-export default function CustomizedTables({ rows }) {
+export default function CustomizedTables({ rows, loading }) {
   return (
     <TableContainer
       id="query-table"
@@ -55,7 +55,25 @@ export default function CustomizedTables({ rows }) {
             <StyledTableCell align="center">Resolution Message</StyledTableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
+        <TableBody
+          style={{
+            border: '1px solid #CECECE'
+          }}
+        >
+          {!rows.length && (
+            <StyledTableRow>
+              <StyledTableCell
+                component="th"
+                scope="row"
+                style={{
+                  padding: '1rem',
+                  fontSize: '1rem'
+                }}
+              >
+                {loading ? 'Loading...' : 'No queries yet.'}
+              </StyledTableCell>
+            </StyledTableRow>
+          )}
           {rows.map((row) => (
             <StyledTableRow key={row._id}>
               <StyledTableCell component="th" scope="row">
