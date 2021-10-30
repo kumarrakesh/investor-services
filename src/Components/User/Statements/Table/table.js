@@ -63,7 +63,7 @@ export default function CustomizedTables({ rows, fundname, loading }) {
           {!rows.length && (
             <StyledTableRow>
               <StyledTableCell component="th" scope="row">
-                {loading ? 'Loading...' : 'No investments queries...'}
+                {loading ? 'Loading...' : 'No investments...'}
               </StyledTableCell>
             </StyledTableRow>
           )}

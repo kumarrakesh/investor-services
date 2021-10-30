@@ -66,7 +66,7 @@ const AdminGrievances = () => {
       <div id="grievances-container">
         <h1 className="dtitle">Grievances</h1>
         <h1 className="overview">Overview</h1>
-        <p className="total-investors">Unresolved Queries</p>
+        <p className="total-investors">Unresolved Grievances</p>
         <p className="total-no">
           {queries?.filter((el) => !el.isResolved).length}
         </p>

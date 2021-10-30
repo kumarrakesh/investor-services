@@ -51,7 +51,7 @@ const Grievances = () => {
       );
       setData(await response.json());
       // console.log(data);
-      Swal.fire('Great!', 'Query sent successfully!', 'success');
+      Swal.fire('Great!', 'Grievance sent successfully!', 'success');
     } catch (e) {
       console.log(e);
       Swal.fire('Something went wrong', '', 'error');
@@ -93,7 +93,7 @@ const Grievances = () => {
 
       <div className="grievances-container">
         <h1 id="grievances-header">Investors and Funds</h1>
-        <h1 className="query-header">Query Generate</h1>
+        <h1 className="query-header">Grievance Generate</h1>
 
         <div className="btns-div">
           <div>
@@ -105,7 +105,7 @@ const Grievances = () => {
                 setValue('raise');
               }}
             >
-              Raise Query
+              Raise Grievance
             </Button>
           </div>
 
@@ -116,7 +116,7 @@ const Grievances = () => {
               id="apply-btn"
               onClick={handleRespone}
             >
-              Query History
+              Grievance History
             </Button>
           </div>
         </div>
@@ -127,7 +127,7 @@ const Grievances = () => {
               <div className="query-subject">
                 <TextField
                   fullWidth
-                  label="Query Subject"
+                  label="Grievance Subject"
                   name="subject"
                   onChange={(e) => {
                     setSubject(e.target.value);
@@ -144,7 +144,7 @@ const Grievances = () => {
                   onChange={(e) => {
                     setDescription(e.target.value);
                   }}
-                  label="Query"
+                  label="Grievance"
                   fullWidth
                   multiline
                   rows={3}
@@ -161,7 +161,7 @@ const Grievances = () => {
                   <div>
                     <TelegramIcon />
                   </div>
-                  <div>Send Query</div>
+                  <div>Send Grievance</div>
                 </Button>
               </div>
             </div>

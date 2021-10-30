@@ -48,9 +48,9 @@ export default function CustomizedTables({ rows, loading }) {
       <Table stickyHeader aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Date of Query</StyledTableCell>
-            <StyledTableCell align="center">Query Subject</StyledTableCell>
-            <StyledTableCell>Query ID</StyledTableCell>
+            <StyledTableCell>Date of Grievance</StyledTableCell>
+            <StyledTableCell align="center">Grievance Subject</StyledTableCell>
+            <StyledTableCell>Grievance ID</StyledTableCell>
             <StyledTableCell align="center">Status</StyledTableCell>
             <StyledTableCell align="center">Resolution Message</StyledTableCell>
           </TableRow>
@@ -63,7 +63,7 @@ export default function CustomizedTables({ rows, loading }) {
           {!rows.length && (
             <StyledTableRow>
               <StyledTableCell component="th" scope="row">
-                {loading ? 'Loading...' : 'No queries...'}
+                {loading ? 'Loading...' : 'No Grievances...'}
               </StyledTableCell>
             </StyledTableRow>
           )}
