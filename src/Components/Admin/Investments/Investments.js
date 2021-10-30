@@ -72,9 +72,11 @@ const Investments = () => {
     const filteredRows = rows.filter((row) => {
       let modStartDate = new Date(selectedStartDate);
       modStartDate = modStartDate.setDate(modStartDate.getDate() - 1);
+      let modEndDate = new Date(selectedStartDate);
+      modEndDate = modEndDate.setDate(modEndDate.getDate() + 1);
       return (
         new Date(row.date) >= modStartDate &&
-        new Date(row.date) <= new Date(selectedEndDate)
+        new Date(row.date) <= new Date(modEndDate)
       );
     });
     setDisplayRows(filteredRows);
@@ -120,6 +122,7 @@ const Investments = () => {
               disableCloseOnSelect={false}
               renderInput={(params) => <TextField {...params} />}
               className="padding-for-inputs"
+              maxDate={selectedEndDate}
             />
           </LocalizationProvider>
 
@@ -132,6 +135,8 @@ const Investments = () => {
               disableCloseOnSelect={false}
               className="padding-for-inputs"
               renderInput={(params) => <TextField {...params} />}
+              minDate={selectedStartDate}
+              maxDate={new Date()}
             />
           </LocalizationProvider>
 

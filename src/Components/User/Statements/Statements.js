@@ -114,10 +114,12 @@ const Statements = () => {
       let modRows = [...rows];
       let modStartDate = new Date(selectedStartDate);
       modStartDate = modStartDate.setDate(modStartDate.getDate() - 1);
+      let modEndDate = new Date(selectedStartDate);
+      modEndDate = modEndDate.setDate(modEndDate.getDate() + 1);
       modRows = modRows.filter(
         (row) =>
           new Date(row.date) >= new Date(modStartDate) &&
-          new Date(row.date) <= new Date(selectedEndDate)
+          new Date(row.date) <= new Date(modEndDate)
       );
       setDisplayRows(modRows);
     });
@@ -182,6 +184,7 @@ const Statements = () => {
                 onChange={handleStartDateChange}
                 disableCloseOnSelect={false}
                 renderInput={(params) => <TextField {...params} />}
+                maxDate={selectedEndDate}
               />
             </LocalizationProvider>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -192,6 +195,8 @@ const Statements = () => {
                 onChange={handleEndDateChange}
                 disableCloseOnSelect={false}
                 renderInput={(params) => <TextField {...params} />}
+                minDate={selectedStartDate}
+                maxDate={new Date()}
               />
             </LocalizationProvider>
           </ThemeProvider>
