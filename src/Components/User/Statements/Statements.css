@@ -5,12 +5,14 @@
   color: #132f5e;
 }
 
+.header-container {
+  background-color: var(--light-blue-bg);
+}
 .statement-container {
   padding: 2rem 3rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  background-color: #f7f9fd;
   width: 100%;
 }
 
