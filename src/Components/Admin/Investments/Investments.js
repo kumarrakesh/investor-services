@@ -72,7 +72,7 @@ const Investments = () => {
     const filteredRows = rows.filter((row) => {
       let modStartDate = new Date(selectedStartDate);
       modStartDate = modStartDate.setDate(modStartDate.getDate() - 1);
-      let modEndDate = new Date(selectedStartDate);
+      let modEndDate = new Date(selectedEndDate);
       modEndDate = modEndDate.setDate(modEndDate.getDate() + 1);
       return (
         new Date(row.date) >= modStartDate &&

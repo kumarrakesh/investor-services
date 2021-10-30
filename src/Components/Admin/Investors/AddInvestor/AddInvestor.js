@@ -39,7 +39,8 @@ const AddInvestor = () => {
     investorCountry: '',
     investorZipCode: '',
     role: '616d2f588d908648c28d63a1',
-    Id: ''
+    Id: '',
+    showPassword: false
   });
 
   useEffect(() => {
@@ -211,6 +212,7 @@ const AddInvestor = () => {
                 onChange={handleChange('investorName')}
                 label=" Investor Name"
                 style={{ width: '24rem' }}
+                autoComplete="off"
               />
             </FormControl>
 
@@ -225,7 +227,13 @@ const AddInvestor = () => {
                 value={values.investorPassword}
                 onChange={handleChange('investorPassword')}
                 style={{ width: '24rem' }}
-                autoComplete="current-password"
+                autoComplete="off"
+                inputProps={{
+                  autocomplete: 'off',
+                  form: {
+                    autocomplete: 'off'
+                  }
+                }}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton

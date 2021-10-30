@@ -70,6 +70,8 @@ const Statements = () => {
   }, []);
   useEffect(() => {
     getUserTransactions(fundname);
+    setSelectedStartDate(new Date());
+    setSelectedEndDate(new Date());
   }, [fundname]);
   //functions and handlers
   const handleStartDateChange = (date) => {
@@ -114,7 +116,7 @@ const Statements = () => {
       let modRows = [...rows];
       let modStartDate = new Date(selectedStartDate);
       modStartDate = modStartDate.setDate(modStartDate.getDate() - 1);
-      let modEndDate = new Date(selectedStartDate);
+      let modEndDate = new Date(selectedEndDate);
       modEndDate = modEndDate.setDate(modEndDate.getDate() + 1);
       modRows = modRows.filter(
         (row) =>

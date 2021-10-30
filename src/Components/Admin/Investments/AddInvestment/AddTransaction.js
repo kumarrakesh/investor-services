@@ -146,8 +146,6 @@ const AddTransaction = () => {
           }
         }
       );
-      const data = await response.json();
-      setUsers(data.data);
       const response1 = await fetch(
         'https://investorbackend.herokuapp.com/api/funds',
         {
@@ -156,7 +154,9 @@ const AddTransaction = () => {
           }
         }
       );
+      const data = await response.json();
       const data1 = await response1.json();
+      setUsers(data.data);
       setFundNames(data1.data);
       setLoading(false);
     } catch (e) {

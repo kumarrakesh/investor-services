@@ -102,10 +102,12 @@ const AdNavbar = () => {
           history.push('/admin/investors');
         }}
         style={{
-          color:
-            location.pathname == '/admin/investors' ? '#E95B3E' : '#8997ae',
-          backgroundColor:
-            location.pathname == '/admin/investors' ? '#F7F9FD' : 'inherit',
+          color: location.pathname.startsWith('/admin/investor')
+            ? '#E95B3E'
+            : '#8997ae',
+          backgroundColor: location.pathname.startsWith('/admin/investor')
+            ? '#F7F9FD'
+            : 'inherit',
           textTransform: 'none'
         }}
       >
@@ -129,9 +131,12 @@ const AdNavbar = () => {
           history.push('/admin/funds');
         }}
         style={{
-          color: location.pathname == '/admin/funds' ? '#E95B3E' : '#8997ae',
-          backgroundColor:
-            location.pathname == '/admin/funds' ? '#F7F9FD' : 'inherit',
+          color: location.pathname.startsWith('/admin/fund')
+            ? '#E95B3E'
+            : '#8997ae',
+          backgroundColor: location.pathname.startsWith('/admin/fund')
+            ? '#F7F9FD'
+            : 'inherit',
 
           textTransform: 'none'
         }}
@@ -155,10 +160,12 @@ const AdNavbar = () => {
           history.push('/admin/investments');
         }}
         style={{
-          color:
-            location.pathname == '/admin/investments' ? '#E95B3E' : '#8997ae',
-          backgroundColor:
-            location.pathname == '/admin/investments' ? '#F7F9FD' : 'inherit',
+          color: location.pathname.startsWith('/admin/investment')
+            ? '#E95B3E'
+            : '#8997ae',
+          backgroundColor: location.pathname.startsWith('/admin/investment')
+            ? '#F7F9FD'
+            : 'inherit',
 
           textTransform: 'none'
         }}

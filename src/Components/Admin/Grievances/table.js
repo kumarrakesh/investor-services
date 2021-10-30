@@ -222,7 +222,10 @@ export default function CustomizedTables({
               disabled={!message.length}
               variant="outlined"
               style={{
-                color: 'var(--primary-color)',
+                backgroundColor: message.length
+                  ? 'var(--primary-color)'
+                  : '#eee',
+                color: message.length ? 'white' : '#bbb',
                 padding: '1rem',
                 borderRadius: '0.5rem',
                 margin: 0,
