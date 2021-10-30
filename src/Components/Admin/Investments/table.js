@@ -37,7 +37,8 @@ export default function CustomizedTables({
   rows,
   setRows,
   displayRows,
-  setDisplayRows
+  setDisplayRows,
+  loading
 }) {
   // const [rows, setRows] = useState(originalRows);
   const [searched, setSearched] = useState('');
@@ -86,8 +87,15 @@ export default function CustomizedTables({
               </TableRow>
             </TableHead>
             <TableBody>
+              {!displayRows.length && (
+                <StyledTableRow>
+                  <StyledTableCell component="th" scope="row">
+                    {loading ? 'Loading...' : 'No transactions...'}
+                  </StyledTableCell>
+                </StyledTableRow>
+              )}
               {displayRows.map((row) => (
-                <StyledTableRow key={row.name}>
+                <StyledTableRow key={row._id}>
                   <StyledTableCell component="th" scope="row">
                     {new Date(row.date).toLocaleDateString('en-GB')}
                   </StyledTableCell>

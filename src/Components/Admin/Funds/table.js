@@ -141,7 +141,13 @@ export default function CustomizedTables({
             </TableRow>
           </TableHead>
           <TableBody>
-            {!displayRows.length && <p style={{ padding: 10 }}>Loading...</p>}
+            {!displayRows.length && (
+              <StyledTableRow>
+                <StyledTableCell component="th" scope="row">
+                  {loading ? 'Loading...' : 'No funds...'}
+                </StyledTableCell>
+              </StyledTableRow>
+            )}
             {displayRows.map((row) => (
               <StyledTableRow key={row._id}>
                 <StyledTableCell

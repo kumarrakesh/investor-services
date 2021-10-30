@@ -139,9 +139,11 @@ export default function CustomizedTables({
             </TableHead>
             <TableBody>
               {!displayRows.length && (
-                <p style={{ padding: 10 }}>
-                  {loading ? 'Loading...' : 'No such queries...'}
-                </p>
+                <StyledTableRow>
+                  <StyledTableCell component="th" scope="row">
+                    {loading ? 'Loading...' : 'No queries...'}
+                  </StyledTableCell>
+                </StyledTableRow>
               )}
               {displayRows.map((row) => (
                 <StyledTableRow

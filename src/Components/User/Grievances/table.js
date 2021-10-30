@@ -62,15 +62,8 @@ export default function CustomizedTables({ rows, loading }) {
         >
           {!rows.length && (
             <StyledTableRow>
-              <StyledTableCell
-                component="th"
-                scope="row"
-                style={{
-                  padding: '1rem',
-                  fontSize: '1rem'
-                }}
-              >
-                {loading ? 'Loading...' : 'No queries yet.'}
+              <StyledTableCell component="th" scope="row">
+                {loading ? 'Loading...' : 'No queries...'}
               </StyledTableCell>
             </StyledTableRow>
           )}

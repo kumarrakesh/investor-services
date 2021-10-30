@@ -62,16 +62,8 @@ export default function CustomizedTables({ rows, fundname, loading }) {
         >
           {!rows.length && (
             <StyledTableRow>
-              <StyledTableCell
-                component="th"
-                scope="row"
-                style={{
-                  padding: '1rem',
-                  textAlign: 'center',
-                  fontSize: '1rem'
-                }}
-              >
-                {loading ? 'Loading...' : 'No such data'}
+              <StyledTableCell component="th" scope="row">
+                {loading ? 'Loading...' : 'No investments queries...'}
               </StyledTableCell>
             </StyledTableRow>
           )}

@@ -35,7 +35,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   }
 }));
 
-export default function CustomizedTables({ displayRows, setUpdate }) {
+export default function CustomizedTables({ displayRows, setUpdate, loading }) {
   const history = useHistory();
 
   const handleClickOpen = (row) => {
@@ -71,7 +71,13 @@ export default function CustomizedTables({ displayRows, setUpdate }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {!displayRows.length && <p style={{ padding: 10 }}>Loading...</p>}
+            {!displayRows.length && (
+              <StyledTableRow>
+                <StyledTableCell component="th" scope="row">
+                  {loading ? 'Loading...' : 'No investors...'}
+                </StyledTableCell>
+              </StyledTableRow>
+            )}
             {displayRows.map((row) => (
               <StyledTableRow key={row._id}>
                 <StyledTableCell component="th" scope="row">
