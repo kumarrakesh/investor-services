@@ -33,7 +33,7 @@ const Profile = () => {
     },
     AmountInvested: 0
   });
-  const [imgURL, setImgURL] = useState('https://via.placeholder.com/100');
+  const [imgURL, setImgURL] = useState('https://tiwpe.com/image/tiw-logo.png');
   const [showImageDialog, setShowImageDialog] = useState(false);
 
   useEffect(() => {
@@ -103,10 +103,31 @@ const Profile = () => {
     );
     const details = await response.json();
     setProfile(details);
-    setImgURL(
-      'https://investorbackend.herokuapp.com/api/profilePic/' +
-        details?.data?.profilePic
-    );
+    try {
+      const tempResponse = await fetch(
+        'https://investorbackend.herokuapp.com/api/profilePic/' +
+          details?.data?.profilePic,
+        {
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'x-access-token': token
+          },
+          method: 'GET'
+        }
+      );
+      if (tempResponse.ok)
+        setImgURL(
+          'https://investorbackend.herokuapp.com/api/profilePic/' +
+            details?.data?.profilePic
+        );
+      else setImgURL('https://tiwpe.com/image/tiw-logo.png');
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+      setImgURL('https://tiwpe.com/image/tiw-logo.png');
+    }
+
     localStorage.setItem(
       'imageURL',
       'https://investorbackend.herokuapp.com/api/profilePic/' +
