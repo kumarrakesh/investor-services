@@ -49,7 +49,7 @@ export default function CustomizedTables({ rows, fundname, loading }) {
             <StyledTableCell align="right">Ref. No.</StyledTableCell>
             <StyledTableCell align="right">Investment Amount</StyledTableCell>
             <StyledTableCell align="right">Withdraw Amount</StyledTableCell>
-            <StyledTableCell align="right">Total Gain Amount</StyledTableCell>
+            <StyledTableCell align="right">Current Value</StyledTableCell>
             <StyledTableCell align="right">
               Total Balance Amount
             </StyledTableCell>
@@ -93,7 +93,7 @@ export default function CustomizedTables({ rows, fundname, loading }) {
                     100}
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                  {Math.round(row.totalGain * 100 + Number.EPSILON) / 100}
+                  {Math.round(row.currentValue * 100 + Number.EPSILON) / 100}
                 </StyledTableCell>
                 <StyledTableCell align="right">
                   {Math.round(row.totalInvested * 100 + Number.EPSILON) / 100}
