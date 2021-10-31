@@ -118,8 +118,10 @@ const Profile = () => {
       );
       if (tempResponse.ok)
         setImgURL(
-          'https://investorbackend.herokuapp.com/api/profilePic/' +
-            details?.data?.profilePic
+          details?.data?.profilePic
+            ? 'https://investorbackend.herokuapp.com/api/profilePic/' +
+                details?.data?.profilePic
+            : 'https://tiwpe.com/image/tiw-logo.png'
         );
       else setImgURL('https://tiwpe.com/image/tiw-logo.png');
       setLoading(false);
@@ -130,8 +132,10 @@ const Profile = () => {
 
     localStorage.setItem(
       'imageURL',
-      'https://investorbackend.herokuapp.com/api/profilePic/' +
-        details?.data?.profilePic
+      details?.data?.profilePic
+        ? 'https://investorbackend.herokuapp.com/api/profilePic/' +
+            details?.data?.profilePic
+        : 'https://tiwpe.com/image/tiw-logo.png'
     );
     setLoading(false);
   };
@@ -142,7 +146,17 @@ const Profile = () => {
         <div className="profile-heading">Profile</div>
         <div className="profile-pic-edit-btn-holder">
           <div className="profile-image-holder">
-            <img src={imgURL} alt="" className="profile-image--img" />
+            <img
+              src={imgURL}
+              alt=""
+              className="profile-image--img"
+              style={
+                !loading ? { display: 'inline-block' } : { display: 'none' }
+              }
+              onError={() => {
+                setImgURL('https://tiwpe.com/image/tiw-logo.png');
+              }}
+            />
           </div>
           <Button
             variant="contained"
@@ -251,7 +265,9 @@ const Profile = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseImageDialog}>Cancel</Button>
-          <Button onClick={handleUploadImage}>Upload</Button>
+          <Button onClick={handleUploadImage} disabled={!selectedImage}>
+            Upload
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

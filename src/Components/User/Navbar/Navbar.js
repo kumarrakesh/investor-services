@@ -10,11 +10,19 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import './Navbar.css';
 
 const Navbar = () => {
-  const [imgURL, setImgURL] = useState('');
+  const [imgURL, setImgURL] = useState('https://tiwpe.com/image/tiw-logo.png');
   const history = useHistory();
   const location = useLocation();
   useEffect(() => {
-    setImgURL(localStorage.getItem('imageURL'));
+    console.log(localStorage.getItem('imageURL'));
+    if (
+      localStorage.getItem('imageURL') ==
+        'https://investorbackend.herokuapp.com/api/profilePic/' ||
+      localStorage.getItem('imageURL') ==
+        'https://investorbackend.herokuapp.com/api/profilePic/undefined'
+    ) {
+      setImgURL('https://tiwpe.com/image/tiw-logo.png');
+    } else setImgURL(localStorage.getItem('imageURL'));
     // setImgURL(localStorage.getItem('username'));
   }, []);
   const GotoProfile = () => {
@@ -46,7 +54,13 @@ const Navbar = () => {
         }}
       >
         <div className="pic">
-          <img src={localStorage.getItem('imageURL')} alt="" />
+          <img
+            src={imgURL}
+            alt=""
+            onError={() => {
+              setImgURL('https://tiwpe.com/image/tiw-logo.png');
+            }}
+          />
         </div>
 
         <div className="prof-txt">
