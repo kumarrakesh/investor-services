@@ -99,18 +99,32 @@ export default function CustomizedTables({
     setMessage(e.target.value);
   };
   const requestSearch = (searchedVal) => {
+    setLoading(true);
     const filteredRows = rows.filter((row) => {
+      if (searchedVal.toLowerCase() === 'resolved') return row.isResolved;
       return (
-        row.date.toLowerCase().includes(searchedVal.toLowerCase()) ||
+        new Date(row.date)
+          .toLocaleDateString('en-GB')
+          .toLowerCase()
+          .includes(searchedVal.toLowerCase()) ||
         row.subject.toLowerCase().includes(searchedVal.toLowerCase()) ||
         row.queryId.toLowerCase().includes(searchedVal.toLowerCase()) ||
-        row.user.name.toLowerCase().includes(searchedVal.toLowerCase())
+        row.user.name.toLowerCase().includes(searchedVal.toLowerCase()) ||
+        (row.isResolved ? 'resolved' : 'unresolved')
+          .toLowerCase()
+          .includes(searchedVal.toLowerCase())
       );
     });
+    setTimeout(() => {
+      console.log('hey');
+      setLoading(false);
+    }, 350);
     setDisplayRows(filteredRows);
+    clearTimeout();
   };
 
   const cancelSearch = () => {
+    setLoading(false);
     setSearched('');
     requestSearch(searched);
   };
