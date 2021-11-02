@@ -99,7 +99,6 @@ const Grievances = () => {
           <div>
             <Button
               variant="contained"
-              id="apply-btn"
               style={{ backgroundColor: '#E95B3E', textTransform: 'none' }}
               onClick={() => {
                 setValue('raise');
@@ -113,7 +112,6 @@ const Grievances = () => {
             <Button
               variant="contained"
               style={{ backgroundColor: '#E95B3E', textTransform: 'none' }}
-              id="apply-btn"
               onClick={handleRespone}
             >
               Grievance History

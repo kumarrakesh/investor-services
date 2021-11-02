@@ -317,6 +317,7 @@ const AddInvestor = () => {
           <div className="investor-div" id="inv-id4">
             <FormControl variant="standard">
               <TextField
+                required
                 id="outlined-required"
                 value={values.investorCountry}
                 onChange={handleChange('investorCountry')}

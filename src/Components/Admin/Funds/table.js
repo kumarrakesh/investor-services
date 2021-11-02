@@ -53,7 +53,7 @@ export default function CustomizedTables({
   loading
 }) {
   const [open, setOpen] = React.useState(false);
-  const [values, setValues] = React.useState({ amount: '' });
+  const [values, setValues] = React.useState({ amount: '124' });
   const [dialogData, setDialogData] = useState({});
 
   const [NavHistoryOpen, setNavHistoryOpen] = useState(false);
@@ -68,8 +68,9 @@ export default function CustomizedTables({
     setSelectedDate(newValue);
   };
 
-  const handleEditNAV = (row) => {
+  const handleEditNAV = async (row) => {
     setDialogData(row);
+    setValues({ ...values, amount: row.nav });
     setOpen(true);
   };
 
@@ -120,7 +121,7 @@ export default function CustomizedTables({
   return (
     <>
       <TableContainer
-        sx={{ maxHeight: '40vh' }}
+        sx={{ maxHeight: '50vh' }}
         component={Paper}
         className="inv-table-funds"
       >
@@ -259,6 +260,8 @@ export default function CustomizedTables({
                 onChange={handleDateChange}
                 disableCloseOnSelect={false}
                 renderInput={(params) => <TextField {...params} />}
+                maxDate={new Date()}
+                minDate={new Date(dialogData.dateOfCreation)}
               />
             </LocalizationProvider>
           </DialogContent>

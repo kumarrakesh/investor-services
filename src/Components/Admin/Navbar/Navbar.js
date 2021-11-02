@@ -9,6 +9,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import Swal from 'sweetalert2';
 import './Navbar.css';
 
 const AdNavbar = () => {
@@ -16,6 +17,24 @@ const AdNavbar = () => {
   //hooks
   const history = useHistory();
   const location = useLocation();
+
+  const handleLogout = () => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You have to login again',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Logout!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.clear();
+        Swal.fire('Logged out!', 'You have been logged out.', 'success');
+        history.push('/');
+      }
+    });
+  };
   return (
     <div id="sidebar-main">
       <div id="header-logo">
@@ -211,10 +230,7 @@ const AdNavbar = () => {
 
       <Button
         className="nav-dashboard-btn"
-        onClick={() => {
-          localStorage.clear();
-          history.push('/');
-        }}
+        onClick={handleLogout}
         style={{
           color: location.pathname == '/' ? '#E95B3E' : '#8997ae',
           backgroundColor: location.pathname == '/' ? '#F7F9FD' : 'inherit',

@@ -17,7 +17,7 @@ const LoginPage = () => {
     setProgress(true);
     setDisability(true);
     let response = await fetch(
-      '/backend/api/user/signin',
+      'https://investorbackend.herokuapp.com/api/user/signin',
       {
         headers: {
           Accept: 'application/json',

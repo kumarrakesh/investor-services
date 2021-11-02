@@ -7,6 +7,8 @@ import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import Swal from 'sweetalert2';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -25,9 +27,6 @@ const Navbar = () => {
     } else setImgURL(localStorage.getItem('imageURL'));
     // setImgURL(localStorage.getItem('username'));
   }, []);
-  const GotoProfile = () => {
-    history.push('/profile');
-  };
 
   const GoToStatments = () => {
     history.push('/statements');
@@ -37,19 +36,43 @@ const Navbar = () => {
     history.push('/grievances');
   };
 
+  const handleLogout = () => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You have to login again',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Logout!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.clear();
+        Swal.fire('Logged out!', 'You have been logged out.', 'success');
+        history.push('/');
+      }
+    });
+  };
+
   return (
     <div id="sidebar-main">
       <div id="header-logo">
         <img src="https://tiwpe.com/image/tiw-logo.png" alt="tiwpe logo" />
       </div>
 
-      <Button
-        className="prof-btn"
-        onClick={GotoProfile}
+      <Divider
         style={{
-          color: location.pathname == '/profile' ? '#E95B3E' : '#8997ae',
-          backgroundColor:
-            location.pathname == '/profile' ? '#F7F9FD' : 'inherit',
+          backgroundColor: '#E6E6E6 ',
+          width: '100%',
+          margin: '3px 0px'
+        }}
+      />
+
+      <div
+        className="prof-btn"
+        style={{
+          color: '#E95B3E',
+          backgroundColor: 'inherit',
           textTransform: 'none'
         }}
       >
@@ -71,6 +94,30 @@ const Navbar = () => {
             {localStorage.getItem('username')?.toUpperCase()}
           </div>
         </div>
+      </div>
+      <Divider
+        style={{
+          backgroundColor: '#E6E6E6 ',
+          width: '100%',
+          margin: '2px 0px'
+        }}
+      />
+      <Button
+        className="nav-dashboard-btn"
+        onClick={() => {
+          history.push('/profile');
+        }}
+        style={{
+          color: location.pathname == '/profile' ? '#E95B3E' : '#8997ae',
+          backgroundColor:
+            location.pathname == '/profile' ? '#F7F9FD' : 'inherit',
+          textTransform: 'none'
+        }}
+      >
+        <AccountBoxIcon />
+
+        <div className="dash-name"> Profile </div>
+        <ChevronRightIcon />
       </Button>
       <Divider
         style={{
@@ -147,10 +194,7 @@ const Navbar = () => {
       />
       <Button
         className="nav-dashboard-btn"
-        onClick={() => {
-          localStorage.clear();
-          history.push('/');
-        }}
+        onClick={handleLogout}
         style={{
           color:
             location.pathname == '/admin/grievances' ? '#E95B3E' : '#8997ae',
