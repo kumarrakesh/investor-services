@@ -155,6 +155,7 @@ const Investments = () => {
           setDisplayRows={setDisplayRows}
           displayRows={displayRows}
           loading={loading}
+          setLoading={setLoading}
         />
         <Button
           variant="contained"

@@ -38,23 +38,43 @@ export default function CustomizedTables({
   setRows,
   displayRows,
   setDisplayRows,
-  loading
+  loading,
+  setLoading
 }) {
   // const [rows, setRows] = useState(originalRows);
   const [searched, setSearched] = useState('');
 
   const requestSearch = (searchedVal) => {
+    setLoading(true);
     const filteredRows = rows.filter((row) => {
       return (
-        row.date?.toLowerCase().includes(searchedVal.toLowerCase()) ||
+        new Date(row.date)
+          .toLocaleDateString('en-GB')
+          .toLowerCase()
+          .includes(searchedVal.toLowerCase()) ||
         row.fundname?.toLowerCase().includes(searchedVal.toLowerCase()) ||
-        row.user?.name?.toLowerCase().includes(searchedVal.toLowerCase())
+        row.user?.name?.toLowerCase().includes(searchedVal.toLowerCase()) ||
+        (row.remarks || row.narration)
+          ?.toLowerCase()
+          .includes(searchedVal.toLowerCase()) ||
+        (row.action ? 'resolved' : 'unresolved')
+          .toLowerCase()
+          .includes(searchedVal.toLowerCase()) ||
+        (row.investedAmount < 0 ? 'Withdrawn' : 'Invested')
+          .toLowerCase()
+          .includes(searchedVal.toLowerCase())
       );
     });
+    setTimeout(() => {
+      console.log('hey');
+      setLoading(false);
+    }, 350);
     setDisplayRows(filteredRows);
+    clearTimeout();
   };
 
   const cancelSearch = () => {
+    setLoading(false);
     setSearched('');
     requestSearch(searched);
   };
