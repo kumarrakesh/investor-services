@@ -50,9 +50,14 @@ const Grievances = () => {
           body: JSON.stringify({ subject, description, date: new Date() })
         }
       );
-      setData(await response.json());
-      // console.log(data);
-      Swal.fire('Great!', 'Grievance sent successfully!', 'success');
+      const data = await response.json();
+      setData(data);
+      console.log(data);
+      Swal.fire(
+        'Grievance sent successfully!',
+        'Query Ref ID is: ' + data.data.queryId,
+        'success'
+      );
     } catch (e) {
       console.log(e);
       Swal.fire('Something went wrong', '', 'error');

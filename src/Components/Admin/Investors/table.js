@@ -87,7 +87,7 @@ export default function CustomizedTables({ displayRows, setUpdate, loading }) {
                   {row.name}
                 </StyledTableCell>
                 <StyledTableCell align="center" component="th" scope="row">
-                  {row.city},{row.state},{row.country}
+                  {[row.city, row.state, row.country].join(', ')}
                 </StyledTableCell>
                 <StyledTableCell align="center" component="th" scope="row">
                   {row.passport}
