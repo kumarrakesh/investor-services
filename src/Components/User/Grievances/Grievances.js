@@ -10,7 +10,8 @@ import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import TextField from '@mui/material/TextField';
 import TelegramIcon from '@mui/icons-material/Telegram';
-
+import HistoryIcon from '@mui/icons-material/History';
+import EditIcon from '@mui/icons-material/Edit';
 import CustomizedTables from './table';
 import Swal from 'sweetalert2';
 
@@ -18,8 +19,8 @@ const Grievances = () => {
   const history = useHistory();
   const token = JSON.parse(localStorage.getItem('token'));
 
-  const [subject, setSubject] = useState('TESTING');
-  const [description, setDescription] = useState('TESTING');
+  const [subject, setSubject] = useState('');
+  const [description, setDescription] = useState('');
   const [date, setDate] = useState('18 OCT 2021');
   const [data, setData] = useState('');
 
@@ -99,22 +100,32 @@ const Grievances = () => {
           <div>
             <Button
               variant="contained"
-              style={{ backgroundColor: '#E95B3E', textTransform: 'none' }}
+              style={{
+                backgroundColor:
+                  value == 'raise' ? '#E95B3E' : 'hsl(10, 30%, 60%)',
+                textTransform: 'none'
+              }}
               onClick={() => {
                 setValue('raise');
               }}
             >
               Raise Grievance
+              <EditIcon sx={{ marginLeft: '10px' }} />
             </Button>
           </div>
 
           <div>
             <Button
               variant="contained"
-              style={{ backgroundColor: '#E95B3E', textTransform: 'none' }}
+              style={{
+                backgroundColor:
+                  value == 'response' ? '#E95B3E' : 'hsl(10, 30%, 60%)',
+                textTransform: 'none'
+              }}
               onClick={handleRespone}
             >
               Grievance History
+              <HistoryIcon sx={{ marginLeft: '10px' }} />
             </Button>
           </div>
         </div>
@@ -154,12 +165,14 @@ const Grievances = () => {
                   variant="outlined"
                   className="send-btn"
                   onClick={handleSendQuery}
-                  style={{ color: '#E95B3E', textTransform: 'none' }}
+                  style={{
+                    textTransform: 'none',
+                    color: !subject || !description ? 'gray' : '#E95B3E'
+                  }}
+                  disabled={!subject || !description}
                 >
-                  <div>
-                    <TelegramIcon />
-                  </div>
-                  <div>Send Grievance</div>
+                  Send Grievance
+                  <TelegramIcon />
                 </Button>
               </div>
             </div>
