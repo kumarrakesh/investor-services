@@ -52,21 +52,21 @@ const DashContainer = () => {
         data: dashboardData.map(
           (el) => Math.round(el.currentAmount * 100 + Number.EPSILON) / 100
         )
-      },
-      {
-        label: 'Net Gain/Loss',
-        fill: false,
-        backgroundColor: '#1196FF',
-        borderColor: '#1196FF',
-        borderWidth: 2,
-        lineTension: 0,
-        data: dashboardData.map(
-          (el) =>
-            Math.round(
-              (el.currentAmount - el.investedAmount) * 100 + Number.EPSILON
-            ) / 100
-        )
       }
+      // ,{
+      //   label: 'Net Gain/Loss',
+      //   fill: false,
+      //   backgroundColor: '#1196FF',
+      //   borderColor: '#1196FF',
+      //   borderWidth: 2,
+      //   lineTension: 0,
+      //   data: dashboardData.map(
+      //     (el) =>
+      //       Math.round(
+      //         (el.currentAmount - el.investedAmount) * 100 + Number.EPSILON
+      //       ) / 100
+      //   )
+      // }
     ]
   };
   //hooks
