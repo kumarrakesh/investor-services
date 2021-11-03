@@ -4,6 +4,9 @@
   padding: 3rem 5rem;
   width: 100%;
 }
+.nav-dash-container {
+  display: flex;
+}
 .dashboard-title {
   font-size: 1.5rem;
   color: var(--secondary-color);
@@ -107,4 +110,23 @@
   background: #ffffff;
   box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.09);
   border-radius: 8px;
+}
+@media screen and (max-width: 768px) {
+  .header-container {
+    display: flex;
+    flex-direction: column !important;
+    background-color: red !important;
+  }
+  .dashboard-graph-info {
+    display: none;
+  }
+  .dash-container {
+    margin-top: -100vh;
+    background-color: red;
+    width: 200%;
+  }
+  .nav-dash-container {
+    display: flex;
+    flex-direction: column;
+  }
 }

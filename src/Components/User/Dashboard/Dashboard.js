@@ -19,13 +19,8 @@ const Dashboard = () => {
     }
   }, []);
   return (
-    <div
-      id="header-container"
-      style={{ display: 'flex', backgroundColor: '  var(--light-blue-bg)' }}
-    >
-      <div>
-        <Navbar />
-      </div>
+    <div className="nav-dash-container">
+      <Navbar />
       <DashContainer />
     </div>
   );

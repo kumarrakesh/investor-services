@@ -53,160 +53,189 @@ const Navbar = () => {
       }
     });
   };
-
+  const [navbarOpen, setNavbarOpen] = useState(false);
+  const navbarOpenStyles = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    fontSize: '2rem',
+    top: 0,
+    width: '100% !important'
+  };
   return (
-    <div id="sidebar-main">
-      <div id="header-logo">
-        <img src="https://tiwpe.com/image/tiw-logo.png" alt="tiwpe logo" />
-      </div>
-
-      <Divider
-        style={{
-          backgroundColor: '#E6E6E6 ',
-          width: '100%',
-          margin: '3px 0px'
-        }}
-      />
-
+    <div className="navbar-both-container">
       <div
-        className="prof-btn"
-        style={{
-          color: '#E95B3E',
-          backgroundColor: 'inherit',
-          textTransform: 'none'
-        }}
+        id="navbar-top"
+        style={
+          navbarOpen
+            ? navbarOpenStyles
+            : { display: 'none', padding: '0px 2rem' }
+        }
       >
-        <div className="pic">
-          <img
-            src={imgURL}
-            alt=""
-            onError={() => {
-              setImgURL('https://tiwpe.com/image/tiw-logo.png');
-            }}
-          />
+        <div id="navbar-top-close" onClick={() => setNavbarOpen(false)}>
+          x
         </div>
-
-        <div className="prof-txt">
-          <div className="welcome">
-            <h4>Welcome,</h4>
-          </div>
-          <div className="prof-name">
-            {localStorage.getItem('username')?.toUpperCase()}
-          </div>
+        <div id="navbar-top-header-logo">
+          <img src="https://tiwpe.com/image/tiw-logo.png" alt="tiwpe logo" />
+        </div>
+        <div className="navbar-top-profile-pic">
+          <img src="https://tiwpe.com/image/tiw-logo.png" alt="tiwpe logo" />
         </div>
       </div>
-      <Divider
-        style={{
-          backgroundColor: '#E6E6E6 ',
-          width: '100%',
-          margin: '2px 0px'
-        }}
-      />
-      <Button
-        className="nav-dashboard-btn"
-        onClick={() => {
-          history.push('/profile');
-        }}
-        style={{
-          color: location.pathname == '/profile' ? '#E95B3E' : '#8997ae',
-          backgroundColor:
-            location.pathname == '/profile' ? '#F7F9FD' : 'inherit',
-          textTransform: 'none'
-        }}
-      >
-        <AccountBoxIcon />
 
-        <div className="dash-name"> Profile </div>
-        <ChevronRightIcon />
-      </Button>
-      <Divider
-        style={{
-          backgroundColor: '#E6E6E6 ',
-          width: '100%',
-          margin: '2px 0px'
-        }}
-      />
-      <Button
-        className="nav-dashboard-btn"
-        onClick={() => {
-          history.push('/dashboard');
-        }}
-        style={{
-          color: location.pathname == '/dashboard' ? '#E95B3E' : '#8997ae',
-          backgroundColor:
-            location.pathname == '/dashboard' ? '#F7F9FD' : 'inherit',
-          textTransform: 'none'
-        }}
-      >
-        <DashboardIcon />
+      <div id="sidebar-main">
+        <div id="header-logo">
+          <img src="https://tiwpe.com/image/tiw-logo.png" alt="tiwpe logo" />
+        </div>
 
-        <div className="dash-name"> Dashboard </div>
-        <ChevronRightIcon />
-      </Button>
-      <Divider
-        style={{
-          backgroundColor: '#E6E6E6 ',
-          width: '100%',
-          margin: '2px 0px'
-        }}
-      />
-      <Button
-        className="nav-dashboard-btn"
-        onClick={GoToStatments}
-        style={{
-          color: location.pathname == '/statements' ? '#E95B3E' : '#8997ae',
-          backgroundColor:
-            location.pathname == '/statements' ? '#F7F9FD' : 'inherit',
-          textTransform: 'none'
-        }}
-      >
-        <AccountBalanceIcon />
-        <div className="dash-name"> Account Statements </div>
-        <ChevronRightIcon />
-      </Button>
-      <Divider
-        style={{
-          backgroundColor: '#E6E6E6 ',
-          width: '100%',
-          margin: '2px 0px'
-        }}
-      />
-      <Button
-        className="nav-dashboard-btn"
-        onClick={GoToGrievances}
-        style={{
-          color: location.pathname == '/grievances' ? '#E95B3E' : '#8997ae',
-          backgroundColor:
-            location.pathname == '/grievances' ? '#F7F9FD' : 'inherit',
-          textTransform: 'none'
-        }}
-      >
-        <AccountCircleSharpIcon />
-        <div className="dash-name">Grievances</div>
-        <ChevronRightIcon />
-      </Button>
-      <Divider
-        style={{
-          backgroundColor: '#E6E6E6 ',
-          width: '100%',
-          margin: '2px 0px'
-        }}
-      />
-      <Button
-        className="nav-dashboard-btn"
-        onClick={handleLogout}
-        style={{
-          color:
-            location.pathname == '/admin/grievances' ? '#E95B3E' : '#8997ae',
-          backgroundColor:
-            location.pathname == '/admin/grievances' ? '#F7F9FD' : 'inherit',
-          textTransform: 'none'
-        }}
-      >
-        <LogoutIcon />
-        <div className="dash-name"> Logout </div>
-        <ChevronRightIcon />
-      </Button>
+        <Divider
+          style={{
+            backgroundColor: '#E6E6E6 ',
+            width: '100%',
+            margin: '3px 0px'
+          }}
+        />
+
+        <div
+          className="prof-btn"
+          style={{
+            color: '#E95B3E',
+            backgroundColor: 'inherit',
+            textTransform: 'none'
+          }}
+        >
+          <div className="pic">
+            <img
+              src={imgURL}
+              alt=""
+              onError={() => {
+                setImgURL('https://tiwpe.com/image/tiw-logo.png');
+              }}
+            />
+          </div>
+
+          <div className="prof-txt">
+            <div className="welcome">
+              <h4>Welcome,</h4>
+            </div>
+            <div className="prof-name">
+              {localStorage.getItem('username')?.toUpperCase()}
+            </div>
+          </div>
+        </div>
+        <Divider
+          style={{
+            backgroundColor: '#E6E6E6 ',
+            width: '100%',
+            margin: '2px 0px'
+          }}
+        />
+        <Button
+          className="nav-dashboard-btn"
+          onClick={() => {
+            history.push('/profile');
+          }}
+          style={{
+            color: location.pathname == '/profile' ? '#E95B3E' : '#8997ae',
+            backgroundColor:
+              location.pathname == '/profile' ? '#F7F9FD' : 'inherit',
+            textTransform: 'none'
+          }}
+        >
+          <AccountBoxIcon />
+
+          <div className="dash-name"> Profile </div>
+          <ChevronRightIcon />
+        </Button>
+        <Divider
+          style={{
+            backgroundColor: '#E6E6E6 ',
+            width: '100%',
+            margin: '2px 0px'
+          }}
+        />
+        <Button
+          className="nav-dashboard-btn"
+          onClick={() => {
+            history.push('/dashboard');
+          }}
+          style={{
+            color: location.pathname == '/dashboard' ? '#E95B3E' : '#8997ae',
+            backgroundColor:
+              location.pathname == '/dashboard' ? '#F7F9FD' : 'inherit',
+            textTransform: 'none'
+          }}
+        >
+          <DashboardIcon />
+
+          <div className="dash-name"> Dashboard </div>
+          <ChevronRightIcon />
+        </Button>
+        <Divider
+          style={{
+            backgroundColor: '#E6E6E6 ',
+            width: '100%',
+            margin: '2px 0px'
+          }}
+        />
+        <Button
+          className="nav-dashboard-btn"
+          onClick={GoToStatments}
+          style={{
+            color: location.pathname == '/statements' ? '#E95B3E' : '#8997ae',
+            backgroundColor:
+              location.pathname == '/statements' ? '#F7F9FD' : 'inherit',
+            textTransform: 'none'
+          }}
+        >
+          <AccountBalanceIcon />
+          <div className="dash-name"> Account Statements </div>
+          <ChevronRightIcon />
+        </Button>
+        <Divider
+          style={{
+            backgroundColor: '#E6E6E6 ',
+            width: '100%',
+            margin: '2px 0px'
+          }}
+        />
+        <Button
+          className="nav-dashboard-btn"
+          onClick={GoToGrievances}
+          style={{
+            color: location.pathname == '/grievances' ? '#E95B3E' : '#8997ae',
+            backgroundColor:
+              location.pathname == '/grievances' ? '#F7F9FD' : 'inherit',
+            textTransform: 'none'
+          }}
+        >
+          <AccountCircleSharpIcon />
+          <div className="dash-name">Grievances</div>
+          <ChevronRightIcon />
+        </Button>
+        <Divider
+          style={{
+            backgroundColor: '#E6E6E6 ',
+            width: '100%',
+            margin: '2px 0px'
+          }}
+        />
+        <Button
+          className="nav-dashboard-btn"
+          onClick={handleLogout}
+          style={{
+            color:
+              location.pathname == '/admin/grievances' ? '#E95B3E' : '#8997ae',
+            backgroundColor:
+              location.pathname == '/admin/grievances' ? '#F7F9FD' : 'inherit',
+            textTransform: 'none'
+          }}
+        >
+          <LogoutIcon />
+          <div className="dash-name"> Logout </div>
+          <ChevronRightIcon />
+        </Button>
+      </div>
     </div>
   );
 };
