@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router';
-import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
+import { Button, Divider, IconButton } from '@mui/material';
+
+import Swal from 'sweetalert2';
+import './Navbar.css';
+import useWindowSize from '../../../utils/useWindowSize';
+//icons
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import Swal from 'sweetalert2';
-import './Navbar.css';
-
+import MenuIcon from '@mui/icons-material/Menu';
 const Navbar = () => {
+  const size = useWindowSize();
   const [imgURL, setImgURL] = useState('https://tiwpe.com/image/tiw-logo.png');
   const history = useHistory();
   const location = useLocation();
@@ -55,46 +58,65 @@ const Navbar = () => {
   };
   const [navbarOpen, setNavbarOpen] = useState(false);
   const navbarOpenStyles = {
-    display: 'flex',
-    justifyContent: 'space-between',
+    zIndex: 8,
+    width: '100vw',
+    height: 'calc( 100vh - 80px ) !important',
     alignItems: 'center',
-    fontSize: '2rem',
-    top: 0,
-    width: '100% !important'
+    boxShadow: '3px 0px 6px 1px #0000001a',
+    marginTop: '0px',
+    display: 'flex',
+    transform: 'translateX(0%)'
   };
   return (
     <div className="navbar-both-container">
-      <div
-        id="navbar-top"
-        style={
-          navbarOpen
-            ? navbarOpenStyles
-            : { display: 'none', padding: '0px 2rem' }
-        }
-      >
-        <div id="navbar-top-close" onClick={() => setNavbarOpen(false)}>
-          x
+      <div id="navbar-top">
+        <div id="navbar-top-close" onClick={() => setNavbarOpen(!navbarOpen)}>
+          <IconButton onClick={() => setNavbarOpen(!navbarOpen)}>
+            <MenuIcon />
+          </IconButton>
         </div>
         <div id="navbar-top-header-logo">
           <img src="https://tiwpe.com/image/tiw-logo.png" alt="tiwpe logo" />
         </div>
         <div className="navbar-top-profile-pic">
-          <img src="https://tiwpe.com/image/tiw-logo.png" alt="tiwpe logo" />
+          <img
+            src={imgURL}
+            alt=""
+            onError={() => {
+              setImgURL('https://tiwpe.com/image/tiw-logo.png');
+            }}
+          />
         </div>
       </div>
 
-      <div id="sidebar-main">
-        <div id="header-logo">
-          <img src="https://tiwpe.com/image/tiw-logo.png" alt="tiwpe logo" />
-        </div>
+      <div
+        id="sidebar-main"
+        style={
+          navbarOpen
+            ? navbarOpenStyles
+            : size.width < 770
+            ? { transform: 'translateX(-100%)' }
+            : {}
+        }
+      >
+        {size.width > 770 && (
+          <>
+            <div id="header-logo">
+              <img
+                src="https://tiwpe.com/image/tiw-logo.png"
+                alt="tiwpe logo"
+              />
+            </div>
 
-        <Divider
-          style={{
-            backgroundColor: '#E6E6E6 ',
-            width: '100%',
-            margin: '3px 0px'
-          }}
-        />
+            <Divider
+              style={{
+                backgroundColor: '#E6E6E6 ',
+                width: '100%',
+                margin: '3px 0px'
+              }}
+            />
+          </>
+        )}
 
         <div
           className="prof-btn"
