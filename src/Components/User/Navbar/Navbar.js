@@ -9,13 +9,26 @@ import useWindowSize from '../../../utils/useWindowSize';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
 import LogoutIcon from '@mui/icons-material/Logout';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import RightIcon from '@mui/icons-material/ChevronRight';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import MenuIcon from '@mui/icons-material/Menu';
 const Navbar = () => {
-  const size = useWindowSize();
+  const navbarOpenStyles = {
+    zIndex: 10,
+    width: '100vw',
+    height: 'calc( 100vh - 80px ) !important',
+    alignItems: 'center',
+    boxShadow: '3px 0px 6px 1px #0000001a',
+    marginTop: '0px',
+    display: 'flex',
+    transform: 'translateX(0%)'
+  };
+  //states
   const [imgURL, setImgURL] = useState('https://tiwpe.com/image/tiw-logo.png');
+  const [navbarOpen, setNavbarOpen] = useState(false);
+  //hooks
+  const size = useWindowSize();
   const history = useHistory();
   const location = useLocation();
   useEffect(() => {
@@ -30,7 +43,7 @@ const Navbar = () => {
     } else setImgURL(localStorage.getItem('imageURL'));
     // setImgURL(localStorage.getItem('username'));
   }, []);
-
+  //handlers
   const GoToStatments = () => {
     history.push('/statements');
   };
@@ -56,17 +69,7 @@ const Navbar = () => {
       }
     });
   };
-  const [navbarOpen, setNavbarOpen] = useState(false);
-  const navbarOpenStyles = {
-    zIndex: 8,
-    width: '100vw',
-    height: 'calc( 100vh - 80px ) !important',
-    alignItems: 'center',
-    boxShadow: '3px 0px 6px 1px #0000001a',
-    marginTop: '0px',
-    display: 'flex',
-    transform: 'translateX(0%)'
-  };
+
   return (
     <div className="navbar-both-container">
       <div id="navbar-top">
@@ -167,7 +170,7 @@ const Navbar = () => {
           <AccountBoxIcon />
 
           <div className="dash-name"> Profile </div>
-          <ChevronRightIcon />
+          <RightIcon />
         </Button>
         <Divider
           style={{
@@ -191,7 +194,7 @@ const Navbar = () => {
           <DashboardIcon />
 
           <div className="dash-name"> Dashboard </div>
-          <ChevronRightIcon />
+          <RightIcon />
         </Button>
         <Divider
           style={{
@@ -212,7 +215,7 @@ const Navbar = () => {
         >
           <AccountBalanceIcon />
           <div className="dash-name"> Account Statements </div>
-          <ChevronRightIcon />
+          <RightIcon />
         </Button>
         <Divider
           style={{
@@ -233,7 +236,7 @@ const Navbar = () => {
         >
           <AccountCircleSharpIcon />
           <div className="dash-name">Grievances</div>
-          <ChevronRightIcon />
+          <RightIcon />
         </Button>
         <Divider
           style={{
@@ -255,7 +258,7 @@ const Navbar = () => {
         >
           <LogoutIcon />
           <div className="dash-name"> Logout </div>
-          <ChevronRightIcon />
+          <RightIcon />
         </Button>
       </div>
     </div>

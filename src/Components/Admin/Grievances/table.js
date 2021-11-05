@@ -137,10 +137,7 @@ export default function CustomizedTables({
         onCancelSearch={() => cancelSearch()}
       />
       <Paper>
-        <TableContainer
-          component={Paper}
-          sx={{ minWidth: 700, maxHeight: '350px' }}
-        >
+        <TableContainer component={Paper} sx={{ maxHeight: '350px' }}>
           <Table stickyHeader aria-label="customized table">
             <TableHead>
               <TableRow>

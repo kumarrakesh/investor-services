@@ -58,16 +58,15 @@ const AdminGrievances = () => {
     setLoading(false);
   };
   return (
-    <div className="grievances-main">
-      <div>
-        <AdNavbar />
-      </div>
-
-      <div id="grievances-container">
-        <h1 className="dtitle">Grievances</h1>
-        <h1 className="overview">Overview</h1>
-        <p className="total-investors">Unresolved Grievances</p>
-        <p className="total-no">
+    <div className="grievances-admin-main">
+      <AdNavbar />
+      <div id="grievances-admin-container">
+        <h1 className="grievances-admin-title">Grievances</h1>
+        <h1 className="grievances-admin-overview">Overview</h1>
+        <p className="grievances-admin-total-investors">
+          Unresolved Grievances
+        </p>
+        <p className="grievances-admin-total-no">
           {queries?.filter((el) => !el.isResolved).length}
         </p>
         {/* <div className="inv-btns">
@@ -104,7 +103,7 @@ const AdminGrievances = () => {
           </Button>
         </div> */}
 
-        <div className="inv-table-grievances">
+        <div className="gr-ad-inv-table-grievances">
           <CustomizedTables
             rows={queries}
             displayRows={displayRows}

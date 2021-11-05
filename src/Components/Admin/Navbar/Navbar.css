@@ -6,6 +6,9 @@
   align-items: center;
   background-color: #fff;
   box-shadow: 3px 0px 6px 1px #0000001a;
+  transition: all 0.25s ease;
+  z-index: 99999 !important;
+  position: relative;
 }
 #header-logo {
   width: 100px;
@@ -54,4 +57,28 @@
   line-height: 19px;
 
   color: rgba(19, 47, 94, 0.8);
+}
+#navbar-top {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px !important;
+  padding: 0.5rem 2rem;
+  box-shadow: 0px 0px 10px 0px #0000003d;
+}
+@media screen and (max-width: 768px) {
+  /* .navbar-both-container {
+    width: 200vw;
+  } */
+  #sidebar-main {
+    height: calc(100vh - 80px) !important;
+  }
+}
+@media screen and (min-width: 770px) {
+  #sidebar-main {
+    width: 300px !important;
+  }
+  #navbar-top {
+    display: none !important;
+  }
 }
