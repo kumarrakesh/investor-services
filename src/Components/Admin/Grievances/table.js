@@ -118,7 +118,7 @@ export default function CustomizedTables({
     setTimeout(() => {
       console.log('hey');
       setLoading(false);
-    }, 350);
+    }, 200);
     setDisplayRows(filteredRows);
     clearTimeout();
   };

@@ -43,7 +43,7 @@
 }
 
 .gr-ad-inv-table-grievances {
-  max-width: 80vw;
+  /* max-width: 80vw; */
   /* overflow: auto; */
 }
 
@@ -53,6 +53,7 @@
   }
   #grievances-admin-container {
     margin-top: -90vh;
+    padding: 2rem 1rem;
   }
   .gr-ad-inv-table-grievances {
     /* max-width: 100%; */

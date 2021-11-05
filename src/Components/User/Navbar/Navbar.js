@@ -53,6 +53,7 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
+    setNavbarOpen(false);
     Swal.fire({
       title: 'Are you sure?',
       text: 'You have to login again',
@@ -164,13 +165,16 @@ const Navbar = () => {
             color: location.pathname == '/profile' ? '#E95B3E' : '#8997ae',
             backgroundColor:
               location.pathname == '/profile' ? '#F7F9FD' : 'inherit',
-            textTransform: 'none'
+            textTransform: 'none',
+            display: 'flex'
           }}
         >
-          <AccountBoxIcon />
+          <AccountBoxIcon style={{ flex: 1 }} />
 
-          <div className="dash-name"> Profile </div>
-          <RightIcon />
+          <div className="dash-name" style={{ flex: 2 }}>
+            Profile
+          </div>
+          <RightIcon style={{ flex: 1 }} />
         </Button>
         <Divider
           style={{
@@ -191,10 +195,12 @@ const Navbar = () => {
             textTransform: 'none'
           }}
         >
-          <DashboardIcon />
+          <DashboardIcon style={{ flex: 1 }} />
 
-          <div className="dash-name"> Dashboard </div>
-          <RightIcon />
+          <div className="dash-name" style={{ flex: 2 }}>
+            Dashboard
+          </div>
+          <RightIcon style={{ flex: 1 }} />
         </Button>
         <Divider
           style={{
@@ -213,9 +219,11 @@ const Navbar = () => {
             textTransform: 'none'
           }}
         >
-          <AccountBalanceIcon />
-          <div className="dash-name"> Account Statements </div>
-          <RightIcon />
+          <AccountBalanceIcon style={{ flex: 1 }} />
+          <div className="dash-name" style={{ flex: 2 }}>
+            Account Statements
+          </div>
+          <RightIcon style={{ flex: 1 }} />
         </Button>
         <Divider
           style={{
@@ -234,9 +242,11 @@ const Navbar = () => {
             textTransform: 'none'
           }}
         >
-          <AccountCircleSharpIcon />
-          <div className="dash-name">Grievances</div>
-          <RightIcon />
+          <AccountCircleSharpIcon style={{ flex: 1 }} />
+          <div className="dash-name" style={{ flex: 2 }}>
+            Grievances
+          </div>
+          <RightIcon style={{ flex: 1 }} />
         </Button>
         <Divider
           style={{
@@ -256,9 +266,11 @@ const Navbar = () => {
             textTransform: 'none'
           }}
         >
-          <LogoutIcon />
-          <div className="dash-name"> Logout </div>
-          <RightIcon />
+          <LogoutIcon style={{ flex: 1 }} />
+          <div className="dash-name" style={{ flex: 2 }}>
+            Logout
+          </div>
+          <RightIcon style={{ flex: 1 }} />
         </Button>
       </div>
     </div>

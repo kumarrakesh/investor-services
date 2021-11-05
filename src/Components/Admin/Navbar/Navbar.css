@@ -37,9 +37,8 @@
 .dash-name {
   font-weight: 500;
   font-size: 16px;
-  line-height: 19px;
   /* identical to box height */
-  text-align: center;
+  text-align: left;
 }
 
 .nav-stat-header {

@@ -18,7 +18,7 @@
   background-color: #0c80db;
   /* background-color: #1196ff; */
   width: fit-content;
-  max-width: 80%;
+  /* max-width: 80%; */
   min-width: 90%;
   flex-wrap: wrap;
   margin-top: 3rem;
@@ -123,7 +123,7 @@
     flex: 1;
   }
   .dash-container {
-    padding: 1rem 0.5rem;
+    padding: 2rem 1rem;
     margin-top: -90vh;
     width: 100%;
     height: fit-content !important;

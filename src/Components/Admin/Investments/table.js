@@ -68,7 +68,7 @@ export default function CustomizedTables({
     setTimeout(() => {
       console.log('hey');
       setLoading(false);
-    }, 350);
+    }, 200);
     setDisplayRows(filteredRows);
     clearTimeout();
   };
@@ -90,7 +90,6 @@ export default function CustomizedTables({
         <TableContainer
           component={Paper}
           sx={{
-            minWidth: 700,
             maxHeight: '300px'
           }}
         >

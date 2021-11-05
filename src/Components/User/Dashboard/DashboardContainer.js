@@ -155,7 +155,7 @@ const DashContainer = () => {
               alignItems: 'flex-start'
             }}
           >
-            <small style={{ color: 'white', fontWeight: 300, marginLeft: 10 }}>
+            <small style={{ color: 'white', fontWeight: 300 }}>
               Year filter
             </small>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -171,6 +171,7 @@ const DashContainer = () => {
                     sx={{
                       backgroundColor: 'white !important',
                       margin: '10px',
+                      marginLeft: 0,
                       borderRadius: '4px',
                       width: '15ch'
                     }}
