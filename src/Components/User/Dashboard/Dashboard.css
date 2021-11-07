@@ -106,11 +106,6 @@
   border-radius: 8px;
 }
 @media screen and (max-width: 768px) {
-  .header-container {
-    display: flex;
-    flex-direction: column !important;
-    background-color: red !important;
-  }
   .dashboard-graph-info {
     /* display: none; */
     /* flex-direction: column; */

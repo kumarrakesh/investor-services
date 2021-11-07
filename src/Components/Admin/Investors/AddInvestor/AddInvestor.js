@@ -186,37 +186,38 @@ const AddInvestor = () => {
       </div>
 
       <div id="add-investors-container">
-        <h1 id="add-investors-title">Investors</h1>
+        <div className="add-investors-title-div">
+          <h1 id="add-investors-title">Investors</h1>
 
-        <div className="add-investors-cross-btn">
-          <IconButton
-            size="large"
-            style={{ color: '#E95B3E' }}
-            onClick={() => {
-              history.push('/admin/investors');
-            }}
-          >
-            <CancelIcon fontSize="inherit" />
-          </IconButton>
+          <div className="add-investors-cross-btn">
+            <IconButton
+              size="large"
+              style={{ color: '#E95B3E' }}
+              onClick={() => {
+                history.push('/admin/investors');
+              }}
+            >
+              <CancelIcon fontSize="inherit" />
+            </IconButton>
+          </div>
         </div>
 
         <h1 id="add-investors-subtitle">{flag ? 'Update' : 'Add'} Investor</h1>
 
         <form action="" onSubmit={submitForm} className="add-inv-all-inputs">
-          <div className="investor-div" id="inv-id1">
-            <FormControl variant="standard">
+          <div id="inv-id1">
+            <FormControl variant="standard" sx={{ width: '100%' }}>
               <TextField
                 required
                 id="outlined-required"
                 value={values.investorName}
                 onChange={handleChange('investorName')}
                 label=" Investor Name"
-                style={{ width: '24rem' }}
                 autoComplete="off"
               />
             </FormControl>
 
-            <FormControl variant="outlined">
+            <FormControl variant="outlined" sx={{ width: '100%' }}>
               <InputLabel htmlFor="outlined-adornment-password">
                 Password *
               </InputLabel>
@@ -226,7 +227,6 @@ const AddInvestor = () => {
                 type={values.showPassword ? 'text' : 'password'}
                 value={values.investorPassword}
                 onChange={handleChange('investorPassword')}
-                style={{ width: '24rem' }}
                 autoComplete="off"
                 inputProps={{
                   autocomplete: 'off',
@@ -251,7 +251,7 @@ const AddInvestor = () => {
             </FormControl>
           </div>
 
-          <div className="investor-div" id="inv-id2">
+          <div id="inv-id2">
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <MobileDatePicker
                 required
@@ -261,72 +261,67 @@ const AddInvestor = () => {
                 onChange={handleDateChange}
                 disableCloseOnSelect={false}
                 renderInput={(params) => (
-                  <TextField required {...params} sx={{ width: '24rem ' }} />
+                  <TextField required {...params} sx={{ width: '100%' }} />
                 )}
               />
             </LocalizationProvider>
 
-            <FormControl variant="standard">
+            <FormControl variant="standard" sx={{ width: '100%' }}>
               <TextField
                 required
                 id="outlined-required"
                 value={values.investorPassport}
                 onChange={handleChange('investorPassport')}
                 label="Passport Number"
-                style={{ width: '24rem' }}
               />
             </FormControl>
           </div>
 
-          <div className="investor-div" id="inv-id3" required>
-            <FormControl variant="standard">
+          <div id="inv-id3">
+            <FormControl variant="standard" sx={{ width: '100%' }}>
               <TextField
                 required
-                id="outlined-required"
+                label="Address Line 1"
                 value={values.investorAddress1}
                 onChange={handleChange('investorAddress1')}
-                label="Address Line 1"
               />
             </FormControl>
           </div>
 
-          <div className="investor-div" id="inv-id4">
-            <FormControl variant="standard">
+          <div id="inv-id4">
+            <FormControl variant="standard" sx={{ width: '100%' }}>
               <TextField
                 required
                 id="outlined-required"
                 value={values.investorCity}
                 onChange={handleChange('investorCity')}
                 label="City"
-                style={{ width: '24rem' }}
               />
             </FormControl>
 
-            <FormControl variant="standard">
+            <FormControl variant="standard" sx={{ width: '100%' }}>
               <TextField
                 required
                 id="outlined-required"
                 value={values.investorState}
                 onChange={handleChange('investorState')}
                 label="State"
-                style={{ width: '24rem' }}
               />
             </FormControl>
           </div>
 
-          <div className="investor-div" id="inv-id4">
-            <FormControl variant="standard">
+          <div id="inv-id4">
+            <FormControl variant="standard" sx={{ width: '100%' }}>
               <TextField
                 required
                 id="outlined-required"
                 value={values.investorCountry}
                 onChange={handleChange('investorCountry')}
                 label="Country"
-                style={{ width: '24rem' }}
               />
             </FormControl>
 
-            <FormControl variant="standard">
+            <FormControl variant="standard" sx={{ width: '100%' }}>
               <TextField
                 required
                 id="outlined-number"
@@ -334,7 +329,6 @@ const AddInvestor = () => {
                 type="number"
                 value={values.investorZipCode}
                 onChange={handleChange('investorZipCode')}
-                style={{ width: '24rem' }}
                 InputLabelProps={{
                   shrink: true
                 }}
@@ -342,12 +336,15 @@ const AddInvestor = () => {
             </FormControl>
           </div>
 
-          <div className="investor-div" id="add-inv-btn">
+          <div id="add-inv-btn">
             <Button
               variant="outlined"
               type="submit"
-              className="download-btn"
-              style={{ color: '#E95B3E', textTransform: 'none' }}
+              style={{
+                color: '#E95B3E',
+                textTransform: 'none',
+                width: '16rem'
+              }}
             >
               {flag ? 'Update' : 'Add'} Investor
             </Button>

@@ -127,7 +127,7 @@ const Statements = () => {
     });
   };
   return (
-    <div className="header-container">
+    <div className="statement-header-container">
       <div className="sidebar">
         <Navbar />
       </div>

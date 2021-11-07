@@ -11,11 +11,13 @@
   gap: 2rem;
   margin-top: 1rem;
 }
+
 .profile-heading {
   color: var(--secondary-color);
   font-weight: 500;
   font-size: 1.5rem;
 }
+
 .profile-pic-edit-btn-holder {
   display: flex;
   align-items: center;
@@ -50,9 +52,9 @@
   background: #ffffff;
   border-radius: 8px;
   box-shadow: 0px 4px 11px 3px #0000000d;
-
   width: 80%;
 }
+
 .profile-info-row {
   display: flex;
   gap: 1rem;
@@ -75,4 +77,33 @@
 .profile-info-row-item-value {
   font-size: 1rem;
   font-weight: 700;
+}
+
+@media screen and (max-width: 768px) {
+  .profile-container {
+    display: flex;
+    flex-direction: column !important;
+  }
+
+  .profile-container-content {
+    padding: 3rem 3rem;
+  }
+
+  .profile-pic-edit-btn-holder {
+    width: 80vw !important;
+    gap: 4rem;
+  }
+
+  .profile-info {
+    width: 80vw;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .profile-info-row {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+  }
 }

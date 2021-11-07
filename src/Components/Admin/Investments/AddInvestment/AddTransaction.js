@@ -348,18 +348,16 @@ const AddTransaction = () => {
             </FormControl>
 
             <FormControl variant="standard" sx={{ width: '100%' }}>
-              <FormControl variant="standard" sx={{ width: '100%' }}>
-                <FormHelperText>Action *</FormHelperText>
-                <Select
-                  name="action"
-                  variant="outlined"
-                  value={formData.action}
-                  onChange={handleChangeFormData}
-                >
-                  <MenuItem value="Invest">Invest</MenuItem>
-                  <MenuItem value="Withdraw">Withdraw</MenuItem>
-                </Select>
-              </FormControl>
+              <FormHelperText>Action *</FormHelperText>
+              <Select
+                name="action"
+                variant="outlined"
+                value={formData.action}
+                onChange={handleChangeFormData}
+              >
+                <MenuItem value="Invest">Invest</MenuItem>
+                <MenuItem value="Withdraw">Withdraw</MenuItem>
+              </Select>
             </FormControl>
           </div>
 

@@ -33,7 +33,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function CustomizedTables({ rows, fundname, loading }) {
   return (
-    <TableContainer component={Paper} sx={{ maxHeight: '40vh' }}>
+    <TableContainer component={Paper} sx={{ maxHeight: '45vh' }}>
       <Table stickyHeader aria-label="customized table">
         <TableHead>
           <TableRow

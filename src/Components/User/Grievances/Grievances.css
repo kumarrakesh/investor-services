@@ -1,76 +1,48 @@
-.header-container {
-  display: flex;
-  background-color: var(--light-blue-bg) !important;
+.grievances-header-container {
+  display: flex !important;
 }
 
 .grievances-container {
-  position: absolute;
-  left: 300px;
-  width: 1100px;
+  display: flex;
+  flex-direction: column;
+  padding: 3rem 5rem;
+  width: 100%;
+  gap: 1rem;
 }
 
-#grievances-header {
-  position: absolute;
-  width: 420px;
-  height: 28px;
-  left: 76px;
-  top: 57px;
-
+#grievances-header-label {
+  font-size: 1.5rem;
+  color: var(--secondary-color);
   font-weight: 500;
-  font-size: 24px;
-  line-height: 28px;
-
-  color: #132f5e;
 }
 
-.query-header {
-  position: absolute;
-  width: 174px;
-  height: 21px;
-  left: 76px;
-  top: 128px;
-
+.query-header-label {
+  font-size: 1rem;
+  color: var(--secondary-color);
   font-weight: 500;
-  font-size: 18px;
-  line-height: 21px;
-  color: #132f5e;
 }
 
 .btns-div {
-  position: absolute;
-  left: 77px;
-  top: 184px;
-  justify-content: space-between;
-  width: 420px;
   display: flex;
+  margin: 2rem 0rem 1.5rem 0;
 }
 
 Button:visited {
   background: red;
 }
 
-.query-subject {
-  position: absolute;
-  left: 76px;
-  top: 265px;
-  width: 90%;
-}
-
-.user-query-box {
-  position: absolute;
-  left: 76px;
-  top: 361px;
-  width: 90%;
+.query-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
 }
 
 .send-btn-div {
-  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  left: 76px;
-  top: 640px;
-  width: 1100px;
+  width: 100%;
 }
 
 .send-btn {
@@ -80,9 +52,16 @@ Button:visited {
 }
 
 #query-table {
-  position: absolute;
-  width: 1100px;
-  height: 430px;
-  left: 76px;
-  top: 280px !important;
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .grievances-header-container {
+    flex-direction: column !important;
+  }
+
+  .grievances-container {
+    margin-top: -90vh;
+    padding: 2rem 1rem;
+  }
 }

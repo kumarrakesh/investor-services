@@ -92,14 +92,14 @@ const Grievances = () => {
   };
 
   return (
-    <div className="header-container">
+    <div className="grievances-header-container">
       <div className="sidebar">
         <Navbar />
       </div>
 
       <div className="grievances-container">
-        <h1 id="grievances-header">Investors and Funds</h1>
-        <h1 className="query-header">Grievance Generate</h1>
+        <h1 id="grievances-header-label">Investors and Funds</h1>
+        <h1 className="query-header-label">Grievance Generate</h1>
 
         <div className="btns-div">
           <div>
@@ -125,7 +125,8 @@ const Grievances = () => {
               style={{
                 backgroundColor:
                   value == 'response' ? '#E95B3E' : 'hsl(10, 30%, 60%)',
-                textTransform: 'none'
+                textTransform: 'none',
+                marginLeft: '3rem'
               }}
               onClick={handleRespone}
             >

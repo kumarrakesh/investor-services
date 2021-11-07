@@ -71,7 +71,7 @@ export default function CustomizedTables({ displayRows, setUpdate, loading }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {!displayRows.length && (
+            {!displayRows?.length && (
               <StyledTableRow>
                 <StyledTableCell component="th" scope="row">
                   {loading ? 'Loading...' : 'No investors...'}

@@ -39,10 +39,9 @@ export default function CustomizedTables({ rows, loading }) {
       id="query-table"
       component={Paper}
       sx={{
-        maxHeight: '500px',
+        maxHeight: '60vh',
         border: '1px solid #CECECE',
-        borderRadius: '8px',
-        overflowX: 'hidden'
+        borderRadius: '8px'
       }}
     >
       <Table stickyHeader aria-label="customized table">

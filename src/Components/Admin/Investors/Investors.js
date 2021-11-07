@@ -6,6 +6,7 @@ import './Investors.css';
 import CustomizedTables from './table';
 import Swal from 'sweetalert2';
 import { Backdrop, CircularProgress } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 
 const Investors = () => {
   const history = useHistory();
@@ -56,25 +57,27 @@ const Investors = () => {
         <h1 id="inv-title">Investors</h1>
         <h1 id="inv-overview">Overview</h1>
 
-        <p id="total-investors">Total Investors</p>
-        <p id="total-no">{displayRows.length}</p>
+        <div className="total-investors-div">
+          <p id="total-investors">Total Investors</p>
+          <p id="total-no">{displayRows?.length}</p>
+        </div>
 
-        <div className="inv-btns">
-          <div>
-            <Button
-              variant="contained"
-              style={{
-                backgroundColor: '#E95B3E',
-                textTransform: 'none',
-                borderRadius: '8px !important'
-              }}
-              onClick={handleAddInvestor}
-            >
-              Add Investor +
-            </Button>
-          </div>
+        <div className="add-investor-btn">
+          <Button
+            variant="contained"
+            style={{
+              backgroundColor: '#E95B3E',
+              textTransform: 'none',
+              borderRadius: '8px !important'
+            }}
+            onClick={handleAddInvestor}
+          >
+            Add Investor
+            <AddIcon sx={{ marginLeft: '10px' }} />
+          </Button>
+        </div>
 
-          {/* <Button
+        {/* <Button
             variant="outlined"
             className="download-btn"
             style={{ color: '#E95B3E' }}
@@ -94,7 +97,6 @@ const Investors = () => {
             Download
             {'\n'} List
           </Button> */}
-        </div>
 
         <div className="investors-inv-table">
           <CustomizedTables

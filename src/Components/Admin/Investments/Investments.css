@@ -1,6 +1,5 @@
 .investments-main {
   display: flex;
-  flex-direction: column;
   background-color: var(--light-blue-bg);
 }
 

@@ -1,6 +1,6 @@
 .add-transaction-main {
   display: flex;
-  flex-direction: row !important;
+  flex-direction: row;
 }
 
 #add-transaction-container {
@@ -19,7 +19,7 @@
 
 .add-transaction-subtitle {
   font-weight: 500;
-  font-size: 18px;
+  font-size: 1.1rem;
   line-height: 21px;
   color: #132f5e;
 }
@@ -31,6 +31,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .add-investments-forms > div {
   width: 100%;
   justify-content: center;
@@ -39,44 +40,26 @@
   display: flex;
   gap: 2rem;
 }
-.investor-div {
-  width: 1000px !important;
-  display: flex;
-  left: 76px;
-  justify-content: space-between;
-}
 
-#transcation-id1 {
-  top: 190px !important;
-}
-
-#transcation-id2 {
-  top: 280px !important;
-}
-
-#transcation-id3 {
-  top: 370px !important;
-}
-
-#transcation-id4 {
-  top: 460px !important;
-  height: 160px;
-  align-content: space-between;
-  flex-direction: column !important;
-}
-
-#add-transaction-btn {
-  top: 665px !important;
-  justify-content: center;
-}
 .add-investments-cross-btn {
   position: absolute;
   top: 3rem;
-  right: 10rem;
+  right: 2.5rem;
 }
 .MuiAutocomplete-inputRoot {
   padding: 0rem !important;
 }
 .MuiInputBase-input {
   padding: 0.9rem !important;
+}
+
+@media screen and (max-width: 768px) {
+  .add-transaction-main {
+    flex-direction: column;
+  }
+
+  #add-investors-container {
+    margin-top: -90vh;
+    padding: 2rem 1rem;
+  }
 }

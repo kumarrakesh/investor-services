@@ -5,8 +5,9 @@
   color: #132f5e;
 }
 
-.header-container {
+.statement-header-container {
   background-color: var(--light-blue-bg);
+  display: flex;
 }
 .statement-container {
   padding: 2rem 3rem;
@@ -71,23 +72,37 @@
   justify-content: flex-start;
 }
 #apply-btn {
-  width: 100px;
+  width: 8rem;
   background-color: #e95b3e;
 }
-.date-btns {
+/* .date-btns {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-}
+} */
 
-.download-btn {
+/* .download-btn {
   width: 184px;
   height: 44px;
   box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.09);
   border-radius: 8px;
-}
+} */
 
 .stat-table {
   overflow: auto;
-  height: 300px;
+}
+
+@media screen and (max-width: 768px) {
+  .statement-header-container {
+    flex-direction: column;
+  }
+
+  .statement-container {
+    margin-top: -90vh;
+    padding: 2rem 1rem;
+  }
+
+  .statement-summary {
+    flex-wrap: wrap;
+  }
 }
