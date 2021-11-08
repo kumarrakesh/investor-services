@@ -61,7 +61,12 @@ const AdNavbar = () => {
             <MenuIcon />
           </IconButton>
         </div>
-        <div id="navbar-top-header-logo">
+        <div
+          id="navbar-top-header-logo"
+          onClick={() => {
+            history.push('/admin/investors');
+          }}
+        >
           <img src="https://tiwpe.com/image/tiw-logo.png" alt="tiwpe logo" />
         </div>
         <div className="navbar-top-profile-pic">

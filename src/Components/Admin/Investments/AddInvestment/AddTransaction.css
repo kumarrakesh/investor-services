@@ -58,8 +58,15 @@
     flex-direction: column;
   }
 
-  #add-investors-container {
+  .add-investments-cross-btn {
+    top: 100px;
+  }
+  #add-transaction-container {
     margin-top: -90vh;
     padding: 2rem 1rem;
+  }
+  .add-investments-forms > div {
+    flex-direction: column;
+    gap: 1rem;
   }
 }
