@@ -49,7 +49,7 @@ const Navbar = () => {
   };
 
   const GoToGrievances = () => {
-    history.push('/grievances');
+    history.push('/queries');
   };
 
   const handleLogout = () => {
@@ -250,15 +250,15 @@ const Navbar = () => {
           className="nav-dashboard-btn"
           onClick={GoToGrievances}
           style={{
-            color: location.pathname == '/grievances' ? '#E95B3E' : '#8997ae',
+            color: location.pathname == '/queries' ? '#E95B3E' : '#8997ae',
             backgroundColor:
-              location.pathname == '/grievances' ? '#F7F9FD' : 'inherit',
+              location.pathname == '/queries' ? '#F7F9FD' : 'inherit',
             textTransform: 'none'
           }}
         >
           <AccountCircleSharpIcon style={{ flex: 1 }} />
           <div className="dash-name" style={{ flex: 2 }}>
-            Grievances
+            Queries
           </div>
           <RightIcon style={{ flex: 1 }} />
         </Button>
@@ -274,9 +274,9 @@ const Navbar = () => {
           onClick={handleLogout}
           style={{
             color:
-              location.pathname == '/admin/grievances' ? '#E95B3E' : '#8997ae',
+              location.pathname == '/admin/queries' ? '#E95B3E' : '#8997ae',
             backgroundColor:
-              location.pathname == '/admin/grievances' ? '#F7F9FD' : 'inherit',
+              location.pathname == '/admin/queries' ? '#F7F9FD' : 'inherit',
             textTransform: 'none'
           }}
         >

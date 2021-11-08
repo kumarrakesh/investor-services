@@ -54,7 +54,7 @@ const Grievances = () => {
       setData(data);
       console.log(data);
       Swal.fire(
-        'Grievance sent successfully!',
+        'Query sent successfully!',
         'Query Ref ID is: ' + data.data.queryId,
         'success'
       );
@@ -99,7 +99,7 @@ const Grievances = () => {
 
       <div className="grievances-container">
         <h1 id="grievances-header-label">Investors and Funds</h1>
-        <h1 className="query-header-label">Grievance Generate</h1>
+        <h1 className="query-header-label">Queries Generate</h1>
 
         <div className="btns-div">
           <div>
@@ -114,7 +114,7 @@ const Grievances = () => {
                 setValue('raise');
               }}
             >
-              Raise Grievance
+              Raise Query
               <EditIcon sx={{ marginLeft: '10px' }} />
             </Button>
           </div>
@@ -130,7 +130,7 @@ const Grievances = () => {
               }}
               onClick={handleRespone}
             >
-              Grievance History
+              Query History
               <HistoryIcon sx={{ marginLeft: '10px' }} />
             </Button>
           </div>
@@ -142,7 +142,7 @@ const Grievances = () => {
               <div className="query-subject">
                 <TextField
                   fullWidth
-                  label="Grievance Subject"
+                  label="Query Subject"
                   name="subject"
                   onChange={(e) => {
                     setSubject(e.target.value);
@@ -159,7 +159,7 @@ const Grievances = () => {
                   onChange={(e) => {
                     setDescription(e.target.value);
                   }}
-                  label="Grievance"
+                  label="Query"
                   fullWidth
                   multiline
                   rows={3}
@@ -177,7 +177,7 @@ const Grievances = () => {
                   }}
                   disabled={!subject || !description}
                 >
-                  Send Grievance
+                  Send Query
                   <TelegramIcon />
                 </Button>
               </div>

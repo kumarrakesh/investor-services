@@ -91,7 +91,7 @@ export default function CustomizedTables({
     setLoading(false);
     if (data.status) {
       setUpdate((state) => state + 1);
-      Swal.fire('Updated the Grievance!', '', 'success');
+      Swal.fire('Updated the Query!', '', 'success');
     } else Swal.fire('Error while updating', data?.error, 'error');
     // console.log(data);
   };
@@ -142,10 +142,8 @@ export default function CustomizedTables({
             <TableHead>
               <TableRow>
                 <StyledTableCell>Date Added</StyledTableCell>
-                <StyledTableCell align="center">
-                  Grievance Subject
-                </StyledTableCell>
-                <StyledTableCell>Grievance ID</StyledTableCell>
+                <StyledTableCell align="center">Query Subject</StyledTableCell>
+                <StyledTableCell>Query ID</StyledTableCell>
                 <StyledTableCell align="center">Investor Name</StyledTableCell>
                 <StyledTableCell align="center">Status</StyledTableCell>
               </TableRow>
@@ -154,7 +152,7 @@ export default function CustomizedTables({
               {!displayRows.length && (
                 <StyledTableRow>
                   <StyledTableCell component="th" scope="row">
-                    {loading ? 'Loading...' : 'No grievances...'}
+                    {loading ? 'Loading...' : 'No queries...'}
                   </StyledTableCell>
                 </StyledTableRow>
               )}
@@ -197,7 +195,7 @@ export default function CustomizedTables({
               autoFocus
               margin="dense"
               id="name"
-              label="Add a message to mark the Grievance as resolved"
+              label="Add a message to mark as resolved"
               type="text"
               fullWidth
               variant="standard"

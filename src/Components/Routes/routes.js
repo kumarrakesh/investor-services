@@ -32,7 +32,7 @@ const Routes = () => {
         <Statements />
       </Route>
 
-      <Route exact path="/grievances">
+      <Route exact path="/queries">
         <Grievances />
       </Route>
 
@@ -52,7 +52,7 @@ const Routes = () => {
         <Investments />
       </Route>
 
-      <Route exact path="/admin/grievances">
+      <Route exact path="/admin/queries">
         <AdminGrievances />
       </Route>
 
