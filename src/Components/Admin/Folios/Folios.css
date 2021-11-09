@@ -1,0 +1,67 @@
+.folios-main {
+  display: flex;
+  background-color: var(--light-blue-bg);
+}
+
+#folios-container {
+  display: flex;
+  flex-direction: column;
+  padding: 3rem 3.5rem 3rem 5rem;
+  width: 100%;
+  gap: 2rem;
+}
+
+.folio-title {
+  width: 117px;
+  height: 28px;
+
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+
+  color: #132f5e;
+}
+
+.folio-overview {
+  width: 74px;
+  height: 21px;
+
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  color: #132f5e;
+}
+
+.total-folios {
+  width: 91px;
+  height: 16px;
+
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 16px;
+
+  color: #132f5e;
+}
+
+.total-folios-no {
+  width: 28px;
+  height: 28px;
+
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+
+  color: #132f5e;
+}
+
+.add-folio-btn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.inv-table-folios {
+  width: 100%;
+  height: 350px;
+  overflow: scroll;
+}

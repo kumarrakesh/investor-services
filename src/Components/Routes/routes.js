@@ -12,6 +12,10 @@ import AdminGrievances from '../Admin/Grievances/Grievances';
 import AddInvestor from '../Admin/Investors/AddInvestor/AddInvestor';
 import AddFund from '../Admin/Funds/AddFund/AddFund';
 import AddTransaction from '../Admin/Investments/AddInvestment/AddTransaction';
+import Folios from '../Admin/Folios/Folios';
+import AddFolio from '../Admin/Folios/AddFolio/AddFolio';
+import FolioStatements from '../Admin/Folios Statements/FolioStatements';
+import AddFolioTransaction from '../Admin/Folios Statements/AddFolioTransaction/AddFolioTransaction';
 
 const Routes = () => {
   return (
@@ -66,6 +70,22 @@ const Routes = () => {
 
       <Route exact path="/admin/investments/add">
         <AddTransaction />
+      </Route>
+
+      <Route exact path="/admin/folios">
+        <Folios />
+      </Route>
+
+      <Route exact path="/admin/folios/add">
+        <AddFolio />
+      </Route>
+
+      <Route exact path="/admin/folioStatements">
+        <FolioStatements />
+      </Route>
+
+      <Route exact path="/admin/folioStatements/add">
+        <AddFolioTransaction />
       </Route>
     </Switch>
   );

@@ -1,0 +1,138 @@
+.dash-container {
+  display: flex;
+  flex-direction: column;
+  padding: 3rem 5rem;
+  width: 100%;
+}
+.nav-dash-container {
+  display: flex;
+}
+.dashboard-title {
+  font-size: 1.5rem;
+  color: var(--secondary-color);
+  font-weight: 500;
+}
+.dashboard-graph-container {
+  padding: 2rem;
+  padding-top: 0;
+  background-color: #0c80db;
+  /* background-color: #1196ff; */
+  width: fit-content;
+  /* max-width: 80%; */
+  min-width: 90%;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+  border-radius: 0.5rem;
+}
+
+.dashboard-graph-info {
+  padding: 2rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+.dashboard-graph-info-data {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.dashboard-graph-info-data-label {
+  font-size: 0.8rem;
+  color: white;
+  font-weight: 300;
+}
+.dashboard-graph-info-data-value {
+  font-size: 1.5rem;
+  color: white;
+  font-weight: 500;
+}
+.dashboard-graph {
+  background-color: white;
+  border-radius: 0.5rem;
+}
+.year-select {
+  background-color: white !important;
+}
+.overview {
+  width: 74px;
+  height: 21px;
+  left: 76px;
+  top: 128px;
+
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  color: var(--secondary-color);
+}
+
+.btns {
+  display: flex;
+  justify-content: space-between;
+  width: 928px;
+  height: 96px;
+  top: 615px;
+  left: 76px;
+}
+
+.inv-btn {
+  width: 261px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  white-space: pre-wrap;
+  justify-content: left;
+  text-align: right;
+
+  background: #ffffff;
+  box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.09);
+  border-radius: 8px;
+}
+
+.gain-btn {
+  width: 261px;
+  white-space: pre-wrap;
+  background: #ffffff;
+  box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.09);
+  border-radius: 8px;
+}
+
+.overall-btn {
+  width: 261px;
+  white-space: pre-wrap;
+  background: #ffffff;
+  box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.09);
+  border-radius: 8px;
+}
+@media screen and (max-width: 768px) {
+  .dashboard-graph-info {
+    /* display: none; */
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: left;
+    padding: 1rem;
+  }
+  .dashboard-graph-info > * {
+    flex: 1;
+  }
+  .dash-container {
+    padding: 2rem 1rem;
+    margin-top: -90vh;
+    width: 100%;
+    height: fit-content !important;
+  }
+  .nav-dash-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .dashboard-graph-container {
+    padding: 1rem 0.5rem;
+    width: 100%;
+  }
+  .dashboard-graph {
+    height: fit-content;
+    padding: 1rem 0rem;
+  }
+}

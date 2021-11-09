@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import DashContainer from '../../User/Dashboard/DashboardContainer';
+import DashContainer from '../../User/Graph-Dashboard/DashboardContainer';
 import AdNavbar from '../Navbar/Navbar';
 import { useHistory } from 'react-router';
 import Swal from 'sweetalert2';

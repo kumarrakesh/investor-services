@@ -152,6 +152,30 @@ const AdNavbar = () => {
         <Button
           className="nav-dashboard-btn"
           onClick={() => {
+            history.push('/admin/folios');
+          }}
+          style={{
+            color: location.pathname.startsWith('/admin/folios')
+              ? '#E95B3E'
+              : '#8997ae',
+            backgroundColor: location.pathname.startsWith('/admin/folios')
+              ? '#F7F9FD'
+              : 'inherit',
+
+            textTransform: 'none'
+          }}
+        >
+          <AttachMoneyIcon style={{ flex: 1 }} />
+
+          <div className="dash-name" style={{ flex: 2 }}>
+            Folios
+          </div>
+          <RightIcon style={{ flex: 1 }} />
+        </Button>
+
+        {/* <Button
+          className="nav-dashboard-btn"
+          onClick={() => {
             history.push('/admin/funds');
           }}
           style={{
@@ -171,7 +195,7 @@ const AdNavbar = () => {
             Funds
           </div>
           <RightIcon style={{ flex: 1 }} />
-        </Button>
+        </Button> */}
         <Divider
           style={{
             backgroundColor: '#E6E6E6 ',
@@ -181,6 +205,33 @@ const AdNavbar = () => {
         />
 
         <Button
+          className="nav-dashboard-btn"
+          onClick={() => {
+            history.push('/admin/folioStatements');
+          }}
+          style={{
+            color: location.pathname.startsWith('/admin/folioStatements')
+              ? '#E95B3E'
+              : '#8997ae',
+            backgroundColor: location.pathname.startsWith(
+              '/admin/folioStatements'
+            )
+              ? '#F7F9FD'
+              : 'inherit',
+
+            textTransform: 'none'
+          }}
+        >
+          <AccountBalanceWalletIcon style={{ flex: 1 }} />
+
+          <div className="dash-name" style={{ flex: 2 }}>
+            Folios Statements
+          </div>
+
+          <RightIcon style={{ flex: 1 }} />
+        </Button>
+
+        {/* <Button
           className="nav-dashboard-btn"
           onClick={() => {
             history.push('/admin/investments');
@@ -203,7 +254,7 @@ const AdNavbar = () => {
           </div>
 
           <RightIcon style={{ flex: 1 }} />
-        </Button>
+        </Button> */}
         <Divider
           style={{
             backgroundColor: '#E6E6E6 ',

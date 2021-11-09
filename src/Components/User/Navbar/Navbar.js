@@ -197,7 +197,7 @@ const Navbar = () => {
             margin: '2px 0px'
           }}
         />
-        <Button
+        {/* <Button
           className="nav-dashboard-btn"
           onClick={() => {
             history.push('/dashboard');
@@ -222,20 +222,22 @@ const Navbar = () => {
             width: '100%',
             margin: '2px 0px'
           }}
-        />
+        /> */}
         <Button
           className="nav-dashboard-btn"
-          onClick={GoToStatments}
+          onClick={() => {
+            history.push('/dashboard');
+          }}
           style={{
-            color: location.pathname == '/statements' ? '#E95B3E' : '#8997ae',
+            color: location.pathname == '/dashboard' ? '#E95B3E' : '#8997ae',
             backgroundColor:
-              location.pathname == '/statements' ? '#F7F9FD' : 'inherit',
+              location.pathname == '/dashboard' ? '#F7F9FD' : 'inherit',
             textTransform: 'none'
           }}
         >
-          <AccountBalanceIcon style={{ flex: 1 }} />
+          <DashboardIcon style={{ flex: 1 }} />
           <div className="dash-name" style={{ flex: 2 }}>
-            Account Statements
+            Dashboard
           </div>
           <RightIcon style={{ flex: 1 }} />
         </Button>

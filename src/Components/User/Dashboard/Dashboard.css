@@ -1,138 +1,108 @@
-.dash-container {
+.stats {
+  font-weight: 500;
+  font-size: 1.5rem !important;
+  font-weight: 600;
+  color: #132f5e;
+}
+
+.statement-header-container {
+  background-color: var(--light-blue-bg);
+  display: flex;
+}
+.statement-container {
+  padding: 2rem 3rem;
   display: flex;
   flex-direction: column;
-  padding: 3rem 5rem;
+  gap: 2rem;
   width: 100%;
 }
-.nav-dash-container {
-  display: flex;
-}
-.dashboard-title {
-  font-size: 1.5rem;
-  color: var(--secondary-color);
-  font-weight: 500;
-}
-.dashboard-graph-container {
-  padding: 2rem;
-  padding-top: 0;
-  background-color: #0c80db;
-  /* background-color: #1196ff; */
-  width: fit-content;
-  /* max-width: 80%; */
-  min-width: 90%;
-  flex-wrap: wrap;
-  margin-top: 3rem;
-  border-radius: 0.5rem;
-}
 
-.dashboard-graph-info {
-  padding: 2rem;
-  border-radius: 0.5rem;
-  display: flex;
-  align-items: center;
-}
-.dashboard-graph-info-data {
-  flex: 1;
+.MuiMenu-list {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  width: 100%;
 }
-.dashboard-graph-info-data-label {
-  font-size: 0.8rem;
-  color: white;
-  font-weight: 300;
+.MuiMenuItem-gutters {
+  height: 2rem;
+  width: 100%;
 }
-.dashboard-graph-info-data-value {
-  font-size: 1.5rem;
-  color: white;
-  font-weight: 500;
-}
-.dashboard-graph {
-  background-color: white;
-  border-radius: 0.5rem;
-}
-.year-select {
+#fund-name-select {
+  width: 14rem !important;
+  margin-left: -5px;
+  margin-right: -5px;
   background-color: white !important;
+  padding-left: 2rem !important;
+  height: 0.8rem;
 }
-.overview {
-  width: 74px;
-  height: 21px;
-  left: 76px;
-  top: 128px;
+.MuiSelect-root {
+  border-radius: 0.5rem !important;
+  font-weight: 500 !important;
+}
+.MuiSelect-select {
+  color: #e95b3e !important;
+}
+.statement-summary {
+  display: flex;
+  gap: 4rem;
+}
+.statement-summary-col {
+  display: flex;
+  gap: 0.8rem;
+  flex-direction: column;
+}
 
+.statement-summary-name {
+  font-weight: 300;
+  font-size: 0.875;
+  color: #132f5e;
+}
+
+.statement-summary-val {
   font-weight: 500;
-  font-size: 18px;
-  line-height: 21px;
-  color: var(--secondary-color);
+  font-size: 1.5rem;
+  color: #132f5e;
 }
 
-.btns {
+.date-div {
   display: flex;
-  justify-content: space-between;
-  width: 928px;
-  height: 96px;
-  top: 615px;
-  left: 76px;
+  gap: 4rem;
+  justify-content: flex-start;
 }
-
-.inv-btn {
-  width: 261px;
+#apply-btn {
+  width: 8rem;
+  background-color: #e95b3e;
+}
+/* .date-btns {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-start;
+  align-items: flex-start;
+} */
 
-  white-space: pre-wrap;
-  justify-content: left;
-  text-align: right;
-
-  background: #ffffff;
+/* .download-btn {
+  width: 184px;
+  height: 44px;
   box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.09);
   border-radius: 8px;
+} */
+
+.stat-table {
+  overflow: auto;
 }
 
-.gain-btn {
-  width: 261px;
-  white-space: pre-wrap;
-  background: #ffffff;
-  box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.09);
-  border-radius: 8px;
-}
-
-.overall-btn {
-  width: 261px;
-  white-space: pre-wrap;
-  background: #ffffff;
-  box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.09);
-  border-radius: 8px;
-}
 @media screen and (max-width: 768px) {
-  .dashboard-graph-info {
-    /* display: none; */
-    /* flex-direction: column; */
-    flex-wrap: wrap;
-    gap: 1rem;
-    align-items: left;
-    padding: 1rem;
-  }
-  .dashboard-graph-info > * {
-    flex: 1;
-  }
-  .dash-container {
-    padding: 2rem 1rem;
-    margin-top: -90vh;
-    width: 100%;
-    height: fit-content !important;
-  }
-  .nav-dash-container {
-    display: flex;
+  .statement-header-container {
     flex-direction: column;
   }
-  .dashboard-graph-container {
-    padding: 1rem 0.5rem;
-    width: 100%;
+
+  .statement-container {
+    margin-top: -90vh;
+    padding: 2rem 1rem;
   }
-  .dashboard-graph {
-    height: fit-content;
-    padding: 1rem 0rem;
+
+  .statement-summary {
+    flex-wrap: wrap;
   }
 }
