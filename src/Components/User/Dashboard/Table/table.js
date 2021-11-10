@@ -179,8 +179,8 @@ export default function CustomizedTables({
                         {row.type == 1
                           ? 'Invested'
                           : row.type == 2
-                          ? 'Withdrawn'
-                          : 'Yielded'}
+                          ? 'Yielded'
+                          : 'Withdrawn'}
                       </TableCell>
                     </TableRow>
                   ))
