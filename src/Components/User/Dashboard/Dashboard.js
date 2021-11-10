@@ -89,16 +89,12 @@ const Dashboard = () => {
     let modFundName = fundname === 'All' ? '' : fundname;
     try {
       const response = await fetch(
-        'https://investorbackend.herokuapp.com/api/transactions',
+        'https://investorbackend.herokuapp.com/api/user/folio',
         {
           headers: {
             'x-access-token': token,
             'Content-Type': 'application/json'
-          },
-          method: 'POST',
-          body: JSON.stringify({
-            fundname: modFundName
-          })
+          }
         }
       );
       const data = await response.json();
@@ -231,6 +227,7 @@ const Dashboard = () => {
           rows={displayRows}
           fundname={fundname}
           loading={loading}
+          setLoading={setLoading}
         />
         <Backdrop
           sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
