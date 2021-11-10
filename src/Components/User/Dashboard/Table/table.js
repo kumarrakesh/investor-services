@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -32,6 +33,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function CustomizedTables({ rows, fundname, loading }) {
+  const history = useHistory();
   return (
     <TableContainer component={Paper} sx={{ maxHeight: '60vh' }}>
       <Table stickyHeader aria-label="customized table">
@@ -41,8 +43,8 @@ export default function CustomizedTables({ rows, fundname, loading }) {
               border: '1px solid #CECECE'
             }}
           >
-            <StyledTableCell>Date</StyledTableCell>
-            <StyledTableCell align="center">Folio ID</StyledTableCell>
+            <StyledTableCell>Folio ID</StyledTableCell>
+            <StyledTableCell align="center">Date</StyledTableCell>
             {/* {fundname == 'All' ? ( */}
             <StyledTableCell align="center">Capital Commitment</StyledTableCell>
             {/* ) : null} */}
@@ -65,11 +67,17 @@ export default function CustomizedTables({ rows, fundname, loading }) {
           {rows != {} &&
             rows.map((row) => (
               <StyledTableRow key={row._id}>
-                <StyledTableCell component="th" scope="row">
-                  {new Date(row.date).toLocaleDateString('en-GB')}
+                <StyledTableCell
+                  onClick={() => {
+                    history.push('/dashboard/statements');
+                  }}
+                  component="th"
+                  scope="row"
+                >
+                  {1012}
                 </StyledTableCell>
                 <StyledTableCell align="center" component="th" scope="row">
-                  {row.narration || '-'}
+                  {new Date(row.date).toLocaleDateString('en-GB')}
                 </StyledTableCell>
                 {/* {fundname == 'All' ? ( */}
                 <StyledTableCell align="center" component="th" scope="row">

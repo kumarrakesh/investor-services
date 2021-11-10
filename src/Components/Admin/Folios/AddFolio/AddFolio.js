@@ -18,7 +18,14 @@ import InputAdornment from '@mui/material/InputAdornment';
 
 const AddFolio = () => {
   let history = useHistory();
-  const [values, setValues] = React.useState({ amount: '', fname: '' });
+  const [values, setValues] = React.useState({
+    folioId: '',
+    investorId: '',
+    commitment: '',
+    yield: '',
+    folioName: '',
+    investorName: ''
+  });
 
   const [loading, setLoading] = useState(false);
 
@@ -47,29 +54,33 @@ const AddFolio = () => {
   const submitForm = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const response = await fetch(
-      'https://investorbackend.herokuapp.com/api/add/fund',
-      {
-        method: 'POST',
-        body: JSON.stringify({
-          fundname: values.fname,
-          nav: values.amount,
-          date: selectedDate
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-          'x-access-token': JSON.parse(localStorage.getItem('token'))
+    try {
+      const response = await fetch(
+        'https://investorbackend.herokuapp.com/api/add/folio',
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            userId: values.investorId,
+            commitment: values.commitment,
+            yield: values.yield,
+            date: selectedDate
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': JSON.parse(localStorage.getItem('token'))
+          }
         }
-      }
-    );
-    const data = await response.json();
-    console.log(data);
-    setLoading(false);
+      );
+      const data = await response.json();
+      console.log(data);
+      setLoading(false);
 
-    if (data.success) {
-      Swal.fire('Fund added successfully!', '', 'success');
-    } else Swal.fire('Something went wrong!', data?.error, 'error');
-
+      if (data.success) {
+        Swal.fire('Fund added successfully!', '', 'success');
+      } else Swal.fire('Something went wrong!', data?.error, 'error');
+    } catch (e) {
+      console.log(e);
+    }
     history.push('/admin/folios');
   };
 
@@ -103,20 +114,20 @@ const AddFolio = () => {
           <div className="add-folio-input-1">
             <FormControl variant="standard" sx={{ width: '100%' }}>
               <TextField
+                required
                 id="outlined-required"
-                value={values.fname}
-                onChange={handleChange('fname')}
-                label="Folio Name"
+                value={values.folioId}
+                onChange={handleChange('folioId')}
+                label="Folio ID"
               />
             </FormControl>
 
             <FormControl variant="standard" sx={{ width: '100%' }}>
               <TextField
-                required
                 id="outlined-required"
-                value={values.fname}
-                onChange={handleChange('fname')}
-                label="Folio ID"
+                value={values.folioName}
+                onChange={handleChange('folioName')}
+                label="Folio Name"
               />
             </FormControl>
           </div>
@@ -126,9 +137,9 @@ const AddFolio = () => {
               <TextField
                 required
                 id="outlined-required"
-                value={values.fname}
-                onChange={handleChange('fname')}
-                label="Investor Name"
+                value={values.investorId}
+                onChange={handleChange('investorId')}
+                label="Investor ID"
               />
             </FormControl>
 
@@ -136,9 +147,9 @@ const AddFolio = () => {
               <TextField
                 required
                 id="outlined-required"
-                value={values.fname}
-                onChange={handleChange('fname')}
-                label="Investor ID"
+                value={values.investorName}
+                onChange={handleChange('investorName')}
+                label="Investor Name"
               />
             </FormControl>
           </div>
@@ -165,8 +176,8 @@ const AddFolio = () => {
                 id="outlined-number"
                 label="Yield(%)"
                 type="number"
-                value={values.investorZipCode}
-                onChange={handleChange('investorZipCode')}
+                value={values.yield}
+                onChange={handleChange('yield')}
                 InputLabelProps={{
                   shrink: true
                 }}
@@ -182,8 +193,8 @@ const AddFolio = () => {
               <OutlinedInput
                 required
                 id="outlined-adornment-amount"
-                value={values.amount}
-                onChange={handleChange('amount')}
+                value={values.commitment}
+                onChange={handleChange('commitment')}
                 startAdornment={
                   <InputAdornment position="start">$</InputAdornment>
                 }
@@ -198,8 +209,8 @@ const AddFolio = () => {
               <OutlinedInput
                 required
                 id="outlined-adornment-amount"
-                value={values.amount}
-                onChange={handleChange('amount')}
+                value={values.contribution}
+                onChange={handleChange('contribution')}
                 startAdornment={
                   <InputAdornment position="start">$</InputAdornment>
                 }

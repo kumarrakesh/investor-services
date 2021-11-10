@@ -11,7 +11,6 @@ import AddIcon from '@mui/icons-material/Add';
 const Folios = () => {
   let history = useHistory();
   const [displayRows, setDisplayRows] = useState([]);
-  const [update, setUpdate] = useState(0);
   const [loading, setLoading] = React.useState(true);
 
   const token = JSON.parse(localStorage.getItem('token'));
@@ -27,35 +26,32 @@ const Folios = () => {
       history.push('/');
     }
 
-    getAllFunds();
+    getAllFolios();
   }, []);
 
-  useEffect(() => {
-    getAllFunds();
-  }, [update]);
-
-  const getAllFunds = async () => {
+  const getAllFolios = async () => {
     setLoading(true);
-    const response = await fetch(
-      'https://investorbackend.herokuapp.com/api/funds',
-      {
-        headers: {
-          'x-access-token': token
+    try {
+      const response = await fetch(
+        'https://investorbackend.herokuapp.com/api/all/folio',
+        {
+          method: 'POST',
+          headers: {
+            'x-access-token': token
+          }
         }
-      }
-    );
-    const data = await response.json();
-    console.log(data);
-    setDisplayRows(data.data);
+      );
+      const data = await response.json();
+      console.log('fg' + data);
+      setDisplayRows(data.data);
+    } catch (e) {
+      console.log(e);
+    }
     setLoading(false);
   };
 
   const handleAddfolios = () => {
     history.push('/admin/folios/add');
-  };
-
-  const handleLoadingDone = () => {
-    // setLoading(false);
   };
 
   return (
@@ -104,7 +100,6 @@ const Folios = () => {
         <div>
           <CustomizedTables
             displayRows={displayRows}
-            setUpdate={setUpdate}
             setLoading={setLoading}
             loading={loading}
           />

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import AdNavbar from '../../Navbar/Navbar';
 import Swal from 'sweetalert2';
@@ -23,8 +24,12 @@ import './AddFolioTransaction.css';
 
 const AddFolioTransaction = () => {
   //states
+  const history = useHistory();
+  const location = useLocation();
+
   const [users, setUsers] = useState([]);
   const [fundNames, setFundNames] = useState([]);
+  const [folioFlag, setFolioFlag] = useState(false);
   const [formDataError, setFormDataError] = useState({
     invName: false,
     fundname: false,
@@ -43,6 +48,13 @@ const AddFolioTransaction = () => {
     remarks: ''
   });
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (location?.state?.row) {
+      setFolioFlag(true);
+    }
+  }, [location]);
+
   //hooks
   useEffect(() => {
     if (!localStorage.getItem('token')) {
@@ -57,8 +69,7 @@ const AddFolioTransaction = () => {
       getUserAndFundNames();
     }
   }, []);
-  const history = useHistory();
-  //handlers
+
   const handleSubmitNewTransaction = async () => {
     try {
       setLoading(true);
@@ -182,80 +193,6 @@ const AddFolioTransaction = () => {
   const handleChangeNavDate = (e) => {
     setFormData({ ...formData, navDate: new Date(e) });
   };
-  //components
-  const BootstrapInput = styled(InputBase)(({ theme }) => ({
-    'label + &': {
-      marginTop: theme.spacing(3)
-    },
-    '& .MuiInputBase-input': {
-      borderRadius: 4,
-      position: 'relative',
-      backgroundColor: theme.palette.mode === 'light' ? '#fcfcfb' : '#2b2b2b',
-      border: '1px solid #ced4da',
-      fontSize: 16,
-      width: '400px',
-      padding: '10px 12px',
-      transition: theme.transitions.create([
-        'border-color',
-        'background-color',
-        'box-shadow'
-      ]),
-      // Use the system font instead of the default Roboto font.
-      fontFamily: [
-        '-apple-system',
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
-        'Roboto',
-        '"Helvetica Neue"',
-        'Arial',
-        'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"'
-      ].join(','),
-      '&:focus': {
-        boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
-        borderColor: theme.palette.primary.main
-      }
-    }
-  }));
-
-  const BootstrapInput1 = styled(InputBase)(({ theme }) => ({
-    'label + &': {
-      marginTop: theme.spacing(3)
-    },
-    '& .MuiInputBase-input': {
-      borderRadius: 4,
-      position: 'relative',
-      backgroundColor: theme.palette.mode === 'light' ? '#fcfcfb' : '#2b2b2b',
-      border: '1px solid #ced4da',
-      fontSize: 16,
-      width: '1100px',
-      padding: '10px 12px',
-      transition: theme.transitions.create([
-        'border-color',
-        'background-color',
-        'box-shadow'
-      ]),
-      // Use the system font instead of the default Roboto font.
-      fontFamily: [
-        '-apple-system',
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
-        'Roboto',
-        '"Helvetica Neue"',
-        'Arial',
-        'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"'
-      ].join(','),
-      '&:focus': {
-        boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
-        borderColor: theme.palette.primary.main
-      }
-    }
-  }));
 
   return (
     <div className="add-transaction-main">
@@ -265,7 +202,8 @@ const AddFolioTransaction = () => {
           size="large"
           style={{ color: '#E95B3E' }}
           onClick={() => {
-            history.push('/admin/folioStatements');
+            if (!folioFlag) history.push('/admin/folioStatements');
+            else history.push('/admin/folios');
           }}
         >
           <CancelIcon fontSize="inherit" />
