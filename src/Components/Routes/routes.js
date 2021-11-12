@@ -16,6 +16,7 @@ import Folios from '../Admin/Folios/Folios';
 import AddFolio from '../Admin/Folios/AddFolio/AddFolio';
 import FolioStatements from '../Admin/Folios Statements/FolioStatements';
 import AddFolioTransaction from '../Admin/Folios Statements/AddFolioTransaction/AddFolioTransaction';
+import FolioAddTransaction from '../Admin/Folios/AddTransaction/FolioAddTransaction';
 
 const Routes = () => {
   return (
@@ -78,6 +79,10 @@ const Routes = () => {
 
       <Route exact path="/admin/folios/add">
         <AddFolio />
+      </Route>
+
+      <Route exact path="/admin/folios/addTransaction">
+        <FolioAddTransaction />
       </Route>
 
       <Route exact path="/admin/folioStatements">

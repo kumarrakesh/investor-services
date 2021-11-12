@@ -28,6 +28,7 @@ const AddFolio = () => {
   });
 
   const [loading, setLoading] = useState(false);
+  const [errorName, setErrorName] = useState(false);
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
@@ -63,7 +64,8 @@ const AddFolio = () => {
             userId: values.investorId,
             commitment: values.commitment,
             yield: values.yield,
-            date: selectedDate
+            date: selectedDate,
+            folioName: values.folioName
           }),
           headers: {
             'Content-Type': 'application/json',
@@ -75,8 +77,8 @@ const AddFolio = () => {
       console.log(data);
       setLoading(false);
 
-      if (data.success) {
-        Swal.fire('Fund added successfully!', '', 'success');
+      if (data.status) {
+        Swal.fire('Folio added successfully!', '', 'success');
       } else Swal.fire('Something went wrong!', data?.error, 'error');
     } catch (e) {
       console.log(e);
@@ -84,8 +86,35 @@ const AddFolio = () => {
     history.push('/admin/folios');
   };
 
-  const handleLoadingDone = () => {
-    // setLoading(false);
+  useEffect(() => {
+    getInvestorName();
+  }, [values.investorId]);
+
+  const getInvestorName = async () => {
+    try {
+      const response = await fetch(
+        'https://investorbackend.herokuapp.com/api/user/name/get',
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            passport: values.investorId
+          }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      if (data.error) {
+        setErrorName(true);
+      } else {
+        setValues({ ...values, investorName: data.name });
+        setErrorName(false);
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -116,45 +145,12 @@ const AddFolio = () => {
               <TextField
                 required
                 id="outlined-required"
-                value={values.folioId}
-                onChange={handleChange('folioId')}
-                label="Folio ID"
-              />
-            </FormControl>
-
-            <FormControl variant="standard" sx={{ width: '100%' }}>
-              <TextField
-                id="outlined-required"
                 value={values.folioName}
                 onChange={handleChange('folioName')}
                 label="Folio Name"
               />
             </FormControl>
-          </div>
 
-          <div className="add-folio-input-2">
-            <FormControl variant="standard" sx={{ width: '100%' }}>
-              <TextField
-                required
-                id="outlined-required"
-                value={values.investorId}
-                onChange={handleChange('investorId')}
-                label="Investor ID"
-              />
-            </FormControl>
-
-            <FormControl variant="standard" sx={{ width: '100%' }}>
-              <TextField
-                required
-                id="outlined-required"
-                value={values.investorName}
-                onChange={handleChange('investorName')}
-                label="Investor Name"
-              />
-            </FormControl>
-          </div>
-
-          <div className="add-folio-input-3">
             <FormControl variant="standard" sx={{ width: '100%' }}>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <MobileDatePicker
@@ -168,6 +164,52 @@ const AddFolio = () => {
                   )}
                 />
               </LocalizationProvider>
+            </FormControl>
+          </div>
+
+          <div className="add-folio-input-2">
+            <FormControl variant="standard" sx={{ width: '100%' }}>
+              <TextField
+                required
+                id="outlined-required"
+                value={values.investorId}
+                onChange={handleChange('investorId')}
+                label="Investor Passport No."
+              />
+              {errorName && (
+                <small style={{ color: 'red' }}>
+                  Please enter correct Passport No.
+                </small>
+              )}
+            </FormControl>
+
+            <FormControl variant="standard" sx={{ width: '100%' }}>
+              <TextField
+                required
+                disabled
+                id="outlined-required"
+                value={values.investorName}
+                onChange={handleChange('investorName')}
+                label="Investor Name"
+              />
+            </FormControl>
+          </div>
+
+          <div className="add-folio-input-3">
+            <FormControl fullWidth sx={{ width: '100%' }}>
+              <InputLabel required htmlFor="outlined-adornment-amount">
+                Capital Commitment{' '}
+              </InputLabel>
+              <OutlinedInput
+                required
+                id="outlined-adornment-amount"
+                value={values.commitment}
+                onChange={handleChange('commitment')}
+                startAdornment={
+                  <InputAdornment position="start">$</InputAdornment>
+                }
+                label="Capital Commitment"
+              />
             </FormControl>
 
             <FormControl variant="standard" sx={{ width: '100%' }}>
@@ -185,39 +227,7 @@ const AddFolio = () => {
             </FormControl>
           </div>
 
-          <div className="add-folio-input-4">
-            <FormControl fullWidth sx={{ width: '100%' }}>
-              <InputLabel required htmlFor="outlined-adornment-amount">
-                Capital Commitment{' '}
-              </InputLabel>
-              <OutlinedInput
-                required
-                id="outlined-adornment-amount"
-                value={values.commitment}
-                onChange={handleChange('commitment')}
-                startAdornment={
-                  <InputAdornment position="start">$</InputAdornment>
-                }
-                label="Capital Commitment"
-              />
-            </FormControl>
-
-            <FormControl fullWidth sx={{ width: '100%' }}>
-              <InputLabel required htmlFor="outlined-adornment-amount">
-                Capital Contribution
-              </InputLabel>
-              <OutlinedInput
-                required
-                id="outlined-adornment-amount"
-                value={values.contribution}
-                onChange={handleChange('contribution')}
-                startAdornment={
-                  <InputAdornment position="start">$</InputAdornment>
-                }
-                label="Capital Contribution"
-              />
-            </FormControl>
-          </div>
+          <div className="add-folio-input-4"></div>
 
           <div className="add-folios-btn-div">
             <Button

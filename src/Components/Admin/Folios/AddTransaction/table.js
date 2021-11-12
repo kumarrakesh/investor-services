@@ -96,10 +96,12 @@ export default function CustomizedTables({
           <Table aria-label="customized table" stickyHeader>
             <TableHead>
               <TableRow>
-                <StyledTableCell>Date </StyledTableCell>
-                <StyledTableCell align="center">Type</StyledTableCell>
+                <StyledTableCell>Date Added</StyledTableCell>
+                <StyledTableCell align="center">
+                  Transaction Type
+                </StyledTableCell>
                 <StyledTableCell>Contribution</StyledTableCell>
-                <StyledTableCell align="center">Distributed</StyledTableCell>
+                <StyledTableCell align="center">Distribution</StyledTableCell>
                 <StyledTableCell align="center">Withdrawl</StyledTableCell>
               </TableRow>
             </TableHead>
@@ -117,18 +119,16 @@ export default function CustomizedTables({
                     {new Date(row.date).toLocaleDateString('en-GB')}
                   </StyledTableCell>
                   <StyledTableCell align="center" component="th" scope="row">
-                    {row.fundname}
+                    {row.type}
                   </StyledTableCell>
                   <StyledTableCell align="left" component="th" scope="row">
-                    {row?.user?.name}
+                    {row.type == 1 ? row.amount : '-'}
                   </StyledTableCell>
                   <StyledTableCell align="center" component="th" scope="row">
-                    {row.investedAmount < 0
-                      ? row.withdrawalAmount
-                      : row.investedAmount}
+                    {row.type == 2 ? row.amount : '-'}
                   </StyledTableCell>
                   <StyledTableCell align="center" component="th" scope="row">
-                    {row.investedAmount < 0 ? 'Withdrawn' : 'Invested'}
+                    {row.type == 3 ? row.amount : '-'}
                   </StyledTableCell>
                 </StyledTableRow>
               ))}

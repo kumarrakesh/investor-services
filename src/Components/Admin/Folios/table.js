@@ -42,7 +42,7 @@ export default function CustomizedTables({ displayRows, setLoading, loading }) {
   const handleAddFolioTranscation = (row) => {
     console.log(row);
     return history.push({
-      pathname: '/admin/folioStatements/add',
+      pathname: '/admin/folios/addTransaction',
       state: { row }
     });
   };
@@ -58,12 +58,15 @@ export default function CustomizedTables({ displayRows, setLoading, loading }) {
         >
           <TableHead>
             <TableRow>
-              <StyledTableCell>Folio ID</StyledTableCell>
-              <StyledTableCell align="center">Date Added</StyledTableCell>
-              <StyledTableCell align="center">Investor ID</StyledTableCell>
+              <StyledTableCell>Date Added</StyledTableCell>
+              <StyledTableCell align="center">Folio ID</StyledTableCell>
               <StyledTableCell align="center">Investor Name</StyledTableCell>
               <StyledTableCell align="center">Commitment</StyledTableCell>
-              <StyledTableCell align="center">Contribution</StyledTableCell>
+              <StyledTableCell align="center">
+                Total Contribution
+              </StyledTableCell>
+              <StyledTableCell align="center">Distribution</StyledTableCell>
+              <StyledTableCell align="center">Pending Amount</StyledTableCell>
               <StyledTableCell align="center">Action</StyledTableCell>
             </TableRow>
           </TableHead>
@@ -78,7 +81,7 @@ export default function CustomizedTables({ displayRows, setLoading, loading }) {
             {displayRows.map((row) => (
               <StyledTableRow key={row._id}>
                 <StyledTableCell component="th" scope="row">
-                  {row.folioId}
+                  {new Date(row.date).toLocaleDateString('en-GB')}
                 </StyledTableCell>
                 {/* <StyledTableCell
                   align="center"
@@ -89,20 +92,24 @@ export default function CustomizedTables({ displayRows, setLoading, loading }) {
                 </StyledTableCell> */}
 
                 <StyledTableCell align="center" component="th" scope="row">
-                  {new Date(row.date).toLocaleDateString('en-GB')}
-                </StyledTableCell>
-                <StyledTableCell align="center" component="th" scope="row">
-                  {row.user.userId}
+                  {row.folioId}
                 </StyledTableCell>
                 <StyledTableCell align="center" component="th" scope="row">
                   {row.user.name}
                 </StyledTableCell>
                 <StyledTableCell align="center" component="th" scope="row">
-                  {row.commitment}
+                  {row.commitment.toFixed(2)}
                 </StyledTableCell>
 
                 <StyledTableCell align="center" component="th" scope="row">
-                  {row.contribution}
+                  -{row.contribution.toFixed(2)}
+                </StyledTableCell>
+
+                <StyledTableCell align="center" component="th" scope="row">
+                  {row.contribution.toFixed(2)}
+                </StyledTableCell>
+                <StyledTableCell align="center" component="th" scope="row">
+                  {(row.commitment - row.contribution).toFixed(2)}
                 </StyledTableCell>
                 <StyledTableCell align="center" component="th" scope="row">
                   {

@@ -11,6 +11,12 @@
   gap: 1rem;
 }
 
+.folio-input-div {
+  display: flex;
+  gap: 5rem;
+  padding: 3rem 0rem;
+}
+
 .investments-heading {
   font-weight: 500;
   font-size: 1.5rem;

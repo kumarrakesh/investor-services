@@ -7,8 +7,7 @@ import Swal from 'sweetalert2';
 import { Button } from '@material-ui/core';
 import { TextField, Backdrop, CircularProgress } from '@mui/material';
 import 'date-fns';
-import { LocalizationProvider, MobileDatePicker } from '@mui/lab';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import FormControl from '@mui/material/FormControl';
 
 const FolioStatements = () => {
   // states
@@ -17,7 +16,9 @@ const FolioStatements = () => {
   const [loading, setLoading] = useState(false);
   const [selectedStartDate, setSelectedStartDate] = React.useState(new Date());
   const [selectedEndDate, setSelectedEndDate] = React.useState(new Date());
-  //hooks
+  const [folioId, setFolioId] = useState('');
+  const [folioName, setFolioName] = useState('');
+  const [errorName, setErrorName] = useState(false);
 
   const history = useHistory();
   useEffect(() => {
@@ -29,23 +30,27 @@ const FolioStatements = () => {
         timer: 3000
       });
       history.push('/');
-    } else {
-      getInvestments();
     }
   }, []);
   //handlers and functions
-  const getInvestments = async () => {
+  const getFolioStatement = async () => {
     setLoading(true);
     try {
       const response = await fetch(
-        'https://investorbackend.herokuapp.com/api/transactions/all',
+        'https://investorbackend.herokuapp.com/api/get/folio/transaction',
         {
           method: 'POST',
           headers: {
-            'x-access-token': JSON.parse(localStorage.getItem('token'))
-          }
+            'Content-Type': 'application/json',
+            'x-access-token':
+              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYxN2JlYzNhYTFjYjc1ODEyNGRmOTc0MSIsInVzZXJuYW1lIjoidGFydW5AZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTIkOU5XTzllYVphdjRKcG1qRVozVDdFLld3cnBaL3VwQUFXVDllRkR2akJNZzNjUkhSN3NMTWUiLCJ1c2VySWQiOiI0IiwibmFtZSI6IlRhcnVuIiwicHJvZmlsZVBpYyI6IjdjZDNjOWY3LTBhN2QtNDg5NC1hYmFlLWIzM2UwOTczM2E2OS5KUEciLCJwYXNzcG9ydCI6InRhcnVuQGdtYWlsLmNvbSIsIm1hdHVyaXR5IjoiMjAyMS0xMC0yOVQxMjozODoxNC4wNjNaIiwiY2l0eSI6Imd1cnVncmFtIiwic3RhdGUiOiJIYXJ5YW5hIiwiY291bnRyeSI6IkluZGlhIiwicGluY29kZSI6IjEyMjAwMiIsInJvbGUiOiI2MTZkMmY1ODhkOTA4NjQ4YzI4ZDYzYTEiLCJhbW91bnRJbnZlc3RlZCI6MCwiY3VycmVudEludmVzdGVkVmFsdWUiOjAsIl9fdiI6MH0sImlhdCI6MTYzNjQ0NDQ1MCwiZXhwIjoxNjM5MDM2NDUwfQ.H1yj4n_-uO8kYR7dhVgUhmp0IXD-IJ-6Dd03K-_rsH4'
+          },
+          body: JSON.stringify({
+            folioId: '618a4a03537eb2a3707aaf45'
+          })
         }
       );
+
       const data = await response.json();
       console.log(data);
       setRows(data.data);
@@ -55,16 +60,6 @@ const FolioStatements = () => {
       console.log(e);
       setLoading(false);
     }
-  };
-  const handleStartDateChange = (date) => {
-    setSelectedStartDate(date);
-  };
-  const handleEndDateChange = (date) => {
-    setSelectedEndDate(date);
-  };
-
-  const handleLoadingDone = () => {
-    setLoading(false);
   };
 
   const handleApplyDateFilter = () => {
@@ -82,20 +77,6 @@ const FolioStatements = () => {
     setDisplayRows(filteredRows);
     setLoading(false);
   };
-  // const handleDateFilter = async () => {
-  //   Promise.all([getUserTransactions(fundname)]).then(() => {
-  //     console.log('rows', rows);
-  //     let modRows = [...rows];
-  //     console.log('before', modRows.length);
-  //     modRows = modRows.filter(
-  //       (row) =>
-  //         new Date(row.date) >= new Date(selectedStartDate) &&
-  //         new Date(row.date) <= new Date(selectedEndDate)
-  //     );
-  //     console.log('after', modRows.length);
-  //     setDisplayRows(modRows);
-  //   });
-  // };
 
   const handleAddTranscation = () => {
     history.push('/admin/folioStatements/add');
@@ -108,45 +89,37 @@ const FolioStatements = () => {
       <div id="investments-container">
         <h1 className="investments-heading">Folios Statements</h1>
         <h1 className="investments-subheading">Overview</h1>
-        <p className="investments-total-investors">Total Transactions</p>
-        <p className="investments-total-no">{rows.length}</p>
-        <div className="investments-inv-btns">
-          <div>Filter by date:</div>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <MobileDatePicker
-              label="From Date"
-              variant="outlined"
-              inputFormat="dd/MM/yyyy"
-              value={selectedStartDate}
-              onChange={handleStartDateChange}
-              disableCloseOnSelect={false}
-              renderInput={(params) => <TextField {...params} />}
-              className="padding-for-inputs"
-              maxDate={selectedEndDate}
-            />
-          </LocalizationProvider>
 
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <MobileDatePicker
-              label="To Date"
-              inputFormat="dd/MM/yyyy"
-              value={selectedEndDate}
-              onChange={handleEndDateChange}
-              disableCloseOnSelect={false}
-              className="padding-for-inputs"
-              renderInput={(params) => <TextField {...params} />}
-              minDate={selectedStartDate}
-              maxDate={new Date()}
+        <div className="folio-input-div">
+          <FormControl variant="standard" sx={{ width: '100%' }}>
+            <TextField
+              required
+              id="outlined-required"
+              value={folioId}
+              onChange={(e) => {
+                setFolioId(e.target.value);
+              }}
+              label="Folio ID"
             />
-          </LocalizationProvider>
+            {errorName && (
+              <small style={{ color: 'red' }}>
+                Please enter correct Passport No.
+              </small>
+            )}
+          </FormControl>
 
-          <Button
-            variant="contained"
-            id="investors-apply-btn"
-            onClick={handleApplyDateFilter}
-          >
-            Apply
-          </Button>
+          <FormControl variant="standard" sx={{ width: '100%' }}>
+            <TextField
+              required
+              disabled
+              id="outlined-required"
+              value={folioName}
+              onChange={(e) => {
+                setFolioName(e.target.value);
+              }}
+              label="Folio Name"
+            />
+          </FormControl>
         </div>
 
         <CustomizedTables

@@ -1,0 +1,23 @@
+.folio-add-transaction-main {
+  display: flex;
+  flex-direction: row;
+}
+
+.folio-add-transaction-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 3rem 5rem;
+  background-color: var(--light-blue-bg);
+}
+
+.folio-add-transaction-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.folio-add-transaction-header-label {
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: #132f5e;
+}
