@@ -67,19 +67,19 @@ const Folios = () => {
         <p className="total-folios">Total Folios</p>
         <p className="total-folios-no">{displayRows.length}</p>
 
-        <div className="add-folio-btn">
-          <div>
-            <Button
-              variant="contained"
-              onClick={handleAddfolios}
-              style={{ backgroundColor: '#E95B3E', textTransform: 'none' }}
-            >
-              Add New Folio
-              <AddIcon sx={{ marginLeft: '10px' }} />
-            </Button>
-          </div>
+        {/* <div className="add-folio-btn"> */}
+        <div>
+          <Button
+            variant="contained"
+            onClick={handleAddfolios}
+            style={{ backgroundColor: '#E95B3E', textTransform: 'none' }}
+          >
+            Add New Folio
+            <AddIcon sx={{ marginLeft: '10px' }} />
+          </Button>
+        </div>
 
-          {/* <Button variant="outlined" style={{ color: '#E95B3E' }}>
+        {/* <Button variant="outlined" style={{ color: '#E95B3E' }}>
             <svg
               width="24"
               height="24"
@@ -95,11 +95,12 @@ const Folios = () => {
             Download
             {'\n'} List
           </Button> */}
-        </div>
+        {/* </div> */}
 
         <div>
           <CustomizedTables
             displayRows={displayRows}
+            setDisplayRows={setDisplayRows}
             setLoading={setLoading}
             loading={loading}
           />
