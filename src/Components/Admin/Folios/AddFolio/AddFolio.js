@@ -17,6 +17,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
 
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 const AddFolio = () => {
   let history = useHistory();
   const [values, setValues] = React.useState({
@@ -155,7 +156,7 @@ const AddFolio = () => {
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <MobileDatePicker
                   label="Registration Date"
-                  inputFormat="MM/dd/yyyy"
+                  inputFormat="dd/MM/yyyy"
                   value={selectedDate}
                   onChange={handleDateChange}
                   disableCloseOnSelect={false}

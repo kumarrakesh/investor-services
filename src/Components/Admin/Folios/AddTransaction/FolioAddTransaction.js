@@ -53,6 +53,7 @@ const FolioAddTransaction = () => {
 
   const setFolioBody = async () => {
     setValues({
+      folioId: location?.state?.row?.folioId,
       folioName: location?.state?.row?.folioName,
       investorName: location?.state?.row?.user.name,
       investorPassport: location?.state?.row?.user.passport,
@@ -100,7 +101,7 @@ const FolioAddTransaction = () => {
       <div className="folio-add-transaction-container">
         <div className="folio-add-transaction-header">
           <h1 className="folio-add-transaction-header-label">
-            Add Folio Transaction{' '}
+            Add Folio Transaction
           </h1>
           <IconButton
             size="large"
@@ -195,6 +196,7 @@ const FolioAddTransaction = () => {
           setDisplayRows={setDisplayRows}
           displayRows={displayRows}
           loading={loading}
+          values={values}
           setLoading={setLoading}
         />
       </div>

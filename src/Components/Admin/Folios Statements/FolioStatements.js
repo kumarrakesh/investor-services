@@ -21,6 +21,7 @@ const FolioStatements = () => {
   const [loading, setLoading] = useState(false);
   const [folioId, setFolioId] = useState('');
   const [folioName, setFolioName] = useState('');
+  const [invPassport, setInvPassport] = useState('');
   const [errorName, setErrorName] = useState(false);
 
   const history = useHistory();
@@ -86,6 +87,7 @@ const FolioStatements = () => {
         setFolioName('');
       } else {
         setFolioName(data.data.folioName);
+        setInvPassport(data.data.user.passport);
         setErrorName(false);
         getFolioStatement();
       }
@@ -156,8 +158,10 @@ const FolioStatements = () => {
           displayRows={displayRows}
           loading={loading}
           setLoading={setLoading}
+          folioId={folioId}
+          invPassport={invPassport}
         />
-        <Button
+        {/* <Button
           variant="contained"
           onClick={handleAddTranscation}
           style={{
@@ -168,7 +172,7 @@ const FolioStatements = () => {
           }}
         >
           Record New Transaction
-        </Button>
+        </Button> */}
       </div>
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
