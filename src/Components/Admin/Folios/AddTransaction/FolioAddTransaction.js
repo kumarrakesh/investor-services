@@ -73,7 +73,7 @@ const FolioAddTransaction = () => {
             'x-access-token': token
           },
           body: JSON.stringify({
-            folioId: '618a4a03537eb2a3707aaf45'
+            folioId: location?.state?.row?.folioId
           })
         }
       );

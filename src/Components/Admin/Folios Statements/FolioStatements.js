@@ -48,7 +48,7 @@ const FolioStatements = () => {
             'x-access-token': token
           },
           body: JSON.stringify({
-            folioId: '618a4a03537eb2a3707aaf45'
+            folioId: folioId
           })
         }
       );
@@ -71,7 +71,7 @@ const FolioStatements = () => {
         {
           method: 'POST',
           body: JSON.stringify({
-            folioId: '618a4a03537eb2a3707aaf45'
+            folioId: folioId
           }),
           headers: {
             'Content-Type': 'application/json',
