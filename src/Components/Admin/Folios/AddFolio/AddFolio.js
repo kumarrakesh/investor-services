@@ -196,7 +196,6 @@ const AddFolio = () => {
               )}
             </FormControl>
 
-
             {/* <PageviewIcon /> */}
 
             <FormControl variant="standard" sx={{ width: '100%' }}>

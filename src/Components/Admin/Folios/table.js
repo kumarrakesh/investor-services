@@ -87,7 +87,7 @@ export default function CustomizedTables({
     }
   };
   const handleAddFolioTranscation = (row) => {
-    console.log(row);
+    // console.log(row);
     return history.push({
       pathname: '/admin/folios/addTransaction',
       state: { row }
