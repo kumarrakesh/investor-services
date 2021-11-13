@@ -88,29 +88,58 @@ const UserFolioStatement = () => {
       setDisplayRows(data.data);
       setLoading(false);
     } catch (e) {
+      Swal.fire('Something went wrong', '', 'error');
       console.log(e);
       setLoading(false);
     }
   };
 
-  const handleDownloadPdf = () => {
-    fetch(
-      'https://investorbackend.herokuapp.com/api/download/folio/transaction'
-    )
-      .then((resp) => resp.blob())
-      .then((blob) => {
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.style.display = 'none';
-        a.href = url;
-        // the filename you want
-        a.download = 'todo-1.json';
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-        alert('your file has downloaded!'); // or you know, something with better UX...
-      })
-      .catch(() => alert('oh no!'));
+  const handleDownloadPdf = async () => {
+    setLoading(true);
+    try {
+      let response = await fetch(
+        'https://investorbackend.herokuapp.com/api/download/folio/transaction',
+        {
+          method: 'POST',
+          headers: {
+            'x-access-token': JSON.parse(localStorage.getItem('token')),
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            folioId: values.folioId
+          })
+        }
+      );
+      let data = await response.blob();
+
+      const url = window.URL.createObjectURL(data);
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      // the filename you want
+      a.download = 'statement.pdf';
+      document.body.appendChild(a);
+      a.click();
+      setLoading(false);
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      Swal.fire('Something went wrong', '', 'error');
+      console.log(err);
+    }
+    // .then((resp) => resp.blob())
+    // .then((blob) => {
+    //   const url = window.URL.createObjectURL(blob);
+    //   const a = document.createElement('a');
+    //   a.style.display = 'none';
+    //   a.href = url;
+    //   // the filename you want
+    //   a.download = 'todo-1.json';
+    //   document.body.appendChild(a);
+    //   a.click();
+    //   window.URL.revokeObjectURL(url);
+    //   alert('your file has downloaded!'); // or you know, something with better UX...
+    // })
+    // .catch(() => alert('oh no!'));
   };
 
   return (

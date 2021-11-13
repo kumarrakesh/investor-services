@@ -167,7 +167,7 @@ export default function CustomizedTables({
               </TableRow>
             </TableHead>
             <TableBody>
-              {!displayRows.length && (
+              {!displayRows?.length && (
                 <StyledTableRow>
                   <StyledTableCell component="th" scope="row">
                     {loading ? 'Loading...' : 'No transactions...'}
