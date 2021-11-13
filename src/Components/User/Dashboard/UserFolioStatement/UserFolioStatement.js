@@ -4,12 +4,13 @@ import IconButton from '@mui/material/IconButton';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { useHistory } from 'react-router';
 import { useLocation } from 'react-router-dom';
-import './FolioAddTransaction.css';
+import './UserFolioStatement.css';
 import CustomizedTables from './table';
 import { Backdrop, CircularProgress } from '@mui/material';
 import Swal from 'sweetalert2';
+import Button from '@mui/material/Button';
 
-const FolioAddTransaction = () => {
+const UserFolioStatement = () => {
   const [displayRows, setDisplayRows] = useState([]);
   const [rows, setRows] = useState([]);
   const token = JSON.parse(localStorage.getItem('token'));
@@ -41,20 +42,20 @@ const FolioAddTransaction = () => {
       });
       history.push('/');
     }
-    getFolioStatement();
   }, []);
 
   useEffect(() => {
     if (location?.state?.row) {
       setFolioBody();
       console.log(location?.state?.row);
+      getFolioStatement();
     }
   }, [location]);
 
   const setFolioBody = async () => {
     setValues({
       folioName: location?.state?.row?.folioName,
-      investorName: location?.state?.row?.user.name,
+      investorName: location?.state?.row?.folioId,
       investorPassport: location?.state?.row?.user.passport,
       commitment: location?.state?.row?.commitment,
       yield: location?.state?.row?.yield,
@@ -76,7 +77,7 @@ const FolioAddTransaction = () => {
             'x-access-token': token
           },
           body: JSON.stringify({
-            folioId: values.folioId
+            folioId: location?.state?.row?.folioId
           })
         }
       );
@@ -90,6 +91,26 @@ const FolioAddTransaction = () => {
       console.log(e);
       setLoading(false);
     }
+  };
+
+  const handleDownloadPdf = () => {
+    fetch(
+      'https://investorbackend.herokuapp.com/api/download/folio/transaction'
+    )
+      .then((resp) => resp.blob())
+      .then((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        // the filename you want
+        a.download = 'todo-1.json';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        alert('your file has downloaded!'); // or you know, something with better UX...
+      })
+      .catch(() => alert('oh no!'));
   };
 
   return (
@@ -106,7 +127,7 @@ const FolioAddTransaction = () => {
             size="large"
             style={{ color: '#E95B3E' }}
             onClick={() => {
-              history.push('/admin/folios');
+              history.push('/dashboard');
             }}
           >
             <CancelIcon fontSize="inherit" />
@@ -129,74 +150,44 @@ const FolioAddTransaction = () => {
 
             <div className="folio-add-transaction-row-item">
               <div className="folio-add-transaction-row-item-label">
-                Investor Name
+                Folio ID
               </div>
               <div
                 className="folio-add-transaction-row-item-value"
                 style={{ textTransform: 'none' }}
               >
-                {values.investorName}
+                {values.folioId}
               </div>
             </div>
 
-            <div className="folio-add-transaction-row-item">
-              <div className="folio-add-transaction-row-item-label">
-                Passport Number
-              </div>
-              <div
-                className="folio-add-transaction-row-item-value"
-                style={{ textTransform: 'none' }}
-              >
-                {values.investorPassport}
-              </div>
-            </div>
-          </div>
-
-          <div
-            className="folio-add-transaction-row"
-            style={{ borderBottom: ' 1px solid #E5E5E5' }}
-          >
             <div className="folio-add-transaction-row-item">
               <div className="folio-add-transaction-row-item-label">
                 Registration Date
               </div>
-              <div className="folio-add-transaction-row-item-value">
+              <div
+                className="folio-add-transaction-row-item-value"
+                style={{ textTransform: 'none' }}
+              >
                 {new Date(values.registrationDate).toLocaleDateString('en-GB')}
-              </div>
-            </div>
-
-            <div className="folio-add-transaction-row-item">
-              <div className="folio-add-transaction-row-item-label">
-                commitment
-              </div>
-              <div
-                className="folio-add-transaction-row-item-value"
-                style={{ textTransform: 'none' }}
-              >
-                {values.commitment}
-              </div>
-            </div>
-
-            <div className="folio-add-transaction-row-item">
-              <div className="folio-add-transaction-row-item-label">
-                Yield(%)
-              </div>
-              <div
-                className="folio-add-transaction-row-item-value"
-                style={{ textTransform: 'none' }}
-              >
-                {values.yield}
               </div>
             </div>
           </div>
         </div>
 
-        <CustomizedTables
-          setDisplayRows={setDisplayRows}
-          displayRows={displayRows}
-          loading={loading}
-          setLoading={setLoading}
-        />
+        <Button
+          variant="contained"
+          style={{
+            backgroundColor: '#E95B3E',
+            textTransform: 'none',
+            width: '30%',
+            marginBottom: '2rem'
+          }}
+          onClick={handleDownloadPdf}
+        >
+          Download Statement
+        </Button>
+
+        <CustomizedTables displayRows={displayRows} loading={loading} />
       </div>
 
       <Backdrop
@@ -210,4 +201,4 @@ const FolioAddTransaction = () => {
   );
 };
 
-export default FolioAddTransaction;
+export default UserFolioStatement;

@@ -45,33 +45,15 @@ export default function CustomizedTables({
   loading,
   setLoading
 }) {
-  const [dialogData, setDialogData] = useState({ folioId: 0, data: [] });
-  const [showFolioDetails, setShowFolioDetails] = useState(false);
+  const history = useHistory();
   const handleShowFolioData = async (row) => {
-    setLoading(true);
-    try {
-      const response = await fetch(
-        'https://investorbackend.herokuapp.com/api/get/folio/transaction',
-        {
-          headers: {
-            'x-access-token': JSON.parse(localStorage.getItem('token')),
-            'Content-Type': 'application/json'
-          },
-          method: 'POST',
-          body: JSON.stringify({ folioId: row._id })
-        }
-      );
-      const data = await response.json();
-      // console.log({ folioId: row.folioId, data: data.data });
-      setDialogData({ folioId: row.folioId, data: data.data });
+    console.log(row);
+    return history.push({
+      pathname: '/dashboard/folioStatement',
+      state: { row }
+    });
+  };
 
-      setShowFolioDetails(true);
-    } catch (e) {}
-    setLoading(false);
-  };
-  const handleFolioDetailsClose = (row) => {
-    setShowFolioDetails(false);
-  };
   return (
     <>
       <TableContainer component={Paper} sx={{ maxHeight: '60vh' }}>
@@ -144,62 +126,6 @@ export default function CustomizedTables({
           </TableBody>
         </Table>
       </TableContainer>
-      <Dialog open={showFolioDetails} onClose={handleFolioDetailsClose}>
-        <DialogTitle>Folio #{dialogData.folioId} </DialogTitle>
-        <DialogContent
-          style={{ display: 'flex', flexDirection: 'column', gap: '1.7rem' }}
-        >
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 400 }} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>Date</TableCell>
-                  {/* <TableCell align="right">Added by</TableCell> */}
-                  <TableCell align="right">Amount</TableCell>
-                  <TableCell align="right">Type</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {dialogData?.data?.length ? (
-                  dialogData?.data?.map((row) => (
-                    <TableRow
-                      key={row._id}
-                      sx={{
-                        '&:last-child td, &:last-child th': { border: 0 }
-                      }}
-                    >
-                      <TableCell component="th" scope="row">
-                        {new Date(row.date).toLocaleDateString('en-GB')}
-                      </TableCell>
-                      {/* <TableCell align="right">{row.addedBy?.name}</TableCell> */}
-                      <TableCell align="right">
-                        {Math.round((row.amount + Number.EPSILON) * 100) / 100}
-                      </TableCell>
-                      <TableCell align="right">
-                        {row.type == 1
-                          ? 'Invested'
-                          : row.type == 2
-                          ? 'Yielded'
-                          : 'Withdrawn'}
-                      </TableCell>
-                    </TableRow>
-                  ))
-                ) : (
-                  <h3 style={{ padding: '1rem' }}>No details found...</h3>
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={handleFolioDetailsClose}
-            style={{ color: 'var(--primary-color)' }}
-          >
-            Ok
-          </Button>
-        </DialogActions>
-      </Dialog>
     </>
   );
 }
