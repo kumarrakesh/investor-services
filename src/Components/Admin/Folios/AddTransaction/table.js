@@ -34,58 +34,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function CustomizedTables({
-  rows,
-  setRows,
   displayRows,
   setDisplayRows,
   loading,
   setLoading
 }) {
-  // const [rows, setRows] = useState(originalRows);
-  const [searched, setSearched] = useState('');
-
-  const requestSearch = (searchedVal) => {
-    setLoading(true);
-    const filteredRows = rows.filter((row) => {
-      return (
-        new Date(row.date)
-          .toLocaleDateString('en-GB')
-          .toLowerCase()
-          .includes(searchedVal.toLowerCase()) ||
-        row.fundname?.toLowerCase().includes(searchedVal.toLowerCase()) ||
-        row.user?.name?.toLowerCase().includes(searchedVal.toLowerCase()) ||
-        (row.remarks || row.narration)
-          ?.toLowerCase()
-          .includes(searchedVal.toLowerCase()) ||
-        (row.action ? 'resolved' : 'unresolved')
-          .toLowerCase()
-          .includes(searchedVal.toLowerCase()) ||
-        (row.investedAmount < 0 ? 'Withdrawn' : 'Invested')
-          .toLowerCase()
-          .includes(searchedVal.toLowerCase())
-      );
-    });
-    setTimeout(() => {
-      console.log('hey');
-      setLoading(false);
-    }, 200);
-    setDisplayRows(filteredRows);
-    clearTimeout();
-  };
-
-  const cancelSearch = () => {
-    setLoading(false);
-    setSearched('');
-    requestSearch(searched);
-  };
-
   return (
     <>
-      <SearchBar
-        value={searched}
-        onChange={(searchVal) => requestSearch(searchVal)}
-        onCancelSearch={() => cancelSearch()}
-      />
       <Paper>
         <TableContainer
           component={Paper}
@@ -97,10 +52,8 @@ export default function CustomizedTables({
             <TableHead>
               <TableRow>
                 <StyledTableCell>Date Added</StyledTableCell>
-                <StyledTableCell align="center">
-                  Transaction Type
-                </StyledTableCell>
-                <StyledTableCell>Contribution</StyledTableCell>
+                <StyledTableCell align="left">Transaction Type</StyledTableCell>
+                <StyledTableCell align="left">Contribution</StyledTableCell>
                 <StyledTableCell align="center">Distribution</StyledTableCell>
                 <StyledTableCell align="center">Withdrawl</StyledTableCell>
               </TableRow>
@@ -118,8 +71,12 @@ export default function CustomizedTables({
                   <StyledTableCell component="th" scope="row">
                     {new Date(row.date).toLocaleDateString('en-GB')}
                   </StyledTableCell>
-                  <StyledTableCell align="center" component="th" scope="row">
-                    {row.type}
+                  <StyledTableCell align="left" component="th" scope="row">
+                    {row.type == 1
+                      ? 'Invested'
+                      : row.type == 2
+                      ? 'Yielded'
+                      : 'Withdrawn'}
                   </StyledTableCell>
                   <StyledTableCell align="left" component="th" scope="row">
                     {row.type == 1 ? row.amount : '-'}

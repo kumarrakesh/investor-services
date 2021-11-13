@@ -8,14 +8,17 @@ import { Button } from '@material-ui/core';
 import { TextField, Backdrop, CircularProgress } from '@mui/material';
 import 'date-fns';
 import FormControl from '@mui/material/FormControl';
+import InputAdornment from '@mui/material/InputAdornment';
+import SearchIcon from '@material-ui/icons/Search';
+import IconButton from '@mui/material/IconButton';
+import { tokenToString } from 'typescript';
 
 const FolioStatements = () => {
   // states
+  const token = JSON.parse(localStorage.getItem('token'));
   const [rows, setRows] = useState([]);
   const [displayRows, setDisplayRows] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [selectedStartDate, setSelectedStartDate] = React.useState(new Date());
-  const [selectedEndDate, setSelectedEndDate] = React.useState(new Date());
   const [folioId, setFolioId] = useState('');
   const [folioName, setFolioName] = useState('');
   const [errorName, setErrorName] = useState(false);
@@ -42,8 +45,7 @@ const FolioStatements = () => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'x-access-token':
-              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYxN2JlYzNhYTFjYjc1ODEyNGRmOTc0MSIsInVzZXJuYW1lIjoidGFydW5AZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTIkOU5XTzllYVphdjRKcG1qRVozVDdFLld3cnBaL3VwQUFXVDllRkR2akJNZzNjUkhSN3NMTWUiLCJ1c2VySWQiOiI0IiwibmFtZSI6IlRhcnVuIiwicHJvZmlsZVBpYyI6IjdjZDNjOWY3LTBhN2QtNDg5NC1hYmFlLWIzM2UwOTczM2E2OS5KUEciLCJwYXNzcG9ydCI6InRhcnVuQGdtYWlsLmNvbSIsIm1hdHVyaXR5IjoiMjAyMS0xMC0yOVQxMjozODoxNC4wNjNaIiwiY2l0eSI6Imd1cnVncmFtIiwic3RhdGUiOiJIYXJ5YW5hIiwiY291bnRyeSI6IkluZGlhIiwicGluY29kZSI6IjEyMjAwMiIsInJvbGUiOiI2MTZkMmY1ODhkOTA4NjQ4YzI4ZDYzYTEiLCJhbW91bnRJbnZlc3RlZCI6MCwiY3VycmVudEludmVzdGVkVmFsdWUiOjAsIl9fdiI6MH0sImlhdCI6MTYzNjQ0NDQ1MCwiZXhwIjoxNjM5MDM2NDUwfQ.H1yj4n_-uO8kYR7dhVgUhmp0IXD-IJ-6Dd03K-_rsH4'
+            'x-access-token': token
           },
           body: JSON.stringify({
             folioId: '618a4a03537eb2a3707aaf45'
@@ -53,7 +55,6 @@ const FolioStatements = () => {
 
       const data = await response.json();
       console.log(data);
-      setRows(data.data);
       setDisplayRows(data.data);
       setLoading(false);
     } catch (e) {
@@ -62,19 +63,35 @@ const FolioStatements = () => {
     }
   };
 
-  const handleApplyDateFilter = () => {
+  const handleSearchFolioName = async () => {
     setLoading(true);
-    const filteredRows = rows.filter((row) => {
-      let modStartDate = new Date(selectedStartDate);
-      modStartDate = modStartDate.setDate(modStartDate.getDate() - 1);
-      let modEndDate = new Date(selectedEndDate);
-      modEndDate = modEndDate.setDate(modEndDate.getDate() + 1);
-      return (
-        new Date(row.date) >= modStartDate &&
-        new Date(row.date) <= new Date(modEndDate)
+    try {
+      const response = await fetch(
+        'https://investorbackend.herokuapp.com/api/get/folio',
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            folioId: '618a4a03537eb2a3707aaf45'
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': token
+          }
+        }
       );
-    });
-    setDisplayRows(filteredRows);
+      const data = await response.json();
+      console.log(data);
+      if (!data.status) {
+        setErrorName(true);
+        setFolioName('');
+      } else {
+        setFolioName(data.data.folioName);
+        setErrorName(false);
+        getFolioStatement();
+      }
+    } catch (e) {
+      console.log(e);
+    }
     setLoading(false);
   };
 
@@ -94,12 +111,24 @@ const FolioStatements = () => {
           <FormControl variant="standard" sx={{ width: '100%' }}>
             <TextField
               required
-              id="outlined-required"
+              label="Folio ID"
               value={folioId}
               onChange={(e) => {
                 setFolioId(e.target.value);
               }}
-              label="Folio ID"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment>
+                    <IconButton
+                      style={{ color: 'red' }}
+                      size="large"
+                      onClick={handleSearchFolioName}
+                    >
+                      <SearchIcon />
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }}
             />
             {errorName && (
               <small style={{ color: 'red' }}>
@@ -123,8 +152,6 @@ const FolioStatements = () => {
         </div>
 
         <CustomizedTables
-          rows={rows}
-          setRows={setRows}
           setDisplayRows={setDisplayRows}
           displayRows={displayRows}
           loading={loading}

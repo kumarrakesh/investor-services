@@ -41,6 +41,9 @@
   gap: 2.5rem !important;
 }
 
+.add-folio-investorId {
+  display: flex;
+}
 .add-folios-div > div {
   display: flex;
   gap: 10rem;

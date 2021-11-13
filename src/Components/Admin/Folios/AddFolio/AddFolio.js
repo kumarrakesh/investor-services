@@ -15,6 +15,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import TextField from '@mui/material/TextField';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
+import SearchIcon from '@material-ui/icons/Search';
 
 const AddFolio = () => {
   let history = useHistory();
@@ -86,11 +87,8 @@ const AddFolio = () => {
     history.push('/admin/folios');
   };
 
-  useEffect(() => {
-    getInvestorName();
-  }, [values.investorId]);
-
-  const getInvestorName = async () => {
+  const handleSearchInvestorName = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         'https://investorbackend.herokuapp.com/api/user/name/get',
@@ -108,6 +106,7 @@ const AddFolio = () => {
       console.log(data);
       if (data.error) {
         setErrorName(true);
+        setValues({ ...values, investorName: '' });
       } else {
         setValues({ ...values, investorName: data.name });
         setErrorName(false);
@@ -115,6 +114,7 @@ const AddFolio = () => {
     } catch (e) {
       console.log(e);
     }
+    setLoading(false);
   };
 
   return (
@@ -171,10 +171,22 @@ const AddFolio = () => {
             <FormControl variant="standard" sx={{ width: '100%' }}>
               <TextField
                 required
-                id="outlined-required"
+                label="Investor Passport No."
                 value={values.investorId}
                 onChange={handleChange('investorId')}
-                label="Investor Passport No."
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment>
+                      <IconButton
+                        style={{ color: 'red' }}
+                        size="large"
+                        onClick={handleSearchInvestorName}
+                      >
+                        <SearchIcon />
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
               />
               {errorName && (
                 <small style={{ color: 'red' }}>
@@ -182,6 +194,8 @@ const AddFolio = () => {
                 </small>
               )}
             </FormControl>
+
+            {/* <PageviewIcon /> */}
 
             <FormControl variant="standard" sx={{ width: '100%' }}>
               <TextField
