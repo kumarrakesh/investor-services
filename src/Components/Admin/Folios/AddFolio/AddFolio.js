@@ -155,6 +155,7 @@ const AddFolio = () => {
             <FormControl variant="standard" sx={{ width: '100%' }}>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <MobileDatePicker
+                  maxDate={new Date()}
                   label="Registration Date"
                   inputFormat="dd/MM/yyyy"
                   value={selectedDate}
@@ -175,6 +176,13 @@ const AddFolio = () => {
                 label="Investor Passport No."
                 value={values.investorId}
                 onChange={handleChange('investorId')}
+                onKeyDown={(e) => {
+                  if (e.key == 'Enter') {
+                    e.preventDefault();
+                    handleSearchInvestorName();
+                    return;
+                  }
+                }}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment>

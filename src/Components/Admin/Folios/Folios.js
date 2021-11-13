@@ -42,7 +42,6 @@ const Folios = () => {
         }
       );
       const data = await response.json();
-      console.log('fg' + data);
       setDisplayRows(data.data);
     } catch (e) {
       console.log(e);

@@ -272,9 +272,9 @@ export default function CustomizedTables({
                             });
                           }}
                         >
-                          <MenuItem value="1">Invest</MenuItem>
-                          <MenuItem value="2">Yielded</MenuItem>
-                          <MenuItem value="3">Withdraw</MenuItem>
+                          <MenuItem value="1">Contribution</MenuItem>
+                          <MenuItem value="2">Yield Payment</MenuItem>
+                          <MenuItem value="3">Redemption</MenuItem>
                         </Select>
                       </FormControl>
                     </StyledTableCell>
@@ -356,10 +356,10 @@ export default function CustomizedTables({
                     </StyledTableCell>
                     <StyledTableCell align="center" component="th" scope="row">
                       {row.type == 1
-                        ? 'Invested'
+                        ? 'Contribution'
                         : row.type == 2
-                        ? 'Yielded'
-                        : 'Withdrawn'}
+                        ? 'Yield Payment'
+                        : 'Redemtion'}
                     </StyledTableCell>
                     <StyledTableCell align="left" component="th" scope="row">
                       {row.type == 1 ? row.amount : '-'}

@@ -68,10 +68,10 @@ export default function CustomizedTables({ displayRows, loading }) {
                   </StyledTableCell>
                   <StyledTableCell align="left" component="th" scope="row">
                     {row.type == 1
-                      ? 'Invested'
+                      ? 'Contribution'
                       : row.type == 2
-                      ? 'Yielded'
-                      : 'Withdrawn'}
+                      ? 'Yield Payment'
+                      : 'Redemtion'}
                   </StyledTableCell>
                   <StyledTableCell align="left" component="th" scope="row">
                     {row.type == 1 ? row.amount : '-'}

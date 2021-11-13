@@ -59,8 +59,7 @@ const FolioAddTransaction = () => {
       investorPassport: location?.state?.row?.user.passport,
       commitment: location?.state?.row?.commitment,
       yield: location?.state?.row?.yield,
-      registrationDate: location?.state?.row?.date,
-      folioId: location?.state?.row?.folioId
+      registrationDate: location?.state?.row?.date
     });
     console.log(values);
   };
@@ -77,15 +76,19 @@ const FolioAddTransaction = () => {
             'x-access-token': token
           },
           body: JSON.stringify({
-            folioId: values.folioId
+            folioId: location?.state?.row?.folioId
           })
         }
       );
 
       const data = await response.json();
-      console.log(data);
-      setRows(data.data);
-      setDisplayRows(data.data);
+      // console.log('ye hi hai wo', data);
+      if (data.status) {
+        setRows(data.data);
+        setDisplayRows(data.data);
+      } else {
+        Swal.fire('something went wrong', '', 'error');
+      }
       setLoading(false);
     } catch (e) {
       console.log(e);

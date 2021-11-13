@@ -63,10 +63,10 @@ export default function CustomizedTables({ displayRows, setUpdate, loading }) {
               <StyledTableCell align="center">Investor Name</StyledTableCell>
               <StyledTableCell align="center">Address</StyledTableCell>
               <StyledTableCell align="right">Passport Number</StyledTableCell>
-              <StyledTableCell align="center">Invested Amount</StyledTableCell>
+              {/* <StyledTableCell align="center">Invested Amount</StyledTableCell>
               <StyledTableCell align="center">
                 Current Invested Value
-              </StyledTableCell>
+              </StyledTableCell> */}
               <StyledTableCell align="center">Action</StyledTableCell>
             </TableRow>
           </TableHead>
@@ -92,12 +92,12 @@ export default function CustomizedTables({ displayRows, setUpdate, loading }) {
                 <StyledTableCell align="center" component="th" scope="row">
                   {row.passport}
                 </StyledTableCell>
-                <StyledTableCell align="center" component="th" scope="row">
+                {/* <StyledTableCell align="center" component="th" scope="row">
                   {row.totalInvested.toFixed(2)}
                 </StyledTableCell>
                 <StyledTableCell align="center" component="th" scope="row">
                   {row.currentValue.toFixed(2)}
-                </StyledTableCell>
+                </StyledTableCell> */}
                 <StyledTableCell align="center" component="th" scope="row">
                   {
                     <Button
