@@ -82,9 +82,10 @@ const FolioStatements = () => {
       );
       const data = await response.json();
       console.log(data);
-      if (!data.status) {
+      if (!data.data) {
         setErrorName(true);
         setFolioName('');
+        setDisplayRows([]);
       } else {
         setFolioName(data.data.folioName);
         setInvPassport(data.data.user.passport);
@@ -97,17 +98,13 @@ const FolioStatements = () => {
     setLoading(false);
   };
 
-  const handleAddTranscation = () => {
-    history.push('/admin/folioStatements/add');
-  };
-
   return (
-    <div className="investments-main">
+    <div className="folio-statements-main">
       <AdNavbar />
 
-      <div id="investments-container">
-        <h1 className="investments-heading">Folios Statements</h1>
-        <h1 className="investments-subheading">Overview</h1>
+      <div id="folio-statements-container">
+        <h1 className="folio-statements-heading">Folios Statements</h1>
+        <h1 className="folio-statements-subheading">Overview</h1>
 
         <div className="folio-input-div">
           <FormControl variant="standard" sx={{ width: '100%' }}>
@@ -134,7 +131,7 @@ const FolioStatements = () => {
             />
             {errorName && (
               <small style={{ color: 'red' }}>
-                Please enter correct Passport No.
+                Please enter correct Folio ID
               </small>
             )}
           </FormControl>
@@ -161,18 +158,6 @@ const FolioStatements = () => {
           folioId={folioId}
           invPassport={invPassport}
         />
-        {/* <Button
-          variant="contained"
-          onClick={handleAddTranscation}
-          style={{
-            textTransform: 'none',
-            backgroundColor: 'var(--primary-color)',
-            color: 'white',
-            padding: '1rem'
-          }}
-        >
-          Record New Transaction
-        </Button> */}
       </div>
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}

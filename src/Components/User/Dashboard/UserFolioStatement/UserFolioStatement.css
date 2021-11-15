@@ -1,0 +1,72 @@
+.user-folio-transaction-main {
+  display: flex;
+  flex-direction: row;
+}
+
+.user-folio-transaction-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 3rem 5rem;
+  background-color: var(--light-blue-bg);
+}
+
+.user-folio-transaction-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-folio-transaction-header-label {
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: #132f5e;
+}
+
+.user-folio-transaction {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 11px 3px #0000000d;
+  width: 100%;
+  margin: 1rem 0rem 1rem 0rem;
+}
+
+.user-folio-transaction-row {
+  display: flex;
+  gap: 1rem;
+  padding: 2rem;
+}
+.user-folio-transaction-row-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-transform: capitalize;
+  color: #333333;
+}
+.user-folio-transaction-row-item * {
+  flex: 1;
+}
+.user-folio-transaction-row-item-label {
+  font-size: 0.8rem;
+}
+.user-folio-transaction-row-item-value {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+@media screen and (max-width: 768px) {
+  .user-folio-transaction-main {
+    flex-direction: column;
+  }
+
+  .user-folio-transaction-container {
+    margin-top: -90vh;
+    padding: 2rem 1rem;
+  }
+
+  .user-folio-transaction {
+    flex-wrap: wrap;
+  }
+}

@@ -28,11 +28,6 @@
   color: #132f5e;
 }
 
-.investor-div {
-  display: flex;
-  justify-content: space-between;
-}
-
 .add-inv-all-inputs {
   margin-top: 1rem;
   padding-right: 2rem;

@@ -16,9 +16,6 @@
 }
 
 #add-folio-subtitle {
-  width: 274px;
-  height: 21px;
-
   font-weight: 500;
   font-size: 18px;
   line-height: 21px;
@@ -26,9 +23,6 @@
 }
 
 .add-folio-title {
-  width: 117px;
-  height: 28px;
-
   font-weight: 500;
   font-size: 24px;
   color: #132f5e;
@@ -41,20 +35,26 @@
   gap: 2.5rem !important;
 }
 
-.add-folio-investorId {
-  display: flex;
-}
 .add-folios-div > div {
   display: flex;
   gap: 10rem;
   flex: 1;
-}
-
-.add-folios-btn-div {
-  display: flex;
   justify-content: center;
 }
 
-/* #add-folios-btn {
-  margin-top: 1rem;
-} */
+@media screen and (max-width: 768px) {
+  .add-folios-main {
+    flex-direction: column;
+  }
+
+  #add-folios-container {
+    margin-top: -90vh;
+    padding: 2rem 1rem;
+  }
+
+  .add-folios-div > div {
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+  }
+}

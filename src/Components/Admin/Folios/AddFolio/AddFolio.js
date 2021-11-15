@@ -250,9 +250,7 @@ const AddFolio = () => {
             </FormControl>
           </div>
 
-          <div className="add-folio-input-4"></div>
-
-          <div className="add-folios-btn-div">
+          <div className="add-folios-btn-div" style={{ width: '100%' }}>
             <Button
               id="add-folios-btn"
               type="submit"

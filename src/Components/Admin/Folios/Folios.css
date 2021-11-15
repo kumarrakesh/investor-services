@@ -65,3 +65,14 @@
   height: 350px;
   overflow: scroll;
 }
+
+@media screen and (max-width: 768px) {
+  .folios-main {
+    flex-direction: column;
+  }
+
+  #folios-container {
+    margin-top: -90vh;
+    padding: 2rem 1rem;
+  }
+}

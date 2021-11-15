@@ -143,13 +143,13 @@ const UserFolioStatement = () => {
   };
 
   return (
-    <div className="folio-add-transaction-main">
+    <div className="user-folio-transaction-main">
       <div>
         <AdNavbar />
       </div>
-      <div className="folio-add-transaction-container">
-        <div className="folio-add-transaction-header">
-          <h1 className="folio-add-transaction-header-label">
+      <div className="user-folio-transaction-container">
+        <div className="user-folio-transaction-header">
+          <h1 className="user-folio-transaction-header-label">
             Add Folio Transaction{' '}
           </h1>
           <IconButton
@@ -163,38 +163,38 @@ const UserFolioStatement = () => {
           </IconButton>
         </div>
         <h1 className="folio-overview">Overview</h1>
-        <div className="folio-add-transaction">
+        <div className="user-folio-transaction">
           <div
-            className="folio-add-transaction-row"
+            className="user-folio-transaction-row"
             style={{ borderBottom: ' 1px solid #E5E5E5' }}
           >
-            <div className="folio-add-transaction-row-item">
-              <div className="folio-add-transaction-row-item-label">
+            <div className="user-folio-transaction-row-item">
+              <div className="user-folio-transaction-row-item-label">
                 Folio Name
               </div>
-              <div className="folio-add-transaction-row-item-value">
+              <div className="user-folio-transaction-row-item-value">
                 {values.folioName}
               </div>
             </div>
 
-            <div className="folio-add-transaction-row-item">
-              <div className="folio-add-transaction-row-item-label">
+            <div className="user-folio-transaction-row-item">
+              <div className="user-folio-transaction-row-item-label">
                 Folio ID
               </div>
               <div
-                className="folio-add-transaction-row-item-value"
+                className="user-folio-transaction-row-item-value"
                 style={{ textTransform: 'none' }}
               >
                 {values.folioId}
               </div>
             </div>
 
-            <div className="folio-add-transaction-row-item">
-              <div className="folio-add-transaction-row-item-label">
+            <div className="user-folio-transaction-row-item">
+              <div className="user-folio-transaction-row-item-label">
                 Registration Date
               </div>
               <div
-                className="folio-add-transaction-row-item-value"
+                className="user-folio-transaction-row-item-value"
                 style={{ textTransform: 'none' }}
               >
                 {new Date(values.registrationDate).toLocaleDateString('en-GB')}
