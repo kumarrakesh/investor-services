@@ -26,3 +26,12 @@ code {
 button {
   cursor: pointer;
 }
+
+.swal2-show {
+  /* -webkit-animation: swal2-show 1s !important; */
+  animation: swal2-show 0.75s !important;
+  transition: all 0.75s ease;
+}
+/* .swal2-confirm {
+  background-color: var(--primary-color) !important;
+} */
