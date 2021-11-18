@@ -199,7 +199,7 @@ const AddFolio = () => {
               />
               {errorName && (
                 <small style={{ color: 'red' }}>
-                  Please enter correct Passport No.
+                  User could not be found for this passport number
                 </small>
               )}
             </FormControl>
