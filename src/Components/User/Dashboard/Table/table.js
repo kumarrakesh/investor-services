@@ -74,6 +74,7 @@ export default function CustomizedTables({
               {/* ) : null} */}
               <StyledTableCell align="right">Contribution</StyledTableCell>
               <StyledTableCell align="right">Expected Yield</StyledTableCell>
+              <StyledTableCell align="center">Action</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody
@@ -90,13 +91,7 @@ export default function CustomizedTables({
             )}
             {rows != {} &&
               rows.map((row) => (
-                <StyledTableRow
-                  key={row._id}
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => {
-                    handleShowFolioData(row);
-                  }}
-                >
+                <StyledTableRow key={row._id}>
                   <StyledTableCell component="th" scope="row">
                     {new Date(row.date).toLocaleDateString('en-GB')}
                   </StyledTableCell>
@@ -108,18 +103,30 @@ export default function CustomizedTables({
                   </StyledTableCell>
                   {/* {fundname == 'All' ? ( */}
                   <StyledTableCell align="center" component="th" scope="row">
-                    {row.commitment}
+                    {row.commitment.toFixed(2)}
                   </StyledTableCell>
                   {/* ) : null} */}
                   <StyledTableCell align="right">
-                    {row.contribution}
+                    {row.contribution.toFixed(2)}
                   </StyledTableCell>
                   <StyledTableCell align="right">
-                    {row.yield}
-                    {/* {row.investedAmount < 0
-                    ? 0
-                    : Math.round(row.investedAmount * 100 + Number.EPSILON) /
-                      100} */}
+                    {row.yield.toFixed(2)}
+                  </StyledTableCell>
+                  <StyledTableCell align="center" component="th" scope="row">
+                    {
+                      <Button
+                        variant="contained"
+                        onClick={() => {
+                          handleShowFolioData(row);
+                        }}
+                        style={{
+                          backgroundColor: '#E95B3E',
+                          textTransform: 'none'
+                        }}
+                      >
+                        See Details
+                      </Button>
+                    }
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
