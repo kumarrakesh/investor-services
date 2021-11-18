@@ -59,7 +59,7 @@ const AddFolio = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        'https://investorbackend.herokuapp.com/api/add/folio',
+        `${process.env.REACT_APP_API}/api/add/folio`,
         {
           method: 'POST',
           body: JSON.stringify({
@@ -92,7 +92,7 @@ const AddFolio = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        'https://investorbackend.herokuapp.com/api/user/name/get',
+        `${process.env.REACT_APP_API}/api/user/name/get`,
         {
           method: 'POST',
           body: JSON.stringify({

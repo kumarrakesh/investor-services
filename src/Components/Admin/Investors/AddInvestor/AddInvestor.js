@@ -102,7 +102,7 @@ const AddInvestor = () => {
         userId: values.Id
       });
       const response = await fetch(
-        'https://investorbackend.herokuapp.com/api/update/profile/admin',
+        `${process.env.REACT_APP_API}/api/update/profile/admin`,
         {
           method: 'POST',
           body: JSON.stringify({
@@ -133,7 +133,7 @@ const AddInvestor = () => {
     } else {
       setLoading(true);
       const response = await fetch(
-        'https://investorbackend.herokuapp.com/api/admin/user/register',
+        `${process.env.REACT_APP_API}/api/admin/user/register`,
         {
           method: 'POST',
           body: JSON.stringify({

@@ -53,7 +53,7 @@ const Dashboard = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        'https://investorbackend.herokuapp.com/api/user/folio',
+        `${process.env.REACT_APP_API}/api/user/folio`,
         {
           headers: {
             'x-access-token': token,

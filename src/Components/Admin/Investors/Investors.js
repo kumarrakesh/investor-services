@@ -30,14 +30,11 @@ const Investors = () => {
 
   const getAllUsers = async () => {
     setLoading(true);
-    const response = await fetch(
-      'https://investorbackend.herokuapp.com/api/users',
-      {
-        headers: {
-          'x-access-token': token
-        }
+    const response = await fetch(`${process.env.REACT_APP_API}/api/users`, {
+      headers: {
+        'x-access-token': token
       }
-    );
+    });
     const data = await response.json();
     setDisplayRows(data.data);
     setLoading(false);

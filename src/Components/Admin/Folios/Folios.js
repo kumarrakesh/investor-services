@@ -33,7 +33,7 @@ const Folios = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        'https://investorbackend.herokuapp.com/api/all/folio',
+        `${process.env.REACT_APP_API}/api/all/folio`,
         {
           method: 'POST',
           headers: {

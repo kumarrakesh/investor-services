@@ -35,9 +35,9 @@ const Navbar = () => {
     console.log(localStorage.getItem('imageURL'));
     if (
       localStorage.getItem('imageURL') ==
-        'https://investorbackend.herokuapp.com/api/profilePic/' ||
+        `${process.env.REACT_APP_API}/api/profilePic/` ||
       localStorage.getItem('imageURL') ==
-        'https://investorbackend.herokuapp.com/api/profilePic/undefined'
+        `${process.env.REACT_APP_API}/api/profilePic/undefined`
     ) {
       setImgURL('https://tiwpe.com/image/tiw-logo.png');
     } else setImgURL(localStorage.getItem('imageURL'));

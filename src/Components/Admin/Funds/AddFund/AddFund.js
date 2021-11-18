@@ -47,21 +47,18 @@ const AddFund = () => {
   const submitForm = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const response = await fetch(
-      'https://investorbackend.herokuapp.com/api/add/fund',
-      {
-        method: 'POST',
-        body: JSON.stringify({
-          fundname: values.fname,
-          nav: values.amount,
-          date: selectedDate
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-          'x-access-token': JSON.parse(localStorage.getItem('token'))
-        }
+    const response = await fetch(`${process.env.REACT_APP_API}/api/add/fund`, {
+      method: 'POST',
+      body: JSON.stringify({
+        fundname: values.fname,
+        nav: values.amount,
+        date: selectedDate
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': JSON.parse(localStorage.getItem('token'))
       }
-    );
+    });
     const data = await response.json();
     console.log(data);
     setLoading(false);

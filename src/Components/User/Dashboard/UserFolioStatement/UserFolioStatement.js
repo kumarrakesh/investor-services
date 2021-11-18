@@ -69,7 +69,7 @@ const UserFolioStatement = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        'https://investorbackend.herokuapp.com/api/get/folio/transaction',
+        `${process.env.REACT_APP_API}/api/get/folio/transaction`,
         {
           method: 'POST',
           headers: {
@@ -98,7 +98,7 @@ const UserFolioStatement = () => {
     setLoading(true);
     try {
       let response = await fetch(
-        'https://investorbackend.herokuapp.com/api/download/folio/transaction',
+        `${process.env.REACT_APP_API}/api/download/folio/transaction`,
         {
           method: 'POST',
           headers: {

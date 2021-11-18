@@ -16,17 +16,14 @@ const LoginPage = () => {
   const handleLogin = async () => {
     setProgress(true);
     setDisability(true);
-    let response = await fetch(
-      'https://investorbackend.herokuapp.com/api/user/signin',
-      {
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        },
-        method: 'POST',
-        body: JSON.stringify({ username, password })
-      }
-    );
+    let response = await fetch(`${process.env.REACT_APP_API}/api/user/signin`, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({ username, password })
+    });
     let data = await response.json();
     // console.log(data);
     setDisability(false);
@@ -40,21 +37,17 @@ const LoginPage = () => {
       return;
     }
     localStorage.setItem('token', JSON.stringify(data.token));
-    let imgResponse = await fetch(
-      'https://investorbackend.herokuapp.com/api/profile',
-      {
-        headers: {
-          'x-access-token': data.token
-        }
+    let imgResponse = await fetch(`${process.env.REACT_APP_API}/api/profile`, {
+      headers: {
+        'x-access-token': data.token
       }
-    );
+    });
     let imgData = await imgResponse.json();
     // console.log(imgData);
     localStorage.setItem('username', imgData.data.name);
     localStorage.setItem(
       'imageURL',
-      'https://investorbackend.herokuapp.com/api/profilePic/' +
-        imgData.data.profilePic
+      `${process.env.REACT_APP_API}/api/profilePic/` + imgData.data.profilePic
     );
     setUserData({ role: data.role, token: data.token });
     if (data.status && data.role === 'ADMIN') {

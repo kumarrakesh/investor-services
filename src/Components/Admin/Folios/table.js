@@ -62,14 +62,11 @@ export default function CustomizedTables({
   const tableRef = React.createRef();
   //handlers
   const handleGetNameFromPassport = async () => {
-    const response = await fetch(
-      'https://investorbackend.herokuapp.com/api/users/new',
-      {
-        headers: {
-          'x-access-token': JSON.parse(localStorage.getItem('token'))
-        }
+    const response = await fetch(`${process.env.REACT_APP_API}/api/users/new`, {
+      headers: {
+        'x-access-token': JSON.parse(localStorage.getItem('token'))
       }
-    );
+    });
     const data = await response.json();
     if (!data.success)
       Swal.fire('Please check the passport number', '', 'error');
@@ -108,7 +105,7 @@ export default function CustomizedTables({
     };
     try {
       const response = await fetch(
-        'https://investorbackend.herokuapp.com/api/add/folio',
+        `${process.env.REACT_APP_API}/api/add/folio`,
         {
           method: 'POST',
           body: JSON.stringify({ ...folioData }),
@@ -124,7 +121,7 @@ export default function CustomizedTables({
       else {
         Swal.fire(data.message, '', 'success');
         const response1 = await fetch(
-          'https://investorbackend.herokuapp.com/api/all/folio',
+          `${process.env.REACT_APP_API}/api/all/folio`,
           {
             method: 'POST',
             headers: {

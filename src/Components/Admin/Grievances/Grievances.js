@@ -43,14 +43,11 @@ const AdminGrievances = () => {
 
   const getAllQueries = async () => {
     setLoading(true);
-    const response = await fetch(
-      'https://investorbackend.herokuapp.com/api/query/all',
-      {
-        headers: {
-          'x-access-token': JSON.parse(localStorage.getItem('token'))
-        }
+    const response = await fetch(`${process.env.REACT_APP_API}/api/query/all`, {
+      headers: {
+        'x-access-token': JSON.parse(localStorage.getItem('token'))
       }
-    );
+    });
     const data = await response.json();
     // console.log(data.data);
     setQueries(data.data);

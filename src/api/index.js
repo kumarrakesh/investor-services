@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 const api = axios.create({
-  baseURL: 'https://investorbackend.herokuapp.com/api'
+  baseURL: `${process.env.REACT_APP_API}/api`
 });
 
 export const signin = async (formData) => {

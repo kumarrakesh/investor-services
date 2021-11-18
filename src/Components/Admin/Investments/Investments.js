@@ -38,7 +38,7 @@ const Investments = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        'https://investorbackend.herokuapp.com/api/transactions/all',
+        `${process.env.REACT_APP_API}/api/transactions/all`,
         {
           method: 'POST',
           headers: {

@@ -41,7 +41,7 @@ const FolioStatements = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        'https://investorbackend.herokuapp.com/api/get/folio/transaction',
+        `${process.env.REACT_APP_API}/api/get/folio/transaction`,
         {
           method: 'POST',
           headers: {
@@ -68,7 +68,7 @@ const FolioStatements = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        'https://investorbackend.herokuapp.com/api/get/folio',
+        `${process.env.REACT_APP_API}/api/get/folio`,
         {
           method: 'POST',
           body: JSON.stringify({
@@ -114,6 +114,13 @@ const FolioStatements = () => {
               value={folioId}
               onChange={(e) => {
                 setFolioId(e.target.value);
+              }}
+              onKeyDown={(e) => {
+                if (e.key == 'Enter') {
+                  e.preventDefault();
+                  handleSearchFolioName();
+                  return;
+                }
               }}
               InputProps={{
                 endAdornment: (

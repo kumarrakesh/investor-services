@@ -52,7 +52,7 @@ const Statements = () => {
       history.push('/');
     }
 
-    fetch('https://investorbackend.herokuapp.com/api/user/fundnames', {
+    fetch(`${process.env.REACT_APP_API}/api/user/fundnames`, {
       headers: {
         'x-access-token': token,
         'Content-Type': 'application/json'
@@ -89,7 +89,7 @@ const Statements = () => {
     let modFundName = fundname === 'All' ? '' : fundname;
     try {
       const response = await fetch(
-        'https://investorbackend.herokuapp.com/api/transactions',
+        `${process.env.REACT_APP_API}/api/transactions`,
         {
           headers: {
             'x-access-token': token,

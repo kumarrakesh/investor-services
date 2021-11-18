@@ -106,7 +106,7 @@ const AddTransaction = () => {
         return;
       }
       const response = await fetch(
-        'https://investorbackend.herokuapp.com/api/add/transaction',
+        `${process.env.REACT_APP_API}/api/add/transaction`,
         {
           method: 'POST',
           body: JSON.stringify({
@@ -138,22 +138,16 @@ const AddTransaction = () => {
   const getUserAndFundNames = async () => {
     try {
       setLoading(true);
-      const response = await fetch(
-        'https://investorbackend.herokuapp.com/api/users',
-        {
-          headers: {
-            'x-access-token': JSON.parse(localStorage.getItem('token'))
-          }
+      const response = await fetch(`${process.env.REACT_APP_API}/api/users`, {
+        headers: {
+          'x-access-token': JSON.parse(localStorage.getItem('token'))
         }
-      );
-      const response1 = await fetch(
-        'https://investorbackend.herokuapp.com/api/funds',
-        {
-          headers: {
-            'x-access-token': JSON.parse(localStorage.getItem('token'))
-          }
+      });
+      const response1 = await fetch(`${process.env.REACT_APP_API}/api/funds`, {
+        headers: {
+          'x-access-token': JSON.parse(localStorage.getItem('token'))
         }
-      );
+      });
       const data = await response.json();
       const data1 = await response1.json();
       setUsers(data.data);

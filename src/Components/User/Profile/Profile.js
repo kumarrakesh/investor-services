@@ -74,7 +74,7 @@ const Profile = () => {
     };
     try {
       const response = await fetch(
-        'https://investorbackend.herokuapp.com/api/update/profile',
+        `${process.env.REACT_APP_API}/api/update/profile`,
         requestOptions
       );
       const data = await response.json();
@@ -90,22 +90,19 @@ const Profile = () => {
   };
   const getProfileData = async () => {
     setLoading(true);
-    const response = await fetch(
-      'https://investorbackend.herokuapp.com/api/profile',
-      {
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          'x-access-token': token
-        },
-        method: 'GET'
-      }
-    );
+    const response = await fetch(`${process.env.REACT_APP_API}/api/profile`, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'x-access-token': token
+      },
+      method: 'GET'
+    });
     const details = await response.json();
     setProfile(details);
     try {
       const tempResponse = await fetch(
-        'https://investorbackend.herokuapp.com/api/profilePic/' +
+        `${process.env.REACT_APP_API}/api/profilePic/` +
           details?.data?.profilePic,
         {
           headers: {
@@ -119,7 +116,7 @@ const Profile = () => {
       if (tempResponse.ok)
         setImgURL(
           details?.data?.profilePic
-            ? 'https://investorbackend.herokuapp.com/api/profilePic/' +
+            ? `${process.env.REACT_APP_API}/api/profilePic/` +
                 details?.data?.profilePic
             : 'https://tiwpe.com/image/tiw-logo.png'
         );
@@ -133,7 +130,7 @@ const Profile = () => {
     localStorage.setItem(
       'imageURL',
       details?.data?.profilePic
-        ? 'https://investorbackend.herokuapp.com/api/profilePic/' +
+        ? `${process.env.REACT_APP_API}/api/profilePic/` +
             details?.data?.profilePic
         : 'https://tiwpe.com/image/tiw-logo.png'
     );

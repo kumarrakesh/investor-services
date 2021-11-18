@@ -38,18 +38,15 @@ const Grievances = () => {
 
   const handleSendQuery = async () => {
     try {
-      let response = await fetch(
-        'https://investorbackend.herokuapp.com/api/add/query',
-        {
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            'x-access-token': token
-          },
-          method: 'POST',
-          body: JSON.stringify({ subject, description, date: new Date() })
-        }
-      );
+      let response = await fetch(`${process.env.REACT_APP_API}/api/add/query`, {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'x-access-token': token
+        },
+        method: 'POST',
+        body: JSON.stringify({ subject, description, date: new Date() })
+      });
       const data = await response.json();
       setData(data);
       console.log(data);
@@ -73,17 +70,14 @@ const Grievances = () => {
     setValue('response');
     const token = JSON.parse(localStorage.getItem('token'));
 
-    const response = await fetch(
-      'https://investorbackend.herokuapp.com/api/query',
-      {
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          'x-access-token': token
-        },
-        method: 'GET'
-      }
-    );
+    const response = await fetch(`${process.env.REACT_APP_API}/api/query`, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'x-access-token': token
+      },
+      method: 'GET'
+    });
 
     const data = await response.json();
     setLoading(false);

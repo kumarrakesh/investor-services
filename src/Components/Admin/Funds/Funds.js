@@ -35,14 +35,11 @@ const Funds = () => {
 
   const getAllFunds = async () => {
     setLoading(true);
-    const response = await fetch(
-      'https://investorbackend.herokuapp.com/api/funds',
-      {
-        headers: {
-          'x-access-token': token
-        }
+    const response = await fetch(`${process.env.REACT_APP_API}/api/funds`, {
+      headers: {
+        'x-access-token': token
       }
-    );
+    });
     const data = await response.json();
     console.log(data);
     setDisplayRows(data.data);

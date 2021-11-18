@@ -99,7 +99,7 @@ export default function CustomizedTables({
     };
     try {
       const response = await fetch(
-        'https://investorbackend.herokuapp.com/api/add/folio/transaction',
+        `${process.env.REACT_APP_API}/api/add/folio/transaction`,
         {
           method: 'POST',
           body: JSON.stringify({ ...folioData }),
@@ -120,7 +120,7 @@ export default function CustomizedTables({
       else {
         Swal.fire('Transaction noted!', '', 'success');
         const response1 = await fetch(
-          'https://investorbackend.herokuapp.com/api/get/folio/transaction',
+          `${process.env.REACT_APP_API}/api/get/folio/transaction`,
           {
             method: 'POST',
             headers: {

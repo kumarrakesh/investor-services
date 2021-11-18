@@ -92,7 +92,7 @@ export default function CustomizedTables({
     setOpen(false);
 
     const response = await fetch(
-      'https://investorbackend.herokuapp.com/api/update/fund',
+      `${process.env.REACT_APP_API}/api/update/fund`,
       {
         method: 'POST',
         body: JSON.stringify({

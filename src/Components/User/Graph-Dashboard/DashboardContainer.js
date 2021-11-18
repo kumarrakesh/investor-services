@@ -78,7 +78,7 @@ const DashContainer = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        'https://investorbackend.herokuapp.com/api/user/dashboard',
+        `${process.env.REACT_APP_API}/api/user/dashboard`,
         {
           headers: {
             'Content-Type': 'application/json',
