@@ -35,6 +35,14 @@ const FolioStatements = () => {
       });
       history.push('/');
     }
+    if (
+      localStorage.getItem('folioId') &&
+      localStorage.getItem('folioId') != ''
+    ) {
+      console.log(localStorage.getItem('folioId'));
+      setFolioId(localStorage.getItem('folioId'));
+      handleSearchFolioName(localStorage.getItem('folioId'));
+    }
   }, []);
   //handlers and functions
   const getFolioStatement = async () => {
@@ -49,7 +57,7 @@ const FolioStatements = () => {
             'x-access-token': token
           },
           body: JSON.stringify({
-            folioId: folioId
+            folioId: folioId || localStorage.getItem('folioId')
           })
         }
       );
@@ -64,7 +72,9 @@ const FolioStatements = () => {
     }
   };
 
-  const handleSearchFolioName = async () => {
+  const handleSearchFolioName = async (folioId) => {
+    console.log('insice', folioId);
+    localStorage.setItem('folioId', folioId);
     setLoading(true);
     try {
       const response = await fetch(
@@ -118,7 +128,7 @@ const FolioStatements = () => {
               onKeyDown={(e) => {
                 if (e.key == 'Enter') {
                   e.preventDefault();
-                  handleSearchFolioName();
+                  handleSearchFolioName(folioId);
                   return;
                 }
               }}
@@ -128,7 +138,9 @@ const FolioStatements = () => {
                     <IconButton
                       style={{ color: 'red' }}
                       size="large"
-                      onClick={handleSearchFolioName}
+                      onClick={() => {
+                        handleSearchFolioName(folioId);
+                      }}
                     >
                       <SearchIcon />
                     </IconButton>

@@ -117,6 +117,11 @@ const UserFolioStatement = () => {
       a.style.display = 'none';
       a.href = url;
       // the filename you want
+      //folio_number_investor_name_download_date.pdf
+      console.log(values.folioId);
+      // a.download = `${folio_number}_${investor_name}_${new Date().toLocaleDateString(
+      //   'en-GB'
+      // )}.pdf`;
       a.download = 'statement.pdf';
       document.body.appendChild(a);
       a.click();
