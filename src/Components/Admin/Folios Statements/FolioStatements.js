@@ -187,38 +187,38 @@ const FolioStatements = () => {
           </FormControl>
         </div>
 
-        <div className="folio-add-transaction">
+        <div className="folio-statements-add-transaction">
           <div
-            className="folio-add-transaction-row"
+            className="folio-statements-add-transaction-row"
             style={{ borderBottom: ' 1px solid #E5E5E5' }}
           >
-            <div className="folio-add-transaction-row-item">
-              <div className="folio-add-transaction-row-item-label">
+            <div className="folio-statements-add-transaction-row-item">
+              <div className="folio-statements-add-transaction-row-item-label">
                 Folio Name
               </div>
-              <div className="folio-add-transaction-row-item-value">
+              <div className="folio-statements-add-transaction-row-item-value">
                 {folioName}
               </div>
             </div>
 
-            <div className="folio-add-transaction-row-item">
-              <div className="folio-add-transaction-row-item-label">
+            <div className="folio-statements-add-transaction-row-item">
+              <div className="folio-statements-add-transaction-row-item-label">
                 Investor Name
               </div>
               <div
-                className="folio-add-transaction-row-item-value"
+                className="folio-statements-add-transaction-row-item-value"
                 style={{ textTransform: 'none' }}
               >
                 {values.investorName}
               </div>
             </div>
 
-            <div className="folio-add-transaction-row-item">
-              <div className="folio-add-transaction-row-item-label">
+            <div className="folio-statements-add-transaction-row-item">
+              <div className="folio-statements-add-transaction-row-item-label">
                 Passport Number
               </div>
               <div
-                className="folio-add-transaction-row-item-value"
+                className="folio-statements-add-transaction-row-item-value"
                 style={{ textTransform: 'none' }}
               >
                 {values.investorPassport}
@@ -227,36 +227,36 @@ const FolioStatements = () => {
           </div>
 
           <div
-            className="folio-add-transaction-row"
+            className="folio-statements-add-transaction-row"
             style={{ borderBottom: ' 1px solid #E5E5E5' }}
           >
-            <div className="folio-add-transaction-row-item">
-              <div className="folio-add-transaction-row-item-label">
+            <div className="folio-statements-add-transaction-row-item">
+              <div className="folio-statements-add-transaction-row-item-label">
                 Registration Date
               </div>
-              <div className="folio-add-transaction-row-item-value">
+              <div className="folio-statements-add-transaction-row-item-value">
                 {new Date(values.registrationDate).toLocaleDateString('en-GB')}
               </div>
             </div>
 
-            <div className="folio-add-transaction-row-item">
-              <div className="folio-add-transaction-row-item-label">
+            <div className="folio-statements-add-transaction-row-item">
+              <div className="folio-statements-add-transaction-row-item-label">
                 commitment
               </div>
               <div
-                className="folio-add-transaction-row-item-value"
+                className="folio-statements-add-transaction-row-item-value"
                 style={{ textTransform: 'none' }}
               >
                 {values.commitment}
               </div>
             </div>
 
-            <div className="folio-add-transaction-row-item">
-              <div className="folio-add-transaction-row-item-label">
+            <div className="folio-statements-add-transaction-row-item">
+              <div className="folio-statements-add-transaction-row-item-label">
                 Yield(%)
               </div>
               <div
-                className="folio-add-transaction-row-item-value"
+                className="folio-statements-add-transaction-row-item-value"
                 style={{ textTransform: 'none' }}
               >
                 {values.yield}

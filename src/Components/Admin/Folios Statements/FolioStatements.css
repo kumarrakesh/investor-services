@@ -29,6 +29,40 @@
   color: var(--secondary-color);
 }
 
+.folio-statements-add-transaction {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 11px 3px #0000000d;
+  width: 100%;
+  margin: 1rem 0rem 1rem 0rem;
+}
+
+.folio-statements-add-transaction-row {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+}
+.folio-statements-add-transaction-row-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-transform: capitalize;
+  color: #333333;
+}
+.folio-statements-add-transaction-row-item * {
+  flex: 1;
+}
+.folio-statements-add-transaction-row-item-label {
+  font-size: 0.8rem;
+}
+.folio-statements-add-transaction-row-item-value {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
 @media screen and (max-width: 768px) {
   .folio-statements-main {
     flex-direction: column;

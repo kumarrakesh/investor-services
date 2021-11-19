@@ -201,7 +201,7 @@ export default function CustomizedTables({
         <TableContainer
           component={Paper}
           sx={{
-            maxHeight: '300px'
+            maxHeight: '250px'
           }}
         >
           <Table aria-label="customized table" stickyHeader>
@@ -237,6 +237,7 @@ export default function CustomizedTables({
                           value={selectedDate}
                           onChange={handleDateChange}
                           disableCloseOnSelect={false}
+                          maxDate={new Date()}
                           renderInput={(params) => (
                             <TextField
                               required
@@ -361,7 +362,7 @@ export default function CustomizedTables({
                         ? 'Contribution'
                         : row.type == 2
                         ? 'Yield Payment'
-                        : 'Redemtion'}
+                        : 'Redemption'}
                     </StyledTableCell>
                     <StyledTableCell align="left" component="th" scope="row">
                       {row.type == 1 ? '-' + row.amount : '-'}
