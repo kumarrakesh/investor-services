@@ -31,6 +31,7 @@ const AddFolio = () => {
 
   const [loading, setLoading] = useState(false);
   const [errorName, setErrorName] = useState(false);
+  const [helperText, setHelperText] = useState(true);
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
@@ -111,6 +112,7 @@ const AddFolio = () => {
       } else {
         setValues({ ...values, investorName: data.name });
         setErrorName(false);
+        setHelperText(false);
       }
     } catch (e) {
       console.log(e);
@@ -197,11 +199,15 @@ const AddFolio = () => {
                   )
                 }}
               />
-              {errorName && (
+              {
                 <small style={{ color: 'red' }}>
-                  User could not be found for this passport number
+                  {errorName
+                    ? 'Investor not found in system, Please add first'
+                    : helperText
+                    ? 'Add Passport Number to find Investor'
+                    : ''}
                 </small>
-              )}
+              }
             </FormControl>
 
             {/* <PageviewIcon /> */}

@@ -89,7 +89,7 @@ const Navbar = () => {
             history.push('/dashboard');
           }}
         >
-          <img src="https://tiwpe.com/image/tiw-logo.png" alt="tiwpe logo" />
+          <img src="https://via.placeholder.com/100" alt="tiwpe logo" />
         </div>
         <div
           className="navbar-top-profile-pic"
@@ -98,7 +98,7 @@ const Navbar = () => {
           }}
         >
           <img
-            src={imgURL}
+            src="https://via.placeholder.com/100"
             alt=""
             onError={() => {
               setImgURL('https://tiwpe.com/image/tiw-logo.png');
@@ -120,10 +120,7 @@ const Navbar = () => {
         {size.width > 770 && (
           <>
             <div id="header-logo">
-              <img
-                src="https://tiwpe.com/image/tiw-logo.png"
-                alt="tiwpe logo"
-              />
+              <img src="https://via.placeholder.com/100" alt="tiwpe logo" />
             </div>
 
             <Divider
@@ -146,7 +143,7 @@ const Navbar = () => {
         >
           <div className="pic">
             <img
-              src={imgURL}
+              src="https://via.placeholder.com/100"
               alt=""
               onError={() => {
                 setImgURL('https://tiwpe.com/image/tiw-logo.png');

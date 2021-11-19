@@ -15,7 +15,6 @@ import AddTransaction from '../Admin/Investments/AddInvestment/AddTransaction';
 import Folios from '../Admin/Folios/Folios';
 import AddFolio from '../Admin/Folios/AddFolio/AddFolio';
 import FolioStatements from '../Admin/Folios Statements/FolioStatements';
-import AddFolioTransaction from '../Admin/Folios Statements/AddFolioTransaction/AddFolioTransaction';
 import FolioAddTransaction from '../Admin/Folios/AddTransaction/FolioAddTransaction';
 import UserFolioStatement from '../User/Dashboard/UserFolioStatement/UserFolioStatement';
 
@@ -92,10 +91,6 @@ const Routes = () => {
 
       <Route exact path="/admin/folioStatements">
         <FolioStatements />
-      </Route>
-
-      <Route exact path="/admin/folioStatements/add">
-        <AddFolioTransaction />
       </Route>
     </Switch>
   );

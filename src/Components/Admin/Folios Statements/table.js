@@ -220,7 +220,9 @@ export default function CustomizedTables({
               {!displayRows.length && (
                 <StyledTableRow>
                   <StyledTableCell component="th" scope="row">
-                    {loading ? 'Loading...' : 'No transactions...'}
+                    {loading
+                      ? 'Loading...'
+                      : 'No transactions...  Please enter Folio ID to search!'}
                   </StyledTableCell>
                 </StyledTableRow>
               )}

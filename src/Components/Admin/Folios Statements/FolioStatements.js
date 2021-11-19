@@ -23,6 +23,19 @@ const FolioStatements = () => {
   const [folioName, setFolioName] = useState('');
   const [invPassport, setInvPassport] = useState('');
   const [errorName, setErrorName] = useState(false);
+  const [values, setValues] = React.useState({
+    folioName: '',
+    investorName: '',
+    investorPassport: '',
+    commitment: '',
+    yield: '',
+    registrationDate: new Date(),
+    folioId: ''
+  });
+
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
 
   const history = useHistory();
   useEffect(() => {
@@ -90,6 +103,13 @@ const FolioStatements = () => {
         setFolioName(data.data.folioName);
         setInvPassport(data.data.user.passport);
         setErrorName(false);
+        setValues({
+          investorName: data.data.user.name,
+          investorPassport: data.data.user.passport,
+          commitment: data.data.commitment,
+          yield: data.data.yield,
+          registrationDate: data.data.date
+        });
         getFolioStatement();
       }
     } catch (e) {
@@ -104,7 +124,7 @@ const FolioStatements = () => {
 
       <div id="folio-statements-container">
         <h1 className="folio-statements-heading">Folios Statements</h1>
-        <h1 className="folio-statements-subheading">Overview</h1>
+        {/* <h1 className="folio-statements-subheading">Overview</h1> */}
 
         <div className="folio-input-div">
           <FormControl variant="standard" sx={{ width: '100%' }}>
@@ -137,9 +157,7 @@ const FolioStatements = () => {
               }}
             />
             {errorName && (
-              <small style={{ color: 'red' }}>
-                Please enter correct Folio ID
-              </small>
+              <small style={{ color: 'red' }}>Folio with ID not found!</small>
             )}
           </FormControl>
 
@@ -155,6 +173,84 @@ const FolioStatements = () => {
               label="Folio Name"
             />
           </FormControl>
+        </div>
+
+        <div className="folio-add-transaction">
+          <div
+            className="folio-add-transaction-row"
+            style={{ borderBottom: ' 1px solid #E5E5E5' }}
+          >
+            <div className="folio-add-transaction-row-item">
+              <div className="folio-add-transaction-row-item-label">
+                Folio Name
+              </div>
+              <div className="folio-add-transaction-row-item-value">
+                {folioName}
+              </div>
+            </div>
+
+            <div className="folio-add-transaction-row-item">
+              <div className="folio-add-transaction-row-item-label">
+                Investor Name
+              </div>
+              <div
+                className="folio-add-transaction-row-item-value"
+                style={{ textTransform: 'none' }}
+              >
+                {values.investorName}
+              </div>
+            </div>
+
+            <div className="folio-add-transaction-row-item">
+              <div className="folio-add-transaction-row-item-label">
+                Passport Number
+              </div>
+              <div
+                className="folio-add-transaction-row-item-value"
+                style={{ textTransform: 'none' }}
+              >
+                {values.investorPassport}
+              </div>
+            </div>
+          </div>
+
+          <div
+            className="folio-add-transaction-row"
+            style={{ borderBottom: ' 1px solid #E5E5E5' }}
+          >
+            <div className="folio-add-transaction-row-item">
+              <div className="folio-add-transaction-row-item-label">
+                Registration Date
+              </div>
+              <div className="folio-add-transaction-row-item-value">
+                {new Date(values.registrationDate).toLocaleDateString('en-GB')}
+              </div>
+            </div>
+
+            <div className="folio-add-transaction-row-item">
+              <div className="folio-add-transaction-row-item-label">
+                commitment
+              </div>
+              <div
+                className="folio-add-transaction-row-item-value"
+                style={{ textTransform: 'none' }}
+              >
+                {values.commitment}
+              </div>
+            </div>
+
+            <div className="folio-add-transaction-row-item">
+              <div className="folio-add-transaction-row-item-label">
+                Yield(%)
+              </div>
+              <div
+                className="folio-add-transaction-row-item-value"
+                style={{ textTransform: 'none' }}
+              >
+                {values.yield}
+              </div>
+            </div>
+          </div>
         </div>
 
         <CustomizedTables
