@@ -71,7 +71,7 @@ const LoginPage = () => {
     <div id="login-background">
       <div id="login-page-content">
         <div id="login-logo">
-          <img src={logo} alt="Brand Logo" />
+          <img src="https://via.placeholder.com/100" alt="Brand Logo" />
         </div>
         <div id="login-box">
           <span id="login-welcome-text">Welcome to TIW Private Equity</span>

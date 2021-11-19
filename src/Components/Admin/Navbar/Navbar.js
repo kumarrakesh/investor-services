@@ -87,10 +87,7 @@ const AdNavbar = () => {
         {size.width > 770 && (
           <>
             <div id="header-logo">
-              <img
-                src="https://tiwpe.com/image/tiw-logo.png"
-                alt="tiwpe logo"
-              />
+              <img src="https://via.placeholder.com/100" alt="tiwpe logo" />
             </div>
 
             <div

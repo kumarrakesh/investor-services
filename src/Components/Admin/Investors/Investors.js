@@ -95,14 +95,12 @@ const Investors = () => {
             {'\n'} List
           </Button> */}
 
-        <div className="investors-inv-table">
-          <CustomizedTables
-            displayRows={displayRows}
-            setLoading={setLoading}
-            loading={loading}
-            setUpdate={setUpdate}
-          />
-        </div>
+        <CustomizedTables
+          displayRows={displayRows}
+          setLoading={setLoading}
+          loading={loading}
+          setUpdate={setUpdate}
+        />
       </div>
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}

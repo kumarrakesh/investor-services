@@ -48,12 +48,9 @@ export default function CustomizedTables({ displayRows, setUpdate, loading }) {
 
   return (
     <>
-      <TableContainer
-        component={Paper}
-        sx={{ minWidth: 700, maxHeight: '350px' }}
-      >
+      <TableContainer component={Paper} sx={{ maxHeight: '50vh' }}>
         <Table
-          sx={{ minWidth: 700, maxHeight: '100px', overflow: 'scroll' }}
+          sx={{ minWidth: 700, overflow: 'scroll' }}
           aria-label="customized table"
           stickyHeader
         >
@@ -62,7 +59,7 @@ export default function CustomizedTables({ displayRows, setUpdate, loading }) {
               <StyledTableCell>Date</StyledTableCell>
               <StyledTableCell align="center">Investor Name</StyledTableCell>
               <StyledTableCell align="center">Address</StyledTableCell>
-              <StyledTableCell align="right">Passport Number</StyledTableCell>
+              <StyledTableCell align="center">Passport Number</StyledTableCell>
               {/* <StyledTableCell align="center">Invested Amount</StyledTableCell>
               <StyledTableCell align="center">
                 Current Invested Value
