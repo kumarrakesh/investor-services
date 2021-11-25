@@ -22,7 +22,7 @@
 
 .add-folio-title {
   font-size: 24px;
-  color: #132f5e;
+  color: var(--secondary-color);
 }
 
 .add-folios-div {

@@ -7,11 +7,19 @@ import './Folios.css';
 import CustomizedTables from './table';
 import Swal from 'sweetalert2';
 import AddIcon from '@mui/icons-material/Add';
-
+import SearchIcon from '@material-ui/icons/Search';
+import {
+  TextField,
+  IconButton,
+  InputAdornment,
+  FormControl,
+  Autocomplete
+} from '@mui/material';
 const Folios = () => {
   let history = useHistory();
   const [displayRows, setDisplayRows] = useState([]);
   const [loading, setLoading] = React.useState(true);
+  const [folioNumber, setFolioNumber] = React.useState('');
 
   const token = JSON.parse(localStorage.getItem('token'));
 
@@ -52,6 +60,9 @@ const Folios = () => {
   const handleAddfolios = () => {
     history.push('/admin/folios/add');
   };
+  const handleSearchFolioNumber = (folioNumber) => {
+    alert(folioNumber);
+  };
 
   return (
     <div className="folios-main">
@@ -61,23 +72,22 @@ const Folios = () => {
 
       <div id="folios-container">
         <h1 className="folio-title">Folios</h1>
-        <h1 className="folio-overview">Overview</h1>
-
-        <p className="total-folios">Total Folios</p>
-        <p className="total-folios-no">{displayRows.length}</p>
-
-        {/* <div className="add-folio-btn"> */}
-        <div>
+        {/* <h1 className="folio-overview">Overview</h1> */}
+        <div className="folio-oneline">
+          <div>
+            <p className="total-folios">Total Folios</p>
+            <p className="total-folios-no">{displayRows.length}</p>
+          </div>
+          {/* <div className="add-folio-btn"> */}
           <Button
+            className="add-folio-btn"
             variant="contained"
             onClick={handleAddfolios}
-            style={{ backgroundColor: '#E95B3E', textTransform: 'none' }}
           >
+            <AddIcon sx={{ marginRight: '10px' }} />
             Add New Folio
-            <AddIcon sx={{ marginLeft: '10px' }} />
           </Button>
         </div>
-
         {/* <Button variant="outlined" style={{ color: '#E95B3E' }}>
             <svg
               width="24"
@@ -95,7 +105,42 @@ const Folios = () => {
             {'\n'} List
           </Button> */}
         {/* </div> */}
-
+        <FormControl variant="standard">
+          <Autocomplete
+            options={displayRows}
+            renderInput={(params) => (
+              <TextField {...params} className="folio-searchbar" />
+            )}
+            // className="folio-searchbar"
+            placeholder="Search by folio number"
+            // value={folioId}
+            // onChange={(e) => {
+            //   setFolioId(e.target.value);
+            // }}
+            value={folioNumber}
+            onChange={(event, newValue) => {
+              setFolioNumber(newValue);
+            }}
+            getOptionLabel={(option) =>
+              `${option.folioNumber} - ${option?.user?.name}`
+            }
+            // inputValue={inputValue}
+            // onInputChange={(event, newInputValue) => {
+            //   setInputValue(newInputValue);
+            // }}
+            onKeyDown={(e) => {
+              if (e.key == 'Enter') {
+                e.preventDefault();
+                alert('add functionality');
+                handleSearchFolioNumber(folioNumber);
+                return;
+              }
+            }}
+          />
+          {/* {errorName && (
+            <small style={{ color: 'red' }}>Folio with ID not found!</small>
+          )} */}
+        </FormControl>
         <div>
           <CustomizedTables
             displayRows={displayRows}
