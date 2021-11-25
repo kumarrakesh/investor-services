@@ -18,7 +18,7 @@ const FolioAddTransaction = () => {
   const [loading, setLoading] = useState(false);
 
   const [values, setValues] = React.useState({
-    folioName: '',
+    folioNumber: '',
     investorName: '',
     investorPassport: '',
     commitment: '',
@@ -53,8 +53,7 @@ const FolioAddTransaction = () => {
 
   const setFolioBody = async () => {
     setValues({
-      folioId: location?.state?.row?.folioId,
-      folioName: location?.state?.row?.folioName,
+      folioNumber: location?.state?.row?.folioNumber,
       investorName: location?.state?.row?.user.name,
       investorPassport: location?.state?.row?.user.passport,
       commitment: location?.state?.row?.commitment,
@@ -76,7 +75,7 @@ const FolioAddTransaction = () => {
             'x-access-token': token
           },
           body: JSON.stringify({
-            folioId: location?.state?.row?.folioId
+            folioNumber: location?.state?.row?.folioNumber
           })
         }
       );
@@ -124,10 +123,10 @@ const FolioAddTransaction = () => {
           >
             <div className="folio-add-transaction-row-item">
               <div className="folio-add-transaction-row-item-label">
-                Folio Name
+                Folio Number
               </div>
               <div className="folio-add-transaction-row-item-value">
-                {values.folioName}
+                {values.folioNumber}
               </div>
             </div>
 
