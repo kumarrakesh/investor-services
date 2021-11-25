@@ -17,9 +17,10 @@ import {
 } from '@mui/material';
 const Folios = () => {
   let history = useHistory();
+  const [ogRows, setOgRows] = useState([]);
   const [displayRows, setDisplayRows] = useState([]);
   const [loading, setLoading] = React.useState(true);
-  const [folioNumber, setFolioNumber] = React.useState('');
+  const [folioNumber, setFolioNumber] = React.useState({});
 
   const token = JSON.parse(localStorage.getItem('token'));
 
@@ -51,6 +52,7 @@ const Folios = () => {
       );
       const data = await response.json();
       setDisplayRows(data.data);
+      setOgRows(data.data);
     } catch (e) {
       console.log(e);
     }
@@ -60,10 +62,23 @@ const Folios = () => {
   const handleAddfolios = () => {
     history.push('/admin/folios/add');
   };
-  const handleSearchFolioNumber = (folioNumber) => {
-    alert(folioNumber);
+  const handleSearchFolioNumber = async (folioNumber) => {
+    setLoading(true);
+    let filtered = ogRows.filter((row) => {
+      // console.log(row);
+      return row?.folioNumber === folioNumber?.folioNumber;
+    });
+    setDisplayRows(filtered);
+    // sleep for 1 second
+    await setTimeout(() => {
+      setLoading(false);
+    }, 250);
   };
-
+  useEffect(() => {
+    if (!folioNumber || folioNumber.length < 1) {
+      setDisplayRows(ogRows);
+    } else handleSearchFolioNumber(folioNumber);
+  }, [folioNumber]);
   return (
     <div className="folios-main">
       <div>
@@ -107,9 +122,13 @@ const Folios = () => {
         {/* </div> */}
         <FormControl variant="standard">
           <Autocomplete
-            options={displayRows}
+            options={ogRows}
             renderInput={(params) => (
-              <TextField {...params} className="folio-searchbar" />
+              <TextField
+                {...params}
+                className="folio-searchbar"
+                placeholder="Search by folio number"
+              />
             )}
             // className="folio-searchbar"
             placeholder="Search by folio number"
@@ -121,21 +140,23 @@ const Folios = () => {
             onChange={(event, newValue) => {
               setFolioNumber(newValue);
             }}
-            getOptionLabel={(option) =>
-              `${option.folioNumber} - ${option?.user?.name}`
-            }
+            getOptionLabel={(option) => {
+              if (option?.folioNumber)
+                return `${option?.folioNumber} - ${option?.user?.name}`;
+              return '';
+            }}
             // inputValue={inputValue}
             // onInputChange={(event, newInputValue) => {
             //   setInputValue(newInputValue);
             // }}
-            onKeyDown={(e) => {
-              if (e.key == 'Enter') {
-                e.preventDefault();
-                alert('add functionality');
-                handleSearchFolioNumber(folioNumber);
-                return;
-              }
-            }}
+            // onKeyDown={(e) => {
+            //   if (e.key == 'Enter') {
+            //     e.preventDefault();
+            //     console.log(folioNumber);
+            //     handleSearchFolioNumber(folioNumber);
+            //     return;
+            //   }
+            // }}
           />
           {/* {errorName && (
             <small style={{ color: 'red' }}>Folio with ID not found!</small>
