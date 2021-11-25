@@ -25,10 +25,17 @@ const AddFolio = () => {
     investorId: '',
     commitment: '',
     yield: '',
-    folioName: '',
-    investorName: ''
+    folioNo: '',
+    investorName: 'Name',
+    address: 'address',
+    city: 'city',
+    state: 'state',
+    country: 'country',
+    pincode: 'PIN',
+    userPassport: 'passport'
   });
 
+  const [user, setUser] = useState([]);
   const [loading, setLoading] = useState(false);
   const [errorName, setErrorName] = useState(false);
   const [helperText, setHelperText] = useState(true);
@@ -64,11 +71,11 @@ const AddFolio = () => {
         {
           method: 'POST',
           body: JSON.stringify({
-            userId: values.investorId,
+            userId: values.userPassport,
             commitment: values.commitment,
             yield: values.yield,
             date: selectedDate,
-            folioName: values.folioName
+            folioNumber: values.folioNo
           }),
           headers: {
             'Content-Type': 'application/json',
@@ -93,24 +100,32 @@ const AddFolio = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API}/api/user/name/get`,
+        `${process.env.REACT_APP_API}/api/user/search/passport`,
         {
           method: 'POST',
           body: JSON.stringify({
             passport: values.investorId
           }),
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'x-access-token': JSON.parse(localStorage.getItem('token'))
           }
         }
       );
       const data = await response.json();
-      console.log(data);
-      if (data.error) {
+      console.log(data.user);
+      if (!data.success) {
         setErrorName(true);
-        setValues({ ...values, investorName: '' });
       } else {
-        setValues({ ...values, investorName: data.name });
+        setValues({
+          investorName: data?.user?.name,
+          userPassport: data.user.passport,
+          address: data.user.address,
+          city: data.user.city,
+          state: data.user.state,
+          country: data.user.country,
+          pincode: data.user.pincode
+        });
         setErrorName(false);
         setHelperText(false);
       }
@@ -140,44 +155,17 @@ const AddFolio = () => {
           </IconButton>
         </div>
 
-        <h1 id="add-folio-subtitle">Add Folio</h1>
+        <h1 id="add-folio-subtitle">Add New Folio</h1>
 
         <form action="" onSubmit={submitForm} className="add-folios-div">
-          <div className="add-folio-input-1">
-            <FormControl variant="standard" sx={{ width: '100%' }}>
-              <TextField
-                required
-                id="outlined-required"
-                value={values.folioName}
-                onChange={handleChange('folioName')}
-                label="Folio Name"
-              />
-            </FormControl>
-
-            <FormControl variant="standard" sx={{ width: '100%' }}>
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <MobileDatePicker
-                  maxDate={new Date()}
-                  label="Registration Date"
-                  inputFormat="dd/MM/yyyy"
-                  value={selectedDate}
-                  onChange={handleDateChange}
-                  disableCloseOnSelect={false}
-                  renderInput={(params) => (
-                    <TextField required {...params} sx={{ width: '100%' }} />
-                  )}
-                />
-              </LocalizationProvider>
-            </FormControl>
-          </div>
-
-          <div className="add-folio-input-2">
+          <div>
             <FormControl variant="standard" sx={{ width: '100%' }}>
               <TextField
                 required
                 label="Investor Passport No."
                 value={values.investorId}
                 onChange={handleChange('investorId')}
+                defaultValue=""
                 onKeyDown={(e) => {
                   if (e.key == 'Enter') {
                     e.preventDefault();
@@ -209,22 +197,92 @@ const AddFolio = () => {
                 </small>
               }
             </FormControl>
+          </div>
 
-            {/* <PageviewIcon /> */}
+          <div className="add-folio-info">
+            <div
+              className="add-folio-info-row"
+              style={{ borderBottom: ' 1px solid #E5E5E5' }}
+            >
+              <div className="add-folio-info-row-item">
+                <div className="add-folio-info-row-item-label">
+                  Investor Name
+                </div>
+                <div className="add-folio-info-row-item-value">
+                  {values.investorName}
+                </div>
+              </div>
 
+              <div className="add-folio-info-row-item">
+                <div className="add-folio-info-row-item-label">
+                  Passport Number
+                </div>
+                <div
+                  className="add-folio-info-row-item-value"
+                  style={{ textTransform: 'none' }}
+                >
+                  {values.userPassport}
+                </div>
+              </div>
+
+              <div className="add-folio-info-row-item">
+                <div className="add-folio-info-row-item-label">
+                  Investor Address
+                </div>
+                <div
+                  className="add-folio-info-row-item-value"
+                  style={{ textTransform: 'none' }}
+                >
+                  {values.address},{values.city}, {values.state},
+                  {values.country},PIN-{values.pincode}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="add-folio-input-1">
             <FormControl variant="standard" sx={{ width: '100%' }}>
               <TextField
                 required
-                disabled
                 id="outlined-required"
-                value={values.investorName}
-                onChange={handleChange('investorName')}
-                label="Investor Name"
+                value={values.folioNo}
+                onChange={handleChange('folioNo')}
+                label="Folio No."
               />
+            </FormControl>
+
+            <FormControl variant="standard" sx={{ width: '100%' }}>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <MobileDatePicker
+                  maxDate={new Date()}
+                  label="Registration Date"
+                  inputFormat="dd/MM/yyyy"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  disableCloseOnSelect={false}
+                  renderInput={(params) => (
+                    <TextField required {...params} sx={{ width: '100%' }} />
+                  )}
+                />
+              </LocalizationProvider>
             </FormControl>
           </div>
 
           <div className="add-folio-input-3">
+            <FormControl variant="standard" sx={{ width: '100%' }}>
+              <TextField
+                required
+                id="outlined-number"
+                label="Yield(%)"
+                type="number"
+                value={values.yield}
+                onChange={handleChange('yield')}
+                InputLabelProps={{
+                  shrink: true
+                }}
+              />
+            </FormControl>
+
             <FormControl fullWidth sx={{ width: '100%' }}>
               <InputLabel required htmlFor="outlined-adornment-amount">
                 Capital Commitment{' '}
@@ -240,31 +298,18 @@ const AddFolio = () => {
                 label="Capital Commitment"
               />
             </FormControl>
-
-            <FormControl variant="standard" sx={{ width: '100%' }}>
-              <TextField
-                required
-                id="outlined-number"
-                label="Yield(%)"
-                type="number"
-                value={values.yield}
-                onChange={handleChange('yield')}
-                InputLabelProps={{
-                  shrink: true
-                }}
-              />
-            </FormControl>
           </div>
 
           <div className="add-folios-btn-div" style={{ width: '100%' }}>
             <Button
               id="add-folios-btn"
               type="submit"
-              variant="outlined"
+              variant="contained"
               style={{
-                color: '#E95B3E',
+                color: 'white',
                 textTransform: 'none',
-                width: '16rem'
+                width: '16rem',
+                backgroundColor: '#E95B3E'
               }}
             >
               Add Folio
