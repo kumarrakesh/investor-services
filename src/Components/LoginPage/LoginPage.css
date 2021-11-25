@@ -69,17 +69,17 @@
   font-size: 0.8rem;
 }
 #login-welcome-text {
-  color: #132f5e;
+  color: var(--secondary-color);
   font-weight: 700;
   font-size: 1.5rem;
 }
 #login-login-type {
-  color: #132f5e;
+  color: var(--secondary-color);
   font-weight: 400;
   font-size: 1.125rem;
 }
 #login-forgot-password {
-  color: #132f5e;
+  color: var(--secondary-color);
   margin-left: auto;
   font-weight: 500;
   font-size: 0.8rem;

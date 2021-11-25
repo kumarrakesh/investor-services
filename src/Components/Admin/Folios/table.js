@@ -17,25 +17,33 @@ import TextField from '@mui/material/TextField';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: '#E6E8EA !important',
-    color: 'var(--secondary-color)'
+    backgroundColor: '#F6F8FA !important',
+    color: 'var(--secondary-color)',
+    padding: '0.9rem 1rem'
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
-    color: 'var(--secondary-color)'
+    color: 'var(--secondary-color)',
+    padding: '0.6rem 1rem'
   }
 }));
+// border: '1px solid black'
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
-    backgroundColor: 'white !important'
+    backgroundColor: 'white !important',
+    border: 'none !important',
+    outline: 'none'
   },
   '&:nth-of-type(even)': {
-    backgroundColor: 'var(--light-blue-bg)'
+    backgroundColor: '#F6F8FA',
+    border: 'none !important',
+    outline: 'none'
   },
   // hide last border
   '&:last-child td, &:last-child th': {
-    border: 0
+    border: 'none !important',
+    outline: 'none'
   }
 }));
 
@@ -85,7 +93,7 @@ export default function CustomizedTables({
   };
   const handleAddFolioTranscation = (row) => {
     // console.log(row);
-    if (row.folioId)
+    if (row.folioNumber)
       history.push({
         pathname: '/admin/folios/addTransaction',
         state: { row }
@@ -192,27 +200,32 @@ export default function CustomizedTables({
   // console.log(displayRows);
   return (
     <>
-      <TableContainer sx={{ maxHeight: '50vh' }} component={Paper}>
+      <TableContainer
+        sx={{ maxHeight: '50vh', borderRadius: 2 }}
+        component={Paper}
+      >
         <Table
           stickyHeader
-          sx={{ minWidth: 700, overflow: 'scroll' }}
+          sx={{
+            minWidth: 700,
+            overflow: 'scroll'
+          }}
           aria-label="customized table"
           ref={tableRef}
         >
-          <TableHead>
+          <TableHead style={{ border: '1px solid red' }}>
             <TableRow>
               <StyledTableCell>Date Added</StyledTableCell>
-              <StyledTableCell align="center">Folio ID</StyledTableCell>
+              <StyledTableCell align="center">Folio No.</StyledTableCell>
               {/* <StyledTableCell align="center">
                 Investor Passport
               </StyledTableCell> */}
               <StyledTableCell align="center">Investor Name</StyledTableCell>
+              <StyledTableCell align="center">Passport No.</StyledTableCell>
               <StyledTableCell align="center">Commitment</StyledTableCell>
-              <StyledTableCell align="center">
-                Total Contribution
-              </StyledTableCell>
-              <StyledTableCell align="center">Distribution</StyledTableCell>
-              <StyledTableCell align="center">Pending Amount</StyledTableCell>
+              <StyledTableCell align="center">Contribution</StyledTableCell>
+              {/* <StyledTableCell align="center">Distribution</StyledTableCell> */}
+              {/* <StyledTableCell align="center">Pending Amount</StyledTableCell> */}
               <StyledTableCell align="center">Action</StyledTableCell>
             </TableRow>
           </TableHead>
@@ -493,13 +506,16 @@ export default function CustomizedTables({
                 {row.folioName}
               </StyledTableCell> */}
                   <StyledTableCell align="center" component="th" scope="row">
-                    {row.folioId}
+                    {row.folioNumber}
                   </StyledTableCell>
                   {/* <StyledTableCell align="center" component="th" scope="row">
                     {row.user.passport}
                   </StyledTableCell> */}
                   <StyledTableCell align="center" component="th" scope="row">
                     {row.user.name}
+                  </StyledTableCell>
+                  <StyledTableCell align="center" component="th" scope="row">
+                    {row.user.passport}
                   </StyledTableCell>
                   <StyledTableCell align="center" component="th" scope="row">
                     {row.commitment.toFixed(2)}
@@ -509,12 +525,12 @@ export default function CustomizedTables({
                     -{row.contribution.toFixed(2)}
                   </StyledTableCell>
 
-                  <StyledTableCell align="center" component="th" scope="row">
+                  {/* <StyledTableCell align="center" component="th" scope="row">
                     {row.contribution.toFixed(2)}
                   </StyledTableCell>
                   <StyledTableCell align="center" component="th" scope="row">
                     {(row.commitment - row.contribution).toFixed(2)}
-                  </StyledTableCell>
+                  </StyledTableCell> */}
                   <StyledTableCell align="center" component="th" scope="row">
                     {
                       <Button
@@ -523,12 +539,14 @@ export default function CustomizedTables({
                         }}
                         variant="contained"
                         style={{
-                          backgroundColor: '#E95B3E',
-                          textTransform: 'none'
+                          border: '1px solid var(--primary-color)',
+                          backgroundColor: 'white',
+                          textTransform: 'none',
+                          color: 'var(--primary-color)'
                         }}
                       >
-                        <AddIcon sx={{ marginRight: '5px' }} />
-                        Transaction
+                        {/* <AddIcon sx={{ marginRight: '5px' }} /> */}
+                        Add Transaction
                       </Button>
                     }
                   </StyledTableCell>

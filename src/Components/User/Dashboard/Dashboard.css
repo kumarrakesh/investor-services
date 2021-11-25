@@ -2,7 +2,7 @@
   font-weight: 500;
   font-size: 1.5rem !important;
   font-weight: 600;
-  color: #132f5e;
+  color: var(--secondary-color);
 }
 
 .statement-header-container {
@@ -57,13 +57,13 @@
 .statement-summary-name {
   font-weight: 300;
   font-size: 0.875;
-  color: #132f5e;
+  color: var(--secondary-color);
 }
 
 .statement-summary-val {
   font-weight: 500;
   font-size: 1.5rem;
-  color: #132f5e;
+  color: var(--secondary-color);
 }
 
 .date-div {

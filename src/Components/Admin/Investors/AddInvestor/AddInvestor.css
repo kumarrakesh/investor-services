@@ -19,13 +19,13 @@
 #add-investors-subtitle {
   font-weight: 500;
   font-size: 18px;
-  color: #132f5e;
+  color: var(--secondary-color);
 }
 
 #add-investors-title {
   font-weight: 500;
   font-size: 1.5rem;
-  color: #132f5e;
+  color: var(--secondary-color);
 }
 
 .add-inv-all-inputs {

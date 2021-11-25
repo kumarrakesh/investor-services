@@ -20,7 +20,7 @@
   font-size: 24px;
   line-height: 28px;
 
-  color: #132f5e;
+  color: var(--secondary-color);
 }
 
 .overview {
@@ -33,7 +33,7 @@
   font-weight: 500;
   font-size: 18px;
   line-height: 21px;
-  color: #132f5e;
+  color: var(--secondary-color);
 }
 
 .total-investors {
@@ -47,7 +47,7 @@
   font-size: 14px;
   line-height: 16px;
 
-  color: #132f5e;
+  color: var(--secondary-color);
 }
 
 .total-no {
@@ -61,7 +61,7 @@
   font-size: 24px;
   line-height: 28px;
 
-  color: #132f5e;
+  color: var(--secondary-color);
 }
 
 .inv-btns {
