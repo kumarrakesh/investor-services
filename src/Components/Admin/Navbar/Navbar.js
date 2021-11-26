@@ -87,7 +87,7 @@ const AdNavbar = () => {
         {size.width > 770 && (
           <>
             <div id="header-logo">
-              <img src="https://via.placeholder.com/100" alt="tiwpe logo" />
+              <img src="https://via.placeholder.com/100x70" alt="tiwpe logo" />
             </div>
 
             <div
@@ -95,12 +95,12 @@ const AdNavbar = () => {
               style={{ color: '#E95B3E', textTransform: 'none' }}
             >
               <div className="pic">
-                <img src="https://via.placeholder.com/100" alt="" />
+                <img src="https://via.placeholder.com/50" alt="" />
               </div>
 
               <div className="prof-txt">
                 <div className="welcome">
-                  <h4>Welcome,</h4>
+                  <p>Welcome,</p>
                 </div>
                 <div className="prof-name">Admin</div>
               </div>
@@ -136,7 +136,14 @@ const AdNavbar = () => {
             Investors
           </div>
 
-          <RightIcon style={{ flex: 1 }} />
+          <RightIcon
+            style={{
+              flex: 1,
+              color: location.pathname.startsWith('/admin/investor')
+                ? '#E95B3E'
+                : 'transparent'
+            }}
+          />
         </Button>
         <Divider
           style={{
@@ -167,7 +174,14 @@ const AdNavbar = () => {
           <div className="dash-name" style={{ flex: 2 }}>
             Folios
           </div>
-          <RightIcon style={{ flex: 1 }} />
+          <RightIcon
+            style={{
+              flex: 1,
+              color: location.pathname.startsWith('/admin/folios')
+                ? '#E95B3E'
+                : 'transparent'
+            }}
+          />
         </Button>
 
         {/* <Button
@@ -225,7 +239,14 @@ const AdNavbar = () => {
             Folios Statements
           </div>
 
-          <RightIcon style={{ flex: 1 }} />
+          <RightIcon
+            style={{
+              flex: 1,
+              color: location.pathname.startsWith('/admin/folioStatements')
+                ? '#E95B3E'
+                : 'transparent'
+            }}
+          />
         </Button>
 
         {/* <Button
@@ -277,7 +298,15 @@ const AdNavbar = () => {
           <div className="dash-name" style={{ flex: 2 }}>
             Queries
           </div>
-          <RightIcon style={{ flex: 1 }} />
+
+          <RightIcon
+            style={{
+              flex: 1,
+              color: location.pathname.startsWith('/admin/queries')
+                ? '#E95B3E'
+                : 'transparent'
+            }}
+          />
         </Button>
         <Divider
           style={{
@@ -302,7 +331,8 @@ const AdNavbar = () => {
           <div className="dash-name" style={{ flex: 2 }}>
             Logout
           </div>
-          <RightIcon style={{ flex: 1 }} />
+          {/* <RightIcon style={{ flex: 1 }} /> */}
+          <div style={{ flex: 1 }}></div>
         </Button>
       </div>
     </div>

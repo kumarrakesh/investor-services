@@ -99,7 +99,7 @@ const Folios = () => {
             variant="contained"
             onClick={handleAddfolios}
           >
-            <AddIcon sx={{ marginRight: '10px' }} />
+            <AddIcon sx={{ marginRight: '0.5rem' }} />
             Add New Folio
           </Button>
         </div>
@@ -145,6 +145,8 @@ const Folios = () => {
                 return `${option?.folioNumber} - ${option?.user?.name}`;
               return '';
             }}
+            forcePopupIcon={true}
+            popupIcon={<SearchIcon htmlColor="var(--primary-color)" />}
             // inputValue={inputValue}
             // onInputChange={(event, newInputValue) => {
             //   setInputValue(newInputValue);
