@@ -1,5 +1,6 @@
 .add-folios-main {
   display: flex;
+  background-color: var(--light-blue-bg);
 }
 
 #add-folios-container {
@@ -34,17 +35,43 @@
 
 .add-folios-div > div {
   display: flex;
-  gap: 10rem;
+  gap: 5rem;
   flex: 1;
   justify-content: center;
+}
+
+.folio-searchbar .Mui-focused {
+  box-shadow: none;
+  outline: 2px #91acd9 solid !important;
+}
+
+.add-folio-searchbar .MuiAutocomplete-popupIndicator {
+  transform: none;
+}
+.add-folio-searchbar input {
+  padding: 0.6rem 0.75rem !important;
+}
+.add-folio-searchbar input::placeholder {
+  color: #5a6d8e !important;
+  opacity: 0.9;
+}
+.add-folio-searchbar * {
+  border: none !important;
+}
+.add-folio-searchbar > * {
+  outline: 1px #91acd9 solid !important;
+}
+.add-folio-searchbar {
+  background-color: white !important;
+  width: 100% !important;
 }
 
 .add-folio-info {
   display: flex;
   flex-direction: column;
-  background: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0px 4px 11px 3px #0000000d;
+
+  /* border-radius: 8px; */
+  /* box-shadow: 0px 4px 11px 3px #0000000d; */
   width: 100%;
   margin: 0rem 0rem 0rem 0rem;
 }
@@ -52,7 +79,6 @@
 .add-folio-info-row {
   display: flex;
   gap: 1rem;
-  padding: 2rem;
 }
 .add-folio-info-row-item {
   flex: 1;
