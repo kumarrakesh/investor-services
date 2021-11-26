@@ -39,7 +39,7 @@ const AddFolio = () => {
   const [loading, setLoading] = useState(false);
   const [errorName, setErrorName] = useState(false);
   const [helperText, setHelperText] = useState(true);
-  const [investorRow, setInvestorRow] = useState('');
+  const [investorRow, setInvestorRow] = useState([]);
   const [selectedDate, setSelectedDate] = React.useState(new Date());
   const [ogRows, setOgRows] = useState([]);
   const [flag, setFlag] = useState(false);
@@ -74,12 +74,6 @@ const AddFolio = () => {
     }
     setLoading(false);
   };
-
-  useEffect(() => {
-    if (!investorRow || investorRow.length < 1) {
-      setFlag(false);
-    } else setFlag(true);
-  }, [investorRow]);
 
   const handleDateChange = (newValue) => {
     setSelectedDate(newValue);
@@ -122,6 +116,12 @@ const AddFolio = () => {
     }
     history.push('/admin/folios');
   };
+
+  useEffect(() => {
+    if (investorRow) {
+      setFlag(true);
+    } else setFlag(false);
+  }, [investorRow]);
 
   return (
     <div className="add-folios-main">
@@ -225,7 +225,7 @@ const AddFolio = () => {
                   Investor Name
                 </div>
                 <div className="add-folio-info-row-item-value">
-                  {flag ? investorRow.name : 'Name'}
+                  {flag ? investorRow?.name : 'Name'}
                 </div>
               </div>
 
@@ -237,7 +237,7 @@ const AddFolio = () => {
                   className="add-folio-info-row-item-value"
                   style={{ textTransform: 'none' }}
                 >
-                  {flag ? investorRow.passport : 'passport'}
+                  {flag ? investorRow?.passport : 'passport'}
                 </div>
               </div>
 
@@ -249,10 +249,10 @@ const AddFolio = () => {
                   className="add-folio-info-row-item-value"
                   style={{ textTransform: 'none' }}
                 >
-                  {flag ? investorRow.address : 'address'},
-                  {flag ? investorRow.city : 'city'},{' '}
-                  {flag ? investorRow.state : 'state'},
-                  {flag ? investorRow.country : 'country'}
+                  {flag ? investorRow?.address : 'address'},
+                  {flag ? investorRow?.city : 'city'},{' '}
+                  {flag ? investorRow?.state : 'state'},
+                  {flag ? investorRow?.country : 'country'}
                 </div>
               </div>
             </div>
@@ -327,8 +327,9 @@ const AddFolio = () => {
               id="add-folios-btn"
               type="submit"
               variant="contained"
+              disabled={!flag}
               style={{
-                color: 'white',
+                color: flag ? 'white' : 'gray',
                 textTransform: 'none',
                 width: '16rem',
                 backgroundColor: '#E95B3E'
