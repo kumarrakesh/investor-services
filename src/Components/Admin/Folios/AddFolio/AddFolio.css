@@ -2,7 +2,38 @@
   display: flex;
   background-color: var(--light-blue-bg);
 }
+.add-folio-swal-container {
+  z-index: 9999999;
+  width: 100vw !important;
+}
+.add-folio-swal {
+  height: 3rem !important;
+  padding: 3px 10px !important;
+  display: flex;
+  align-items: center;
+  width: 35vw !important;
+  margin-left: 300px;
+  max-width: 100vw;
+}
 
+.swal-success-bg-color {
+  background-color: hsl(120, 33%, 94%) !important;
+}
+.swal-error-bg-color {
+  background-color: hsl(0, 33%, 94%) !important;
+}
+/* .add-folio-swal-image { */
+/* display: none !important; */
+/* max-height: 0.4rem !important; */
+/* } */
+.add-folio-swal-title {
+  height: 100%;
+  padding-top: 0.75rem !important;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  font-size: 1rem !important;
+  font-weight: 400;
+}
 #add-folios-container {
   width: 100%;
   padding: 3rem 5rem;
@@ -100,6 +131,10 @@
 }
 
 @media screen and (max-width: 768px) {
+  .add-folio-swal {
+    width: 90vw !important;
+    margin-left: 0px;
+  }
   .add-folios-main {
     flex-direction: column;
   }
