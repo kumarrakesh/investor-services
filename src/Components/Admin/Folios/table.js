@@ -205,7 +205,7 @@ export default function CustomizedTables({
   return (
     <>
       <TableContainer
-        sx={{ maxHeight: '50vh', borderRadius: 2 }}
+        sx={{ maxHeight: '60vh', borderRadius: 2 }}
         component={Paper}
         style={{ boxShadow: '0px 0px 0px 1px #CECECE' }}
       >
@@ -238,7 +238,7 @@ export default function CustomizedTables({
             {!displayRows.length && (
               <StyledTableRow>
                 <StyledTableCell component="th" scope="row">
-                  {loading ? 'Loading...' : 'No Folios...'}
+                  {loading ? 'Loading...' : 'Loading...'}
                 </StyledTableCell>
               </StyledTableRow>
             )}

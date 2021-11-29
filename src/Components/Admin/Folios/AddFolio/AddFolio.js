@@ -9,16 +9,20 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Swal from 'sweetalert2';
 import IconButton from '@mui/material/IconButton';
-import CancelIcon from '@mui/icons-material/Cancel';
-import { LocalizationProvider, MobileDatePicker } from '@mui/lab';
+import CloseIcon from '@mui/icons-material/Close';
+import {
+  LocalizationProvider,
+  MobileDatePicker,
+  DesktopDatePicker
+} from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import TextField from '@mui/material/TextField';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+
 const AddFolio = () => {
   let history = useHistory();
   const token = JSON.parse(localStorage.getItem('token'));
@@ -39,7 +43,7 @@ const AddFolio = () => {
   const [loading, setLoading] = useState(false);
   const [errorName, setErrorName] = useState(false);
   const [helperText, setHelperText] = useState(true);
-  const [investorRow, setInvestorRow] = useState([]);
+  const [investorRow, setInvestorRow] = useState({});
   const [selectedDate, setSelectedDate] = React.useState(new Date());
   const [ogRows, setOgRows] = useState([]);
   const [flag, setFlag] = useState(false);
@@ -118,9 +122,15 @@ const AddFolio = () => {
   };
 
   useEffect(() => {
-    if (investorRow) {
+    if (
+      !investorRow ||
+      (Object.keys(investorRow).length === 0 &&
+        investorRow.constructor === Object)
+    ) {
+      setFlag(false);
+    } else {
       setFlag(true);
-    } else setFlag(false);
+    }
   }, [investorRow]);
 
   return (
@@ -131,15 +141,15 @@ const AddFolio = () => {
 
       <div id="add-folios-container">
         <div className="add-folio-header">
-          <h1 className="add-folio-title">Folios</h1>
+          <h2 className="add-folio-title">Folios</h2>
           <IconButton
             size="large"
-            style={{ color: '#E95B3E' }}
+            style={{ color: '#132f5e' }}
             onClick={() => {
               history.push('/admin/folios');
             }}
           >
-            <CancelIcon fontSize="inherit" />
+            <CloseIcon fontSize="large" />
           </IconButton>
         </div>
 
@@ -148,6 +158,9 @@ const AddFolio = () => {
         <form action="" onSubmit={submitForm} className="add-folios-div">
           <div>
             <FormControl variant="standard" sx={{ width: '100%' }}>
+              <small className="add-folio-find-investor-label">
+                Find Investor
+              </small>
               <Autocomplete
                 options={ogRows}
                 renderInput={(params) => (
@@ -160,6 +173,7 @@ const AddFolio = () => {
                 value={investorRow}
                 onChange={(event, newValue) => {
                   setInvestorRow(newValue);
+                  console.log(newValue);
                 }}
                 getOptionLabel={(option) => {
                   if (option?.passport)
@@ -175,44 +189,6 @@ const AddFolio = () => {
             <small style={{ color: 'red' }}>Folio with ID not found!</small>
           )} */}
             </FormControl>
-            {/* <FormControl variant="standard" sx={{ width: '100%' }}>
-              <TextField
-                required
-                label="Investor Passport No."
-                value={values.investorId}
-                onChange={handleChange('investorId')}
-                defaultValue=""
-                onKeyDown={(e) => {
-                  if (e.key == 'Enter') {
-                    e.preventDefault();
-                    handleSearchInvestorName();
-                    return;
-                  }
-                }}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment>
-                      <IconButton
-                        style={{ color: 'red' }}
-                        size="large"
-                        onClick={handleSearchInvestorName}
-                      >
-                        <SearchIcon />
-                      </IconButton>
-                    </InputAdornment>
-                  )
-                }}
-              />
-              {
-                <small style={{ color: 'red' }}>
-                  {errorName
-                    ? 'Investor not found in system, Please add first'
-                    : helperText
-                    ? 'Add Passport Number to find Investor'
-                    : ''}
-                </small>
-              }
-            </FormControl> */}
           </div>
 
           <div className="add-folio-info">
@@ -225,7 +201,7 @@ const AddFolio = () => {
                   Investor Name
                 </div>
                 <div className="add-folio-info-row-item-value">
-                  {flag ? investorRow?.name : 'Name'}
+                  {flag ? investorRow?.name : 'NA'}
                 </div>
               </div>
 
@@ -237,7 +213,7 @@ const AddFolio = () => {
                   className="add-folio-info-row-item-value"
                   style={{ textTransform: 'none' }}
                 >
-                  {flag ? investorRow?.passport : 'passport'}
+                  {flag ? investorRow?.passport : 'NA'}
                 </div>
               </div>
 
@@ -249,10 +225,16 @@ const AddFolio = () => {
                   className="add-folio-info-row-item-value"
                   style={{ textTransform: 'none' }}
                 >
-                  {flag ? investorRow?.address : 'address'},
-                  {flag ? investorRow?.city : 'city'},{' '}
-                  {flag ? investorRow?.state : 'state'},
-                  {flag ? investorRow?.country : 'country'}
+                  {flag
+                    ? investorRow?.address +
+                      ',' +
+                      investorRow?.city +
+                      ',' +
+                      ' ' +
+                      investorRow?.state +
+                      ',' +
+                      investorRow?.country
+                    : 'NA'}
                 </div>
               </div>
             </div>
@@ -267,12 +249,35 @@ const AddFolio = () => {
                 value={values.folioNo}
                 onChange={handleChange('folioNo')}
                 label="Folio No."
+                style={{ backgroundColor: 'white', color: '#132f5e' }}
               />
             </FormControl>
 
             <FormControl variant="standard" sx={{ width: '100%' }}>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <MobileDatePicker
+                <DesktopDatePicker
+                  required
+                  maxDate={new Date()}
+                  disabled={!flag}
+                  label="Registration Date"
+                  inputFormat="dd/MM/yyyy"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  disableCloseOnSelect={false}
+                  minDate={new Date('2017-01-01')}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      sx={{
+                        width: '100%',
+                        backgroundColor: 'white',
+                        color: '#132f5e',
+                        svg: 'red'
+                      }}
+                    />
+                  )}
+                />
+                {/* <MobileDatePicker
                   maxDate={new Date()}
                   disabled={!flag}
                   label="Registration Date"
@@ -283,7 +288,7 @@ const AddFolio = () => {
                   renderInput={(params) => (
                     <TextField required {...params} sx={{ width: '100%' }} />
                   )}
-                />
+                /> */}
               </LocalizationProvider>
             </FormControl>
           </div>
@@ -301,6 +306,7 @@ const AddFolio = () => {
                 InputLabelProps={{
                   shrink: true
                 }}
+                style={{ backgroundColor: 'white', color: '#132f5e' }}
               />
             </FormControl>
 
@@ -318,6 +324,7 @@ const AddFolio = () => {
                   <InputAdornment position="start">$</InputAdornment>
                 }
                 label="Capital Commitment"
+                style={{ backgroundColor: 'white', color: '#132f5e' }}
               />
             </FormControl>
           </div>
@@ -331,7 +338,7 @@ const AddFolio = () => {
               style={{
                 color: flag ? 'white' : 'gray',
                 textTransform: 'none',
-                width: '16rem',
+                width: '14rem',
                 backgroundColor: '#E95B3E'
               }}
             >
