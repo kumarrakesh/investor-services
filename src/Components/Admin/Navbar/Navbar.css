@@ -46,6 +46,7 @@
   justify-content: space-evenly !important;
   width: 300px;
   height: 70px;
+  padding: 0 !important;
 }
 
 .dash-name {

@@ -113,8 +113,48 @@ const AddFolio = () => {
       setLoading(false);
 
       if (data.status) {
-        Swal.fire('Folio added successfully!', '', 'success');
-      } else Swal.fire('Something went wrong!', data?.error, 'error');
+        Swal.mixin({
+          customClass: {
+            container: 'add-folio-swal-container',
+            popup: 'add-folio-swal swal-success-bg-color',
+            title: 'add-folio-swal-title'
+          },
+          imageUrl: '',
+          imageHeight: 10,
+          imageWidth: 10,
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3000,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          }
+        }).fire(
+          'New folio successfully created for ' + investorRow?.name ||
+            'the investor!',
+          '',
+          'success'
+        );
+      } else
+        Swal.mixin({
+          customClass: {
+            container: 'add-folio-swal-container',
+            popup: 'add-folio-swal swal-error-bg-color',
+            title: 'add-folio-swal-title'
+          },
+          imageUrl: '',
+          imageHeight: 10,
+          imageWidth: 10,
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3000,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          }
+        }).fire(data.error || 'Something went wrong!', '', 'error');
     } catch (e) {
       console.log(e);
     }
