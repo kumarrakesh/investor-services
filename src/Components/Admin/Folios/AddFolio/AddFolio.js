@@ -293,7 +293,11 @@ const AddFolio = () => {
               />
             </FormControl>
 
-            <FormControl variant="standard" sx={{ width: '100%' }}>
+            <FormControl
+              variant="standard"
+              sx={{ width: '100%' }}
+              className="add-folio-registration-div"
+            >
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DesktopDatePicker
                   required
@@ -312,7 +316,7 @@ const AddFolio = () => {
                         width: '100%',
                         backgroundColor: 'white',
                         color: '#132f5e',
-                        svg: 'red'
+                        svg: 'var(--primary-color)'
                       }}
                     />
                   )}

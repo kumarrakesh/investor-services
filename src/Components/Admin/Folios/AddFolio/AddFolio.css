@@ -71,6 +71,10 @@
   margin-top: 1.5rem;
 }
 
+.add-folio-registration-div svg {
+  color: var(--primary-color) !important;
+}
+
 .add-folios-div > div {
   display: flex;
   gap: 3rem;
