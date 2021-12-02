@@ -19,7 +19,7 @@ const Folios = () => {
   let history = useHistory();
   const [ogRows, setOgRows] = useState([]);
   const [displayRows, setDisplayRows] = useState([]);
-  const [loading, setLoading] = React.useState(true);
+  const [loading, setLoading] = React.useState(false);
   const [folioNumber, setFolioNumber] = React.useState({});
 
   const token = JSON.parse(localStorage.getItem('token'));
@@ -91,7 +91,7 @@ const Folios = () => {
         <div className="folio-oneline">
           <div>
             <p className="total-folios">Total Folios</p>
-            <p className="total-folios-no">{displayRows.length}</p>
+            <p className="total-folios-no">{ogRows.length}</p>
           </div>
           {/* <div className="add-folio-btn"> */}
           <Button
@@ -99,7 +99,7 @@ const Folios = () => {
             variant="contained"
             onClick={handleAddfolios}
           >
-            <AddIcon sx={{ marginRight: '10px' }} />
+            <AddIcon sx={{ marginRight: '0.5rem' }} />
             Add New Folio
           </Button>
         </div>
@@ -145,6 +145,8 @@ const Folios = () => {
                 return `${option?.folioNumber} - ${option?.user?.name}`;
               return '';
             }}
+            forcePopupIcon={true}
+            popupIcon={<SearchIcon htmlColor="var(--primary-color)" />}
             // inputValue={inputValue}
             // onInputChange={(event, newInputValue) => {
             //   setInputValue(newInputValue);

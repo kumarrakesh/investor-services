@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import Button from '@mui/material/Button';
-import { Backdrop, CircularProgress } from '@mui/material';
+import { Backdrop, CircularProgress, Autocomplete } from '@mui/material';
 import AdNavbar from '../../Navbar/Navbar';
 import './AddFolio.css';
 
@@ -9,20 +9,25 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Swal from 'sweetalert2';
 import IconButton from '@mui/material/IconButton';
-import CancelIcon from '@mui/icons-material/Cancel';
-import { LocalizationProvider, MobileDatePicker } from '@mui/lab';
+import CloseIcon from '@mui/icons-material/Close';
+import {
+  LocalizationProvider,
+  MobileDatePicker,
+  DesktopDatePicker
+} from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import TextField from '@mui/material/TextField';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
-
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+
 const AddFolio = () => {
   let history = useHistory();
+  const token = JSON.parse(localStorage.getItem('token'));
   const [values, setValues] = React.useState({
     folioId: '',
-    investorId: '',
     commitment: '',
     yield: '',
     folioNo: '',
@@ -35,10 +40,13 @@ const AddFolio = () => {
     userPassport: 'passport'
   });
 
-  const [user, setUser] = useState([]);
   const [loading, setLoading] = useState(false);
   const [errorName, setErrorName] = useState(false);
   const [helperText, setHelperText] = useState(true);
+  const [investorRow, setInvestorRow] = useState({});
+  const [selectedDate, setSelectedDate] = React.useState(new Date());
+  const [ogRows, setOgRows] = useState([]);
+  const [flag, setFlag] = useState(false);
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
@@ -50,9 +58,26 @@ const AddFolio = () => {
       });
       history.push('/');
     }
+    getAllUsers();
   }, []);
 
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
+  const getAllUsers = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API}/api/users`, {
+        method: 'GET',
+        headers: {
+          'x-access-token': token
+        }
+      });
+      const data = await response.json();
+      setOgRows(data.data);
+      console.log(data.data);
+    } catch (e) {
+      console.log(e);
+    }
+    setLoading(false);
+  };
 
   const handleDateChange = (newValue) => {
     setSelectedDate(newValue);
@@ -71,7 +96,7 @@ const AddFolio = () => {
         {
           method: 'POST',
           body: JSON.stringify({
-            userId: values.userPassport,
+            userId: investorRow.passport,
             commitment: values.commitment,
             yield: values.yield,
             date: selectedDate,
@@ -88,52 +113,65 @@ const AddFolio = () => {
       setLoading(false);
 
       if (data.status) {
-        Swal.fire('Folio added successfully!', '', 'success');
-      } else Swal.fire('Something went wrong!', data?.error, 'error');
+        Swal.mixin({
+          customClass: {
+            container: 'add-folio-swal-container',
+            popup: 'add-folio-swal swal-success-bg-color',
+            title: 'add-folio-swal-title'
+          },
+          imageUrl: '',
+          imageHeight: 10,
+          imageWidth: 10,
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3000,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          }
+        }).fire(
+          'New folio successfully created for ' + investorRow?.name ||
+            'the investor!',
+          '',
+          'success'
+        );
+      } else
+        Swal.mixin({
+          customClass: {
+            container: 'add-folio-swal-container',
+            popup: 'add-folio-swal swal-error-bg-color',
+            title: 'add-folio-swal-title'
+          },
+          imageUrl: '',
+          imageHeight: 10,
+          imageWidth: 10,
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3000,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          }
+        }).fire(data.error || 'Something went wrong!', '', 'error');
     } catch (e) {
       console.log(e);
     }
     history.push('/admin/folios');
   };
 
-  const handleSearchInvestorName = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch(
-        `${process.env.REACT_APP_API}/api/user/search/passport`,
-        {
-          method: 'POST',
-          body: JSON.stringify({
-            passport: values.investorId
-          }),
-          headers: {
-            'Content-Type': 'application/json',
-            'x-access-token': JSON.parse(localStorage.getItem('token'))
-          }
-        }
-      );
-      const data = await response.json();
-      console.log(data.user);
-      if (!data.success) {
-        setErrorName(true);
-      } else {
-        setValues({
-          investorName: data?.user?.name,
-          userPassport: data.user.passport,
-          address: data.user.address,
-          city: data.user.city,
-          state: data.user.state,
-          country: data.user.country,
-          pincode: data.user.pincode
-        });
-        setErrorName(false);
-        setHelperText(false);
-      }
-    } catch (e) {
-      console.log(e);
+  useEffect(() => {
+    if (
+      !investorRow ||
+      (Object.keys(investorRow).length === 0 &&
+        investorRow.constructor === Object)
+    ) {
+      setFlag(false);
+    } else {
+      setFlag(true);
     }
-    setLoading(false);
-  };
+  }, [investorRow]);
 
   return (
     <div className="add-folios-main">
@@ -143,15 +181,15 @@ const AddFolio = () => {
 
       <div id="add-folios-container">
         <div className="add-folio-header">
-          <h1 className="add-folio-title">Folios</h1>
+          <h2 className="add-folio-title">Folios</h2>
           <IconButton
             size="large"
-            style={{ color: '#E95B3E' }}
+            style={{ color: '#132f5e' }}
             onClick={() => {
               history.push('/admin/folios');
             }}
           >
-            <CancelIcon fontSize="inherit" />
+            <CloseIcon fontSize="large" />
           </IconButton>
         </div>
 
@@ -160,56 +198,50 @@ const AddFolio = () => {
         <form action="" onSubmit={submitForm} className="add-folios-div">
           <div>
             <FormControl variant="standard" sx={{ width: '100%' }}>
-              <TextField
-                required
-                label="Investor Passport No."
-                value={values.investorId}
-                onChange={handleChange('investorId')}
-                defaultValue=""
-                onKeyDown={(e) => {
-                  if (e.key == 'Enter') {
-                    e.preventDefault();
-                    handleSearchInvestorName();
-                    return;
-                  }
+              <small className="add-folio-find-investor-label">
+                Find Investor
+              </small>
+              <Autocomplete
+                options={ogRows}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    className="add-folio-searchbar"
+                    placeholder="Search by Investor's Name or Passport"
+                  />
+                )}
+                value={investorRow}
+                onChange={(event, newValue) => {
+                  setInvestorRow(newValue);
+                  console.log(newValue);
                 }}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment>
-                      <IconButton
-                        style={{ color: 'red' }}
-                        size="large"
-                        onClick={handleSearchInvestorName}
-                      >
-                        <SearchIcon />
-                      </IconButton>
-                    </InputAdornment>
-                  )
+                getOptionLabel={(option) => {
+                  if (option?.passport)
+                    return `${option?.name} - ${option?.passport}`;
+                  return '';
                 }}
+                forcePopupIcon={true}
+                popupIcon={
+                  <ArrowDropDownIcon htmlColor="var(--primary-color)" />
+                }
               />
-              {
-                <small style={{ color: 'red' }}>
-                  {errorName
-                    ? 'Investor not found in system, Please add first'
-                    : helperText
-                    ? 'Add Passport Number to find Investor'
-                    : ''}
-                </small>
-              }
+              {/* {errorName && (
+            <small style={{ color: 'red' }}>Folio with ID not found!</small>
+          )} */}
             </FormControl>
           </div>
 
           <div className="add-folio-info">
             <div
               className="add-folio-info-row"
-              style={{ borderBottom: ' 1px solid #E5E5E5' }}
+              // style={{ borderBottom: ' 1px solid #E5E5E5' }}
             >
               <div className="add-folio-info-row-item">
                 <div className="add-folio-info-row-item-label">
                   Investor Name
                 </div>
                 <div className="add-folio-info-row-item-value">
-                  {values.investorName}
+                  {flag ? investorRow?.name : 'NA'}
                 </div>
               </div>
 
@@ -221,7 +253,7 @@ const AddFolio = () => {
                   className="add-folio-info-row-item-value"
                   style={{ textTransform: 'none' }}
                 >
-                  {values.userPassport}
+                  {flag ? investorRow?.passport : 'NA'}
                 </div>
               </div>
 
@@ -233,8 +265,16 @@ const AddFolio = () => {
                   className="add-folio-info-row-item-value"
                   style={{ textTransform: 'none' }}
                 >
-                  {values.address},{values.city}, {values.state},
-                  {values.country},PIN-{values.pincode}
+                  {flag
+                    ? investorRow?.address +
+                      ',' +
+                      investorRow?.city +
+                      ',' +
+                      ' ' +
+                      investorRow?.state +
+                      ',' +
+                      investorRow?.country
+                    : 'NA'}
                 </div>
               </div>
             </div>
@@ -244,17 +284,46 @@ const AddFolio = () => {
             <FormControl variant="standard" sx={{ width: '100%' }}>
               <TextField
                 required
+                disabled={!flag}
                 id="outlined-required"
                 value={values.folioNo}
                 onChange={handleChange('folioNo')}
                 label="Folio No."
+                style={{ backgroundColor: 'white', color: '#132f5e' }}
               />
             </FormControl>
 
-            <FormControl variant="standard" sx={{ width: '100%' }}>
+            <FormControl
+              variant="standard"
+              sx={{ width: '100%' }}
+              className="add-folio-registration-div"
+            >
               <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <MobileDatePicker
+                <DesktopDatePicker
+                  required
                   maxDate={new Date()}
+                  disabled={!flag}
+                  label="Registration Date"
+                  inputFormat="dd/MM/yyyy"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  disableCloseOnSelect={false}
+                  minDate={new Date('2017-01-01')}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      sx={{
+                        width: '100%',
+                        backgroundColor: 'white',
+                        color: '#132f5e',
+                        svg: 'var(--primary-color)'
+                      }}
+                    />
+                  )}
+                />
+                {/* <MobileDatePicker
+                  maxDate={new Date()}
+                  disabled={!flag}
                   label="Registration Date"
                   inputFormat="dd/MM/yyyy"
                   value={selectedDate}
@@ -263,7 +332,7 @@ const AddFolio = () => {
                   renderInput={(params) => (
                     <TextField required {...params} sx={{ width: '100%' }} />
                   )}
-                />
+                /> */}
               </LocalizationProvider>
             </FormControl>
           </div>
@@ -272,6 +341,7 @@ const AddFolio = () => {
             <FormControl variant="standard" sx={{ width: '100%' }}>
               <TextField
                 required
+                disabled={!flag}
                 id="outlined-number"
                 label="Yield(%)"
                 type="number"
@@ -280,6 +350,7 @@ const AddFolio = () => {
                 InputLabelProps={{
                   shrink: true
                 }}
+                style={{ backgroundColor: 'white', color: '#132f5e' }}
               />
             </FormControl>
 
@@ -289,6 +360,7 @@ const AddFolio = () => {
               </InputLabel>
               <OutlinedInput
                 required
+                disabled={!flag}
                 id="outlined-adornment-amount"
                 value={values.commitment}
                 onChange={handleChange('commitment')}
@@ -296,6 +368,7 @@ const AddFolio = () => {
                   <InputAdornment position="start">$</InputAdornment>
                 }
                 label="Capital Commitment"
+                style={{ backgroundColor: 'white', color: '#132f5e' }}
               />
             </FormControl>
           </div>
@@ -305,10 +378,11 @@ const AddFolio = () => {
               id="add-folios-btn"
               type="submit"
               variant="contained"
+              disabled={!flag}
               style={{
-                color: 'white',
+                color: flag ? 'white' : 'gray',
                 textTransform: 'none',
-                width: '16rem',
+                width: '14rem',
                 backgroundColor: '#E95B3E'
               }}
             >

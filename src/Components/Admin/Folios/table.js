@@ -19,12 +19,16 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: '#F6F8FA !important',
     color: 'var(--secondary-color)',
-    padding: '0.9rem 1rem'
+    padding: '1rem',
+    fontSize: '14px',
+    fontWeight: 700,
+    borderBottom: '1px solid #CECECE'
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
     color: 'var(--secondary-color)',
-    padding: '0.6rem 1rem'
+    padding: '0.6rem 1rem',
+    border: 'none'
   }
 }));
 // border: '1px solid black'
@@ -201,8 +205,9 @@ export default function CustomizedTables({
   return (
     <>
       <TableContainer
-        sx={{ maxHeight: '50vh', borderRadius: 2 }}
+        sx={{ maxHeight: '60vh', borderRadius: 2 }}
         component={Paper}
+        style={{ boxShadow: '0px 0px 0px 1px #CECECE' }}
       >
         <Table
           stickyHeader
@@ -216,24 +221,24 @@ export default function CustomizedTables({
           <TableHead style={{ border: '1px solid red' }}>
             <TableRow>
               <StyledTableCell>Date Added</StyledTableCell>
-              <StyledTableCell align="center">Folio No.</StyledTableCell>
-              {/* <StyledTableCell align="center">
+              <StyledTableCell align="left">Folio No.</StyledTableCell>
+              {/* <StyledTableCell align="left">
                 Investor Passport
               </StyledTableCell> */}
-              <StyledTableCell align="center">Investor Name</StyledTableCell>
-              <StyledTableCell align="center">Passport No.</StyledTableCell>
-              <StyledTableCell align="center">Commitment</StyledTableCell>
-              <StyledTableCell align="center">Contribution</StyledTableCell>
-              {/* <StyledTableCell align="center">Distribution</StyledTableCell> */}
-              {/* <StyledTableCell align="center">Pending Amount</StyledTableCell> */}
-              <StyledTableCell align="center">Action</StyledTableCell>
+              <StyledTableCell align="left">Investor Name</StyledTableCell>
+              <StyledTableCell align="left">Passport No.</StyledTableCell>
+              <StyledTableCell align="left">Commitment</StyledTableCell>
+              <StyledTableCell align="left">Contribution</StyledTableCell>
+              {/* <StyledTableCell align="left">Distribution</StyledTableCell> */}
+              {/* <StyledTableCell align="left">Pending Amount</StyledTableCell> */}
+              <StyledTableCell align="left">Action</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {!displayRows.length && (
               <StyledTableRow>
                 <StyledTableCell component="th" scope="row">
-                  {loading ? 'Loading...' : 'No Folios...'}
+                  {loading ? 'Loading...' : 'Loading...'}
                 </StyledTableCell>
               </StyledTableRow>
             )}
@@ -275,7 +280,7 @@ export default function CustomizedTables({
                     </LocalizationProvider>
                   </StyledTableCell>
                   <StyledTableCell
-                    align="center"
+                    align="left"
                     component="th"
                     scope="row"
                     style={{ fontSize: '0.6rem' }}
@@ -303,7 +308,7 @@ export default function CustomizedTables({
                     />
                   </StyledTableCell>
                   <StyledTableCell
-                    align="center"
+                    align="left"
                     component="th"
                     scope="row"
                     sx={{
@@ -330,7 +335,7 @@ export default function CustomizedTables({
                     />
                   </StyledTableCell>
                   <StyledTableCell
-                    align="center"
+                    align="left"
                     component="th"
                     scope="row"
                     sx={{
@@ -406,7 +411,7 @@ export default function CustomizedTables({
                   </StyledTableCell>
 
                   <StyledTableCell
-                    align="center"
+                    align="left"
                     component="th"
                     scope="row"
                     colSpan={2}
@@ -435,7 +440,7 @@ export default function CustomizedTables({
                   </StyledTableCell>
 
                   <StyledTableCell
-                    align="center"
+                    align="left"
                     component="th"
                     scope="row"
                     colSpan={2}
@@ -462,7 +467,7 @@ export default function CustomizedTables({
                       label="Yield %"
                     />
                   </StyledTableCell>
-                  <StyledTableCell align="center" component="th" scope="row">
+                  <StyledTableCell align="left" component="th" scope="row">
                     <Button
                       variant="contained"
                       onClick={handlePostNewFolio}
@@ -499,39 +504,41 @@ export default function CustomizedTables({
                     {new Date(row.date).toLocaleDateString('en-GB')}
                   </StyledTableCell>
                   {/* <StyledTableCell
-                align="center"
+                align="left"
                 component="th"
                 scope="row"
               >
                 {row.folioName}
               </StyledTableCell> */}
-                  <StyledTableCell align="center" component="th" scope="row">
+                  <StyledTableCell align="left" component="th" scope="row">
                     {row.folioNumber}
                   </StyledTableCell>
-                  {/* <StyledTableCell align="center" component="th" scope="row">
+                  {/* <StyledTableCell align="left" component="th" scope="row">
                     {row.user.passport}
                   </StyledTableCell> */}
-                  <StyledTableCell align="center" component="th" scope="row">
+                  <StyledTableCell align="left" component="th" scope="row">
                     {row.user.name}
                   </StyledTableCell>
-                  <StyledTableCell align="center" component="th" scope="row">
+                  <StyledTableCell align="left" component="th" scope="row">
                     {row.user.passport}
                   </StyledTableCell>
-                  <StyledTableCell align="center" component="th" scope="row">
+                  <StyledTableCell align="left" component="th" scope="row">
                     {row.commitment.toFixed(2)}
                   </StyledTableCell>
 
-                  <StyledTableCell align="center" component="th" scope="row">
-                    -{row.contribution.toFixed(2)}
+                  <StyledTableCell align="left" component="th" scope="row">
+                    {+row.contribution.toFixed(2)
+                      ? '-' + row.contribution.toFixed(2)
+                      : (0).toFixed(2)}
                   </StyledTableCell>
 
-                  {/* <StyledTableCell align="center" component="th" scope="row">
+                  {/* <StyledTableCell align="left" component="th" scope="row">
                     {row.contribution.toFixed(2)}
                   </StyledTableCell>
-                  <StyledTableCell align="center" component="th" scope="row">
+                  <StyledTableCell align="left" component="th" scope="row">
                     {(row.commitment - row.contribution).toFixed(2)}
                   </StyledTableCell> */}
-                  <StyledTableCell align="center" component="th" scope="row">
+                  <StyledTableCell align="left" component="th" scope="row">
                     {
                       <Button
                         onClick={() => {
@@ -542,7 +549,9 @@ export default function CustomizedTables({
                           border: '1px solid var(--primary-color)',
                           backgroundColor: 'white',
                           textTransform: 'none',
-                          color: 'var(--primary-color)'
+                          color: 'var(--primary-color)',
+                          padding: '4px 8px',
+                          fontSize: '0.75rem'
                         }}
                       >
                         {/* <AddIcon sx={{ marginRight: '5px' }} /> */}
