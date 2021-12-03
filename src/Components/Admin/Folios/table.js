@@ -55,7 +55,8 @@ export default function CustomizedTables({
   displayRows,
   setLoading,
   loading,
-  setDisplayRows
+  setDisplayRows,
+  role
 }) {
   //states
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -97,10 +98,11 @@ export default function CustomizedTables({
   };
   const handleAddFolioTranscation = (row) => {
     // console.log(row);
+    // console.log(history.location.pathname);
     if (row.folioNumber)
       history.push({
         pathname: '/admin/folios/addTransaction',
-        state: { row }
+        state: { row, from: history.location.pathname }
       });
   };
   const handleDateChange = (newValue) => {
@@ -555,7 +557,7 @@ export default function CustomizedTables({
                         }}
                       >
                         {/* <AddIcon sx={{ marginRight: '5px' }} /> */}
-                        Add Transaction
+                        {role == 'folio' ? 'Add Transaction' : 'View Detail'}
                       </Button>
                     }
                   </StyledTableCell>
