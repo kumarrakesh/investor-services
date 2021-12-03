@@ -6,94 +6,13 @@ import { useHistory } from 'react-router';
 import { useLocation } from 'react-router-dom';
 import './FolioAddTransaction.css';
 import CustomizedTables from './table';
-import { Backdrop, CircularProgress } from '@mui/material';
+
 import Swal from 'sweetalert2';
+import CloseIcon from '@mui/icons-material/Close';
+import TransactionContainer from './TransactionContainer/TransactionContainer';
 
 const FolioAddTransaction = () => {
-  const [displayRows, setDisplayRows] = useState([]);
-  const [rows, setRows] = useState([]);
-  const token = JSON.parse(localStorage.getItem('token'));
   const history = useHistory();
-  const location = useLocation();
-  const [loading, setLoading] = useState(false);
-
-  const [values, setValues] = React.useState({
-    folioNumber: '',
-    investorName: '',
-    investorPassport: '',
-    commitment: '',
-    yield: '',
-    registrationDate: new Date(),
-    folioId: ''
-  });
-
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
-
-  useEffect(() => {
-    if (!localStorage.getItem('token')) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Please Login Again!',
-        timer: 3000
-      });
-      history.push('/');
-    }
-    getFolioStatement();
-  }, []);
-
-  useEffect(() => {
-    if (location?.state?.row) {
-      setFolioBody();
-      console.log(location?.state?.row);
-    }
-  }, [location]);
-
-  const setFolioBody = async () => {
-    setValues({
-      folioNumber: location?.state?.row?.folioNumber,
-      investorName: location?.state?.row?.user.name,
-      investorPassport: location?.state?.row?.user.passport,
-      commitment: location?.state?.row?.commitment,
-      yield: location?.state?.row?.yield,
-      registrationDate: location?.state?.row?.date
-    });
-    console.log(values);
-  };
-
-  const getFolioStatement = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch(
-        `${process.env.REACT_APP_API}/api/get/folio/transaction`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-access-token': token
-          },
-          body: JSON.stringify({
-            folioNumber: location?.state?.row?.folioNumber
-          })
-        }
-      );
-
-      const data = await response.json();
-      // console.log('ye hi hai wo', data);
-      if (data.status) {
-        setRows(data.data);
-        setDisplayRows(data.data);
-      } else {
-        Swal.fire('something went wrong', '', 'error');
-      }
-      setLoading(false);
-    } catch (e) {
-      console.log(e);
-      setLoading(false);
-    }
-  };
 
   return (
     <div className="folio-add-transaction-main">
@@ -102,114 +21,23 @@ const FolioAddTransaction = () => {
       </div>
       <div className="folio-add-transaction-container">
         <div className="folio-add-transaction-header">
-          <h1 className="folio-add-transaction-header-label">
-            Add Folio Transaction
-          </h1>
+          <h1 className="folio-add-transaction-header-label">Folios</h1>
           <IconButton
             size="large"
-            style={{ color: '#E95B3E' }}
+            style={{ color: 'var(--secondary-color)' }}
             onClick={() => {
               history.push('/admin/folios');
             }}
           >
-            <CancelIcon fontSize="inherit" />
+            <CloseIcon fontSize="large" />
           </IconButton>
         </div>
-        <h1 className="folio-overview">Overview</h1>
-        <div className="folio-add-transaction">
-          <div
-            className="folio-add-transaction-row"
-            style={{ borderBottom: ' 1px solid #E5E5E5' }}
-          >
-            <div className="folio-add-transaction-row-item">
-              <div className="folio-add-transaction-row-item-label">
-                Folio Number
-              </div>
-              <div className="folio-add-transaction-row-item-value">
-                {values.folioNumber}
-              </div>
-            </div>
+        <h1 className="folio-add-transaction-subheading">
+          Record New Transaction
+        </h1>
 
-            <div className="folio-add-transaction-row-item">
-              <div className="folio-add-transaction-row-item-label">
-                Investor Name
-              </div>
-              <div
-                className="folio-add-transaction-row-item-value"
-                style={{ textTransform: 'none' }}
-              >
-                {values.investorName}
-              </div>
-            </div>
-
-            <div className="folio-add-transaction-row-item">
-              <div className="folio-add-transaction-row-item-label">
-                Passport Number
-              </div>
-              <div
-                className="folio-add-transaction-row-item-value"
-                style={{ textTransform: 'none' }}
-              >
-                {values.investorPassport}
-              </div>
-            </div>
-          </div>
-
-          <div
-            className="folio-add-transaction-row"
-            style={{ borderBottom: ' 1px solid #E5E5E5' }}
-          >
-            <div className="folio-add-transaction-row-item">
-              <div className="folio-add-transaction-row-item-label">
-                Registration Date
-              </div>
-              <div className="folio-add-transaction-row-item-value">
-                {new Date(values.registrationDate).toLocaleDateString('en-GB')}
-              </div>
-            </div>
-
-            <div className="folio-add-transaction-row-item">
-              <div className="folio-add-transaction-row-item-label">
-                commitment
-              </div>
-              <div
-                className="folio-add-transaction-row-item-value"
-                style={{ textTransform: 'none' }}
-              >
-                {values.commitment}
-              </div>
-            </div>
-
-            <div className="folio-add-transaction-row-item">
-              <div className="folio-add-transaction-row-item-label">
-                Yield(%)
-              </div>
-              <div
-                className="folio-add-transaction-row-item-value"
-                style={{ textTransform: 'none' }}
-              >
-                {values.yield}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <CustomizedTables
-          setDisplayRows={setDisplayRows}
-          displayRows={displayRows}
-          loading={loading}
-          values={values}
-          setLoading={setLoading}
-        />
+        <TransactionContainer />
       </div>
-
-      <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={loading}
-        onClick={() => {}}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
     </div>
   );
 };
