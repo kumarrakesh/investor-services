@@ -78,7 +78,7 @@ const Routes = () => {
       </Route>
 
       <Route exact path="/admin/folios">
-        <Folios />
+        <Folios role="folio" />
       </Route>
 
       <Route exact path="/admin/folios/add">
@@ -90,7 +90,8 @@ const Routes = () => {
       </Route>
 
       <Route exact path="/admin/folioStatements">
-        <FolioStatements />
+        <Folios role="statement" />
+        {/* <FolioStatements /> */}
       </Route>
     </Switch>
   );
