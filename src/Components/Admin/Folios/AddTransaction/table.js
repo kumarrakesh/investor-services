@@ -22,27 +22,43 @@ import {
   CircularProgress,
   FormHelperText
 } from '@mui/material';
+import { fontSize, fontWeight } from '@mui/system';
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: '#E6E8EA !important',
-    color: 'var(--secondary-color)'
+    backgroundColor: '#F6F8FA !important',
+    color: 'var(--secondary-color)',
+    padding: '1rem',
+    fontSize: '14px',
+    fontWeight: 700,
+    borderBottom: '1px solid #CECECE'
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
-    color: 'var(--secondary-color)'
+    color: 'var(--secondary-color)',
+    padding: '0.6rem 1rem',
+    border: 'none'
   }
 }));
+// border: '1px solid black'
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
-    backgroundColor: 'white !important'
+    backgroundColor: 'white !important',
+    border: 'none !important',
+    outline: 'none',
+    height: '3rem'
   },
   '&:nth-of-type(even)': {
-    backgroundColor: 'var(--light-blue-bg)'
+    backgroundColor: '#F6F8FA',
+    border: 'none !important',
+    outline: 'none',
+    height: '3rem'
   },
   // hide last border
   '&:last-child td, &:last-child th': {
-    border: 0
+    border: 'none !important',
+    outline: 'none'
   }
 }));
 
@@ -94,7 +110,6 @@ export default function CustomizedTables({
       folioId: values.folioId,
       type: newData.type,
       amount: newData.amount,
-
       date: selectedDate
     };
     try {
@@ -153,17 +168,28 @@ export default function CustomizedTables({
         <TableContainer
           component={Paper}
           sx={{
-            maxHeight: '300px'
+            maxHeight: '30vh',
+            borderRadius: 2
           }}
+          style={{ boxShadow: '0px 0px 0px 1px #CECECE' }}
         >
-          <Table aria-label="customized table" stickyHeader>
-            <TableHead>
+          <Table
+            aria-label="customized table"
+            stickyHeader
+            sx={{
+              minWidth: 700,
+              overflow: 'scroll'
+            }}
+          >
+            <TableHead style={{ border: '1px solid red', color: 'silver' }}>
               <TableRow>
-                <StyledTableCell>Date Added</StyledTableCell>
+                <StyledTableCell>Date</StyledTableCell>
                 <StyledTableCell align="left">Transaction Type</StyledTableCell>
-                <StyledTableCell align="left">Contribution</StyledTableCell>
-                <StyledTableCell align="center">Distribution</StyledTableCell>
-                <StyledTableCell align="center">Withdrawl</StyledTableCell>
+                <StyledTableCell align="left">
+                  Capital Contribution
+                </StyledTableCell>
+                <StyledTableCell align="center">Yield Payment</StyledTableCell>
+                <StyledTableCell align="center">Redemption</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -174,194 +200,53 @@ export default function CustomizedTables({
                   </StyledTableCell>
                 </StyledTableRow>
               )}
-              {displayRows.map((row) =>
-                row.role == 'new' ? (
-                  <StyledTableRow key={row._id}>
-                    <StyledTableCell component="th" scope="row">
-                      <LocalizationProvider dateAdapter={AdapterDateFns}>
-                        <MobileDatePicker
-                          label="Date"
-                          inputFormat="dd/MM/yyyy"
-                          value={selectedDate}
-                          onChange={handleDateChange}
-                          disableCloseOnSelect={false}
-                          renderInput={(params) => (
-                            <TextField
-                              required
-                              inputProps={{ style: { fontSize: '0.9rem' } }}
-                              InputLabelProps={{
-                                style: { fontSize: '0.8rem' }
-                              }}
-                              {...params}
-                              sx={{
-                                width: '100%',
-                                minWidth: 95,
-                                fontSize: '0.1rem !important',
-                                padding: '1px'
-                              }}
-                            />
-                          )}
-                        />
-                      </LocalizationProvider>
-                    </StyledTableCell>
-                    <StyledTableCell align="left" component="th" scope="row">
-                      {/* {row.type == 1
-                        ? 'Invested'
-                        : row.type == 2
-                        ? 'Yielded'
-                        : 'Withdrawn'} */}
-                      <FormControl variant="standard" sx={{ width: '100%' }}>
-                        <Select
-                          name="action"
-                          variant="outlined"
-                          value={newData.type}
-                          onChange={(e) => {
-                            setNewData({
-                              ...newData,
-                              type: e.target.value
-                            });
-                          }}
-                        >
-                          <MenuItem value="1">Contribution</MenuItem>
-                          <MenuItem value="2">Yield Payment</MenuItem>
-                          <MenuItem value="3">Redemption</MenuItem>
-                        </Select>
-                      </FormControl>
-                    </StyledTableCell>
-                    <StyledTableCell align="left" component="th" scope="row">
-                      {newData.type == 1 ? (
-                        <TextField
-                          required
-                          type="number"
-                          id="outlined-required"
-                          sx={{ minWidth: 70 }}
-                          value={newData.amount}
-                          inputProps={{ style: { fontSize: '0.9rem' } }}
-                          InputLabelProps={{
-                            style: { fontSize: '0.8rem' }
-                          }}
-                          onChange={(e) => {
-                            setNewData({
-                              ...newData,
-                              amount: e.target.value
-                            });
-                          }}
-                          label="Amount"
-                        />
-                      ) : (
-                        '-'
-                      )}
-                    </StyledTableCell>
-                    <StyledTableCell align="center" component="th" scope="row">
-                      {newData.type == 2 ? (
-                        <TextField
-                          required
-                          id="outlined-required"
-                          sx={{ minWidth: 70 }}
-                          value={newData.amount}
-                          inputProps={{ style: { fontSize: '0.9rem' } }}
-                          InputLabelProps={{
-                            style: { fontSize: '0.8rem' }
-                          }}
-                          onChange={(e) => {
-                            setNewData({
-                              ...newData,
-                              amount: e.target.value
-                            });
-                          }}
-                          label="Amount"
-                        />
-                      ) : (
-                        '-'
-                      )}
-                    </StyledTableCell>
-                    <StyledTableCell align="center" component="th" scope="row">
-                      {newData.type == 3 ? (
-                        <TextField
-                          required
-                          id="outlined-required"
-                          sx={{ minWidth: 70 }}
-                          value={newData.amount}
-                          inputProps={{ style: { fontSize: '0.9rem' } }}
-                          InputLabelProps={{
-                            style: { fontSize: '0.8rem' }
-                          }}
-                          onChange={(e) => {
-                            setNewData({
-                              ...newData,
-                              amount: e.target.value
-                            });
-                          }}
-                          label="Amount"
-                        />
-                      ) : (
-                        '-'
-                      )}
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ) : (
-                  <StyledTableRow key={row._id}>
-                    <StyledTableCell component="th" scope="row">
-                      {new Date(row.date).toLocaleDateString('en-GB')}
-                    </StyledTableCell>
-                    <StyledTableCell align="center" component="th" scope="row">
-                      {row.type == 1
-                        ? 'Contribution'
-                        : row.type == 2
-                        ? 'Yield Payment'
-                        : 'Redemtion'}
-                    </StyledTableCell>
-                    <StyledTableCell align="left" component="th" scope="row">
-                      {row.type == 1 ? row.amount : '-'}
-                    </StyledTableCell>
-                    <StyledTableCell align="center" component="th" scope="row">
-                      {row.type == 2 ? row.amount : '-'}
-                    </StyledTableCell>
-                    <StyledTableCell align="center" component="th" scope="row">
-                      {row.type == 3 ? row.amount : '-'}
-                    </StyledTableCell>
-                  </StyledTableRow>
-                )
-              )}
+              {displayRows.map((row) => (
+                <StyledTableRow key={row._id}>
+                  <StyledTableCell component="th" scope="row">
+                    {new Date(row.date).toLocaleDateString('en-GB')}
+                  </StyledTableCell>
+                  <StyledTableCell align="left" component="th" scope="row">
+                    {row.type == 1
+                      ? 'Capital Contribution'
+                      : row.type == 2
+                      ? 'Yield Payment'
+                      : 'Redemtion'}
+                  </StyledTableCell>
+                  <StyledTableCell align="left" component="th" scope="row">
+                    {row.type == 1 ? '$' + row.amount : ''}
+                  </StyledTableCell>
+                  <StyledTableCell align="center" component="th" scope="row">
+                    {row.type == 2 ? '$' + row.amount : ''}
+                  </StyledTableCell>
+                  <StyledTableCell align="center" component="th" scope="row">
+                    {row.type == 3 ? '$' + row.amount : ''}
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
             </TableBody>
           </Table>
         </TableContainer>
       </Paper>
-      {isEditing ? (
+
+      <div className="folio-add-transaction-btn-div">
         <Button
-          variant="contained"
-          onClick={handlePostNewFolioTransaction}
-          style={{
-            backgroundColor:
-              !newData.date || !newData.type || !newData.amount
-                ? 'gray'
-                : '#E95B3E',
-            textTransform: 'none',
-            marginTop: 10,
-            width: '100%',
-            padding: '10px 0'
-          }}
-          disabled={!newData.date || !newData.type || !newData.amount}
-        >
-          Submit
-          <AddIcon sx={{ marginLeft: '10px' }} />
-        </Button>
-      ) : (
-        <Button
-          variant="contained"
+          variant="outlined"
           onClick={handleAddNewFolioTransaction}
           style={{
-            backgroundColor: '#E95B3E',
+            color: '#E95B3E',
             textTransform: 'none',
-            marginTop: 10,
-            width: '100%',
-            padding: '10px 0'
+            marginTop: '1.5rem',
+            width: '13rem',
+            padding: '10px 0',
+            borderColor: '#E95B3E',
+            fontWeight: '500',
+            fontSize: '1rem',
+            borderWidth: '2px'
           }}
         >
-          Add New Folio Transaction
-          <AddIcon sx={{ marginLeft: '10px' }} />
+          Add New Transaction
         </Button>
-      )}
+      </div>
     </>
   );
 }

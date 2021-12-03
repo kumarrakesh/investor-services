@@ -90,6 +90,12 @@
   }
 }
 
+.folio-add-transaction-btn-div {
+  display: flex;
+  width: 100%;
+  justify-content: right;
+}
+
 @media screen and (max-width: 480px) {
   .folio-add-transaction-row {
     flex-direction: column;
