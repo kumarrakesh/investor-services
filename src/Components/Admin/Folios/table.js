@@ -97,14 +97,19 @@ export default function CustomizedTables({
     }
   };
   const handleAddFolioTranscation = (row) => {
-    // console.log(row);
-    // console.log(history.location.pathname);
-    if (row.folioNumber)
+    if (role == 'folio') {
       history.push({
         pathname: '/admin/folios/addTransaction',
         state: { row, from: history.location.pathname }
       });
+    } else {
+      history.push({
+        pathname: '/admin/folioStatements/viewDetail',
+        state: { row, from: history.location.pathname }
+      });
+    }
   };
+
   const handleDateChange = (newValue) => {
     setSelectedDate(newValue);
   };

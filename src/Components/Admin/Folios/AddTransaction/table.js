@@ -48,13 +48,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     backgroundColor: 'white !important',
     border: 'none !important',
     outline: 'none',
-    height: '3rem'
+    height: '3.2rem'
   },
   '&:nth-of-type(even)': {
     backgroundColor: '#F6F8FA',
     border: 'none !important',
     outline: 'none',
-    height: '3rem'
+    height: '3.2rem'
   },
   // hide last border
   '&:last-child td, &:last-child th': {
