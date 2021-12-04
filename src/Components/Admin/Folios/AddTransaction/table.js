@@ -23,6 +23,7 @@ import {
   FormHelperText
 } from '@mui/material';
 import { fontSize, fontWeight } from '@mui/system';
+import AddMultipleNewTransaction from '../../AddMultipleNewTransaction/AddMultipleNewTransaction';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -228,25 +229,11 @@ export default function CustomizedTables({
         </TableContainer>
       </Paper>
 
-      <div className="folio-add-transaction-btn-div">
-        <Button
-          variant="outlined"
-          onClick={handleAddNewFolioTransaction}
-          style={{
-            color: '#E95B3E',
-            textTransform: 'none',
-            marginTop: '1.5rem',
-            width: '13rem',
-            padding: '10px 0',
-            borderColor: '#E95B3E',
-            fontWeight: '500',
-            fontSize: '1rem',
-            borderWidth: '2px'
-          }}
-        >
-          Add New Transaction
-        </Button>
-      </div>
+      {/* <div className="folio-add-transaction-btn-div"> */}
+      <AddMultipleNewTransaction
+        handleAddNewFolioTransaction={handleAddNewFolioTransaction}
+      />
+      {/* </div> */}
     </>
   );
 }

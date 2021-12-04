@@ -17,7 +17,7 @@ const FolioAddTransaction = () => {
   return (
     <div className="folio-add-transaction-main">
       <div>
-        <AdNavbar />
+        <AdNavbar style={{ height: '100% !important' }} />
       </div>
       <div className="folio-add-transaction-container">
         <div className="folio-add-transaction-header">

@@ -1,0 +1,35 @@
+.add-multiple-new-transaction-container {
+  display: flex;
+}
+.add-multiple-new-transaction-button {
+  color: #e95b3e !important;
+  text-transform: none !important;
+  margin-top: 1.5rem !important;
+  padding: 0.5rem 1rem !important;
+  border-color: #e95b3e !important;
+  font-weight: 500 !important;
+  font-size: 1rem !important;
+  border-width: 2px !important;
+  border-radius: 5px !important;
+}
+.submit-multiple-new-transaction-button {
+  color: white !important;
+  text-transform: none !important;
+  margin-top: 1.5rem !important;
+  padding: 0.5rem 1rem !important;
+  border-color: white !important;
+  font-weight: 500 !important;
+  font-size: 1rem !important;
+  border-width: 2px !important;
+  background-color: var(--primary-color) !important;
+  min-width: 20ch !important;
+  border-radius: 5px !important;
+}
+.new-transaction-heading {
+  margin-right: auto !important;
+  text-align: left !important;
+  margin-top: 2rem !important;
+  font-size: 1rem !important;
+  font-weight: 500;
+  color: #132f5e;
+}
