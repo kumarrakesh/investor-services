@@ -236,7 +236,7 @@ const AdNavbar = () => {
           <AccountBalanceWalletIcon style={{ flex: 1 }} />
 
           <div className="dash-name" style={{ flex: 2 }}>
-            Folios Statements
+            Folio Statements
           </div>
 
           <RightIcon

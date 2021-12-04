@@ -15,7 +15,7 @@ import {
   FormControl,
   Autocomplete
 } from '@mui/material';
-const Folios = () => {
+const Folios = ({ role }) => {
   let history = useHistory();
   const [ogRows, setOgRows] = useState([]);
   const [displayRows, setDisplayRows] = useState([]);
@@ -34,9 +34,9 @@ const Folios = () => {
       });
       history.push('/');
     }
-
+    setFolioNumber({});
     getAllFolios();
-  }, []);
+  }, [history.location.pathname]);
 
   const getAllFolios = async () => {
     setLoading(true);
@@ -86,22 +86,28 @@ const Folios = () => {
       </div>
 
       <div id="folios-container">
-        <h1 className="folio-title">Folios</h1>
+        <h1 className="folio-title">
+          {role == 'folio' ? 'Folios' : 'Folio Statements'}
+        </h1>
         {/* <h1 className="folio-overview">Overview</h1> */}
         <div className="folio-oneline">
           <div>
-            <p className="total-folios">Total Folios</p>
+            <p className="total-folios">
+              {role == 'folio' ? 'Total Folios' : 'Total Transactions'}
+            </p>
             <p className="total-folios-no">{ogRows.length}</p>
           </div>
           {/* <div className="add-folio-btn"> */}
-          <Button
-            className="add-folio-btn"
-            variant="contained"
-            onClick={handleAddfolios}
-          >
-            <AddIcon sx={{ marginRight: '0.5rem' }} />
-            Add New Folio
-          </Button>
+          {role == 'folio' && (
+            <Button
+              className="add-folio-btn"
+              variant="contained"
+              onClick={handleAddfolios}
+            >
+              <AddIcon sx={{ marginRight: '0.5rem' }} />
+              Add New Folio
+            </Button>
+          )}
         </div>
         {/* <Button variant="outlined" style={{ color: '#E95B3E' }}>
             <svg
@@ -170,6 +176,7 @@ const Folios = () => {
             setDisplayRows={setDisplayRows}
             setLoading={setLoading}
             loading={loading}
+            role={role}
           />
         </div>
       </div>

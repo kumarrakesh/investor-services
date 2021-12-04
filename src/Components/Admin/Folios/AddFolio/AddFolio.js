@@ -22,7 +22,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
-
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 const AddFolio = () => {
   let history = useHistory();
   const token = JSON.parse(localStorage.getItem('token'));
@@ -282,14 +282,17 @@ const AddFolio = () => {
 
           <div className="add-folio-input-1">
             <FormControl variant="standard" sx={{ width: '100%' }}>
+              <small className="add-folio-find-investor-label">
+                Folio No. *
+              </small>
               <TextField
                 required
                 disabled={!flag}
                 id="outlined-required"
                 value={values.folioNo}
                 onChange={handleChange('folioNo')}
-                label="Folio No."
                 style={{ backgroundColor: 'white', color: '#132f5e' }}
+                className="add-folio-searchbar"
               />
             </FormControl>
 
@@ -298,12 +301,14 @@ const AddFolio = () => {
               sx={{ width: '100%' }}
               className="add-folio-registration-div"
             >
+              <small className="add-folio-find-investor-label">
+                Registration Date *
+              </small>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DesktopDatePicker
                   required
                   maxDate={new Date()}
                   disabled={!flag}
-                  label="Registration Date"
                   inputFormat="dd/MM/yyyy"
                   value={selectedDate}
                   onChange={handleDateChange}
@@ -312,6 +317,7 @@ const AddFolio = () => {
                   renderInput={(params) => (
                     <TextField
                       {...params}
+                      className="add-folio-searchbar"
                       sx={{
                         width: '100%',
                         backgroundColor: 'white',
@@ -339,11 +345,13 @@ const AddFolio = () => {
 
           <div className="add-folio-input-3">
             <FormControl variant="standard" sx={{ width: '100%' }}>
+              <small className="add-folio-find-investor-label">
+                {'Yield (%) *'}
+              </small>
               <TextField
                 required
                 disabled={!flag}
                 id="outlined-number"
-                label="Yield(%)"
                 type="number"
                 value={values.yield}
                 onChange={handleChange('yield')}
@@ -351,24 +359,34 @@ const AddFolio = () => {
                   shrink: true
                 }}
                 style={{ backgroundColor: 'white', color: '#132f5e' }}
+                className="add-folio-searchbar"
               />
             </FormControl>
 
             <FormControl fullWidth sx={{ width: '100%' }}>
-              <InputLabel required htmlFor="outlined-adornment-amount">
-                Capital Commitment{' '}
-              </InputLabel>
-              <OutlinedInput
+              <small className="add-folio-find-investor-label">
+                Capital Commitment *
+              </small>
+              <TextField
                 required
                 disabled={!flag}
                 id="outlined-adornment-amount"
                 value={values.commitment}
                 onChange={handleChange('commitment')}
                 startAdornment={
-                  <InputAdornment position="start">$</InputAdornment>
+                  <InputAdornment position="start">
+                    <AttachMoneyIcon />
+                  </InputAdornment>
                 }
-                label="Capital Commitment"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <AttachMoneyIcon />
+                    </InputAdornment>
+                  )
+                }}
                 style={{ backgroundColor: 'white', color: '#132f5e' }}
+                className="add-folio-searchbar"
               />
             </FormControl>
           </div>

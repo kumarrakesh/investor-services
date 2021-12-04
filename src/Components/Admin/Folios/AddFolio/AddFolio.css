@@ -91,6 +91,7 @@
   transform: none;
 }
 .add-folio-searchbar input {
+  color: var(--secondary-color);
   padding: 0.6rem 0.75rem !important;
 }
 .add-folio-searchbar input::placeholder {
