@@ -144,7 +144,7 @@ export default function CustomizedTables({
               'x-access-token': JSON.parse(localStorage.getItem('token'))
             },
             body: JSON.stringify({
-              folioId: values.folioId
+              folioNumber: values.folioNumber
             })
           }
         );
@@ -232,6 +232,8 @@ export default function CustomizedTables({
       {/* <div className="folio-add-transaction-btn-div"> */}
       <AddMultipleNewTransaction
         handleAddNewFolioTransaction={handleAddNewFolioTransaction}
+        folioNumber={values.folioNumber}
+        setDisplayRows={setDisplayRows}
       />
       {/* </div> */}
     </>
