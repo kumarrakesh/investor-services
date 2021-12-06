@@ -38,7 +38,7 @@ const TransactionContainer = () => {
       registrationDate: location?.state?.row?.date,
       contribution: location?.state?.row?.contribution
     });
-    console.log(values);
+    // console.log(values);
   };
 
   const getFolioStatement = async () => {
@@ -76,7 +76,7 @@ const TransactionContainer = () => {
   useEffect(() => {
     if (location?.state?.row) {
       setFolioBody();
-      console.log(location?.state?.row);
+      // console.log(location?.state?.row);
     }
   }, [location]);
 

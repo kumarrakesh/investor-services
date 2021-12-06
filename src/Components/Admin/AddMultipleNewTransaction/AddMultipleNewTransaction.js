@@ -16,6 +16,7 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { LocalizationProvider, MobileDatePicker } from '@mui/lab';
 import { styled } from '@mui/material/styles';
 import './AddMultipleNewTransaction.css';
+import Swal from 'sweetalert2';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -29,7 +30,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
     color: 'var(--secondary-color)',
-    padding: '0.6rem 1rem',
+    padding: '0.6rem',
     border: 'none'
   }
 }));
@@ -50,13 +51,20 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     outline: 'none'
   }
 }));
-const AddMultipleNewTransaction = ({ handleAddNewFolioTransaction }) => {
+const AddMultipleNewTransaction = ({
+  handleAddNewFolioTransaction,
+  folioNumber,
+  setDisplayRows
+}) => {
   //states
   const [toBeAddedStatements, setToBeAddedStatements] = useState([]);
   //other hooks
   //handers
   const handleShowAddMultipleNewTransaction = async () => {
-    setToBeAddedStatements([...toBeAddedStatements, {}]);
+    setToBeAddedStatements([
+      ...toBeAddedStatements,
+      { type: '1', date: new Date(), amount: 0 }
+    ]);
   };
 
   return (
@@ -89,6 +97,8 @@ const AddMultipleNewTransaction = ({ handleAddNewFolioTransaction }) => {
               handleShowAddMultipleNewTransaction={
                 handleShowAddMultipleNewTransaction
               }
+              folioNumber={folioNumber}
+              setDisplayRows={setDisplayRows}
             />
           </div>
         )}
@@ -100,12 +110,61 @@ const AddMultipleNewTransaction = ({ handleAddNewFolioTransaction }) => {
 export const AddMultipleNewTransactionTable = ({
   toBeAddedStatements,
   setToBeAddedStatements,
-  handleShowAddMultipleNewTransaction
+  handleShowAddMultipleNewTransaction,
+  folioNumber,
+  setDisplayRows
 }) => {
   const tableRef = React.createRef();
   const handleDateChange = (params) => {
     console.log(params);
     // setSelectedDate(newValue);
+  };
+
+  const handlePostMultipleTransactions = async () => {
+    const response = await fetch(
+      `${process.env.REACT_APP_API}/api/add/folio/transaction`,
+      {
+        method: 'POST',
+        body: JSON.stringify({ folioNumber, statements: toBeAddedStatements }),
+        headers: {
+          'x-access-token': JSON.parse(localStorage.getItem('token')),
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+    if (!data.status)
+      Swal.fire(
+        data.message || data.error || "Couldn't add the transaction",
+        '',
+        'error'
+      );
+    else {
+      Swal.fire(
+        'Transaction' + toBeAddedStatements.length > 1 ? 's' : '' + 'noted!',
+        '',
+        'success'
+      );
+      const response1 = await fetch(
+        `${process.env.REACT_APP_API}/api/get/folio/transaction`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': JSON.parse(localStorage.getItem('token'))
+          },
+          body: JSON.stringify({
+            folioNumber
+          })
+        }
+      );
+      const data1 = await response1.json();
+      // console.log('fg' + data1);
+      setDisplayRows(data1.data);
+      console.log(toBeAddedStatements);
+      // setToBeAddedStatements([]);
+    }
   };
   return (
     <TableContainer
@@ -128,7 +187,7 @@ export const AddMultipleNewTransactionTable = ({
       >
         <TableBody>
           {toBeAddedStatements.map((row, index) => (
-            <StyledTableRow key={index}>
+            <StyledTableRow key={index} sx={{ verticalAlign: 'top' }}>
               <StyledTableCell
                 component="th"
                 scope="row"
@@ -137,9 +196,9 @@ export const AddMultipleNewTransactionTable = ({
                   paddingRight: '3px'
                 }}
               >
+                <small className="add-folio-find-investor-label">Date *</small>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <MobileDatePicker
-                    label="Date"
                     inputFormat="dd/MM/yyyy"
                     value={row.date}
                     onChange={(date) => {
@@ -163,6 +222,7 @@ export const AddMultipleNewTransactionTable = ({
                           fontSize: '0.1rem !important',
                           padding: '1px'
                         }}
+                        className="add-folio-searchbar"
                       />
                     )}
                   />
@@ -172,15 +232,18 @@ export const AddMultipleNewTransactionTable = ({
                 align="left"
                 component="th"
                 scope="row"
-                style={{ fontSize: '0.6rem' }}
+                style={{ fontSize: '0.9rem' }}
                 sx={{
                   paddingLeft: '3px',
                   paddingRight: '3px'
                 }}
               >
+                <small className="add-folio-find-investor-label">
+                  Transaction type
+                </small>
                 <FormControl
                   variant="standard"
-                  sx={{ width: '100%', minWidth: 100 }}
+                  sx={{ width: '100%', minWidth: 100, color: 'red' }}
                 >
                   <Select
                     required
@@ -188,8 +251,11 @@ export const AddMultipleNewTransactionTable = ({
                     variant="outlined"
                     value={row.type}
                     onChange={(e) => {
-                      console.log(e.target.value);
+                      let newToBeAddedStatements = [...toBeAddedStatements];
+                      newToBeAddedStatements[index].type = e.target.value;
+                      setToBeAddedStatements(newToBeAddedStatements);
                     }}
+                    className="add-folio-searchbar"
                   >
                     <MenuItem value="1">Contribution</MenuItem>
                     <MenuItem value="2">Yield Payment</MenuItem>
@@ -203,9 +269,13 @@ export const AddMultipleNewTransactionTable = ({
                 scope="row"
                 sx={{
                   paddingLeft: '3px',
-                  paddingRight: '3px'
+                  paddingRight: '3px',
+                  verticalAlign: 'top'
                 }}
               >
+                <small className="add-folio-find-investor-label">
+                  Transaction Value *
+                </small>
                 <TextField
                   required
                   type="number"
@@ -217,13 +287,36 @@ export const AddMultipleNewTransactionTable = ({
                     style: { fontSize: '0.8rem' }
                   }}
                   onChange={(e) => {
-                    // setNewData({
-                    //   ...newData,
-                    //   investorPassportNumber: e.target.value
-                    // });
+                    let newToBeAddedStatements = [...toBeAddedStatements];
+                    newToBeAddedStatements[index].amount = e.target.value;
+                    setToBeAddedStatements(newToBeAddedStatements);
                   }}
-                  label="Transaction Value"
+                  className="add-folio-searchbar"
                 />
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'right',
+                    marginTop: '0.5rem'
+                  }}
+                >
+                  <button
+                    onClick={() => {
+                      let newToBeAddedStatements = [...toBeAddedStatements];
+                      newToBeAddedStatements.splice(index, 1);
+                      setToBeAddedStatements(newToBeAddedStatements);
+                    }}
+                    style={{
+                      color: 'var(--secondary-color)',
+                      fontSize: '0.9rem',
+                      border: 'none',
+                      background: 'none',
+                      textDecoration: 'underline'
+                    }}
+                  >
+                    Remove
+                  </button>
+                </div>
               </StyledTableCell>
             </StyledTableRow>
           ))}
@@ -246,7 +339,7 @@ export const AddMultipleNewTransactionTable = ({
         </Button>
         <Button
           variant="outlined"
-          onClick={() => {}}
+          onClick={handlePostMultipleTransactions}
           className="submit-multiple-new-transaction-button"
         >
           Submit
