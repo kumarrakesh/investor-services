@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import { LocalizationProvider, MobileDatePicker } from '@mui/lab';
+import { LocalizationProvider, DesktopDatePicker } from '@mui/lab';
 import { styled } from '@mui/material/styles';
 import './AddMultipleNewTransaction.css';
 import Swal from 'sweetalert2';
@@ -243,7 +243,7 @@ export const AddMultipleNewTransactionTable = ({
               >
                 <small className="add-folio-find-investor-label">Date *</small>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <MobileDatePicker
+                  <DesktopDatePicker
                     inputFormat="dd/MM/yyyy"
                     value={row.date}
                     onChange={(date) => {
@@ -256,18 +256,14 @@ export const AddMultipleNewTransactionTable = ({
                     renderInput={(params) => (
                       <TextField
                         required
-                        inputProps={{ style: { fontSize: '0.9rem' } }}
-                        InputLabelProps={{
-                          style: { fontSize: '0.8rem' }
-                        }}
                         {...params}
+                        className="add-folio-searchbar"
                         sx={{
                           width: '100%',
-                          minWidth: 95,
-                          fontSize: '0.1rem !important',
-                          padding: '1px'
+                          backgroundColor: 'white',
+                          color: '#132f5e',
+                          svg: 'var(--primary-color)'
                         }}
-                        className="add-folio-searchbar"
                       />
                     )}
                   />
@@ -277,14 +273,14 @@ export const AddMultipleNewTransactionTable = ({
                 align="left"
                 component="th"
                 scope="row"
-                style={{ fontSize: '0.9rem' }}
+                style={{ fontSize: '0.89rem' }}
                 sx={{
                   paddingLeft: '3px',
                   paddingRight: '3px'
                 }}
               >
                 <small className="add-folio-find-investor-label">
-                  Transaction type
+                  Transaction type*
                 </small>
                 <FormControl
                   variant="standard"
@@ -327,7 +323,7 @@ export const AddMultipleNewTransactionTable = ({
                   id="outlined-required"
                   sx={{ width: '100%', minWidth: 70 }}
                   value={toBeAddedStatements[index].investorPassportNumber}
-                  inputProps={{ style: { fontSize: '0.9rem' } }}
+                  inputProps={{ style: { fontSize: '1rem' } }}
                   InputLabelProps={{
                     style: { fontSize: '0.8rem' }
                   }}

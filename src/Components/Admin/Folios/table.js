@@ -592,7 +592,7 @@ export default function CustomizedTables({
                           backgroundColor: 'white',
                           textTransform: 'none',
                           color: 'var(--primary-color)',
-                          padding: '4px 8px',
+                          padding: role == 'folio' ? '4px 8px' : '4px 1.5rem',
                           fontSize: '0.75rem'
                         }}
                       >
