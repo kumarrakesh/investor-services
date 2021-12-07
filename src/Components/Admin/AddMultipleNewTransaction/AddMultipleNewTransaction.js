@@ -58,13 +58,20 @@ const AddMultipleNewTransaction = ({
 }) => {
   //states
   const [toBeAddedStatements, setToBeAddedStatements] = useState([]);
+  const [count, setCount] = useState(0);
   //other hooks
   //handers
   const handleShowAddMultipleNewTransaction = async () => {
     setToBeAddedStatements([
       ...toBeAddedStatements,
-      { type: '1', date: new Date(), amount: 0 }
+      {
+        type: '1',
+        date: new Date(),
+        amount: 0,
+        key: count + 100000
+      }
     ]);
+    setCount(count + 1);
   };
 
   return (
@@ -146,6 +153,7 @@ export const AddMultipleNewTransactionTable = ({
         '',
         'success'
       );
+      setToBeAddedStatements([]);
       const response1 = await fetch(
         `${process.env.REACT_APP_API}/api/get/folio/transaction`,
         {
@@ -187,7 +195,7 @@ export const AddMultipleNewTransactionTable = ({
       >
         <TableBody>
           {toBeAddedStatements.map((row, index) => (
-            <StyledTableRow key={index} sx={{ verticalAlign: 'top' }}>
+            <StyledTableRow sx={{ verticalAlign: 'top' }} key={row.key}>
               <StyledTableCell
                 component="th"
                 scope="row"
@@ -302,9 +310,10 @@ export const AddMultipleNewTransactionTable = ({
                 >
                   <button
                     onClick={() => {
-                      let newToBeAddedStatements = [...toBeAddedStatements];
-                      newToBeAddedStatements.splice(index, 1);
-                      setToBeAddedStatements(newToBeAddedStatements);
+                      let k = [...toBeAddedStatements];
+                      let k1 = k.slice(0, index);
+                      let k2 = k.slice(index + 1, k.length);
+                      setToBeAddedStatements([...k1, ...k2]);
                     }}
                     style={{
                       color: 'var(--secondary-color)',
