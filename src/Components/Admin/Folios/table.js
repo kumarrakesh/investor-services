@@ -14,7 +14,42 @@ import { useHistory } from 'react-router';
 import { LocalizationProvider, MobileDatePicker } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import TextField from '@mui/material/TextField';
-
+const errorSwal = Swal.mixin({
+  customClass: {
+    container: 'add-folio-swal-container',
+    popup: 'add-folio-swal swal-error-bg-color',
+    title: 'add-folio-swal-title'
+  },
+  imageUrl: '',
+  imageHeight: 10,
+  imageWidth: 10,
+  toast: true,
+  position: 'top',
+  showConfirmButton: false,
+  timer: 3000,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer);
+    toast.addEventListener('mouseleave', Swal.resumeTimer);
+  }
+});
+const successSwal = Swal.mixin({
+  customClass: {
+    container: 'add-folio-swal-container',
+    popup: 'add-folio-swal swal-success-bg-color',
+    title: 'add-folio-swal-title'
+  },
+  imageUrl: '',
+  imageHeight: 10,
+  imageWidth: 10,
+  toast: true,
+  position: 'top',
+  showConfirmButton: false,
+  timer: 3000,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer);
+    toast.addEventListener('mouseleave', Swal.resumeTimer);
+  }
+});
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: '#F6F8FA !important',
@@ -82,7 +117,7 @@ export default function CustomizedTables({
     });
     const data = await response.json();
     if (!data.success)
-      Swal.fire('Please check the passport number', '', 'error');
+      errorSwal.fire('Please check the passport number', '', 'error');
     else {
       console.log(data);
       let name = data.data.filter(
@@ -93,7 +128,7 @@ export default function CustomizedTables({
         setNewData({ ...newData, investorName: name[0].name });
         setGotName(true);
         setIsEditing(false);
-      } else Swal.fire('Please check the passport number', '', 'error');
+      } else errorSwal.fire('Please check the passport number', '', 'error');
     }
   };
   const handleAddFolioTranscation = (row) => {
@@ -136,9 +171,9 @@ export default function CustomizedTables({
       );
       const data = await response.json();
       console.log(data);
-      if (!data.status) Swal.fire(data.message, '', 'error');
+      if (!data.status) errorSwal.fire(data.message, '', 'error');
       else {
-        Swal.fire(data.message, '', 'success');
+        successSwal.fire(data.message, '', 'success');
         const response1 = await fetch(
           `${process.env.REACT_APP_API}/api/all/folio`,
           {
@@ -161,7 +196,7 @@ export default function CustomizedTables({
         });
       }
     } catch (err) {
-      Swal.fire('Some error occured', '', 'error');
+      errorSwal.fire('Some error occured', '', 'error');
     }
     setLoading(false);
   };

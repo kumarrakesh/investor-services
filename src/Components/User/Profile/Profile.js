@@ -13,7 +13,42 @@ import {
 } from '@mui/material';
 import Swal from 'sweetalert2';
 import './Profile.css';
-
+const errorSwal = Swal.mixin({
+  customClass: {
+    container: 'add-folio-swal-container',
+    popup: 'add-folio-swal swal-error-bg-color',
+    title: 'add-folio-swal-title'
+  },
+  imageUrl: '',
+  imageHeight: 10,
+  imageWidth: 10,
+  toast: true,
+  position: 'top',
+  showConfirmButton: false,
+  timer: 3000,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer);
+    toast.addEventListener('mouseleave', Swal.resumeTimer);
+  }
+});
+const successSwal = Swal.mixin({
+  customClass: {
+    container: 'add-folio-swal-container',
+    popup: 'add-folio-swal swal-success-bg-color',
+    title: 'add-folio-swal-title'
+  },
+  imageUrl: '',
+  imageHeight: 10,
+  imageWidth: 10,
+  toast: true,
+  position: 'top',
+  showConfirmButton: false,
+  timer: 3000,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer);
+    toast.addEventListener('mouseleave', Swal.resumeTimer);
+  }
+});
 const Profile = () => {
   const history = useHistory();
   const token = JSON.parse(localStorage.getItem('token'));
@@ -80,10 +115,10 @@ const Profile = () => {
       const data = await response.json();
       if (data.success) {
         await getProfileData();
-        Swal.fire('Uploaded image!', '', 'success');
-      } else Swal.fire('Something went wrong', '', 'error');
+        successSwal.fire('Uploaded image!', '', 'success');
+      } else errorSwal.fire('Something went wrong', '', 'error');
     } catch (err) {
-      Swal.fire('Something went wrong', '', 'error');
+      errorSwal.fire('Something went wrong', '', 'error');
     }
 
     setShowImageDialog(false);

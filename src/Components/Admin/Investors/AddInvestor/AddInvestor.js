@@ -19,7 +19,42 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import OutlinedInput from '@mui/material/OutlinedInput';
-
+const errorSwal = Swal.mixin({
+  customClass: {
+    container: 'add-folio-swal-container',
+    popup: 'add-folio-swal swal-error-bg-color',
+    title: 'add-folio-swal-title'
+  },
+  imageUrl: '',
+  imageHeight: 10,
+  imageWidth: 10,
+  toast: true,
+  position: 'top',
+  showConfirmButton: false,
+  timer: 3000,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer);
+    toast.addEventListener('mouseleave', Swal.resumeTimer);
+  }
+});
+const successSwal = Swal.mixin({
+  customClass: {
+    container: 'add-folio-swal-container',
+    popup: 'add-folio-swal swal-success-bg-color',
+    title: 'add-folio-swal-title'
+  },
+  imageUrl: '',
+  imageHeight: 10,
+  imageWidth: 10,
+  toast: true,
+  position: 'top',
+  showConfirmButton: false,
+  timer: 3000,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer);
+    toast.addEventListener('mouseleave', Swal.resumeTimer);
+  }
+});
 const AddInvestor = () => {
   const history = useHistory();
   const location = useLocation();
@@ -128,8 +163,8 @@ const AddInvestor = () => {
       setLoading(false);
 
       if (data?.success) {
-        Swal.fire('Updated successfully!', '', 'success');
-      } else Swal.fire('Error while updating!', data?.error, 'error');
+        successSwal.fire('Updated successfully!', '', 'success');
+      } else errorSwal.fire('Error while updating!', data?.error, 'error');
     } else {
       setLoading(true);
       const response = await fetch(
@@ -160,8 +195,8 @@ const AddInvestor = () => {
       setLoading(false);
 
       if (data?.success) {
-        Swal.fire('Added successfully!', '', 'success');
-      } else Swal.fire('Error while updating!', data?.error, 'error');
+        successSwal.fire('Added successfully!', '', 'success');
+      } else errorSwal.fire('Error while updating!', data?.error, 'error');
     }
 
     history.push('/admin/investors');

@@ -17,7 +17,42 @@ import { LocalizationProvider, MobileDatePicker } from '@mui/lab';
 import { styled } from '@mui/material/styles';
 import './AddMultipleNewTransaction.css';
 import Swal from 'sweetalert2';
-
+const errorSwal = Swal.mixin({
+  customClass: {
+    container: 'add-folio-swal-container',
+    popup: 'add-folio-swal swal-error-bg-color',
+    title: 'add-folio-swal-title'
+  },
+  imageUrl: '',
+  imageHeight: 10,
+  imageWidth: 10,
+  toast: true,
+  position: 'top',
+  showConfirmButton: false,
+  timer: 3000,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer);
+    toast.addEventListener('mouseleave', Swal.resumeTimer);
+  }
+});
+const successSwal = Swal.mixin({
+  customClass: {
+    container: 'add-folio-swal-container',
+    popup: 'add-folio-swal swal-success-bg-color',
+    title: 'add-folio-swal-title'
+  },
+  imageUrl: '',
+  imageHeight: 10,
+  imageWidth: 10,
+  toast: true,
+  position: 'top',
+  showConfirmButton: false,
+  timer: 3000,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer);
+    toast.addEventListener('mouseleave', Swal.resumeTimer);
+  }
+});
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: '#F6F8FA !important',
@@ -142,14 +177,16 @@ export const AddMultipleNewTransactionTable = ({
     const data = await response.json();
     console.log(data);
     if (!data.status)
-      Swal.fire(
+      errorSwal.fire(
         data.message || data.error || "Couldn't add the transaction",
         '',
         'error'
       );
     else {
-      Swal.fire(
-        'Transaction' + toBeAddedStatements.length > 1 ? 's' : '' + 'noted!',
+      successSwal.fire(
+        'Transaction' +
+          (toBeAddedStatements.length > 1 ? 's' : '') +
+          ' recorded!',
         '',
         'success'
       );

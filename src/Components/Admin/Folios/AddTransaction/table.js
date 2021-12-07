@@ -62,7 +62,42 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     outline: 'none'
   }
 }));
-
+const errorSwal = Swal.mixin({
+  customClass: {
+    container: 'add-folio-swal-container',
+    popup: 'add-folio-swal swal-error-bg-color',
+    title: 'add-folio-swal-title'
+  },
+  imageUrl: '',
+  imageHeight: 10,
+  imageWidth: 10,
+  toast: true,
+  position: 'top',
+  showConfirmButton: false,
+  timer: 3000,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer);
+    toast.addEventListener('mouseleave', Swal.resumeTimer);
+  }
+});
+const successSwal = Swal.mixin({
+  customClass: {
+    container: 'add-folio-swal-container',
+    popup: 'add-folio-swal swal-success-bg-color',
+    title: 'add-folio-swal-title'
+  },
+  imageUrl: '',
+  imageHeight: 10,
+  imageWidth: 10,
+  toast: true,
+  position: 'top',
+  showConfirmButton: false,
+  timer: 3000,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer);
+    toast.addEventListener('mouseleave', Swal.resumeTimer);
+  }
+});
 export default function CustomizedTables({
   displayRows,
   setDisplayRows,
@@ -128,13 +163,13 @@ export default function CustomizedTables({
       const data = await response.json();
       console.log(data);
       if (!data.status)
-        Swal.fire(
+        errorSwal.fire(
           data.message || data.error || "Could'nt add the transaction",
           '',
           'error'
         );
       else {
-        Swal.fire('Transaction noted!', '', 'success');
+        successSwal.fire('Transaction noted!', '', 'success');
         const response1 = await fetch(
           `${process.env.REACT_APP_API}/api/get/folio/transaction`,
           {
@@ -159,7 +194,7 @@ export default function CustomizedTables({
         });
       }
     } catch (err) {
-      Swal.fire('Some error occured', '', 'error');
+      errorSwal.fire('Some error occured', '', 'error');
     }
     setLoading(false);
   };

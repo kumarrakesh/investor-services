@@ -9,7 +9,42 @@ import CustomizedTables from './table';
 import { Backdrop, CircularProgress } from '@mui/material';
 import Swal from 'sweetalert2';
 import Button from '@mui/material/Button';
-
+const errorSwal = Swal.mixin({
+  customClass: {
+    container: 'add-folio-swal-container',
+    popup: 'add-folio-swal swal-error-bg-color',
+    title: 'add-folio-swal-title'
+  },
+  imageUrl: '',
+  imageHeight: 10,
+  imageWidth: 10,
+  toast: true,
+  position: 'top',
+  showConfirmButton: false,
+  timer: 3000,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer);
+    toast.addEventListener('mouseleave', Swal.resumeTimer);
+  }
+});
+const successSwal = Swal.mixin({
+  customClass: {
+    container: 'add-folio-swal-container',
+    popup: 'add-folio-swal swal-success-bg-color',
+    title: 'add-folio-swal-title'
+  },
+  imageUrl: '',
+  imageHeight: 10,
+  imageWidth: 10,
+  toast: true,
+  position: 'top',
+  showConfirmButton: false,
+  timer: 3000,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer);
+    toast.addEventListener('mouseleave', Swal.resumeTimer);
+  }
+});
 const UserFolioStatement = () => {
   const [displayRows, setDisplayRows] = useState([]);
   const [rows, setRows] = useState([]);
@@ -88,7 +123,7 @@ const UserFolioStatement = () => {
       setDisplayRows(data.data);
       setLoading(false);
     } catch (e) {
-      Swal.fire('Something went wrong', '', 'error');
+      errorSwal.fire('Something went wrong', '', 'error');
       console.log(e);
       setLoading(false);
     }
@@ -128,7 +163,7 @@ const UserFolioStatement = () => {
       setLoading(false);
       window.URL.revokeObjectURL(url);
     } catch (err) {
-      Swal.fire('Something went wrong', '', 'error');
+      errorSwal.fire('Something went wrong', '', 'error');
       console.log(err);
     }
     // .then((resp) => resp.blob())
