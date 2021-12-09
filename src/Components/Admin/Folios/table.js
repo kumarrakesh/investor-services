@@ -212,7 +212,7 @@ export default function CustomizedTables({
   return (
     <>
       <TableContainer
-        sx={{ maxHeight: '60vh', borderRadius: 2 }}
+        sx={{ maxHeight: '61vh', borderRadius: 2 }}
         component={Paper}
         style={{ boxShadow: '0px 0px 0px 1px #CECECE' }}
       >

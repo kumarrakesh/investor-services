@@ -52,16 +52,16 @@ const Investors = () => {
 
       <div className="investors-container">
         <h1 id="inv-title">Investors</h1>
-        <h1 id="inv-overview">Overview</h1>
 
-        <div className="total-investors-div">
-          <p id="total-investors">Total Investors</p>
-          <p id="total-no">{displayRows?.length}</p>
-        </div>
+        <div className="investors-overview-div">
+          <div className="total-investors-div">
+            <p id="total-investors">Total Investors</p>
+            <p id="total-no">{displayRows?.length}</p>
+          </div>
 
-        <div className="add-investor-btn">
           <Button
             variant="contained"
+            className="add-investor-btn"
             style={{
               backgroundColor: '#E95B3E',
               textTransform: 'none',
@@ -69,8 +69,8 @@ const Investors = () => {
             }}
             onClick={handleAddInvestor}
           >
+            <AddIcon sx={{ marginRight: '0.5rem' }} />
             Add Investor
-            <AddIcon sx={{ marginLeft: '10px' }} />
           </Button>
         </div>
 
