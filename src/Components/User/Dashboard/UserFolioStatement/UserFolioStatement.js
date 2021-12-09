@@ -9,6 +9,8 @@ import CustomizedTables from './table';
 import { Backdrop, CircularProgress } from '@mui/material';
 import Swal from 'sweetalert2';
 import Button from '@mui/material/Button';
+import CloseIcon from '@mui/icons-material/Close';
+
 const errorSwal = Swal.mixin({
   customClass: {
     container: 'add-folio-swal-container',
@@ -45,6 +47,7 @@ const successSwal = Swal.mixin({
     toast.addEventListener('mouseleave', Swal.resumeTimer);
   }
 });
+
 const UserFolioStatement = () => {
   const [displayRows, setDisplayRows] = useState([]);
   const [rows, setRows] = useState([]);
@@ -54,13 +57,12 @@ const UserFolioStatement = () => {
   const [loading, setLoading] = useState(false);
 
   const [values, setValues] = React.useState({
-    folioName: '',
+    folioNo: '',
     investorName: '',
     investorPassport: '',
     commitment: '',
     yield: '',
-    registrationDate: new Date(),
-    folioId: ''
+    registrationDate: new Date()
   });
 
   const handleChange = (prop) => (event) => {
@@ -89,13 +91,12 @@ const UserFolioStatement = () => {
 
   const setFolioBody = async () => {
     setValues({
-      folioName: location?.state?.row?.folioName,
       investorName: location?.state?.row?.folioId,
-      investorPassport: location?.state?.row?.user.passport,
+      // investorPassport: location?.state?.row?.user.passport,
       commitment: location?.state?.row?.commitment,
       yield: location?.state?.row?.yield,
       registrationDate: location?.state?.row?.date,
-      folioId: location?.state?.row?.folioId
+      folioNo: location?.state?.row?.folioNumber
     });
     console.log(values);
   };
@@ -112,7 +113,7 @@ const UserFolioStatement = () => {
             'x-access-token': token
           },
           body: JSON.stringify({
-            folioId: location?.state?.row?.folioId
+            folioNumber: location?.state?.row?.folioNumber
           })
         }
       );
@@ -141,7 +142,7 @@ const UserFolioStatement = () => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            folioId: values.folioId
+            folioNumber: location?.state?.row?.folioNumber
           })
         }
       );
@@ -153,7 +154,7 @@ const UserFolioStatement = () => {
       a.href = url;
       // the filename you want
       //folio_number_investor_name_download_date.pdf
-      console.log(values.folioId);
+      console.log(values.folioNumber);
       // a.download = `${folio_number}_${investor_name}_${new Date().toLocaleDateString(
       //   'en-GB'
       // )}.pdf`;
@@ -190,16 +191,16 @@ const UserFolioStatement = () => {
       <div className="user-folio-transaction-container">
         <div className="user-folio-transaction-header">
           <h1 className="user-folio-transaction-header-label">
-            Add Folio Transaction{' '}
+            View Folio Transaction{' '}
           </h1>
           <IconButton
             size="large"
-            style={{ color: '#E95B3E' }}
+            style={{ color: '#132f5e' }}
             onClick={() => {
               history.push('/dashboard');
             }}
           >
-            <CancelIcon fontSize="inherit" />
+            <CloseIcon fontSize="large" />
           </IconButton>
         </div>
         <h1 className="folio-overview">Overview</h1>
@@ -210,22 +211,22 @@ const UserFolioStatement = () => {
           >
             <div className="user-folio-transaction-row-item">
               <div className="user-folio-transaction-row-item-label">
-                Folio Name
+                Folio Number
               </div>
               <div className="user-folio-transaction-row-item-value">
-                {values.folioName}
+                {values?.folioNo}
               </div>
             </div>
 
             <div className="user-folio-transaction-row-item">
               <div className="user-folio-transaction-row-item-label">
-                Folio ID
+                Capital Commitment
               </div>
               <div
                 className="user-folio-transaction-row-item-value"
                 style={{ textTransform: 'none' }}
               >
-                {values.folioId}
+                {values?.commitment}
               </div>
             </div>
 
@@ -237,7 +238,7 @@ const UserFolioStatement = () => {
                 className="user-folio-transaction-row-item-value"
                 style={{ textTransform: 'none' }}
               >
-                {new Date(values.registrationDate).toLocaleDateString('en-GB')}
+                {new Date(values?.registrationDate).toLocaleDateString('en-GB')}
               </div>
             </div>
           </div>
@@ -249,7 +250,8 @@ const UserFolioStatement = () => {
             backgroundColor: '#E95B3E',
             textTransform: 'none',
             width: '30%',
-            marginBottom: '2rem'
+            marginTop: '0.8rem',
+            marginBottom: '1.8rem'
           }}
           onClick={handleDownloadPdf}
         >

@@ -177,47 +177,12 @@ const AddInvestor = () => {
       setLoading(false);
 
       if (data?.success) {
-        Swal.mixin({
-          customClass: {
-            container: 'add-folio-swal-container',
-            popup: 'add-folio-swal swal-success-bg-color',
-            title: 'add-folio-swal-title'
-          },
-          imageUrl: '',
-          imageHeight: 10,
-          imageWidth: 10,
-          toast: true,
-          position: 'top',
-          showConfirmButton: false,
-          timer: 3000,
-          didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer);
-            toast.addEventListener('mouseleave', Swal.resumeTimer);
-          }
-        }).fire(
+        successSwal.fire(
           'Investor "' + values.investorName + '" Updated successfully!',
           '',
           'success'
         );
-      } else
-        Swal.mixin({
-          customClass: {
-            container: 'add-folio-swal-container',
-            popup: 'add-folio-swal swal-error-bg-color',
-            title: 'add-folio-swal-title'
-          },
-          imageUrl: '',
-          imageHeight: 10,
-          imageWidth: 10,
-          toast: true,
-          position: 'top',
-          showConfirmButton: false,
-          timer: 3000,
-          didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer);
-            toast.addEventListener('mouseleave', Swal.resumeTimer);
-          }
-        }).fire(data.error || 'Error while updating!', '', 'error');
+      } else errorSwal.fire(data.error || 'Error while updating!', '', 'error');
     } else {
       setLoading(true);
       const response = await fetch(

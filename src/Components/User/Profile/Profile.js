@@ -221,23 +221,75 @@ const Profile = () => {
                 {profile?.data?.passport}
               </div>
             </div>
+
+            <div className="profile-info-row-item">
+              <div className="profile-info-row-item-label">Phone Number</div>
+              <div
+                className="profile-info-row-item-value"
+                style={{ textTransform: 'none' }}
+              >
+                {profile?.data?.phoneNo}
+              </div>
+            </div>
+
+            <div className="profile-info-row-item">
+              <div className="profile-info-row-item-label">Email</div>
+              <div
+                className="profile-info-row-item-value"
+                style={{ textTransform: 'none' }}
+              >
+                {profile?.data?.email}
+              </div>
+            </div>
           </div>
 
           <div className="profile-info-row">
             <div className="profile-info-row-item">
-              <div className="profile-info-row-item-label">Address</div>
-              <div className="profile-info-row-item-value" id="address">
-                {profile?.data?.city}, {profile?.data?.state},{' '}
-                {profile?.data?.country}, PIN - {profile?.data?.pincode}
-              </div>
-            </div>
-            <div className="profile-info-row-item">
               <div className="profile-info-row-item-label">Amount Invested</div>
               <div className="profile-info-row-item-value">
-                {Math.round(profile.AmountInvested * 100 + Number.EPSILON) /
+                $
+                {Math.round(profile.AmountContributed * 100 + Number.EPSILON) /
                   100}
               </div>
             </div>
+
+            <div className="profile-info-row-item">
+              <div className="profile-info-row-item-label">
+                Commitment Amount
+              </div>
+              <div className="profile-info-row-item-value">
+                $
+                {Math.round(profile.AmountCommited * 100 + Number.EPSILON) /
+                  100}
+              </div>
+            </div>
+
+            <div
+              className="profile-info-row-item"
+              style={{ display: 'flex', flex: '2' }}
+            >
+              <div
+                className="profile-info-row-item-label"
+                style={{ display: 'flex', flex: '2' }}
+              >
+                Address
+              </div>
+              <div
+                className="profile-info-row-item-value"
+                id="address"
+                style={{ display: 'flex', flex: '2' }}
+              >
+                {profile?.data?.city}, {profile?.data?.state},
+                {profile?.data?.country}, PIN -{profile?.data?.pincode}
+              </div>
+            </div>
+
+            {/* <div className="profile-info-row-item">
+              <div className="profile-info-row-item-label"></div>
+              <div className="profile-info-row-item-value">
+               
+              </div>
+            </div> */}
 
             {/* <div className="profile-info-row-item">
               <div className="profile-info-row-item-label">Investment Date</div>

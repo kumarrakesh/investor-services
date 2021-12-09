@@ -36,7 +36,7 @@ const Investors = () => {
       }
     });
     const data = await response.json();
-    setDisplayRows(data.data);
+    setDisplayRows(data?.data);
     setLoading(false);
   };
 
