@@ -1,3 +1,21 @@
+.add-folio-find-investor-label {
+  color: #5a6d8e;
+  margin-bottom: 0.3rem;
+}
+.add-folio-searchbar > div {
+  padding: 0.5rem !important;
+  max-height: 2.5rem !important ;
+}
+.add-folio-searchbar input {
+  padding: 0rem !important;
+}
+
+.add-folio-searchbar > * {
+  outline: 0px #91acd9 solid !important;
+}
+.add-folio-searchbar > div {
+  outline: 1px #91acd9 solid !important;
+}
 .add-multiple-new-transaction-container {
   display: flex;
 }
@@ -5,7 +23,7 @@
   color: #e95b3e !important;
   text-transform: none !important;
   margin-top: 1.5rem !important;
-  padding: 0.5rem 1rem !important;
+  padding: 0.4rem 1rem !important;
   border-color: #e95b3e !important;
   font-weight: 500 !important;
   font-size: 1rem !important;
@@ -16,13 +34,13 @@
   color: white !important;
   text-transform: none !important;
   margin-top: 1.5rem !important;
-  padding: 0.5rem 1rem !important;
+  padding: 0.4rem 3rem !important;
   border-color: white !important;
   font-weight: 500 !important;
   font-size: 1rem !important;
   border-width: 2px !important;
   background-color: var(--primary-color) !important;
-  min-width: 20ch !important;
+  /* min-width: 18ch !important; */
   border-radius: 5px !important;
 }
 .new-transaction-heading {

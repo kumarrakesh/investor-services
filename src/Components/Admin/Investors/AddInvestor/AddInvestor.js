@@ -26,6 +26,42 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import CloseIcon from '@mui/icons-material/Close';
 
+const errorSwal = Swal.mixin({
+  customClass: {
+    container: 'add-folio-swal-container',
+    popup: 'add-folio-swal swal-error-bg-color',
+    title: 'add-folio-swal-title'
+  },
+  imageUrl: '',
+  imageHeight: 10,
+  imageWidth: 10,
+  toast: true,
+  position: 'top',
+  showConfirmButton: false,
+  timer: 3000,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer);
+    toast.addEventListener('mouseleave', Swal.resumeTimer);
+  }
+});
+const successSwal = Swal.mixin({
+  customClass: {
+    container: 'add-folio-swal-container',
+    popup: 'add-folio-swal swal-success-bg-color',
+    title: 'add-folio-swal-title'
+  },
+  imageUrl: '',
+  imageHeight: 10,
+  imageWidth: 10,
+  toast: true,
+  position: 'top',
+  showConfirmButton: false,
+  timer: 3000,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer);
+    toast.addEventListener('mouseleave', Swal.resumeTimer);
+  }
+});
 const AddInvestor = () => {
   const history = useHistory();
   const location = useLocation();

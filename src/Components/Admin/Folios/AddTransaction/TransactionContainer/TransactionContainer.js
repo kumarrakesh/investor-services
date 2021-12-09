@@ -4,7 +4,42 @@ import CustomizedTables from '../table';
 import Swal from 'sweetalert2';
 import { Backdrop, CircularProgress } from '@mui/material';
 import '../FolioAddTransaction.css';
-
+const errorSwal = Swal.mixin({
+  customClass: {
+    container: 'add-folio-swal-container',
+    popup: 'add-folio-swal swal-error-bg-color',
+    title: 'add-folio-swal-title'
+  },
+  imageUrl: '',
+  imageHeight: 10,
+  imageWidth: 10,
+  toast: true,
+  position: 'top',
+  showConfirmButton: false,
+  timer: 3000,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer);
+    toast.addEventListener('mouseleave', Swal.resumeTimer);
+  }
+});
+const successSwal = Swal.mixin({
+  customClass: {
+    container: 'add-folio-swal-container',
+    popup: 'add-folio-swal swal-success-bg-color',
+    title: 'add-folio-swal-title'
+  },
+  imageUrl: '',
+  imageHeight: 10,
+  imageWidth: 10,
+  toast: true,
+  position: 'top',
+  showConfirmButton: false,
+  timer: 3000,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer);
+    toast.addEventListener('mouseleave', Swal.resumeTimer);
+  }
+});
 const TransactionContainer = () => {
   const location = useLocation();
   const [loading, setLoading] = useState(false);
@@ -38,7 +73,7 @@ const TransactionContainer = () => {
       registrationDate: location?.state?.row?.date,
       contribution: location?.state?.row?.contribution
     });
-    console.log(values);
+    // console.log(values);
   };
 
   const getFolioStatement = async () => {
@@ -64,7 +99,7 @@ const TransactionContainer = () => {
         setRows(data.data);
         setDisplayRows(data.data);
       } else {
-        Swal.fire('something went wrong', '', 'error');
+        errorSwal.fire('something went wrong', '', 'error');
       }
       setLoading(false);
     } catch (e) {
@@ -76,7 +111,7 @@ const TransactionContainer = () => {
   useEffect(() => {
     if (location?.state?.row) {
       setFolioBody();
-      console.log(location?.state?.row);
+      // console.log(location?.state?.row);
     }
   }, [location]);
 
