@@ -10,6 +10,7 @@ import { Backdrop, CircularProgress } from '@mui/material';
 import Swal from 'sweetalert2';
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 
 const errorSwal = Swal.mixin({
   customClass: {
@@ -191,7 +192,7 @@ const UserFolioStatement = () => {
       <div className="user-folio-transaction-container">
         <div className="user-folio-transaction-header">
           <h1 className="user-folio-transaction-header-label">
-            View Folio Transaction{' '}
+            Folio Transaction{' '}
           </h1>
           <IconButton
             size="large"
@@ -226,7 +227,7 @@ const UserFolioStatement = () => {
                 className="user-folio-transaction-row-item-value"
                 style={{ textTransform: 'none' }}
               >
-                {values?.commitment}
+                ${' ' + values?.commitment}
               </div>
             </div>
 
@@ -247,14 +248,17 @@ const UserFolioStatement = () => {
         <Button
           variant="contained"
           style={{
-            backgroundColor: '#E95B3E',
+            backgroundColor: 'white',
+            color: 'var(--primary-color)',
             textTransform: 'none',
-            width: '30%',
+            width: '22%',
             marginTop: '0.8rem',
-            marginBottom: '1.8rem'
+            marginBottom: '1.8rem',
+            height: '2.9rem'
           }}
           onClick={handleDownloadPdf}
         >
+          <FileDownloadOutlinedIcon sx={{ marginRight: '10px' }} />
           Download Statement
         </Button>
 

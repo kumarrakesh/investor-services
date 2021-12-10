@@ -143,7 +143,7 @@ const Navbar = () => {
         >
           <div className="pic">
             <img
-              src="https://via.placeholder.com/50"
+              src={localStorage.getItem('imageURL')}
               alt=""
               onError={() => {
                 setImgURL('https://tiwpe.com/image/tiw-logo.png');

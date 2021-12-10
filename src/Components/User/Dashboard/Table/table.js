@@ -83,15 +83,16 @@ export default function CustomizedTables({
               }}
             >
               <StyledTableCell>Date</StyledTableCell>
-              <StyledTableCell align="center">Folio No.</StyledTableCell>
+              <StyledTableCell align="left">Folio No.</StyledTableCell>
               {/* {fundname == 'All' ? ( */}
-              <StyledTableCell align="center">
-                Capital Commitment
-              </StyledTableCell>
+              <StyledTableCell align="left">Capital Commitment</StyledTableCell>
               {/* ) : null} */}
-              <StyledTableCell align="right">Contribution</StyledTableCell>
-              <StyledTableCell align="right">Expected Yield</StyledTableCell>
-              <StyledTableCell align="center">Action</StyledTableCell>
+              <StyledTableCell align="left">Contribution</StyledTableCell>
+              <StyledTableCell align="left">
+                Pending Contribution
+              </StyledTableCell>
+              <StyledTableCell align="left">Expected Yield</StyledTableCell>
+              <StyledTableCell align="left">Action</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody
@@ -112,21 +113,24 @@ export default function CustomizedTables({
                   <StyledTableCell component="th" scope="row">
                     {new Date(row.date).toLocaleDateString('en-GB')}
                   </StyledTableCell>
-                  <StyledTableCell align="center" component="th" scope="row">
+                  <StyledTableCell align="left" component="th" scope="row">
                     {row.folioNumber || '-'}
                   </StyledTableCell>
                   {/* {fundname == 'All' ? ( */}
-                  <StyledTableCell align="center" component="th" scope="row">
-                    {row.commitment.toFixed(2)}
+                  <StyledTableCell align="left" component="th" scope="row">
+                    ${' ' + row.commitment.toFixed(2)}
                   </StyledTableCell>
                   {/* ) : null} */}
-                  <StyledTableCell align="right">
-                    {row.contribution.toFixed(2)}
+                  <StyledTableCell align="left">
+                    ${' ' + row.contribution.toFixed(2)}
                   </StyledTableCell>
-                  <StyledTableCell align="right">
-                    {row.yield.toFixed(2)}
+                  <StyledTableCell align="left">
+                    ${' ' + (row.commitment - row.contribution).toFixed(2)}
                   </StyledTableCell>
-                  <StyledTableCell align="center" component="th" scope="row">
+                  <StyledTableCell align="left">
+                    {row.yield.toFixed(2)}%
+                  </StyledTableCell>
+                  <StyledTableCell align="left" component="th" scope="row">
                     {
                       <Button
                         variant="contained"
@@ -142,7 +146,7 @@ export default function CustomizedTables({
                           fontSize: '0.75rem'
                         }}
                       >
-                        View Details
+                        View
                       </Button>
                     }
                   </StyledTableCell>

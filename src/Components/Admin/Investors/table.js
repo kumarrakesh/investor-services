@@ -73,14 +73,14 @@ export default function CustomizedTables({ displayRows, setUpdate, loading }) {
           <TableHead>
             <TableRow>
               <StyledTableCell>Date</StyledTableCell>
-              <StyledTableCell align="center">Investor Name</StyledTableCell>
-              <StyledTableCell align="center">Address</StyledTableCell>
-              <StyledTableCell align="center">Passport Number</StyledTableCell>
+              <StyledTableCell align="left">Investor Name</StyledTableCell>
+              <StyledTableCell align="left">Address</StyledTableCell>
+              <StyledTableCell align="left">Passport Number</StyledTableCell>
               {/* <StyledTableCell align="center">Invested Amount</StyledTableCell>
               <StyledTableCell align="center">
                 Current Invested Value
               </StyledTableCell> */}
-              <StyledTableCell align="center">Action</StyledTableCell>
+              <StyledTableCell align="left">Action</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -96,13 +96,13 @@ export default function CustomizedTables({ displayRows, setUpdate, loading }) {
                 <StyledTableCell component="th" scope="row">
                   {new Date(row.dateOfCreation).toLocaleDateString('en-GB')}
                 </StyledTableCell>
-                <StyledTableCell align="center" component="th" scope="row">
+                <StyledTableCell align="left" component="th" scope="row">
                   {row.name}
                 </StyledTableCell>
-                <StyledTableCell align="center" component="th" scope="row">
+                <StyledTableCell align="left" component="th" scope="row">
                   {[row.city, row.state, row.country].join(', ')}
                 </StyledTableCell>
-                <StyledTableCell align="center" component="th" scope="row">
+                <StyledTableCell align="left" component="th" scope="row">
                   {row.passport}
                 </StyledTableCell>
                 {/* <StyledTableCell align="center" component="th" scope="row">
@@ -111,7 +111,7 @@ export default function CustomizedTables({ displayRows, setUpdate, loading }) {
                 <StyledTableCell align="center" component="th" scope="row">
                   {row.currentValue.toFixed(2)}
                 </StyledTableCell> */}
-                <StyledTableCell align="center" component="th" scope="row">
+                <StyledTableCell align="left" component="th" scope="row">
                   {
                     <Button
                       variant="contained"

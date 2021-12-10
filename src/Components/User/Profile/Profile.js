@@ -89,6 +89,7 @@ const Profile = () => {
   const handleCloseImageDialog = () => {
     setShowImageDialog(false);
   };
+
   const handleUploadImage = async () => {
     var formData = new FormData();
     formData.append('profilePic', selectedImage);
@@ -113,8 +114,17 @@ const Profile = () => {
         requestOptions
       );
       const data = await response.json();
+      console.log(data);
       if (data.success) {
-        await getProfileData();
+        setImgURL(
+          `${process.env.REACT_APP_API}/api/profilePic/` +
+            data?.data?.profilePic
+        );
+        localStorage.setItem(
+          'imageURL',
+          `${process.env.REACT_APP_API}/api/profilePic/` +
+            data?.data?.profilePic
+        );
         successSwal.fire('Uploaded image!', '', 'success');
       } else errorSwal.fire('Something went wrong', '', 'error');
     } catch (err) {
@@ -204,7 +214,7 @@ const Profile = () => {
         <div className="profile-info">
           <div
             className="profile-info-row"
-            style={{ borderBottom: ' 1px solid #E5E5E5' }}
+            style={{ borderBottom: ' 1.5px solid #E5E5E5' }}
           >
             <div className="profile-info-row-item">
               <div className="profile-info-row-item-label">Name</div>
@@ -231,6 +241,28 @@ const Profile = () => {
                 {profile?.data?.phoneNo}
               </div>
             </div>
+          </div>
+
+          <div className="profile-info-row">
+            {/* <div className="profile-info-row-item">
+              <div className="profile-info-row-item-label">Amount Invested</div>
+              <div className="profile-info-row-item-value">
+                $
+                {Math.round(profile.AmountContributed * 100 + Number.EPSILON) /
+                  100}
+              </div>
+            </div> */}
+
+            {/* <div className="profile-info-row-item">
+              <div className="profile-info-row-item-label">
+                Commitment Amount
+              </div>
+              <div className="profile-info-row-item-value">
+                $
+                {Math.round(profile.AmountCommited * 100 + Number.EPSILON) /
+                  100}
+              </div>
+            </div> */}
 
             <div className="profile-info-row-item">
               <div className="profile-info-row-item-label">Email</div>
@@ -239,28 +271,6 @@ const Profile = () => {
                 style={{ textTransform: 'none' }}
               >
                 {profile?.data?.email}
-              </div>
-            </div>
-          </div>
-
-          <div className="profile-info-row">
-            <div className="profile-info-row-item">
-              <div className="profile-info-row-item-label">Amount Invested</div>
-              <div className="profile-info-row-item-value">
-                $
-                {Math.round(profile.AmountContributed * 100 + Number.EPSILON) /
-                  100}
-              </div>
-            </div>
-
-            <div className="profile-info-row-item">
-              <div className="profile-info-row-item-label">
-                Commitment Amount
-              </div>
-              <div className="profile-info-row-item-value">
-                $
-                {Math.round(profile.AmountCommited * 100 + Number.EPSILON) /
-                  100}
               </div>
             </div>
 

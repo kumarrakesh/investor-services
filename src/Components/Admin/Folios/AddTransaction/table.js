@@ -224,8 +224,8 @@ export default function CustomizedTables({
                 <StyledTableCell align="left">
                   Capital Contribution
                 </StyledTableCell>
-                <StyledTableCell align="center">Yield Payment</StyledTableCell>
-                <StyledTableCell align="center">Redemption</StyledTableCell>
+                <StyledTableCell align="left">Yield Payment</StyledTableCell>
+                <StyledTableCell align="left">Redemption</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -249,13 +249,13 @@ export default function CustomizedTables({
                       : 'Redemtion'}
                   </StyledTableCell>
                   <StyledTableCell align="left" component="th" scope="row">
-                    {row.type == 1 ? '$' + row.amount : ''}
+                    {row.type == 1 ? '$ ' + row.amount : ''}
                   </StyledTableCell>
-                  <StyledTableCell align="center" component="th" scope="row">
-                    {row.type == 2 ? '$' + row.amount : ''}
+                  <StyledTableCell align="left" component="th" scope="row">
+                    {row.type == 2 ? '$ ' + row.amount : ''}
                   </StyledTableCell>
-                  <StyledTableCell align="center" component="th" scope="row">
-                    {row.type == 3 ? '$' + row.amount : ''}
+                  <StyledTableCell align="left" component="th" scope="row">
+                    {row.type == 3 ? '$ ' + row.amount : ''}
                   </StyledTableCell>
                 </StyledTableRow>
               ))}

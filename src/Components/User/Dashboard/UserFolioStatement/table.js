@@ -54,7 +54,7 @@ export default function CustomizedTables({ displayRows, loading }) {
         <TableContainer
           component={Paper}
           sx={{
-            maxHeight: '48vh',
+            maxHeight: '46vh',
             borderRadius: 2
           }}
           style={{ boxShadow: '0px 0px 0px 1px #CECECE' }}
@@ -65,8 +65,8 @@ export default function CustomizedTables({ displayRows, loading }) {
                 <StyledTableCell>Date Added</StyledTableCell>
                 <StyledTableCell align="left">Transaction Type</StyledTableCell>
                 <StyledTableCell align="left">Contribution</StyledTableCell>
-                <StyledTableCell align="center">Distribution</StyledTableCell>
-                <StyledTableCell align="center">Withdrawl</StyledTableCell>
+                <StyledTableCell align="left">Distribution</StyledTableCell>
+                <StyledTableCell align="left">Withdrawl</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -90,13 +90,13 @@ export default function CustomizedTables({ displayRows, loading }) {
                       : 'Redemtion'}
                   </StyledTableCell>
                   <StyledTableCell align="left" component="th" scope="row">
-                    {row.type == 1 ? row.amount : ''}
+                    {row.type == 1 ? '$ ' + row.amount : ''}
                   </StyledTableCell>
-                  <StyledTableCell align="center" component="th" scope="row">
-                    {row.type == 2 ? row.amount : ''}
+                  <StyledTableCell align="left" component="th" scope="row">
+                    {row.type == 2 ? '$ ' + row.amount : ''}
                   </StyledTableCell>
-                  <StyledTableCell align="center" component="th" scope="row">
-                    {row.type == 3 ? row.amount : ''}
+                  <StyledTableCell align="left" component="th" scope="row">
+                    {row.type == 3 ? '$ ' + row.amount : ''}
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
