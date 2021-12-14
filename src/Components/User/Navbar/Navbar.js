@@ -89,7 +89,7 @@ const Navbar = () => {
             history.push('/dashboard');
           }}
         >
-          <img src="https://via.placeholder.com/100" alt="tiwpe logo" />
+          <img src="https://via.placeholder.com/100x70" alt="tiwpe logo" />
         </div>
         <div
           className="navbar-top-profile-pic"
@@ -98,7 +98,7 @@ const Navbar = () => {
           }}
         >
           <img
-            src="https://via.placeholder.com/100"
+            src="https://via.placeholder.com/50"
             alt=""
             onError={() => {
               setImgURL('https://tiwpe.com/image/tiw-logo.png');
@@ -120,14 +120,14 @@ const Navbar = () => {
         {size.width > 770 && (
           <>
             <div id="header-logo">
-              <img src="https://via.placeholder.com/100" alt="tiwpe logo" />
+              <img src="https://via.placeholder.com/100x70" alt="tiwpe logo" />
             </div>
 
             <Divider
               style={{
                 backgroundColor: '#E6E6E6 ',
                 width: '100%',
-                margin: '3px 0px'
+                margin: '1px 0px'
               }}
             />
           </>
@@ -143,7 +143,7 @@ const Navbar = () => {
         >
           <div className="pic">
             <img
-              src="https://via.placeholder.com/100"
+              src={localStorage.getItem('imageURL')}
               alt=""
               onError={() => {
                 setImgURL('https://tiwpe.com/image/tiw-logo.png');
@@ -226,9 +226,12 @@ const Navbar = () => {
             history.push('/dashboard');
           }}
           style={{
-            color: location.pathname == '/dashboard' ? '#E95B3E' : '#8997ae',
-            backgroundColor:
-              location.pathname == '/dashboard' ? '#F7F9FD' : 'inherit',
+            color: location.pathname.startsWith('/dashboard')
+              ? '#E95B3E'
+              : '#8997ae',
+            backgroundColor: location.pathname.startsWith('/dashboard')
+              ? '#F7F9FD'
+              : 'inherit',
             textTransform: 'none'
           }}
         >

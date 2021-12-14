@@ -10,7 +10,11 @@ import IconButton from '@mui/material/IconButton';
 import CancelIcon from '@mui/icons-material/Cancel';
 import './AddInvestor.css';
 
-import { LocalizationProvider, MobileDatePicker } from '@mui/lab';
+import {
+  LocalizationProvider,
+  MobileDatePicker,
+  DesktopDatePicker
+} from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { Backdrop, CircularProgress } from '@mui/material';
 
@@ -19,7 +23,45 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import CloseIcon from '@mui/icons-material/Close';
 
+const errorSwal = Swal.mixin({
+  customClass: {
+    container: 'add-folio-swal-container',
+    popup: 'add-folio-swal swal-error-bg-color',
+    title: 'add-folio-swal-title'
+  },
+  imageUrl: '',
+  imageHeight: 10,
+  imageWidth: 10,
+  toast: true,
+  position: 'top',
+  showConfirmButton: false,
+  timer: 3000,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer);
+    toast.addEventListener('mouseleave', Swal.resumeTimer);
+  }
+});
+const successSwal = Swal.mixin({
+  customClass: {
+    container: 'add-folio-swal-container',
+    popup: 'add-folio-swal swal-success-bg-color',
+    title: 'add-folio-swal-title'
+  },
+  imageUrl: '',
+  imageHeight: 10,
+  imageWidth: 10,
+  toast: true,
+  position: 'top',
+  showConfirmButton: false,
+  timer: 3000,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer);
+    toast.addEventListener('mouseleave', Swal.resumeTimer);
+  }
+});
 const AddInvestor = () => {
   const history = useHistory();
   const location = useLocation();
@@ -39,12 +81,15 @@ const AddInvestor = () => {
     investorZipCode: '',
     role: '616d2f588d908648c28d63a1',
     Id: '',
-    showPassword: false
+    showPassword: false,
+    email: '',
+    phone: ''
   });
 
   useEffect(() => {
     if (location?.state?.row) {
       setFlag(true);
+      console.log(location?.state?.row);
     }
     setInvestorBody();
   }, [location]);
@@ -59,7 +104,9 @@ const AddInvestor = () => {
       investorState: location?.state?.row.state,
       investorCountry: location?.state?.row.country,
       investorZipCode: location?.state?.row.pincode,
-      Id: location?.state?.row._id
+      Id: location?.state?.row._id,
+      email: location?.state?.row.email,
+      phone: location?.state?.row.phoneNo
     });
   };
 
@@ -115,7 +162,9 @@ const AddInvestor = () => {
             country: values.investorCountry,
             pincode: values.investorZipCode,
             maturity: investorDate,
-            userId: values.Id
+            userId: values.Id,
+            phoneNo: values.phone,
+            email: values.email
           }),
           headers: {
             'Content-Type': 'application/json',
@@ -128,8 +177,12 @@ const AddInvestor = () => {
       setLoading(false);
 
       if (data?.success) {
-        Swal.fire('Updated successfully!', '', 'success');
-      } else Swal.fire('Error while updating!', data?.error, 'error');
+        successSwal.fire(
+          'Investor "' + values.investorName + '" Updated successfully!',
+          '',
+          'success'
+        );
+      } else errorSwal.fire(data.error || 'Error while updating!', '', 'error');
     } else {
       setLoading(true);
       const response = await fetch(
@@ -147,7 +200,9 @@ const AddInvestor = () => {
             country: values.investorCountry,
             pincode: values.investorZipCode,
             role: values.role,
-            maturity: investorDate
+            maturity: investorDate,
+            phoneNo: values.phone,
+            email: values.email
           }),
           headers: {
             'Content-Type': 'application/json',
@@ -160,8 +215,48 @@ const AddInvestor = () => {
       setLoading(false);
 
       if (data?.success) {
-        Swal.fire('Added successfully!', '', 'success');
-      } else Swal.fire('Error while updating!', data?.error, 'error');
+        Swal.mixin({
+          customClass: {
+            container: 'add-folio-swal-container',
+            popup: 'add-folio-swal swal-success-bg-color',
+            title: 'add-folio-swal-title'
+          },
+          imageUrl: '',
+          imageHeight: 10,
+          imageWidth: 10,
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3000,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          }
+        }).fire(
+          'New Investor " ' + values.investorName + ' " sucessfully added ' ||
+            'the investor!',
+          '',
+          'success'
+        );
+      } else
+        Swal.mixin({
+          customClass: {
+            container: 'add-folio-swal-container',
+            popup: 'add-folio-swal swal-error-bg-color',
+            title: 'add-folio-swal-title'
+          },
+          imageUrl: '',
+          imageHeight: 10,
+          imageWidth: 10,
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3000,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          }
+        }).fire(data.error || 'Something went wrong!', '', 'error');
     }
 
     history.push('/admin/investors');
@@ -191,12 +286,12 @@ const AddInvestor = () => {
           <div className="add-investors-cross-btn">
             <IconButton
               size="large"
-              style={{ color: '#E95B3E' }}
+              style={{ color: '#132f5e' }}
               onClick={() => {
                 history.push('/admin/investors');
               }}
             >
-              <CancelIcon fontSize="inherit" />
+              <CloseIcon fontSize="large" />
             </IconButton>
           </div>
         </div>
@@ -206,21 +301,24 @@ const AddInvestor = () => {
         <form action="" onSubmit={submitForm} className="add-inv-all-inputs">
           <div id="inv-id1">
             <FormControl variant="standard" sx={{ width: '100%' }}>
+              <small className="add-folio-find-investor-label">
+                Investor Name *
+              </small>
               <TextField
                 required
                 id="outlined-required"
                 value={values.investorName}
                 onChange={handleChange('investorName')}
-                label=" Investor Name"
                 autoComplete="off"
+                className="add-folio-searchbar"
               />
             </FormControl>
 
             <FormControl variant="outlined" sx={{ width: '100%' }}>
-              <InputLabel htmlFor="outlined-adornment-password">
+              <small className="add-folio-find-investor-label">
                 Password *
-              </InputLabel>
-              <OutlinedInput
+              </small>
+              <TextField
                 required
                 id="outlined-adornment-password"
                 type={values.showPassword ? 'text' : 'password'}
@@ -233,104 +331,159 @@ const AddInvestor = () => {
                     autocomplete: 'off'
                   }
                 }}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                label="Password"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton onClick={handleClickShowPassword}>
+                        {values.showPassword ? (
+                          <VisibilityOff />
+                        ) : (
+                          <Visibility />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
+                style={{ backgroundColor: 'white', color: '#132f5e' }}
+                className="add-folio-searchbar"
               />
             </FormControl>
           </div>
 
           <div id="inv-id2">
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <MobileDatePicker
-                required
-                label="Registration Date "
-                inputFormat="MM/dd/yyyy"
-                value={investorDate}
-                onChange={handleDateChange}
-                disableCloseOnSelect={false}
-                renderInput={(params) => (
-                  <TextField required {...params} sx={{ width: '100%' }} />
-                )}
-              />
-            </LocalizationProvider>
+            <FormControl
+              variant="standard"
+              sx={{ width: '100%' }}
+              className="add-folio-registration-div"
+            >
+              <small className="add-folio-find-investor-label">
+                Registration Date *
+              </small>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DesktopDatePicker
+                  required
+                  inputFormat="MM/dd/yyyy"
+                  value={investorDate}
+                  onChange={handleDateChange}
+                  disableCloseOnSelect={false}
+                  renderInput={(params) => (
+                    <TextField
+                      required
+                      {...params}
+                      className="add-folio-searchbar"
+                      sx={{
+                        width: '100%',
+                        backgroundColor: 'white',
+                        color: '#132f5e',
+                        svg: 'var(--primary-color)'
+                      }}
+                    />
+                  )}
+                />
+              </LocalizationProvider>
+            </FormControl>
 
             <FormControl variant="standard" sx={{ width: '100%' }}>
+              <small className="add-folio-find-investor-label">
+                Passport Number *
+              </small>
               <TextField
                 required
                 id="outlined-required"
                 value={values.investorPassport}
                 onChange={handleChange('investorPassport')}
-                label="Passport Number"
+                className="add-folio-searchbar"
+              />
+            </FormControl>
+          </div>
+
+          <div id="inv-id1">
+            <FormControl variant="standard" sx={{ width: '100%' }}>
+              <small className="add-folio-find-investor-label">Email *</small>
+              <TextField
+                required
+                id="outlined-required"
+                value={values.email}
+                onChange={handleChange('email')}
+                autoComplete="off"
+                className="add-folio-searchbar"
+              />
+            </FormControl>
+
+            <FormControl variant="standard" sx={{ width: '100%' }}>
+              <small className="add-folio-find-investor-label">
+                Phone Number *
+              </small>
+              <TextField
+                required
+                id="outlined-required"
+                value={values.phone}
+                onChange={handleChange('phone')}
+                autoComplete="off"
+                className="add-folio-searchbar"
               />
             </FormControl>
           </div>
 
           <div id="inv-id3">
             <FormControl variant="standard" sx={{ width: '100%' }}>
+              <small className="add-folio-find-investor-label">
+                Address Line 1 *
+              </small>
               <TextField
                 required
-                label="Address Line 1"
                 value={values.investorAddress1}
                 onChange={handleChange('investorAddress1')}
+                className="add-folio-searchbar"
               />
             </FormControl>
           </div>
 
           <div id="inv-id4">
             <FormControl variant="standard" sx={{ width: '100%' }}>
+              <small className="add-folio-find-investor-label">City</small>
               <TextField
-                required
                 id="outlined-required"
                 value={values.investorCity}
                 onChange={handleChange('investorCity')}
-                label="City"
+                className="add-folio-searchbar"
               />
             </FormControl>
 
             <FormControl variant="standard" sx={{ width: '100%' }}>
+              <small className="add-folio-find-investor-label">State</small>
               <TextField
-                required
                 id="outlined-required"
                 value={values.investorState}
                 onChange={handleChange('investorState')}
-                label="State"
+                className="add-folio-searchbar"
               />
             </FormControl>
           </div>
 
           <div id="inv-id4">
             <FormControl variant="standard" sx={{ width: '100%' }}>
+              <small className="add-folio-find-investor-label">Country *</small>
               <TextField
                 required
                 id="outlined-required"
                 value={values.investorCountry}
                 onChange={handleChange('investorCountry')}
-                label="Country"
+                className="add-folio-searchbar"
               />
             </FormControl>
 
             <FormControl variant="standard" sx={{ width: '100%' }}>
+              <small className="add-folio-find-investor-label">Zip Code</small>
               <TextField
-                required
                 id="outlined-number"
-                label="Zip Code"
                 type="number"
                 value={values.investorZipCode}
                 onChange={handleChange('investorZipCode')}
                 InputLabelProps={{
                   shrink: true
                 }}
+                className="add-folio-searchbar"
               />
             </FormControl>
           </div>
@@ -339,10 +492,12 @@ const AddInvestor = () => {
             <Button
               variant="outlined"
               type="submit"
+              id="add-folios-btn"
               style={{
-                color: '#E95B3E',
+                color: 'white',
                 textTransform: 'none',
-                width: '16rem'
+                width: '14rem',
+                backgroundColor: '#E95B3E'
               }}
             >
               {flag ? 'Update' : 'Add'} Investor

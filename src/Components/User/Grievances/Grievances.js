@@ -14,7 +14,42 @@ import HistoryIcon from '@mui/icons-material/History';
 import EditIcon from '@mui/icons-material/Edit';
 import CustomizedTables from './table';
 import Swal from 'sweetalert2';
-
+const errorSwal = Swal.mixin({
+  customClass: {
+    container: 'add-folio-swal-container',
+    popup: 'add-folio-swal swal-error-bg-color',
+    title: 'add-folio-swal-title'
+  },
+  imageUrl: '',
+  imageHeight: 10,
+  imageWidth: 10,
+  toast: true,
+  position: 'top',
+  showConfirmButton: false,
+  timer: 3000,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer);
+    toast.addEventListener('mouseleave', Swal.resumeTimer);
+  }
+});
+const successSwal = Swal.mixin({
+  customClass: {
+    container: 'add-folio-swal-container',
+    popup: 'add-folio-swal swal-success-bg-color',
+    title: 'add-folio-swal-title'
+  },
+  imageUrl: '',
+  imageHeight: 10,
+  imageWidth: 10,
+  toast: true,
+  position: 'top',
+  showConfirmButton: false,
+  timer: 3000,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer);
+    toast.addEventListener('mouseleave', Swal.resumeTimer);
+  }
+});
 const Grievances = () => {
   const history = useHistory();
   const token = JSON.parse(localStorage.getItem('token'));
@@ -50,14 +85,14 @@ const Grievances = () => {
       const data = await response.json();
       setData(data);
       console.log(data);
-      Swal.fire(
+      successSwal.fire(
         'Query sent successfully!',
         'Query Ref ID is: ' + data.data.queryId,
         'success'
       );
     } catch (e) {
       console.log(e);
-      Swal.fire('Something went wrong', '', 'error');
+      errorSwal.fire('Something went wrong', '', 'error');
     }
   };
 

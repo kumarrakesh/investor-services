@@ -51,7 +51,7 @@
   background: #ffffff;
   border-radius: 8px;
   box-shadow: 0px 4px 11px 3px #0000000d;
-  width: 80%;
+  width: 90%;
 }
 
 .profile-info-row {
@@ -71,11 +71,15 @@
   flex: 1;
 }
 .profile-info-row-item-label {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
+  color: #5a6d8e;
 }
 .profile-info-row-item-value {
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 400;
+  color: #132f5e;
+  flex-wrap: wrap;
+  white-space: pre-wrap;
 }
 
 @media screen and (max-width: 768px) {

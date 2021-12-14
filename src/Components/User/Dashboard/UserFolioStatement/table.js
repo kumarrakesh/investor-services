@@ -11,25 +11,39 @@ import SearchBar from 'material-ui-search-bar';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: '#E6E8EA !important',
-    color: 'var(--secondary-color)'
+    backgroundColor: '#F6F8FA !important',
+    color: 'var(--secondary-color)',
+    padding: '1rem',
+    fontSize: '14px',
+    fontWeight: 700,
+    borderBottom: '1px solid #CECECE',
+    height: '3.2rem'
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
-    color: 'var(--secondary-color)'
+    color: 'var(--secondary-color)',
+    padding: '0.6rem 1rem',
+    border: 'none',
+    height: '3.2rem'
   }
 }));
+// border: '1px solid black'
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
-    backgroundColor: 'white !important'
+    backgroundColor: 'white !important',
+    border: 'none !important',
+    outline: 'none'
   },
   '&:nth-of-type(even)': {
-    backgroundColor: 'var(--light-blue-bg)'
+    backgroundColor: '#F6F8FA',
+    border: 'none !important',
+    outline: 'none'
   },
   // hide last border
   '&:last-child td, &:last-child th': {
-    border: 0
+    border: 'none !important',
+    outline: 'none'
   }
 }));
 
@@ -40,8 +54,10 @@ export default function CustomizedTables({ displayRows, loading }) {
         <TableContainer
           component={Paper}
           sx={{
-            maxHeight: '300px'
+            maxHeight: '46vh',
+            borderRadius: 2
           }}
+          style={{ boxShadow: '0px 0px 0px 1px #CECECE' }}
         >
           <Table aria-label="customized table" stickyHeader>
             <TableHead>
@@ -49,8 +65,8 @@ export default function CustomizedTables({ displayRows, loading }) {
                 <StyledTableCell>Date Added</StyledTableCell>
                 <StyledTableCell align="left">Transaction Type</StyledTableCell>
                 <StyledTableCell align="left">Contribution</StyledTableCell>
-                <StyledTableCell align="center">Distribution</StyledTableCell>
-                <StyledTableCell align="center">Withdrawl</StyledTableCell>
+                <StyledTableCell align="left">Distribution</StyledTableCell>
+                <StyledTableCell align="left">Withdrawl</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -74,13 +90,13 @@ export default function CustomizedTables({ displayRows, loading }) {
                       : 'Redemtion'}
                   </StyledTableCell>
                   <StyledTableCell align="left" component="th" scope="row">
-                    {row.type == 1 ? row.amount : '-'}
+                    {row.type == 1 ? '$ ' + row.amount : ''}
                   </StyledTableCell>
-                  <StyledTableCell align="center" component="th" scope="row">
-                    {row.type == 2 ? row.amount : '-'}
+                  <StyledTableCell align="left" component="th" scope="row">
+                    {row.type == 2 ? '$ ' + row.amount : ''}
                   </StyledTableCell>
-                  <StyledTableCell align="center" component="th" scope="row">
-                    {row.type == 3 ? row.amount : '-'}
+                  <StyledTableCell align="left" component="th" scope="row">
+                    {row.type == 3 ? '$ ' + row.amount : ''}
                   </StyledTableCell>
                 </StyledTableRow>
               ))}

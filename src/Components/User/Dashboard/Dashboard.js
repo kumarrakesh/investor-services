@@ -63,6 +63,7 @@ const Dashboard = () => {
       );
       const data = await response.json();
       setRows(data.data);
+      console.log(data.data);
       setDisplayRows(data.data);
       setLoading(false);
     } catch (e) {

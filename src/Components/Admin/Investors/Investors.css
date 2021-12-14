@@ -5,7 +5,7 @@
 
 .investors-container {
   width: 100%;
-  padding: 3rem 3.5rem 3rem 5rem;
+  padding: 3rem 3.5rem 0rem 5rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -15,6 +15,23 @@
   font-weight: 500;
   font-size: 1.5rem;
   color: var(--secondary-color);
+}
+
+.investors-overview-div {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.add-investor-btn {
+  transition: all 0.1s ease !important;
+  background-color: #e95b3e !important;
+  text-transform: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem !important;
+  padding: 0rem 2rem !important;
+  height: 2.8rem;
 }
 
 #inv-overview {

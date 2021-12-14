@@ -74,6 +74,14 @@ const AdNavbar = () => {
         </div>
       </div>
 
+      <Divider
+        style={{
+          backgroundColor: '#E6E6E6 ',
+          width: '100%',
+          margin: '1px 0px'
+        }}
+      />
+
       <div
         id="sidebar-main"
         style={
@@ -89,6 +97,14 @@ const AdNavbar = () => {
             <div id="header-logo">
               <img src="https://via.placeholder.com/100x70" alt="tiwpe logo" />
             </div>
+
+            <Divider
+              style={{
+                backgroundColor: '#E6E6E6 ',
+                width: '100%',
+                margin: '2px 0px'
+              }}
+            />
 
             <div
               className="prof-btn"

@@ -18,24 +18,37 @@ import {
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: '#E6E8EA !important',
-    color: 'var(--secondary-color)'
+    backgroundColor: '#F6F8FA !important',
+    color: 'var(--secondary-color)',
+    padding: '1rem',
+    fontSize: '14px',
+    fontWeight: 700,
+    borderBottom: '1px solid #CECECE'
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 14
+    fontSize: 14,
+    color: 'var(--secondary-color)',
+    padding: '0.6rem 1rem',
+    border: 'none'
   }
 }));
+// border: '1px solid black'
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
-    backgroundColor: 'white !important'
+    backgroundColor: 'white !important',
+    border: 'none !important',
+    outline: 'none'
   },
   '&:nth-of-type(even)': {
-    backgroundColor: 'var(--light-blue-bg)'
+    backgroundColor: '#F6F8FA',
+    border: 'none !important',
+    outline: 'none'
   },
   // hide last border
   '&:last-child td, &:last-child th': {
-    border: 0
+    border: 'none !important',
+    outline: 'none'
   }
 }));
 
@@ -46,6 +59,7 @@ export default function CustomizedTables({
   setLoading
 }) {
   const history = useHistory();
+
   const handleShowFolioData = async (row) => {
     console.log(row);
     return history.push({
@@ -56,7 +70,11 @@ export default function CustomizedTables({
 
   return (
     <>
-      <TableContainer component={Paper} sx={{ maxHeight: '60vh' }}>
+      <TableContainer
+        component={Paper}
+        sx={{ maxHeight: '70vh', borderRadius: 2 }}
+        style={{ boxShadow: '0px 0px 0px 1px #CECECE' }}
+      >
         <Table stickyHeader aria-label="customized table">
           <TableHead>
             <TableRow
@@ -65,16 +83,16 @@ export default function CustomizedTables({
               }}
             >
               <StyledTableCell>Date</StyledTableCell>
-              <StyledTableCell align="center">Folio Name</StyledTableCell>
-              <StyledTableCell align="center">Folio ID</StyledTableCell>
+              <StyledTableCell align="left">Folio No.</StyledTableCell>
               {/* {fundname == 'All' ? ( */}
-              <StyledTableCell align="center">
-                Capital Commitment
-              </StyledTableCell>
+              <StyledTableCell align="left">Capital Commitment</StyledTableCell>
               {/* ) : null} */}
-              <StyledTableCell align="right">Contribution</StyledTableCell>
-              <StyledTableCell align="right">Expected Yield</StyledTableCell>
-              <StyledTableCell align="center">Action</StyledTableCell>
+              <StyledTableCell align="left">Contribution</StyledTableCell>
+              <StyledTableCell align="left">
+                Pending Contribution
+              </StyledTableCell>
+              <StyledTableCell align="left">Expected Yield</StyledTableCell>
+              <StyledTableCell align="left">Action</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody
@@ -95,24 +113,24 @@ export default function CustomizedTables({
                   <StyledTableCell component="th" scope="row">
                     {new Date(row.date).toLocaleDateString('en-GB')}
                   </StyledTableCell>
-                  <StyledTableCell align="center" component="th" scope="row">
-                    {row.folioName || '-'}
-                  </StyledTableCell>
-                  <StyledTableCell align="center" component="th" scope="row">
-                    {row.folioId || '-'}
+                  <StyledTableCell align="left" component="th" scope="row">
+                    {row.folioNumber || '-'}
                   </StyledTableCell>
                   {/* {fundname == 'All' ? ( */}
-                  <StyledTableCell align="center" component="th" scope="row">
-                    {row.commitment.toFixed(2)}
+                  <StyledTableCell align="left" component="th" scope="row">
+                    ${' ' + row.commitment.toFixed(2)}
                   </StyledTableCell>
                   {/* ) : null} */}
-                  <StyledTableCell align="right">
-                    {row.contribution.toFixed(2)}
+                  <StyledTableCell align="left">
+                    ${' ' + row.contribution.toFixed(2)}
                   </StyledTableCell>
-                  <StyledTableCell align="right">
-                    {row.yield.toFixed(2)}
+                  <StyledTableCell align="left">
+                    ${' ' + (row.commitment - row.contribution).toFixed(2)}
                   </StyledTableCell>
-                  <StyledTableCell align="center" component="th" scope="row">
+                  <StyledTableCell align="left">
+                    {row.yield.toFixed(2)}%
+                  </StyledTableCell>
+                  <StyledTableCell align="left" component="th" scope="row">
                     {
                       <Button
                         variant="contained"
@@ -120,11 +138,15 @@ export default function CustomizedTables({
                           handleShowFolioData(row);
                         }}
                         style={{
-                          backgroundColor: '#E95B3E',
-                          textTransform: 'none'
+                          border: '1px solid var(--primary-color)',
+                          backgroundColor: 'white',
+                          textTransform: 'none',
+                          color: 'var(--primary-color)',
+                          padding: '4px 1.5rem',
+                          fontSize: '0.75rem'
                         }}
                       >
-                        See Details
+                        View
                       </Button>
                     }
                   </StyledTableCell>

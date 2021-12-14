@@ -14,7 +14,7 @@ import TransactionContainer from '../Folios/AddTransaction/TransactionContainer/
 const ViewDetail = () => {
   const history = useHistory();
   const location = useLocation();
-  console.log(location?.state?.row);
+  // console.log(location?.state?.row);
 
   return (
     <div className="folio-add-transaction-main">

@@ -13,7 +13,42 @@ import {
 } from '@mui/material';
 import Swal from 'sweetalert2';
 import './Profile.css';
-
+const errorSwal = Swal.mixin({
+  customClass: {
+    container: 'add-folio-swal-container',
+    popup: 'add-folio-swal swal-error-bg-color',
+    title: 'add-folio-swal-title'
+  },
+  imageUrl: '',
+  imageHeight: 10,
+  imageWidth: 10,
+  toast: true,
+  position: 'top',
+  showConfirmButton: false,
+  timer: 3000,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer);
+    toast.addEventListener('mouseleave', Swal.resumeTimer);
+  }
+});
+const successSwal = Swal.mixin({
+  customClass: {
+    container: 'add-folio-swal-container',
+    popup: 'add-folio-swal swal-success-bg-color',
+    title: 'add-folio-swal-title'
+  },
+  imageUrl: '',
+  imageHeight: 10,
+  imageWidth: 10,
+  toast: true,
+  position: 'top',
+  showConfirmButton: false,
+  timer: 3000,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer);
+    toast.addEventListener('mouseleave', Swal.resumeTimer);
+  }
+});
 const Profile = () => {
   const history = useHistory();
   const token = JSON.parse(localStorage.getItem('token'));
@@ -54,6 +89,7 @@ const Profile = () => {
   const handleCloseImageDialog = () => {
     setShowImageDialog(false);
   };
+
   const handleUploadImage = async () => {
     var formData = new FormData();
     formData.append('profilePic', selectedImage);
@@ -78,12 +114,21 @@ const Profile = () => {
         requestOptions
       );
       const data = await response.json();
+      console.log(data);
       if (data.success) {
-        await getProfileData();
-        Swal.fire('Uploaded image!', '', 'success');
-      } else Swal.fire('Something went wrong', '', 'error');
+        setImgURL(
+          `${process.env.REACT_APP_API}/api/profilePic/` +
+            data?.data?.profilePic
+        );
+        localStorage.setItem(
+          'imageURL',
+          `${process.env.REACT_APP_API}/api/profilePic/` +
+            data?.data?.profilePic
+        );
+        successSwal.fire('Uploaded image!', '', 'success');
+      } else errorSwal.fire('Something went wrong', '', 'error');
     } catch (err) {
-      Swal.fire('Something went wrong', '', 'error');
+      errorSwal.fire('Something went wrong', '', 'error');
     }
 
     setShowImageDialog(false);
@@ -169,7 +214,7 @@ const Profile = () => {
         <div className="profile-info">
           <div
             className="profile-info-row"
-            style={{ borderBottom: ' 1px solid #E5E5E5' }}
+            style={{ borderBottom: ' 1.5px solid #E5E5E5' }}
           >
             <div className="profile-info-row-item">
               <div className="profile-info-row-item-label">Name</div>
@@ -186,23 +231,75 @@ const Profile = () => {
                 {profile?.data?.passport}
               </div>
             </div>
+
+            <div className="profile-info-row-item">
+              <div className="profile-info-row-item-label">Phone Number</div>
+              <div
+                className="profile-info-row-item-value"
+                style={{ textTransform: 'none' }}
+              >
+                {profile?.data?.phoneNo}
+              </div>
+            </div>
           </div>
 
           <div className="profile-info-row">
-            <div className="profile-info-row-item">
-              <div className="profile-info-row-item-label">Address</div>
-              <div className="profile-info-row-item-value" id="address">
-                {profile?.data?.city}, {profile?.data?.state},{' '}
-                {profile?.data?.country}, PIN - {profile?.data?.pincode}
-              </div>
-            </div>
-            <div className="profile-info-row-item">
+            {/* <div className="profile-info-row-item">
               <div className="profile-info-row-item-label">Amount Invested</div>
               <div className="profile-info-row-item-value">
-                {Math.round(profile.AmountInvested * 100 + Number.EPSILON) /
+                $
+                {Math.round(profile.AmountContributed * 100 + Number.EPSILON) /
                   100}
               </div>
+            </div> */}
+
+            {/* <div className="profile-info-row-item">
+              <div className="profile-info-row-item-label">
+                Commitment Amount
+              </div>
+              <div className="profile-info-row-item-value">
+                $
+                {Math.round(profile.AmountCommited * 100 + Number.EPSILON) /
+                  100}
+              </div>
+            </div> */}
+
+            <div className="profile-info-row-item">
+              <div className="profile-info-row-item-label">Email</div>
+              <div
+                className="profile-info-row-item-value"
+                style={{ textTransform: 'none' }}
+              >
+                {profile?.data?.email}
+              </div>
             </div>
+
+            <div
+              className="profile-info-row-item"
+              style={{ display: 'flex', flex: '2' }}
+            >
+              <div
+                className="profile-info-row-item-label"
+                style={{ display: 'flex', flex: '2' }}
+              >
+                Address
+              </div>
+              <div
+                className="profile-info-row-item-value"
+                id="address"
+                style={{ display: 'flex', flex: '2' }}
+              >
+                {profile?.data?.city}, {profile?.data?.state},
+                {profile?.data?.country}, PIN -{profile?.data?.pincode}
+              </div>
+            </div>
+
+            {/* <div className="profile-info-row-item">
+              <div className="profile-info-row-item-label"></div>
+              <div className="profile-info-row-item-value">
+               
+              </div>
+            </div> */}
 
             {/* <div className="profile-info-row-item">
               <div className="profile-info-row-item-label">Investment Date</div>
