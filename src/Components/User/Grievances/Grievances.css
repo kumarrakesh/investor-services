@@ -1,5 +1,6 @@
 .grievances-header-container {
   display: flex !important;
+  background-color: var(--light-blue-bg);
 }
 
 .grievances-container {
@@ -36,18 +37,30 @@ Button:visited {
   flex-direction: column;
   gap: 2rem;
   width: 100%;
+  background-color: white;
+  outline: 1px solid #cecece;
+  padding: 1rem;
 }
-
+.query-container-title {
+  color: var(--secondary-color);
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0px;
+  padding: 0px;
+  margin-bottom: -1rem;
+}
 .send-btn-div {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
 }
 
 .send-btn {
   display: flex;
-  width: 200px;
+  padding: 1rem 4rem !important;
+  height: 3rem;
+  width: 14rem;
   justify-content: space-around;
 }
 
