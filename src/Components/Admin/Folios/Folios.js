@@ -15,7 +15,9 @@ import {
   FormControl,
   Autocomplete
 } from '@mui/material';
+import useWindowSize from '../../../utils/useWindowSize';
 const Folios = ({ role }) => {
+  const size = useWindowSize();
   let history = useHistory();
   const [ogRows, setOgRows] = useState([]);
   const [displayRows, setDisplayRows] = useState([]);
@@ -170,14 +172,123 @@ const Folios = ({ role }) => {
             <small style={{ color: 'red' }}>Folio with ID not found!</small>
           )} */}
         </FormControl>
+        {size.width <= 768 && (
+          <div
+            style={{
+              fontSize: '1.5rem',
+              marginLeft: '0.5rem',
+              color: 'var(--secondary-color)'
+            }}
+          >
+            Folio Detail
+          </div>
+        )}
         <div>
-          <CustomizedTables
-            displayRows={displayRows}
-            setDisplayRows={setDisplayRows}
-            setLoading={setLoading}
-            loading={loading}
-            role={role}
-          />
+          {size.width <= 768 ? (
+            <div className="folio-card-mobile-container">
+              {displayRows.map((row) => {
+                console.log(row);
+                return (
+                  <div className="folio-card-mobile" key={row._id}>
+                    <div className="folio-card-mobile-header-top">
+                      <div className="folio-card-mobile-header-folio-date">
+                        {new Date(row.date).toLocaleDateString('en-GB')}
+                      </div>
+                      <div
+                        style={{
+                          height: '5px',
+                          width: '5px',
+                          backgroundColor: 'gray',
+                          borderRadius: '1rem'
+                        }}
+                      ></div>
+                      <p className="folio-card-mobile-header-name">
+                        {row.folioNumber}
+                      </p>
+                    </div>
+                    <div style={{ display: 'flex' }}>
+                      <div className="folio-card-mobile-header">
+                        <div className="folio-card-mobile-header-name">
+                          {row.user?.name}
+                        </div>
+                        <p className="folio-card-mobile-header-folio">
+                          {row.user?.passport}
+                        </p>
+                      </div>
+                      <div
+                        className="folio-card-mobile-header"
+                        style={{ textAlign: 'right' }}
+                      >
+                        <p
+                          className="folio-card-mobile-body-left-date"
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'flex-end'
+                          }}
+                        >
+                          <span style={{ color: '#666' }}>Contri. </span>
+                          <span style={{ marginLeft: '1ch' }}>
+                            $
+                            {Math.round(
+                              (row.contribution + Number.EPSILON) * 100
+                            ) / 100}
+                          </span>
+                        </p>
+                        <p
+                          className="folio-card-mobile-body-left-amount"
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'flex-end'
+                          }}
+                        >
+                          <span style={{ color: '#666' }}>Commit. </span>
+                          <span style={{ marginLeft: '1ch' }}>
+                            ${' '}
+                            {Math.round(
+                              (row.commitment + Number.EPSILON) * 100
+                            ) / 100}
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'flex-end',
+                        marginTop: '0.5rem'
+                      }}
+                    >
+                      <Button
+                        variant="contained"
+                        style={{
+                          color: 'var(--primary-color)',
+                          backgroundColor: 'white',
+                          border: '1px solid var(--primary-color)',
+                          fontSize: '0.7rem'
+                        }}
+                        onClick={() => {
+                          history.push({
+                            pathname: '/admin/folios/addTransaction',
+                            state: { row, from: history.location.pathname }
+                          });
+                        }}
+                      >
+                        Add Transaction
+                      </Button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <CustomizedTables
+              displayRows={displayRows}
+              setDisplayRows={setDisplayRows}
+              setLoading={setLoading}
+              loading={loading}
+              role={role}
+            />
+          )}
         </div>
       </div>
       <Backdrop
