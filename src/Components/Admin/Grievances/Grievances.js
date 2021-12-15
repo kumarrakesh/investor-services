@@ -4,17 +4,27 @@ import { Backdrop, CircularProgress } from '@mui/material';
 import AdNavbar from '../Navbar/Navbar';
 import './Grievances.css';
 import CustomizedTables from './table';
-
+import {
+  TextField,
+  IconButton,
+  InputAdornment,
+  FormControl,
+  Autocomplete
+} from '@mui/material';
+import SearchIcon from '@material-ui/icons/Search';
 import 'date-fns';
 import Swal from 'sweetalert2';
 
 const AdminGrievances = () => {
   //states
   const [queries, setQueries] = useState([]);
+  const [selectedQuery, setSelectedQuery] = useState({});
   const [displayRows, setDisplayRows] = useState([]);
   const [selectedDate, setSelectedDate] = React.useState(new Date());
   const [update, setUpdate] = React.useState(0);
   const [loading, setLoading] = React.useState(true);
+  const [ogRows, setOgRows] = useState([]);
+  const [folioNumber, setFolioNumber] = React.useState({});
   //hooks
   let history = useHistory();
   useEffect(() => {
@@ -49,54 +59,59 @@ const AdminGrievances = () => {
       }
     });
     const data = await response.json();
-    // console.log(data.data);
+    console.log(data.data);
     setQueries(data.data);
     setDisplayRows(data.data);
     setLoading(false);
   };
+
+  useEffect(() => {
+    if (
+      !selectedQuery ||
+      (Object.keys(selectedQuery).length === 0 &&
+        selectedQuery.constructor === Object)
+    ) {
+      setDisplayRows(queries);
+    } else {
+      setDisplayRows([selectedQuery]);
+    }
+  }, [selectedQuery]);
+
   return (
     <div className="grievances-admin-main">
       <AdNavbar />
       <div id="grievances-admin-container">
         <h1 className="grievances-admin-title">Queries</h1>
-        <h1 className="grievances-admin-overview">Overview</h1>
-        <p className="grievances-admin-total-investors">Unresolved Queries</p>
-        <p className="grievances-admin-total-no">
-          {queries?.filter((el) => !el.isResolved).length}
-        </p>
-        {/* <div className="inv-btns">
-          <div>
-            <Button
-              variant="contained"
-              id="apply-btn"
-              href="#contained-buttons"
-              style={{ textTransform: 'none' }}
-            >
-              Record New Transaction +
-            </Button>
-          </div>
+        <div>
+          <p className="total-folios">Unresolved Queries</p>
+          <p className="total-folios-no">
+            {queries?.filter((el) => !el.isResolved).length}
+          </p>
+        </div>
 
-          <Button
-            variant="outlined"
-            className="download-btn"
-            style={{ color: '#E95B3E', textTransform: 'none' }}
-          >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M20.5 16.25V20.5H3.49996V16.25H0.666626V20.5C0.666626 22.0583 1.94163 23.3333 3.49996 23.3333H20.5C22.0583 23.3333 23.3333 22.0583 23.3333 20.5V16.25H20.5ZM19.0833 10.5833L17.0858 8.58582L13.4166 12.2408V0.666656H10.5833V12.2408L6.91412 8.58582L4.91663 10.5833L12 17.6667L19.0833 10.5833Z"
-                fill="#E95B3E"
+        <FormControl variant="standard">
+          <Autocomplete
+            options={queries}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                className="folio-searchbar"
+                placeholder="Search by Query ID or Investor's Name"
               />
-            </svg>
-            Download
-            {'\n'} List
-          </Button>
-        </div> */}
+            )}
+            value={selectedQuery}
+            onChange={(event, newValue) => {
+              setSelectedQuery(newValue);
+            }}
+            getOptionLabel={(option) => {
+              if (option?.queryId)
+                return `${option?.queryId} - ${option?.user?.name}`;
+              return '';
+            }}
+            forcePopupIcon={true}
+            popupIcon={<SearchIcon htmlColor="var(--primary-color)" />}
+          />
+        </FormControl>
 
         <div className="gr-ad-inv-table-grievances">
           <CustomizedTables

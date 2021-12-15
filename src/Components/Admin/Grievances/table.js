@@ -55,27 +55,38 @@ const successSwal = Swal.mixin({
 });
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: '#E6E8EA !important',
-    color: 'var(--secondary-color)'
+    backgroundColor: '#F6F8FA !important',
+    color: 'var(--secondary-color)',
+    padding: '1rem',
+    fontSize: '14px',
+    fontWeight: 700,
+    borderBottom: '1px solid #CECECE'
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
-    color: 'var(--secondary-color)'
+    color: 'var(--secondary-color)',
+    padding: '0.6rem 1rem',
+    border: 'none'
   }
 }));
+// border: '1px solid black'
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
-    backgroundColor: 'white !important'
+    backgroundColor: 'white !important',
+    border: 'none !important',
+    outline: 'none'
   },
   '&:nth-of-type(even)': {
-    backgroundColor: 'var(--light-blue-bg)'
+    backgroundColor: '#F6F8FA',
+    border: 'none !important',
+    outline: 'none'
   },
   // hide last border
   '&:last-child td, &:last-child th': {
-    border: 0
-  },
-  cursor: 'pointer'
+    border: 'none !important',
+    outline: 'none'
+  }
 }));
 
 export default function CustomizedTables({
@@ -159,29 +170,23 @@ export default function CustomizedTables({
     clearTimeout();
   };
 
-  const cancelSearch = () => {
-    setLoading(false);
-    setSearched('');
-    requestSearch(searched);
-  };
-
   return (
     <>
-      <SearchBar
-        value={searched}
-        onChange={(searchVal) => requestSearch(searchVal)}
-        onCancelSearch={() => cancelSearch()}
-      />
       <Paper>
-        <TableContainer component={Paper} sx={{ maxHeight: '52vh' }}>
+        <TableContainer
+          component={Paper}
+          sx={{ maxHeight: '62vh', borderRadius: 2 }}
+          style={{ boxShadow: '0px 0px 0px 1px #CECECE' }}
+        >
           <Table stickyHeader aria-label="customized table">
-            <TableHead>
+            <TableHead style={{ border: '1px solid red' }}>
               <TableRow>
                 <StyledTableCell>Date Added</StyledTableCell>
-                <StyledTableCell align="center">Query Subject</StyledTableCell>
                 <StyledTableCell>Query ID</StyledTableCell>
-                <StyledTableCell align="center">Investor Name</StyledTableCell>
-                <StyledTableCell align="center">Status</StyledTableCell>
+                <StyledTableCell align="left">Query Subject</StyledTableCell>
+                <StyledTableCell align="left">Investor Name</StyledTableCell>
+                <StyledTableCell align="left">Status</StyledTableCell>
+                <StyledTableCell align="left">Action</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -193,26 +198,46 @@ export default function CustomizedTables({
                 </StyledTableRow>
               )}
               {displayRows.map((row) => (
-                <StyledTableRow
-                  key={row._id}
-                  onClick={() => {
-                    handleOpenDialog(row);
-                  }}
-                >
+                <StyledTableRow key={row._id}>
                   <StyledTableCell component="th" scope="row">
                     {new Date(row.date).toLocaleDateString('en-GB')}
-                  </StyledTableCell>
-                  <StyledTableCell align="center" component="th" scope="row">
-                    {row.subject}
                   </StyledTableCell>
                   <StyledTableCell align="left" component="th" scope="row">
                     {row.queryId}
                   </StyledTableCell>
-                  <StyledTableCell align="center" component="th" scope="row">
+                  <StyledTableCell align="left" component="th" scope="row">
+                    {row.subject}
+                  </StyledTableCell>
+                  <StyledTableCell align="left" component="th" scope="row">
                     {row.user.name}
                   </StyledTableCell>
-                  <StyledTableCell align="center" component="th" scope="row">
+                  <StyledTableCell align="left" component="th" scope="row">
                     {row.isResolved ? 'Resolved' : 'Unresolved'}
+                  </StyledTableCell>
+                  <StyledTableCell align="left" component="th" scope="row">
+                    {
+                      <Button
+                        onClick={() => {
+                          handleOpenDialog(row);
+                        }}
+                        variant="contained"
+                        style={{
+                          border: '1px solid var(--primary-color)',
+                          backgroundColor: row.isResolved
+                            ? 'white'
+                            : 'var(--primary-color)',
+                          textTransform: 'none',
+                          color: row.isResolved
+                            ? 'var(--primary-color)'
+                            : 'white',
+                          padding: '4px 8px',
+                          fontSize: '0.75rem',
+                          width: '7rem'
+                        }}
+                      >
+                        {row.isResolved ? 'Update' : 'Resolve'}
+                      </Button>
+                    }
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
