@@ -40,6 +40,7 @@ Button:visited {
   background-color: white;
   outline: 1px solid #cecece;
   padding: 1rem;
+  border-radius: 5px;
 }
 .query-container-title {
   color: var(--secondary-color);
@@ -77,4 +78,40 @@ Button:visited {
     margin-top: -90vh;
     padding: 2rem 1rem;
   }
+}
+
+.Mui-selected {
+  color: var(--primary-color) !important;
+}
+
+.MuiTabs-indicator {
+  background-color: var(--primary-color) !important;
+}
+.add-folio-searchbar-multiline {
+  margin-top: 4px !important;
+}
+.add-folio-searchbar-multiline div {
+  padding: 0px !important;
+}
+.add-folio-searchbar-multiline .MuiAutocomplete-popupIndicator {
+  transform: none;
+}
+.add-folio-searchbar-multiline input {
+  color: var(--secondary-color);
+  padding: 0.6rem 0.75rem !important;
+}
+.add-folio-searchbar-multiline input::placeholder {
+  color: #5a6d8e !important;
+  opacity: 0.9;
+}
+.add-folio-searchbar-multiline * {
+  border: none !important;
+}
+.add-folio-searchbar-multiline > * {
+  outline: 1px #91acd9 solid !important;
+}
+.add-folio-searchbar-multiline {
+  background-color: white !important;
+  width: 100% !important;
+  color: #132f5e;
 }

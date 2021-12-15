@@ -113,8 +113,8 @@ const Grievances = () => {
       setData(data);
       console.log(data);
       successSwal.fire(
-        'Query sent successfully!',
-        'Query Ref ID is: ' + data.data.queryId,
+        'Query sent successfully! Ref ID is: ' + data.data.queryId,
+        '',
         'success'
       );
     } catch (e) {
@@ -128,26 +128,30 @@ const Grievances = () => {
   const [loading, setLoading] = useState(false);
 
   const handleRespone = async () => {
-    setLoading(true);
-    setValue('response');
-    const token = JSON.parse(localStorage.getItem('token'));
+    try {
+      setLoading(true);
+      const token = JSON.parse(localStorage.getItem('token'));
 
-    const response = await fetch(`${process.env.REACT_APP_API}/api/query`, {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'x-access-token': token
-      },
-      method: 'GET'
-    });
+      const response = await fetch(`${process.env.REACT_APP_API}/api/query`, {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'x-access-token': token
+        },
+        method: 'GET'
+      });
 
-    const data = await response.json();
-    setLoading(false);
-    // console.log(data.data);
-    setRows(data.data);
+      const data = await response.json();
+      setLoading(false);
+      // console.log(data.data);
+      setRows(data.data);
+    } catch (e) {
+      errorSwal.fire('Something went wrong. ' + e.message, '', 'error');
+    }
   };
 
   const handleTabChange = (event, newValue) => {
+    if (newValue === 1) handleRespone();
     setValue(newValue);
   };
 
@@ -192,7 +196,7 @@ const Grievances = () => {
                 }}
                 required
                 id="fullWidth"
-                className="add-folio-searchbar"
+                className="add-folio-searchbar-multiline"
               />
             </div>
             <div className="user-query-box">
@@ -206,9 +210,9 @@ const Grievances = () => {
                   setDescription(e.target.value);
                 }}
                 fullWidth
-                // multiline
-                // rows={3}
-                className="add-folio-searchbar"
+                multiline
+                rows={2}
+                className="add-folio-searchbar-multiline"
               />
             </div>
             <div className="send-btn-div">
