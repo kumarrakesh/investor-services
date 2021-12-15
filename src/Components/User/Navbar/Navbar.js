@@ -13,6 +13,7 @@ import RightIcon from '@mui/icons-material/ChevronRight';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import MenuIcon from '@mui/icons-material/Menu';
+import HelpIcon from '@mui/icons-material/Help';
 const Navbar = () => {
   const navbarOpenStyles = {
     zIndex: 10,
@@ -245,7 +246,7 @@ const Navbar = () => {
           style={{
             backgroundColor: '#E6E6E6 ',
             width: '100%',
-            margin: '2px 0px'
+            margin: '1px 0px'
           }}
         />
         <Button
@@ -258,7 +259,7 @@ const Navbar = () => {
             textTransform: 'none'
           }}
         >
-          <AccountCircleSharpIcon style={{ flex: 1 }} />
+          <HelpIcon style={{ flex: 1 }} />
           <div className="dash-name" style={{ flex: 2 }}>
             Queries
           </div>

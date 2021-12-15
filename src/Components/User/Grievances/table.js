@@ -98,13 +98,14 @@ const statusGiver = (status) => {
     </div>
   );
 };
+
 export default function CustomizedTables({ rows, loading }) {
   return (
     <TableContainer
       id="query-table"
       component={Paper}
       sx={{
-        maxHeight: '60vh',
+        maxHeight: '69vh',
         border: '1px solid #CECECE',
         borderRadius: '8px'
       }}

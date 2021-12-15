@@ -162,8 +162,7 @@ const Grievances = () => {
       </div>
 
       <div className="grievances-container">
-        <h1 id="grievances-header-label">Investors and Funds</h1>
-        <h1 className="query-header-label">Queries Generate</h1>
+        <h1 id="grievances-header-label">Queries</h1>
         <div
           style={{
             backgroundColor: 'white',
@@ -177,11 +176,19 @@ const Grievances = () => {
             aria-label="basic tabs example"
             centered
           >
-            <Tab label="Raise Query" {...a11yProps(0)} />
-            <Tab label="Query History" {...a11yProps(1)} />
+            <Tab
+              label="Raise Query"
+              {...a11yProps(0)}
+              style={{ textTransform: 'none', marginRight: '2rem' }}
+            />
+            <Tab
+              label="Query History"
+              {...a11yProps(1)}
+              style={{ textTransform: 'none' }}
+            />
           </Tabs>
         </div>
-        <TabPanel value={value} index={0}>
+        <TabPanel value={value} index={0} style={{ padding: '0rem' }}>
           <div className="query-container">
             <div className="query-container-title">Raise New Query</div>
             <div className="query-subject">
