@@ -23,7 +23,10 @@ import SearchIcon from '@material-ui/icons/Search';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import useWindowSize from '../../../../utils/useWindowSize';
+
 const AddFolio = () => {
+  const size = useWindowSize();
   let history = useHistory();
   const token = JSON.parse(localStorage.getItem('token'));
   const [values, setValues] = React.useState({
@@ -175,9 +178,11 @@ const AddFolio = () => {
 
   return (
     <div className="add-folios-main">
-      <div>
-        <AdNavbar />
-      </div>
+      {size.width > 768 && (
+        <div>
+          <AdNavbar />
+        </div>
+      )}
 
       <div id="add-folios-container">
         <div className="add-folio-header">
@@ -207,7 +212,11 @@ const AddFolio = () => {
                   <TextField
                     {...params}
                     className="add-folio-searchbar"
-                    placeholder="Search by Investor's Name or Passport"
+                    placeholder={
+                      size.width <= 768
+                        ? 'Search by Name or Passport'
+                        : "Search by Investor's Name or Passport"
+                    }
                   />
                 )}
                 value={investorRow}

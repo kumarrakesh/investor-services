@@ -151,10 +151,11 @@
   margin-top: 0.5rem;
   display: flex;
   gap: 0.5rem;
-  justify-content: center;
-  flex-direction: column;
+  justify-content: space-between;
+  /* flex-direction: column; */
   flex: 1;
 }
+
 .folio-card-mobile-header-name {
   flex: 1;
   color: #666666;

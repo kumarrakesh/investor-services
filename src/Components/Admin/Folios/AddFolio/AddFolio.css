@@ -123,6 +123,7 @@
 .add-folio-info-row {
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 .add-folio-info-row-item {
   flex: 1;
@@ -168,7 +169,7 @@
   }
 
   #add-folios-container {
-    margin-top: -90vh;
+    /* margin-top: -90vh; */
     padding: 2rem 1rem;
   }
 
@@ -176,5 +177,9 @@
     flex-direction: column;
     gap: 2rem;
     justify-content: center;
+  }
+
+  .add-folio-info-row-item {
+    width: 500px !important;
   }
 }

@@ -7,8 +7,10 @@ import CustomizedTables from './table';
 import Swal from 'sweetalert2';
 import { Backdrop, CircularProgress } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import useWindowSize from '../../../utils/useWindowSize';
 
 const Investors = () => {
+  const size = useWindowSize();
   const history = useHistory();
   const token = JSON.parse(localStorage.getItem('token'));
   const [loading, setLoading] = React.useState(true);
@@ -74,33 +76,95 @@ const Investors = () => {
           </Button>
         </div>
 
-        {/* <Button
-            variant="outlined"
-            className="download-btn"
-            style={{ color: '#E95B3E' }}
+        {size.width <= 768 && (
+          <div
+            style={{
+              fontSize: '1.5rem',
+              marginLeft: '0.5rem',
+              color: 'var(--secondary-color)'
+            }}
           >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M20.5 16.25V20.5H3.49996V16.25H0.666626V20.5C0.666626 22.0583 1.94163 23.3333 3.49996 23.3333H20.5C22.0583 23.3333 23.3333 22.0583 23.3333 20.5V16.25H20.5ZM19.0833 10.5833L17.0858 8.58582L13.4166 12.2408V0.666656H10.5833V12.2408L6.91412 8.58582L4.91663 10.5833L12 17.6667L19.0833 10.5833Z"
-                fill="#E95B3E"
-              />
-            </svg>
-            Download
-            {'\n'} List
-          </Button> */}
-
-        <CustomizedTables
-          displayRows={displayRows}
-          setLoading={setLoading}
-          loading={loading}
-          setUpdate={setUpdate}
-        />
+            Investor Detail
+          </div>
+        )}
+        <div>
+          {size.width <= 768 ? (
+            <div className="investor-card-mobile-container">
+              {displayRows.map((row) => {
+                console.log(row);
+                return (
+                  <div className="investor-card-mobile" key={row._id}>
+                    <div className="investor-card-mobile-header-top">
+                      <div className="investor-card-mobile-header-folio-date">
+                        {new Date(row.dateOfCreation).toLocaleDateString(
+                          'en-GB'
+                        )}
+                      </div>
+                    </div>
+                    <div style={{ display: 'flex' }}>
+                      <div className="investor-card-mobile-header">
+                        <div className="investor-card-mobile-header-name">
+                          {row.name}
+                        </div>
+                        <p className="investor-card-mobile-header-folio">
+                          {[row.city, row.state, row.country].join(', ')}
+                        </p>
+                      </div>
+                      <div
+                        className="investor-card-mobile-header"
+                        style={{ textAlign: 'right' }}
+                      >
+                        <p
+                          className="investor-card-mobile-body-left-date"
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'flex-end'
+                          }}
+                        >
+                          <span style={{ color: ' #333333' }}>
+                            {row.passport}{' '}
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'flex-end',
+                        marginTop: '0.5rem'
+                      }}
+                    >
+                      <Button
+                        variant="contained"
+                        style={{
+                          color: 'var(--primary-color)',
+                          backgroundColor: 'white',
+                          border: '1px solid var(--primary-color)',
+                          fontSize: '0.7rem'
+                        }}
+                        onClick={() => {
+                          history.push({
+                            pathname: '/admin/investor/add',
+                            state: { row, from: history.location.pathname }
+                          });
+                        }}
+                      >
+                        Edit
+                      </Button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <CustomizedTables
+              displayRows={displayRows}
+              setLoading={setLoading}
+              loading={loading}
+              setUpdate={setUpdate}
+            />
+          )}
+        </div>
       </div>
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}

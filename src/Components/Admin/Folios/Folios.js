@@ -207,7 +207,10 @@ const Folios = ({ role }) => {
                       </p>
                     </div>
                     <div style={{ display: 'flex' }}>
-                      <div className="folio-card-mobile-header">
+                      <div
+                        className="folio-card-mobile-header"
+                        style={{ flexDirection: 'column', flex: '1.5' }}
+                      >
                         <div className="folio-card-mobile-header-name">
                           {row.user?.name}
                         </div>
@@ -217,31 +220,40 @@ const Folios = ({ role }) => {
                       </div>
                       <div
                         className="folio-card-mobile-header"
-                        style={{ textAlign: 'right' }}
+                        style={{ textAlign: 'right', flex: '1' }}
                       >
                         <p
                           className="folio-card-mobile-body-left-date"
                           style={{
                             display: 'flex',
-                            justifyContent: 'flex-end'
+                            justifyContent: 'flex-end',
+                            flexDirection: 'column'
                           }}
                         >
                           <span style={{ color: '#666' }}>Contri. </span>
-                          <span style={{ marginLeft: '1ch' }}>
-                            $
-                            {Math.round(
-                              (row.contribution + Number.EPSILON) * 100
-                            ) / 100}
-                          </span>
+                          <span style={{ color: '#666' }}>Commit. </span>
                         </p>
                         <p
                           className="folio-card-mobile-body-left-amount"
                           style={{
                             display: 'flex',
-                            justifyContent: 'flex-end'
+                            justifyContent: 'flex-end',
+                            flexDirection: 'column'
                           }}
                         >
-                          <span style={{ color: '#666' }}>Commit. </span>
+                          <span
+                            style={{
+                              marginLeft: '1ch',
+                              color: '#333333',
+                              fontWeight: '500'
+                            }}
+                          >
+                            $
+                            {Math.round(
+                              (row.contribution + Number.EPSILON) * 100
+                            ) / 100}
+                          </span>
+
                           <span style={{ marginLeft: '1ch' }}>
                             ${' '}
                             {Math.round(
@@ -264,16 +276,24 @@ const Folios = ({ role }) => {
                           color: 'var(--primary-color)',
                           backgroundColor: 'white',
                           border: '1px solid var(--primary-color)',
-                          fontSize: '0.7rem'
+                          fontSize: '0.7rem',
+                          width: '9rem'
                         }}
                         onClick={() => {
-                          history.push({
-                            pathname: '/admin/folios/addTransaction',
-                            state: { row, from: history.location.pathname }
-                          });
+                          if (role == 'folio') {
+                            history.push({
+                              pathname: '/admin/folios/addTransaction',
+                              state: { row, from: history.location.pathname }
+                            });
+                          } else {
+                            history.push({
+                              pathname: '/admin/folioStatements/viewDetail',
+                              state: { row, from: history.location.pathname }
+                            });
+                          }
                         }}
                       >
-                        Add Transaction
+                        {role == 'folio' ? 'Add Transaction' : 'View Detail'}
                       </Button>
                     </div>
                   </div>
