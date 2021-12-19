@@ -10,32 +10,33 @@ import CustomizedTables from './table';
 import Swal from 'sweetalert2';
 import CloseIcon from '@mui/icons-material/Close';
 import TransactionContainer from './TransactionContainer/TransactionContainer';
+import useWindowSize from '../../../../utils/useWindowSize';
 
 const FolioAddTransaction = () => {
   const history = useHistory();
+  const size = useWindowSize();
 
   return (
     <div className="folio-add-transaction-main">
-      <div>
-        <AdNavbar style={{ height: '100% !important' }} />
-      </div>
-      <div className="folio-add-transaction-container">
-        <div className="folio-add-transaction-header">
-          <h1 className="folio-add-transaction-header-label">Folios</h1>
+      {size.width > 768 ? (
+        <div>
+          <AdNavbar />
+        </div>
+      ) : (
+        <div className="add-folio-header">
           <IconButton
             size="large"
-            style={{ color: 'var(--secondary-color)' }}
+            style={{ color: '#132f5e' }}
             onClick={() => {
               history.push('/admin/folios');
             }}
           >
             <CloseIcon fontSize="large" />
           </IconButton>
+          <h2 className="add-folio-title">Record New Transaction</h2>
         </div>
-        <h1 className="folio-add-transaction-subheading">
-          Record New Transaction
-        </h1>
-
+      )}
+      <div className="folio-add-transaction-container">
         <TransactionContainer />
       </div>
     </div>

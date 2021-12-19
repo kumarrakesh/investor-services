@@ -25,6 +25,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import CloseIcon from '@mui/icons-material/Close';
+import useWindowSize from '../../../../utils/useWindowSize';
 
 const errorSwal = Swal.mixin({
   customClass: {
@@ -63,6 +64,7 @@ const successSwal = Swal.mixin({
   }
 });
 const AddInvestor = () => {
+  const size = useWindowSize();
   const history = useHistory();
   const location = useLocation();
 
@@ -275,27 +277,26 @@ const AddInvestor = () => {
 
   return (
     <div className="add-investors-main">
-      <div>
-        <AdNavbar />
-      </div>
+      {size.width > 768 ? (
+        <div>
+          <AdNavbar />
+        </div>
+      ) : (
+        <div className="add-folio-header">
+          <IconButton
+            size="large"
+            style={{ color: '#132f5e' }}
+            onClick={() => {
+              history.push('/admin/investors');
+            }}
+          >
+            <CloseIcon fontSize="large" />
+          </IconButton>
+          <h2 className="add-folio-title">Add Investor</h2>
+        </div>
+      )}
 
       <div id="add-investors-container">
-        <div className="add-investors-title-div">
-          <h1 id="add-investors-title">Investors</h1>
-
-          <div className="add-investors-cross-btn">
-            <IconButton
-              size="large"
-              style={{ color: '#132f5e' }}
-              onClick={() => {
-                history.push('/admin/investors');
-              }}
-            >
-              <CloseIcon fontSize="large" />
-            </IconButton>
-          </div>
-        </div>
-
         <h1 id="add-investors-subtitle">{flag ? 'Update' : 'Add'} Investor</h1>
 
         <form action="" onSubmit={submitForm} className="add-inv-all-inputs">

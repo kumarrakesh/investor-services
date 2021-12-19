@@ -30,7 +30,6 @@
 
 .add-inv-all-inputs {
   margin-top: 1rem;
-  padding-right: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1.4rem;
@@ -49,8 +48,8 @@
   }
 
   #add-investors-container {
-    margin-top: -90vh;
-    padding: 2rem 1rem;
+    /* margin-top: -90vh; */
+    padding: 1rem 1rem;
   }
 
   .add-inv-all-inputs > div {

@@ -272,7 +272,7 @@ export default function CustomizedTables({
               <StyledTableCell align="left">Commitment</StyledTableCell>
               <StyledTableCell align="left">Contribution</StyledTableCell>
               {/* <StyledTableCell align="left">Distribution</StyledTableCell> */}
-              {/* <StyledTableCell align="left">Pending Amount</StyledTableCell> */}
+              <StyledTableCell align="left">Pending Amount</StyledTableCell>
               <StyledTableCell align="left">Action</StyledTableCell>
             </TableRow>
           </TableHead>
@@ -574,12 +574,9 @@ export default function CustomizedTables({
                       : (0).toFixed(2)}
                   </StyledTableCell>
 
-                  {/* <StyledTableCell align="left" component="th" scope="row">
-                    {row.contribution.toFixed(2)}
-                  </StyledTableCell>
                   <StyledTableCell align="left" component="th" scope="row">
                     {(row.commitment - row.contribution).toFixed(2)}
-                  </StyledTableCell> */}
+                  </StyledTableCell>
                   <StyledTableCell align="left" component="th" scope="row">
                     {
                       <Button

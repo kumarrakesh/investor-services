@@ -206,10 +206,10 @@ const Folios = ({ role }) => {
                         {row.folioNumber}
                       </p>
                     </div>
-                    <div style={{ display: 'flex' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
                       <div
                         className="folio-card-mobile-header"
-                        style={{ flexDirection: 'column', flex: '1.5' }}
+                        style={{ flexDirection: 'row', flex: '1.3' }}
                       >
                         <div className="folio-card-mobile-header-name">
                           {row.user?.name}
@@ -218,46 +218,48 @@ const Folios = ({ role }) => {
                           {row.user?.passport}
                         </p>
                       </div>
+
                       <div
                         className="folio-card-mobile-header"
-                        style={{ textAlign: 'right', flex: '1' }}
+                        style={{
+                          textAlign: 'left',
+                          flex: '1',
+                          fontSize: '14px',
+                          marginTop: '0.5rem'
+                        }}
                       >
-                        <p
-                          className="folio-card-mobile-body-left-date"
-                          style={{
-                            display: 'flex',
-                            justifyContent: 'flex-end',
-                            flexDirection: 'column'
-                          }}
-                        >
-                          <span style={{ color: '#666' }}>Contri. </span>
+                        <p className="folio-card-mobile-body-row-item">
                           <span style={{ color: '#666' }}>Commit. </span>
+                          <span>
+                            ${' '}
+                            {Math.round(
+                              (row.commitment + Number.EPSILON) * 100
+                            ) / 100}
+                          </span>
                         </p>
-                        <p
-                          className="folio-card-mobile-body-left-amount"
-                          style={{
-                            display: 'flex',
-                            justifyContent: 'flex-end',
-                            flexDirection: 'column'
-                          }}
-                        >
-                          <span
-                            style={{
-                              marginLeft: '1ch',
-                              color: '#333333',
-                              fontWeight: '500'
-                            }}
-                          >
-                            $
+                        <p className="folio-card-mobile-body-row-item">
+                          <span style={{ color: '#666' }}>Tot. Contri. </span>
+                          <span>
+                            ${' '}
                             {Math.round(
                               (row.contribution + Number.EPSILON) * 100
                             ) / 100}
                           </span>
+                        </p>
 
-                          <span style={{ marginLeft: '1ch' }}>
+                        <p className="folio-card-mobile-body-row-item">
+                          <span style={{ color: '#666' }}>Pending Amt. </span>
+                          <span
+                            style={{
+                              color: '#333333'
+                            }}
+                          >
                             ${' '}
                             {Math.round(
-                              (row.commitment + Number.EPSILON) * 100
+                              (row.commitment -
+                                row.contribution +
+                                Number.EPSILON) *
+                                100
                             ) / 100}
                           </span>
                         </p>
@@ -267,7 +269,7 @@ const Folios = ({ role }) => {
                       style={{
                         display: 'flex',
                         justifyContent: 'flex-end',
-                        marginTop: '0.5rem'
+                        marginTop: '0.3rem'
                       }}
                     >
                       <Button
@@ -277,7 +279,8 @@ const Folios = ({ role }) => {
                           backgroundColor: 'white',
                           border: '1px solid var(--primary-color)',
                           fontSize: '0.7rem',
-                          width: '9rem'
+                          width: '9rem',
+                          textTransform: 'none'
                         }}
                         onClick={() => {
                           if (role == 'folio') {

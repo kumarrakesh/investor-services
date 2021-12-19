@@ -114,6 +114,7 @@ const Investors = () => {
                         className="investor-card-mobile-header"
                         style={{ textAlign: 'right' }}
                       >
+                        <p style={{ color: '#666666' }}> Passport No.</p>
                         <p
                           className="investor-card-mobile-body-left-date"
                           style={{
@@ -140,7 +141,9 @@ const Investors = () => {
                           color: 'var(--primary-color)',
                           backgroundColor: 'white',
                           border: '1px solid var(--primary-color)',
-                          fontSize: '0.7rem'
+                          fontSize: '0.8rem',
+                          padding: '0.4rem 2rem',
+                          textTransform: 'none'
                         }}
                         onClick={() => {
                           history.push({
