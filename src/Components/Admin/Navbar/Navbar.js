@@ -9,6 +9,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import HelpIcon from '@mui/icons-material/Help';
 import Swal from 'sweetalert2';
 import './Navbar.css';
 import useWindowSize from '../../../utils/useWindowSize';
@@ -44,11 +45,11 @@ const AdNavbar = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.clear();
-        Swal.mixin({
-          toast: true,
-          position: 'top-end',
-          timer: 2000
-        }).fire('You have been logged out', '', 'success');
+        // Swal.mixin({
+        //   toast: true,
+        //   position: 'top-end',
+        //   timer: 2000
+        // }).fire('You have been logged out', '', 'success');
         history.push('/');
       }
     });
@@ -73,14 +74,6 @@ const AdNavbar = () => {
           <img src="https://via.placeholder.com/100" />
         </div>
       </div>
-
-      <Divider
-        style={{
-          backgroundColor: '#E6E6E6 ',
-          width: '100%',
-          margin: '1px 0px'
-        }}
-      />
 
       <div
         id="sidebar-main"
@@ -265,30 +258,6 @@ const AdNavbar = () => {
           />
         </Button>
 
-        {/* <Button
-          className="nav-dashboard-btn"
-          onClick={() => {
-            history.push('/admin/investments');
-          }}
-          style={{
-            color: location.pathname.startsWith('/admin/investment')
-              ? '#E95B3E'
-              : '#8997ae',
-            backgroundColor: location.pathname.startsWith('/admin/investment')
-              ? '#F7F9FD'
-              : 'inherit',
-
-            textTransform: 'none'
-          }}
-        >
-          <AccountBalanceWalletIcon style={{ flex: 1 }} />
-
-          <div className="dash-name" style={{ flex: 2 }}>
-            Investments
-          </div>
-
-          <RightIcon style={{ flex: 1 }} />
-        </Button> */}
         <Divider
           style={{
             backgroundColor: '#E6E6E6 ',
@@ -310,7 +279,7 @@ const AdNavbar = () => {
             textTransform: 'none'
           }}
         >
-          <AccountCircleSharpIcon style={{ flex: 1 }} />
+          <HelpIcon style={{ flex: 1 }} />
           <div className="dash-name" style={{ flex: 2 }}>
             Queries
           </div>

@@ -1,13 +1,14 @@
 .grievances-header-container {
   display: flex !important;
+  background-color: var(--light-blue-bg);
 }
 
 .grievances-container {
   display: flex;
   flex-direction: column;
-  padding: 3rem 5rem;
+  padding: 3rem 3.5rem 0rem 5rem !important;
   width: 100%;
-  gap: 1rem;
+  gap: 1.6rem;
 }
 
 #grievances-header-label {
@@ -36,23 +37,41 @@ Button:visited {
   flex-direction: column;
   gap: 2rem;
   width: 100%;
+  background-color: white;
+  outline: 1px solid #cecece;
+  padding: 1rem;
+  border-radius: 5px;
 }
-
+.query-container-title {
+  color: var(--secondary-color);
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0px;
+  padding: 0px;
+  margin-bottom: -1rem;
+}
 .send-btn-div {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
 }
 
 .send-btn {
   display: flex;
-  width: 200px;
+  padding: 1rem 4rem !important;
+  height: 3rem;
+  width: 14rem;
   justify-content: space-around;
 }
 
 #query-table {
   width: 100%;
+}
+
+.css-19kzrtu {
+  padding: 0rem !important;
+  margin-top: 0.5rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -64,4 +83,40 @@ Button:visited {
     margin-top: -90vh;
     padding: 2rem 1rem;
   }
+}
+
+.Mui-selected {
+  color: var(--primary-color) !important;
+}
+
+.MuiTabs-indicator {
+  background-color: var(--primary-color) !important;
+}
+.add-folio-searchbar-multiline {
+  margin-top: 4px !important;
+}
+.add-folio-searchbar-multiline div {
+  padding: 0px !important;
+}
+.add-folio-searchbar-multiline .MuiAutocomplete-popupIndicator {
+  transform: none;
+}
+.add-folio-searchbar-multiline input {
+  color: var(--secondary-color);
+  padding: 0.6rem 0.75rem !important;
+}
+.add-folio-searchbar-multiline input::placeholder {
+  color: #5a6d8e !important;
+  opacity: 0.9;
+}
+.add-folio-searchbar-multiline * {
+  border: none !important;
+}
+.add-folio-searchbar-multiline > * {
+  outline: 1px #91acd9 solid !important;
+}
+.add-folio-searchbar-multiline {
+  background-color: white !important;
+  width: 100% !important;
+  color: #132f5e;
 }

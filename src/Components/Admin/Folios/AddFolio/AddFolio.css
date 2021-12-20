@@ -44,7 +44,10 @@
 
 .add-folio-header {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-around; */
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.13);
 }
 
 #add-folio-subtitle {
@@ -66,7 +69,6 @@
 .add-folios-div {
   display: flex;
   flex-direction: column !important;
-  padding-right: 2rem !important;
   gap: 2.5rem !important;
   margin-top: 1.5rem;
 }
@@ -123,6 +125,7 @@
 .add-folio-info-row {
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 .add-folio-info-row-item {
   flex: 1;
@@ -168,13 +171,22 @@
   }
 
   #add-folios-container {
-    margin-top: -90vh;
-    padding: 2rem 1rem;
+    /* margin-top: -90vh; */
+    padding: 1rem 1rem;
   }
 
   .add-folios-div > div {
     flex-direction: column;
     gap: 2rem;
     justify-content: center;
+  }
+
+  .add-folio-info-row-item {
+    width: 300px !important;
+  }
+
+  .add-folios-btn-div {
+    display: flex;
+    justify-content: center !important;
   }
 }

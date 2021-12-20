@@ -99,10 +99,30 @@
 
   .statement-container {
     margin-top: -90vh;
-    padding: 2rem 1rem;
+    padding: 2rem 1rem !important;
   }
 
   .statement-summary {
     flex-wrap: wrap;
+  }
+  .folio-card-mobile {
+    display: flex;
+    flex-direction: column !important;
+  }
+  .folio-card-mobile-header {
+    flex-direction: row;
+  }
+
+  .folio-card-mobile-header-folio-date {
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  .folio-card-mobile-body-row-item {
+    display: flex;
+    flex-direction: row !important;
+    flex: 1;
+    color: #666;
+    font-weight: 400;
+    justify-content: flex-start !important;
   }
 }

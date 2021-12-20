@@ -76,7 +76,7 @@
 .folio-add-transaction-folio-statement-label {
   font-size: 1rem;
   color: var(--secondary-color);
-  margin: 2rem 0rem 1rem 0rem;
+  margin: 1rem 0rem 1rem 0rem;
   font-weight: 500;
 }
 @media screen and (max-width: 768px) {
@@ -85,8 +85,8 @@
   }
 
   .folio-add-transaction-container {
-    margin-top: -90vh;
-    padding: 2rem 1rem;
+    /* margin-top: -90vh; */
+    padding: 1rem 1rem !important;
   }
 }
 
@@ -98,6 +98,10 @@
 
 @media screen and (max-width: 480px) {
   .folio-add-transaction-row {
-    flex-direction: column;
+    flex-wrap: wrap !important;
+  }
+
+  .folio-add-transaction-row-item {
+    width: 200px !important;
   }
 }

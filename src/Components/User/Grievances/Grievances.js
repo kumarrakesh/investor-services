@@ -8,7 +8,7 @@ import { alpha, styled } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
-import TextField from '@mui/material/TextField';
+import { TextField, Tabs, Tab, Box, Typography } from '@mui/material';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import HistoryIcon from '@mui/icons-material/History';
 import EditIcon from '@mui/icons-material/Edit';
@@ -50,6 +50,33 @@ const successSwal = Swal.mixin({
     toast.addEventListener('mouseleave', Swal.resumeTimer);
   }
 });
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`
+  };
+}
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          {/* <Typography> */}
+          {children}
+          {/* </Typography> */}
+        </Box>
+      )}
+    </div>
+  );
+}
 const Grievances = () => {
   const history = useHistory();
   const token = JSON.parse(localStorage.getItem('token'));
@@ -86,8 +113,8 @@ const Grievances = () => {
       setData(data);
       console.log(data);
       successSwal.fire(
-        'Query sent successfully!',
-        'Query Ref ID is: ' + data.data.queryId,
+        'Query sent successfully! Ref ID is: ' + data.data.queryId,
+        '',
         'success'
       );
     } catch (e) {
@@ -96,28 +123,36 @@ const Grievances = () => {
     }
   };
 
-  const [value, setValue] = useState('raise');
+  const [value, setValue] = useState(0);
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const handleRespone = async () => {
-    setLoading(true);
-    setValue('response');
-    const token = JSON.parse(localStorage.getItem('token'));
+    try {
+      setLoading(true);
+      const token = JSON.parse(localStorage.getItem('token'));
 
-    const response = await fetch(`${process.env.REACT_APP_API}/api/query`, {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'x-access-token': token
-      },
-      method: 'GET'
-    });
+      const response = await fetch(`${process.env.REACT_APP_API}/api/query`, {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'x-access-token': token
+        },
+        method: 'GET'
+      });
 
-    const data = await response.json();
-    setLoading(false);
-    // console.log(data.data);
-    setRows(data.data);
+      const data = await response.json();
+      setLoading(false);
+      // console.log(data.data);
+      setRows(data.data);
+    } catch (e) {
+      errorSwal.fire('Something went wrong. ' + e.message, '', 'error');
+    }
+  };
+
+  const handleTabChange = (event, newValue) => {
+    if (newValue === 1) handleRespone();
+    setValue(newValue);
   };
 
   return (
@@ -127,10 +162,89 @@ const Grievances = () => {
       </div>
 
       <div className="grievances-container">
-        <h1 id="grievances-header-label">Investors and Funds</h1>
-        <h1 className="query-header-label">Queries Generate</h1>
+        <h1 id="grievances-header-label">Queries</h1>
+        <div
+          style={{
+            backgroundColor: 'white',
+            borderRadius: '0.5rem',
+            outline: '1px solid #CECECE'
+          }}
+        >
+          <Tabs
+            value={value}
+            onChange={handleTabChange}
+            aria-label="basic tabs example"
+            centered
+          >
+            <Tab
+              label="Raise Query"
+              {...a11yProps(0)}
+              style={{ textTransform: 'none', marginRight: '2rem' }}
+            />
+            <Tab
+              label="Query History"
+              {...a11yProps(1)}
+              style={{ textTransform: 'none' }}
+            />
+          </Tabs>
+        </div>
+        <TabPanel value={value} index={0} style={{ padding: '0rem' }}>
+          <div className="query-container">
+            <div className="query-container-title">Raise New Query</div>
+            <div className="query-subject">
+              <small className="add-folio-find-investor-label">
+                Query Subject*
+              </small>
+              <TextField
+                fullWidth
+                name="subject"
+                onChange={(e) => {
+                  setSubject(e.target.value);
+                }}
+                required
+                id="fullWidth"
+                className="add-folio-searchbar-multiline"
+              />
+            </div>
+            <div className="user-query-box">
+              <small className="add-folio-find-investor-label">
+                Query Detail*
+              </small>
+              <TextField
+                id="outlined-multiline-static"
+                name="description"
+                onChange={(e) => {
+                  setDescription(e.target.value);
+                }}
+                fullWidth
+                multiline
+                rows={2}
+                className="add-folio-searchbar-multiline"
+              />
+            </div>
+            <div className="send-btn-div">
+              <Button
+                variant="outlined"
+                className="send-btn"
+                onClick={handleSendQuery}
+                style={{
+                  textTransform: 'none',
+                  color: !subject || !description ? 'silver' : 'white',
+                  backgroundColor:
+                    !subject || !description ? 'white' : 'var(--primary-color)'
+                }}
+                disabled={!subject || !description}
+              >
+                Submit Query
+              </Button>
+            </div>
+          </div>
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <CustomizedTables rows={rows} loading={loading} />
+        </TabPanel>
 
-        <div className="btns-div">
+        {/* <div className="btns-div">
           <div>
             <Button
               variant="contained"
@@ -163,9 +277,9 @@ const Grievances = () => {
               <HistoryIcon sx={{ marginLeft: '10px' }} />
             </Button>
           </div>
-        </div>
+        </div> */}
 
-        <div>
+        {/* <div>
           {value === 'raise' && (
             <div className="query-container">
               <div className="query-subject">
@@ -215,7 +329,7 @@ const Grievances = () => {
           {value === 'response' && (
             <CustomizedTables rows={rows} loading={loading} />
           )}
-        </div>
+        </div> */}
       </div>
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}

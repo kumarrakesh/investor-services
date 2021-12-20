@@ -23,7 +23,10 @@ import SearchIcon from '@material-ui/icons/Search';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import useWindowSize from '../../../../utils/useWindowSize';
+
 const AddFolio = () => {
+  const size = useWindowSize();
   let history = useHistory();
   const token = JSON.parse(localStorage.getItem('token'));
   const [values, setValues] = React.useState({
@@ -175,13 +178,12 @@ const AddFolio = () => {
 
   return (
     <div className="add-folios-main">
-      <div>
-        <AdNavbar />
-      </div>
-
-      <div id="add-folios-container">
+      {size.width > 768 ? (
+        <div>
+          <AdNavbar />
+        </div>
+      ) : (
         <div className="add-folio-header">
-          <h2 className="add-folio-title">Folios</h2>
           <IconButton
             size="large"
             style={{ color: '#132f5e' }}
@@ -191,10 +193,11 @@ const AddFolio = () => {
           >
             <CloseIcon fontSize="large" />
           </IconButton>
+          <h2 className="add-folio-title">Add New Folio</h2>
         </div>
+      )}
 
-        <h1 id="add-folio-subtitle">Add New Folio</h1>
-
+      <div id="add-folios-container">
         <form action="" onSubmit={submitForm} className="add-folios-div">
           <div>
             <FormControl variant="standard" sx={{ width: '100%' }}>
@@ -207,7 +210,11 @@ const AddFolio = () => {
                   <TextField
                     {...params}
                     className="add-folio-searchbar"
-                    placeholder="Search by Investor's Name or Passport"
+                    placeholder={
+                      size.width <= 768
+                        ? 'Search by Name or Passport'
+                        : "Search by Investor's Name or Passport"
+                    }
                   />
                 )}
                 value={investorRow}
@@ -263,7 +270,7 @@ const AddFolio = () => {
                 </div>
                 <div
                   className="add-folio-info-row-item-value"
-                  style={{ textTransform: 'none' }}
+                  style={{ textTransform: 'none', width: '80vw' }}
                 >
                   {flag
                     ? investorRow?.address +
@@ -391,17 +398,19 @@ const AddFolio = () => {
             </FormControl>
           </div>
 
-          <div className="add-folios-btn-div" style={{ width: '100%' }}>
+          <div className="add-folios-btn-div">
             <Button
               id="add-folios-btn"
               type="submit"
               variant="contained"
               disabled={!flag}
               style={{
-                color: flag ? 'white' : 'gray',
+                display: 'flex',
+                color: 'white',
                 textTransform: 'none',
                 width: '14rem',
-                backgroundColor: '#E95B3E'
+                backgroundColor: '#E95B3E',
+                marginLeft: '3.5rem'
               }}
             >
               Add Folio
