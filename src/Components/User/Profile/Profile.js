@@ -232,13 +232,23 @@ const Profile = () => {
               </div>
             </div>
 
-            <div className="profile-info-row-item">
-              <div className="profile-info-row-item-label">Phone Number</div>
+            <div
+              className="profile-info-row-item"
+              style={{ display: 'flex', flex: '2' }}
+            >
+              <div
+                className="profile-info-row-item-label"
+                style={{ display: 'flex', flex: '2' }}
+              >
+                Address
+              </div>
               <div
                 className="profile-info-row-item-value"
-                style={{ textTransform: 'none' }}
+                id="address"
+                style={{ display: 'flex', flex: '2' }}
               >
-                {profile?.data?.phoneNo}
+                {profile?.data?.city}, {profile?.data?.state},
+                {profile?.data?.country}, PIN -{profile?.data?.pincode}
               </div>
             </div>
           </div>
@@ -273,27 +283,15 @@ const Profile = () => {
                 {profile?.data?.email}
               </div>
             </div>
-
-            <div
-              className="profile-info-row-item"
-              style={{ display: 'flex', flex: '2' }}
-            >
-              <div
-                className="profile-info-row-item-label"
-                style={{ display: 'flex', flex: '2' }}
-              >
-                Address
-              </div>
+            <div className="profile-info-row-item">
+              <div className="profile-info-row-item-label">Phone Number</div>
               <div
                 className="profile-info-row-item-value"
-                id="address"
-                style={{ display: 'flex', flex: '2' }}
+                style={{ textTransform: 'none' }}
               >
-                {profile?.data?.city}, {profile?.data?.state},
-                {profile?.data?.country}, PIN -{profile?.data?.pincode}
+                {profile?.data?.phoneNo}
               </div>
             </div>
-
             {/* <div className="profile-info-row-item">
               <div className="profile-info-row-item-label"></div>
               <div className="profile-info-row-item-value">

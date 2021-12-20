@@ -45,11 +45,11 @@ const AdNavbar = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.clear();
-        Swal.mixin({
-          toast: true,
-          position: 'top-end',
-          timer: 2000
-        }).fire('You have been logged out', '', 'success');
+        // Swal.mixin({
+        //   toast: true,
+        //   position: 'top-end',
+        //   timer: 2000
+        // }).fire('You have been logged out', '', 'success');
         history.push('/');
       }
     });

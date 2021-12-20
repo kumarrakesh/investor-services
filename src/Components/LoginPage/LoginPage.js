@@ -70,11 +70,11 @@ const LoginPage = () => {
   return (
     <div id="login-background">
       <div id="login-page-content">
-        <div id="login-logo">
+        {/* <div id="login-logo">
           <img src="https://via.placeholder.com/100" alt="Brand Logo" />
-        </div>
+        </div> */}
         <div id="login-box">
-          <span id="login-welcome-text">Welcome to TIW Private Equity</span>
+          {/* <span id="login-welcome-text">Welcome to TIW Private Equity</span> */}
           <form
             style={{
               display: 'flex',
