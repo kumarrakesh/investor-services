@@ -4,6 +4,9 @@ import CustomizedTables from '../table';
 import Swal from 'sweetalert2';
 import { Backdrop, CircularProgress } from '@mui/material';
 import '../FolioAddTransaction.css';
+import Button from '@mui/material/Button';
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
+
 const errorSwal = Swal.mixin({
   customClass: {
     container: 'add-folio-swal-container',
@@ -74,6 +77,59 @@ const TransactionContainer = () => {
       contribution: location?.state?.row?.contribution
     });
     // console.log(values);
+  };
+
+  const handleDownloadPdf = async () => {
+    setLoading(true);
+    try {
+      let response = await fetch(
+        `${process.env.REACT_APP_API}/api/download/folio/transaction`,
+        {
+          method: 'POST',
+          headers: {
+            'x-access-token': JSON.parse(localStorage.getItem('token')),
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            folioNumber: location?.state?.row?.folioNumber
+          })
+        }
+      );
+      let data = await response.blob();
+
+      const url = window.URL.createObjectURL(data);
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      // the filename you want
+      //folio_number_investor_name_download_date.pdf
+      console.log(values.folioNumber);
+      // a.download = `${folio_number}_${investor_name}_${new Date().toLocaleDateString(
+      //   'en-GB'
+      // )}.pdf`;
+      a.download = 'statement.pdf';
+      document.body.appendChild(a);
+      a.click();
+      setLoading(false);
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      errorSwal.fire('Something went wrong', '', 'error');
+      console.log(err);
+    }
+    // .then((resp) => resp.blob())
+    // .then((blob) => {
+    //   const url = window.URL.createObjectURL(blob);
+    //   const a = document.createElement('a');
+    //   a.style.display = 'none';
+    //   a.href = url;
+    //   // the filename you want
+    //   a.download = 'todo-1.json';
+    //   document.body.appendChild(a);
+    //   a.click();
+    //   window.URL.revokeObjectURL(url);
+    //   alert('your file has downloaded!'); // or you know, something with better UX...
+    // })
+    // .catch(() => alert('oh no!'));
   };
 
   const getFolioStatement = async () => {
@@ -205,6 +261,23 @@ const TransactionContainer = () => {
           </div>
         </div>
       </div>
+
+      <Button
+        variant="contained"
+        style={{
+          backgroundColor: 'white',
+          color: 'var(--primary-color)',
+          textTransform: 'none',
+          width: '22%',
+          marginTop: '1.2rem',
+          marginBottom: '0.8rem',
+          height: '2.9rem'
+        }}
+        onClick={handleDownloadPdf}
+      >
+        <FileDownloadOutlinedIcon sx={{ marginRight: '10px' }} />
+        Download Statement
+      </Button>
 
       <h3 className="folio-add-transaction-folio-statement-label">
         Folio Statement
