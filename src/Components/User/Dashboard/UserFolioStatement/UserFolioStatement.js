@@ -228,7 +228,7 @@ const UserFolioStatement = () => {
                 className="user-folio-transaction-row-item-value"
                 style={{ textTransform: 'none' }}
               >
-                ${' ' + values?.commitment}
+                {' ' + values?.commitment}
               </div>
             </div>
 

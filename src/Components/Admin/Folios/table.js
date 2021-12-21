@@ -200,49 +200,49 @@ export default function CustomizedTables({
     }
     setLoading(false);
   };
-  const handleAddNewFolio = () => {
-    if (tableRef?.current?.scrollTop) tableRef.current.scrollToBottom();
+  // const handleAddNewFolio = () => {
+  //   if (tableRef?.current?.scrollTop) tableRef.current.scrollToBottom();
 
-    setDisplayRows([
-      ...displayRows,
-      {
-        role: 'new',
-        _id: '618e3e4e65631a344d8c44b9',
-        folioName: 'fund_6',
-        folioId: 16,
-        user: {
-          email: '',
-          mobileNo: '',
-          phoneNo: '',
-          _id: '6182750ff609eec6f9f0b45f',
-          username: 'sdfsdfsd',
-          password:
-            '$2b$12$/sa5fVQYRRQAERgEJZALP.NUE5cnuKWgrG9H61f6gMCvisW73nw2e',
-          userId: '14',
-          name: 'oneInvestor',
-          profilePic: '',
-          passport: 'SDFSDFSD',
-          maturity: '2021-11-03T11:38:57.568Z',
-          address: '42342',
-          city: 'SDFSD',
-          state: 'SDFSD',
-          country: 'NO',
-          pincode: '434534',
-          role: '616d2f588d908648c28d63a1',
-          amountInvested: 0,
-          currentInvestedValue: 0,
-          __v: 0
-        },
-        commitment: 1400,
-        contribution: 0,
-        yield: 10,
-        yieldAmount: 0,
-        date: '2021-11-12T00:00:00.000Z',
-        __v: 0
-      }
-    ]);
-    setIsEditing(true);
-  };
+  //   setDisplayRows([
+  //     ...displayRows,
+  //     {
+  //       role: 'new',
+  //       _id: '618e3e4e65631a344d8c44b9',
+  //       folioName: 'fund_6',
+  //       folioId: 16,
+  //       user: {
+  //         email: '',
+  //         mobileNo: '',
+  //         phoneNo: '',
+  //         _id: '6182750ff609eec6f9f0b45f',
+  //         username: 'sdfsdfsd',
+  //         password:
+  //           '$2b$12$/sa5fVQYRRQAERgEJZALP.NUE5cnuKWgrG9H61f6gMCvisW73nw2e',
+  //         userId: '14',
+  //         name: 'oneInvestor',
+  //         profilePic: '',
+  //         passport: 'SDFSDFSD',
+  //         maturity: '2021-11-03T11:38:57.568Z',
+  //         address: '42342',
+  //         city: 'SDFSD',
+  //         state: 'SDFSD',
+  //         country: 'NO',
+  //         pincode: '434534',
+  //         role: '616d2f588d908648c28d63a1',
+  //         amountInvested: 0,
+  //         currentInvestedValue: 0,
+  //         __v: 0
+  //       },
+  //       commitment: 1400,
+  //       contribution: 0,
+  //       yield: 10,
+  //       yieldAmount: 0,
+  //       date: '2021-11-12T00:00:00.000Z',
+  //       __v: 0
+  //     }
+  //   ]);
+  //   setIsEditing(true);
+  // };
   // console.log(displayRows);
   return (
     <>

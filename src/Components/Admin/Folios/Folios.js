@@ -231,7 +231,7 @@ const Folios = ({ role }) => {
                         <p className="folio-card-mobile-body-row-item">
                           <span style={{ color: '#666' }}>Commit. </span>
                           <span>
-                            ${' '}
+                            {' '}
                             {Math.round(
                               (row.commitment + Number.EPSILON) * 100
                             ) / 100}
@@ -240,7 +240,7 @@ const Folios = ({ role }) => {
                         <p className="folio-card-mobile-body-row-item">
                           <span style={{ color: '#666' }}>Tot. Contri. </span>
                           <span>
-                            ${' '}
+                            {' '}
                             {Math.round(
                               (row.contribution + Number.EPSILON) * 100
                             ) / 100}
@@ -254,7 +254,7 @@ const Folios = ({ role }) => {
                               color: '#333333'
                             }}
                           >
-                            ${' '}
+                            {' '}
                             {Math.round(
                               (row.commitment -
                                 row.contribution +

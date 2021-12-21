@@ -90,13 +90,13 @@ export default function CustomizedTables({ displayRows, loading }) {
                       : 'Redemtion'}
                   </StyledTableCell>
                   <StyledTableCell align="left" component="th" scope="row">
-                    {row.type == 1 ? '$ ' + row.amount : ''}
+                    {row.type == 1 ? ' ' + row.amount : ''}
                   </StyledTableCell>
                   <StyledTableCell align="left" component="th" scope="row">
-                    {row.type == 2 ? '$ ' + row.amount : ''}
+                    {row.type == 2 ? ' ' + row.amount : ''}
                   </StyledTableCell>
                   <StyledTableCell align="left" component="th" scope="row">
-                    {row.type == 3 ? '$ ' + row.amount : ''}
+                    {row.type == 3 ? ' ' + row.amount : ''}
                   </StyledTableCell>
                 </StyledTableRow>
               ))}

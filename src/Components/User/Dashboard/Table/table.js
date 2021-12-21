@@ -122,14 +122,14 @@ export default function CustomizedTables({
                   </StyledTableCell>
                   {/* {fundname == 'All' ? ( */}
                   <StyledTableCell align="left" component="th" scope="row">
-                    ${' ' + row.commitment.toFixed(2)}
+                    {' ' + row.commitment.toFixed(2)}
                   </StyledTableCell>
                   {/* ) : null} */}
                   <StyledTableCell align="left">
-                    ${' ' + row.contribution.toFixed(2)}
+                    {' ' + row.contribution.toFixed(2)}
                   </StyledTableCell>
                   <StyledTableCell align="left">
-                    ${' ' + (row.commitment - row.contribution).toFixed(2)}
+                    {' ' + (row.commitment - row.contribution).toFixed(2)}
                   </StyledTableCell>
                   <StyledTableCell align="left">
                     {row.yield.toFixed(2)}%
