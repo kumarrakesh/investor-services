@@ -105,19 +105,19 @@
   .statement-summary {
     flex-wrap: wrap;
   }
-  .folio-card-mobile {
+  .dashboard-card-mobile {
     display: flex;
     flex-direction: column !important;
   }
-  .folio-card-mobile-header {
+  .dashboard-card-mobile-header {
     flex-direction: row;
   }
 
-  .folio-card-mobile-header-folio-date {
+  .dashboard-card-mobile-header-folio-date {
     font-weight: 700;
     font-size: 1rem;
   }
-  .folio-card-mobile-body-row-item {
+  .dashboard-card-mobile-body-row-item {
     display: flex;
     flex-direction: row !important;
     flex: 1;

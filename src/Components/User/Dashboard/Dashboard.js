@@ -108,20 +108,20 @@ const Dashboard = () => {
           </div>
         </div>
         {size.width <= 768 ? (
-          <div className="folio-card-mobile-container">
+          <div className="dashboard-card-mobile-container">
             {displayRows.map((row) => {
               console.log(row);
               return (
-                <div className="folio-card-mobile" key={row._id}>
-                  <div className="folio-card-mobile-header-top">
-                    <div className="folio-card-mobile-header-folio-date">
+                <div className="dashboard-card-mobile" key={row._id}>
+                  <div className="dashboard-card-mobile-header-top">
+                    <div className="dashboard-card-mobile-header-folio-date">
                       {new Date(row.date).toLocaleDateString('en-GB')}
                     </div>
                   </div>
                   {/*  */}
                   <div style={{ display: 'flex' }}>
                     <div
-                      className="folio-card-mobile-header"
+                      className="dashboard-card-mobile-header"
                       style={{
                         textAlign: 'left',
                         flex: '1',
@@ -130,12 +130,12 @@ const Dashboard = () => {
                         flexDirection: 'column'
                       }}
                     >
-                      <div className="folio-card-mobile-body-row-item">
+                      <div className="dashboard-card-mobile-body-row-item">
                         <span>{row.folioNumber}</span>
                       </div>
                     </div>
                     <div
-                      className="folio-card-mobile-header"
+                      className="dashboard-card-mobile-header"
                       style={{
                         textAlign: 'right',
                         flex: '1.5 !important',
@@ -145,19 +145,19 @@ const Dashboard = () => {
                         alignItems: 'flex-end'
                       }}
                     >
-                      <div className="folio-card-mobile-body-row-item">
+                      <div className="dashboard-card-mobile-body-row-item">
                         Contri.
                         <span style={{ color: '#333', fontWeight: 500 }}>
                           {row.contribution}
                         </span>
                       </div>
-                      <div className="folio-card-mobile-body-row-item">
+                      <div className="dashboard-card-mobile-body-row-item">
                         Commit.
                         <span style={{ color: '#333', fontWeight: 500 }}>
                           {row.commitment}
                         </span>
                       </div>
-                      <div className="folio-card-mobile-body-row-item">
+                      <div className="dashboard-card-mobile-body-row-item">
                         Expected Yield
                         <span style={{ color: '#333', fontWeight: 500 }}>
                           {row.yield}%
