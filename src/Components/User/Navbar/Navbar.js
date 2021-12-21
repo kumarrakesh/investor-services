@@ -14,6 +14,8 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import MenuIcon from '@mui/icons-material/Menu';
 import HelpIcon from '@mui/icons-material/Help';
+import logo from '../../../assets/images/logo.jpeg';
+
 const Navbar = () => {
   const navbarOpenStyles = {
     zIndex: 10,
@@ -90,7 +92,7 @@ const Navbar = () => {
             history.push('/dashboard');
           }}
         >
-          <img src="https://via.placeholder.com/100x70" alt="tiwpe logo" />
+          <img src={logo} alt="tiwpe logo" />
         </div>
         <div
           className="navbar-top-profile-pic"
@@ -121,7 +123,7 @@ const Navbar = () => {
         {size.width > 770 && (
           <>
             <div id="header-logo">
-              <img src="https://via.placeholder.com/100x70" alt="tiwpe logo" />
+              <img src={logo} alt="tiwpe logo" />
             </div>
 
             <Divider
