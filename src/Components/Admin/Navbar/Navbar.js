@@ -12,6 +12,7 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import HelpIcon from '@mui/icons-material/Help';
 import Swal from 'sweetalert2';
 import './Navbar.css';
+import logo from '../../../assets/images/logo.jpeg';
 import useWindowSize from '../../../utils/useWindowSize';
 
 const AdNavbar = () => {
@@ -68,7 +69,7 @@ const AdNavbar = () => {
             history.push('/admin/investors');
           }}
         >
-          <img src="https://tiwpe.com/image/tiw-logo.png" alt="tiwpe logo" />
+          <img src="https://via.placeholder.com/100x70" alt="tiwpe logo" />
         </div>
         <div className="navbar-top-profile-pic">
           <img src="https://via.placeholder.com/100" />
@@ -88,7 +89,7 @@ const AdNavbar = () => {
         {size.width > 770 && (
           <>
             <div id="header-logo">
-              <img src="https://via.placeholder.com/100x70" alt="tiwpe logo" />
+              <img src={logo} alt="tiwpe logo" />
             </div>
 
             <Divider
