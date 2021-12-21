@@ -69,10 +69,10 @@ const AdNavbar = () => {
             history.push('/admin/investors');
           }}
         >
-          <img src="https://via.placeholder.com/100x70" alt="tiwpe logo" />
+          <img src={logo} alt="tiwpe logo" />
         </div>
         <div className="navbar-top-profile-pic">
-          <img src="https://via.placeholder.com/100" />
+          <img src="https://via.placeholder.com/50" />
         </div>
       </div>
 

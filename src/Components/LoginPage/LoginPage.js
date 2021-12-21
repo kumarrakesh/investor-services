@@ -43,12 +43,14 @@ const LoginPage = () => {
       }
     });
     let imgData = await imgResponse.json();
-    // console.log(imgData);
+    console.log(imgData);
     localStorage.setItem('username', imgData.data.name);
-    localStorage.setItem(
-      'imageURL',
-      `${process.env.REACT_APP_API}/api/profilePic/` + imgData.data.profilePic
-    );
+    if (imgData.data.profilePic != '') {
+      localStorage.setItem(
+        'imageURL',
+        `${process.env.REACT_APP_API}/api/profilePic/` + imgData.data.profilePic
+      );
+    }
     setUserData({ role: data.role, token: data.token });
     if (data.status && data.role === 'ADMIN') {
       history.push('/admin/investors');

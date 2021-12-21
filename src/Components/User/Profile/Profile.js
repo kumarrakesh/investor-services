@@ -68,7 +68,7 @@ const Profile = () => {
     },
     AmountInvested: 0
   });
-  const [imgURL, setImgURL] = useState('https://tiwpe.com/image/tiw-logo.png');
+  const [imgURL, setImgURL] = useState('https://via.placeholder.com/50');
   const [showImageDialog, setShowImageDialog] = useState(false);
 
   useEffect(() => {
@@ -163,13 +163,13 @@ const Profile = () => {
           details?.data?.profilePic
             ? `${process.env.REACT_APP_API}/api/profilePic/` +
                 details?.data?.profilePic
-            : 'https://tiwpe.com/image/tiw-logo.png'
+            : 'https://via.placeholder.com/50'
         );
-      else setImgURL('https://tiwpe.com/image/tiw-logo.png');
+      else setImgURL('https://via.placeholder.com/50');
       setLoading(false);
     } catch (err) {
       console.log(err);
-      setImgURL('https://tiwpe.com/image/tiw-logo.png');
+      setImgURL('https://via.placeholder.com/50');
     }
 
     localStorage.setItem(
@@ -177,7 +177,7 @@ const Profile = () => {
       details?.data?.profilePic
         ? `${process.env.REACT_APP_API}/api/profilePic/` +
             details?.data?.profilePic
-        : 'https://tiwpe.com/image/tiw-logo.png'
+        : 'https://via.placeholder.com/50'
     );
     setLoading(false);
   };
@@ -196,7 +196,7 @@ const Profile = () => {
                 !loading ? { display: 'inline-block' } : { display: 'none' }
               }
               onError={() => {
-                setImgURL('https://tiwpe.com/image/tiw-logo.png');
+                setImgURL('https://via.placeholder.com/50');
               }}
             />
           </div>

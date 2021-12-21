@@ -28,7 +28,7 @@ const Navbar = () => {
     transform: 'translateX(0%)'
   };
   //states
-  const [imgURL, setImgURL] = useState('https://tiwpe.com/image/tiw-logo.png');
+  const [imgURL, setImgURL] = useState('https://via.placeholder.com/50');
   const [navbarOpen, setNavbarOpen] = useState(false);
   //hooks
   const size = useWindowSize();
@@ -42,7 +42,7 @@ const Navbar = () => {
       localStorage.getItem('imageURL') ==
         `${process.env.REACT_APP_API}/api/profilePic/undefined`
     ) {
-      setImgURL('https://tiwpe.com/image/tiw-logo.png');
+      setImgURL('https://via.placeholder.com/50');
     } else setImgURL(localStorage.getItem('imageURL'));
     // setImgURL(localStorage.getItem('username'));
   }, []);
@@ -104,7 +104,7 @@ const Navbar = () => {
             src="https://via.placeholder.com/50"
             alt=""
             onError={() => {
-              setImgURL('https://tiwpe.com/image/tiw-logo.png');
+              setImgURL('https://via.placeholder.com/50');
             }}
           />
         </div>
@@ -146,10 +146,14 @@ const Navbar = () => {
         >
           <div className="pic">
             <img
-              src={localStorage.getItem('imageURL')}
+              src={
+                localStorage.getItem('imageURL')
+                  ? localStorage.getItem('imageURL')
+                  : 'https://via.placeholder.com/50'
+              }
               alt=""
               onError={() => {
-                setImgURL('https://tiwpe.com/image/tiw-logo.png');
+                setImgURL('https://via.placeholder.com/50');
               }}
             />
           </div>
