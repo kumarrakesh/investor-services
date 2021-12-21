@@ -83,6 +83,7 @@ export default function CustomizedTables({
               }}
             >
               <StyledTableCell>Date</StyledTableCell>
+              <StyledTableCell align="left">Currency</StyledTableCell>
               <StyledTableCell align="left">Folio No.</StyledTableCell>
               {/* {fundname == 'All' ? ( */}
               <StyledTableCell align="left">Capital Commitment</StyledTableCell>
@@ -112,6 +113,9 @@ export default function CustomizedTables({
                 <StyledTableRow key={row._id}>
                   <StyledTableCell component="th" scope="row">
                     {new Date(row.date).toLocaleDateString('en-GB')}
+                  </StyledTableCell>
+                  <StyledTableCell align="left" component="th" scope="row">
+                    {row.currency || 'USD'}
                   </StyledTableCell>
                   <StyledTableCell align="left" component="th" scope="row">
                     {row.folioNumber || '-'}

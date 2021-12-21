@@ -24,7 +24,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import useWindowSize from '../../../../utils/useWindowSize';
-
+import { Select, MenuItem } from '@mui/material';
 const AddFolio = () => {
   const size = useWindowSize();
   let history = useHistory();
@@ -40,7 +40,8 @@ const AddFolio = () => {
     state: 'state',
     country: 'country',
     pincode: 'PIN',
-    userPassport: 'passport'
+    userPassport: 'passport',
+    currency: 'USD'
   });
 
   const [loading, setLoading] = useState(false);
@@ -103,7 +104,8 @@ const AddFolio = () => {
             commitment: values.commitment,
             yield: values.yield,
             date: selectedDate,
-            folioNumber: values.folioNo
+            folioNumber: values.folioNo,
+            currency: values.currency
           }),
           headers: {
             'Content-Type': 'application/json',
@@ -263,26 +265,27 @@ const AddFolio = () => {
                   {flag ? investorRow?.passport : 'NA'}
                 </div>
               </div>
-
-              <div className="add-folio-info-row-item">
-                <div className="add-folio-info-row-item-label">
-                  Investor Address
-                </div>
-                <div
-                  className="add-folio-info-row-item-value"
-                  style={{ textTransform: 'none', width: '80vw' }}
-                >
-                  {flag
-                    ? investorRow?.address +
-                      ',' +
-                      investorRow?.city +
-                      ',' +
-                      ' ' +
-                      investorRow?.state +
-                      ',' +
-                      investorRow?.country
-                    : 'NA'}
-                </div>
+            </div>
+          </div>
+          <div className="add-folio-info-row">
+            <div className="add-folio-info-row-item">
+              <div className="add-folio-info-row-item-label">
+                Investor Address
+              </div>
+              <div
+                className="add-folio-info-row-item-value"
+                style={{ textTransform: 'none' }}
+              >
+                {flag
+                  ? investorRow?.address +
+                    ',' +
+                    investorRow?.city +
+                    ',' +
+                    ' ' +
+                    investorRow?.state +
+                    ',' +
+                    investorRow?.country
+                  : 'NA'}
               </div>
             </div>
           </div>
@@ -380,11 +383,11 @@ const AddFolio = () => {
                 id="outlined-adornment-amount"
                 value={values.commitment}
                 onChange={handleChange('commitment')}
-                startAdornment={
-                  <InputAdornment position="start">
-                    <AttachMoneyIcon />
-                  </InputAdornment>
-                }
+                // startAdornment={
+                //   <InputAdornment position="start">
+                //     <AttachMoneyIcon />
+                //   </InputAdornment>
+                // }
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -395,6 +398,20 @@ const AddFolio = () => {
                 style={{ backgroundColor: 'white', color: '#132f5e' }}
                 className="add-folio-searchbar"
               />
+            </FormControl>
+          </div>
+          <div className="add-folio-input-3">
+            <FormControl fullWidth sx={{ width: '100%' }}>
+              <small className="add-folio-find-investor-label">Currency</small>
+              <Select
+                value={values.currency}
+                onChange={handleChange('currency')}
+                required
+                className="add-folio-searchbar"
+              >
+                <MenuItem value={'USD'}>USD</MenuItem>
+                <MenuItem value={'GBP'}>GBP</MenuItem>
+              </Select>
             </FormControl>
           </div>
 

@@ -263,6 +263,7 @@ export default function CustomizedTables({
           <TableHead style={{ border: '1px solid red' }}>
             <TableRow>
               <StyledTableCell>Date Added</StyledTableCell>
+              <StyledTableCell align="left">Currency</StyledTableCell>
               <StyledTableCell align="left">Folio No.</StyledTableCell>
               {/* <StyledTableCell align="left">
                 Investor Passport
@@ -552,6 +553,9 @@ export default function CustomizedTables({
               >
                 {row.folioName}
               </StyledTableCell> */}
+                  <StyledTableCell align="left" component="th" scope="row">
+                    {row.currency || 'USD'}
+                  </StyledTableCell>
                   <StyledTableCell align="left" component="th" scope="row">
                     {row.folioNumber}
                   </StyledTableCell>

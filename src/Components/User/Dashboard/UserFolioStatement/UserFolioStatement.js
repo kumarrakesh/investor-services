@@ -63,7 +63,8 @@ const UserFolioStatement = () => {
     investorPassport: '',
     commitment: '',
     yield: '',
-    registrationDate: new Date()
+    registrationDate: new Date(),
+    currency: ''
   });
 
   const handleChange = (prop) => (event) => {
@@ -240,6 +241,17 @@ const UserFolioStatement = () => {
                 style={{ textTransform: 'none' }}
               >
                 {new Date(values?.registrationDate).toLocaleDateString('en-GB')}
+              </div>
+            </div>
+            <div className="user-folio-transaction-row-item">
+              <div className="user-folio-transaction-row-item-label">
+                Currency
+              </div>
+              <div
+                className="user-folio-transaction-row-item-value"
+                style={{ textTransform: 'none' }}
+              >
+                {values.currency || 'USD'}
               </div>
             </div>
           </div>
