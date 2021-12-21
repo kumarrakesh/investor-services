@@ -6,6 +6,9 @@ import { Backdrop, CircularProgress } from '@mui/material';
 import '../FolioAddTransaction.css';
 import Button from '@mui/material/Button';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
+import useWindowSize from '../../../../../utils/useWindowSize';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 const errorSwal = Swal.mixin({
   customClass: {
@@ -45,6 +48,7 @@ const successSwal = Swal.mixin({
 });
 const TransactionContainer = () => {
   const location = useLocation();
+  const size = useWindowSize();
   const [loading, setLoading] = useState(false);
   const [displayRows, setDisplayRows] = useState([]);
   const [values, setValues] = React.useState({
@@ -186,6 +190,24 @@ const TransactionContainer = () => {
 
   return (
     <div>
+      {/* {size.width>768 && 
+      <div>
+      <div className="add-folio-header-pc">
+        
+         <h2 className="add-folio-title">Folio Statements</h2>
+        <IconButton
+          size="large"
+          style={{ color: '#132f5e' }}
+          onClick={() => {
+            history.push('/admin/folios');
+          }}
+        >
+          <CloseIcon fontSize="large" />
+        </IconButton>       
+        </div>
+        <h1 id='add-folio-subtitle'>Record New Transaction</h1>
+        </div>
+        } */}
       <div className="folio-add-transaction">
         <h3 className="folio-add-transaction-heading">Investor Details</h3>
         <div className="folio-add-transaction-row">

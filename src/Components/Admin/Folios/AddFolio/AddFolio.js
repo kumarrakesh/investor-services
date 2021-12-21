@@ -200,6 +200,24 @@ const AddFolio = () => {
       )}
 
       <div id="add-folios-container">
+        {size.width > 768 && (
+          <div>
+            <div className="add-folio-header-pc">
+              <h2 className="add-folio-title">Folios</h2>
+              <IconButton
+                size="large"
+                style={{ color: '#132f5e' }}
+                onClick={() => {
+                  history.push('/admin/folios');
+                }}
+              >
+                <CloseIcon fontSize="large" />
+              </IconButton>
+            </div>
+            <h1 id="add-folio-subtitle">Add New Folio</h1>
+          </div>
+        )}
+
         <form action="" onSubmit={submitForm} className="add-folios-div">
           <div>
             <FormControl variant="standard" sx={{ width: '100%' }}>

@@ -297,7 +297,25 @@ const AddInvestor = () => {
       )}
 
       <div id="add-investors-container">
-        <h1 id="add-investors-subtitle">{flag ? 'Update' : 'Add'} Investor</h1>
+        {size.width > 768 && (
+          <div>
+            <div className="add-folio-header-pc">
+              <h2 className="add-folio-title">Investors</h2>
+              <IconButton
+                size="large"
+                style={{ color: '#132f5e' }}
+                onClick={() => {
+                  history.push('/admin/investors');
+                }}
+              >
+                <CloseIcon fontSize="large" />
+              </IconButton>
+            </div>
+            <h1 id="add-investors-subtitle">
+              {flag ? 'Update' : 'Add'} Investor
+            </h1>
+          </div>
+        )}
 
         <form action="" onSubmit={submitForm} className="add-inv-all-inputs">
           <div id="inv-id1">

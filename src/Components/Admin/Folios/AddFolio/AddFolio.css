@@ -50,6 +50,11 @@
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.13);
 }
 
+.add-folio-header-pc {
+  display: flex;
+  justify-content: space-between;
+}
+
 #add-folio-subtitle {
   font-size: 18px;
   font-weight: 500;
