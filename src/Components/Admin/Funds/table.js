@@ -294,7 +294,7 @@ export default function CustomizedTables({
                       <TableCell component="th" scope="row">
                         {new Date(row.date).toLocaleDateString('en-GB')}
                       </TableCell>
-                      <TableCell align="right">$ {row.nav}</TableCell>
+                      <TableCell align="right">{row.nav}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

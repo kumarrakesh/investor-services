@@ -225,7 +225,7 @@ const TransactionContainer = () => {
 
         <div
           className="folio-add-transaction-row"
-          style={{ borderBottom: ' 1px solid #E5E5E5' }}
+          // style={{ borderBottom: ' 1px solid #E5E5E5' }}
         >
           <div className="folio-add-transaction-row-item">
             <div className="folio-add-transaction-row-item-label">
@@ -244,7 +244,7 @@ const TransactionContainer = () => {
               className="folio-add-transaction-row-item-value"
               style={{ textTransform: 'none' }}
             >
-              ${values.commitment}
+              {values.commitment}
             </div>
           </div>
 
@@ -256,7 +256,18 @@ const TransactionContainer = () => {
               className="folio-add-transaction-row-item-value"
               style={{ textTransform: 'none' }}
             >
-              ${values.contribution}
+              {values.contribution}
+            </div>
+          </div>
+        </div>
+        <div
+          className="folio-add-transaction-row"
+          // style={{ borderBottom: ' 1px solid #E5E5E5' }}
+        >
+          <div className="folio-add-transaction-row-item">
+            <div className="folio-add-transaction-row-item-label">Currency</div>
+            <div className="folio-add-transaction-row-item-value">
+              {values.currency || 'USD'}
             </div>
           </div>
         </div>

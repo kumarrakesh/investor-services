@@ -83,6 +83,7 @@ export default function CustomizedTables({
               }}
             >
               <StyledTableCell>Date</StyledTableCell>
+              <StyledTableCell align="left">Currency</StyledTableCell>
               <StyledTableCell align="left">Folio No.</StyledTableCell>
               {/* {fundname == 'All' ? ( */}
               <StyledTableCell align="left">Capital Commitment</StyledTableCell>
@@ -114,18 +115,21 @@ export default function CustomizedTables({
                     {new Date(row.date).toLocaleDateString('en-GB')}
                   </StyledTableCell>
                   <StyledTableCell align="left" component="th" scope="row">
+                    {row.currency || 'USD'}
+                  </StyledTableCell>
+                  <StyledTableCell align="left" component="th" scope="row">
                     {row.folioNumber || '-'}
                   </StyledTableCell>
                   {/* {fundname == 'All' ? ( */}
                   <StyledTableCell align="left" component="th" scope="row">
-                    ${' ' + row.commitment.toFixed(2)}
+                    {' ' + row.commitment.toFixed(2)}
                   </StyledTableCell>
                   {/* ) : null} */}
                   <StyledTableCell align="left">
-                    ${' ' + row.contribution.toFixed(2)}
+                    {' ' + row.contribution.toFixed(2)}
                   </StyledTableCell>
                   <StyledTableCell align="left">
-                    ${' ' + (row.commitment - row.contribution).toFixed(2)}
+                    {' ' + (row.commitment - row.contribution).toFixed(2)}
                   </StyledTableCell>
                   <StyledTableCell align="left">
                     {row.yield.toFixed(2)}%
