@@ -1,7 +1,7 @@
 .dash-container {
   display: flex;
   flex-direction: column;
-  padding: 3rem 4rem;
+  padding: 3rem 2.5rem;
   width: 100%;
 }
 .nav-dash-container {
