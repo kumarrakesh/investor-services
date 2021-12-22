@@ -423,6 +423,7 @@ const AddFolio = () => {
               <TextField
                 required
                 disabled={!flag}
+                type="number"
                 id="outlined-adornment-amount"
                 value={values.commitment}
                 onChange={handleChange('commitment')}
