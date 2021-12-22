@@ -243,12 +243,6 @@ const TransactionContainer = () => {
               {new Date(values.registrationDate).toLocaleDateString('en-GB')}
             </div>
           </div>
-        </div>
-
-        <div
-          className="folio-add-transaction-row"
-          // style={{ borderBottom: ' 1px solid #E5E5E5' }}
-        >
           <div className="folio-add-transaction-row-item">
             <div className="folio-add-transaction-row-item-label">
               Yield (%)
@@ -257,7 +251,12 @@ const TransactionContainer = () => {
               {values.yield}
             </div>
           </div>
+        </div>
 
+        <div
+          className="folio-add-transaction-row"
+          // style={{ borderBottom: ' 1px solid #E5E5E5' }}
+        >
           <div className="folio-add-transaction-row-item">
             <div className="folio-add-transaction-row-item-label">
               Capital Commitment
@@ -281,11 +280,6 @@ const TransactionContainer = () => {
               {values.contribution}
             </div>
           </div>
-        </div>
-        <div
-          className="folio-add-transaction-row"
-          // style={{ borderBottom: ' 1px solid #E5E5E5' }}
-        >
           <div className="folio-add-transaction-row-item">
             <div className="folio-add-transaction-row-item-label">Currency</div>
             <div className="folio-add-transaction-row-item-value">

@@ -263,13 +263,13 @@ export default function CustomizedTables({
           <TableHead style={{ border: '1px solid red' }}>
             <TableRow>
               <StyledTableCell>Date Added</StyledTableCell>
-              <StyledTableCell align="left">Currency</StyledTableCell>
               <StyledTableCell align="left">Folio No.</StyledTableCell>
               {/* <StyledTableCell align="left">
                 Investor Passport
               </StyledTableCell> */}
               <StyledTableCell align="left">Investor Name</StyledTableCell>
               <StyledTableCell align="left">Passport No.</StyledTableCell>
+              <StyledTableCell align="left">Currency</StyledTableCell>
               <StyledTableCell align="left">Commitment</StyledTableCell>
               <StyledTableCell align="left">Contribution</StyledTableCell>
               {/* <StyledTableCell align="left">Distribution</StyledTableCell> */}
@@ -553,9 +553,7 @@ export default function CustomizedTables({
               >
                 {row.folioName}
               </StyledTableCell> */}
-                  <StyledTableCell align="left" component="th" scope="row">
-                    {row.currency || 'USD'}
-                  </StyledTableCell>
+
                   <StyledTableCell align="left" component="th" scope="row">
                     {row.folioNumber}
                   </StyledTableCell>
@@ -567,6 +565,9 @@ export default function CustomizedTables({
                   </StyledTableCell>
                   <StyledTableCell align="left" component="th" scope="row">
                     {row.user.passport}
+                  </StyledTableCell>
+                  <StyledTableCell align="left" component="th" scope="row">
+                    {row.currency || 'USD'}
                   </StyledTableCell>
                   <StyledTableCell align="left" component="th" scope="row">
                     {row.commitment.toFixed(2)}
