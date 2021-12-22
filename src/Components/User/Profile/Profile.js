@@ -59,6 +59,7 @@ const Profile = () => {
     data: {
       name: 'Name',
       passport: 'passport',
+      address: '',
       city: 'city',
       state: 'state',
       country: 'country',
@@ -144,6 +145,7 @@ const Profile = () => {
       method: 'GET'
     });
     const details = await response.json();
+    console.log(details);
     setProfile(details);
     try {
       const tempResponse = await fetch(
@@ -247,8 +249,14 @@ const Profile = () => {
                 id="address"
                 style={{ display: 'flex', flex: '2' }}
               >
-                {profile?.data?.city}, {profile?.data?.state},
-                {profile?.data?.country}, PIN -{profile?.data?.pincode}
+                {[
+                  profile?.data.city,
+                  profile?.data.state,
+                  profile?.data.country,
+                  profile?.data?.pincode
+                ]
+                  .filter((value) => value != '')
+                  .join(',')}
               </div>
             </div>
           </div>

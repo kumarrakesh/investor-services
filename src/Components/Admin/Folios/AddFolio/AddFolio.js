@@ -295,14 +295,14 @@ const AddFolio = () => {
                 style={{ textTransform: 'none' }}
               >
                 {flag
-                  ? investorRow?.address +
-                    ',' +
-                    investorRow?.city +
-                    ',' +
-                    ' ' +
-                    investorRow?.state +
-                    ',' +
-                    investorRow?.country
+                  ? [
+                      investorRow.address,
+                      investorRow.city,
+                      investorRow.state,
+                      investorRow.country
+                    ]
+                      .filter((value) => value !== '')
+                      .join(', ')
                   : 'NA'}
               </div>
             </div>

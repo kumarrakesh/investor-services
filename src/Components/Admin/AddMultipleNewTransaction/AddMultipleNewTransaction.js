@@ -94,6 +94,7 @@ const AddMultipleNewTransaction = ({
   //states
   const [toBeAddedStatements, setToBeAddedStatements] = useState([]);
   const [count, setCount] = useState(0);
+  const [contribution, setContribution] = useState();
   //other hooks
   //handers
   const handleShowAddMultipleNewTransaction = async () => {
@@ -176,6 +177,7 @@ export const AddMultipleNewTransactionTable = ({
     );
     const data = await response.json();
     console.log(data);
+    console.log(data.data.contribution);
     if (!data.status)
       errorSwal.fire(
         data.message || data.error || "Couldn't add the transaction",

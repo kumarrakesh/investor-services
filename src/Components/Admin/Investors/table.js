@@ -100,7 +100,9 @@ export default function CustomizedTables({ displayRows, setUpdate, loading }) {
                   {row.name}
                 </StyledTableCell>
                 <StyledTableCell align="left" component="th" scope="row">
-                  {[row.city, row.state, row.country].join(', ')}
+                  {[row.city, row.state, row.country]
+                    .filter((value) => value !== '')
+                    .join(', ')}
                 </StyledTableCell>
                 <StyledTableCell align="left" component="th" scope="row">
                   {row.passport}
