@@ -89,7 +89,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const AddMultipleNewTransaction = ({
   handleAddNewFolioTransaction,
   folioNumber,
-  setDisplayRows
+  setDisplayRows,
+  folioDetail
 }) => {
   //states
   const [toBeAddedStatements, setToBeAddedStatements] = useState([]);
@@ -142,6 +143,7 @@ const AddMultipleNewTransaction = ({
               }
               folioNumber={folioNumber}
               setDisplayRows={setDisplayRows}
+              folioDetail={folioDetail}
             />
           </div>
         )}
@@ -155,7 +157,8 @@ export const AddMultipleNewTransactionTable = ({
   setToBeAddedStatements,
   handleShowAddMultipleNewTransaction,
   folioNumber,
-  setDisplayRows
+  setDisplayRows,
+  folioDetail
 }) => {
   const tableRef = React.createRef();
   const handleDateChange = (params) => {
@@ -177,7 +180,7 @@ export const AddMultipleNewTransactionTable = ({
     );
     const data = await response.json();
     console.log(data);
-    console.log(data.data.contribution);
+    folioDetail(data.data);
     if (!data.status)
       errorSwal.fire(
         data.message || data.error || "Couldn't add the transaction",
