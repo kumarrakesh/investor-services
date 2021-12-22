@@ -59,7 +59,8 @@ const TransactionContainer = () => {
     yield: '',
     registrationDate: new Date(),
     folioId: '',
-    contribution: ''
+    contribution: '',
+    currency: ''
   });
 
   const [rows, setRows] = useState([]);
@@ -79,7 +80,8 @@ const TransactionContainer = () => {
       commitment: location?.state?.row?.commitment,
       yield: location?.state?.row?.yield,
       registrationDate: location?.state?.row?.date,
-      contribution: location?.state?.row?.contribution
+      contribution: location?.state?.row?.contribution,
+      currency: location?.state?.row?.currency
     });
     // console.log(values);
   };
@@ -268,7 +270,7 @@ const TransactionContainer = () => {
           <div className="folio-add-transaction-row-item">
             <div className="folio-add-transaction-row-item-label">Currency</div>
             <div className="folio-add-transaction-row-item-value">
-              {values.currency || 'USD'}
+              {values.currency}
             </div>
           </div>
         </div>

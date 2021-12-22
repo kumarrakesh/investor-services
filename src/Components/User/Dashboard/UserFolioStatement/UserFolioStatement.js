@@ -251,7 +251,7 @@ const UserFolioStatement = () => {
                 className="user-folio-transaction-row-item-value"
                 style={{ textTransform: 'none' }}
               >
-                {values.currency || 'USD'}
+                {values.currency}
               </div>
             </div>
           </div>

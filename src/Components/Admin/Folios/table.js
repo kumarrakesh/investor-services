@@ -567,7 +567,7 @@ export default function CustomizedTables({
                     {row.user.passport}
                   </StyledTableCell>
                   <StyledTableCell align="left" component="th" scope="row">
-                    {row.currency || 'USD'}
+                    {row.currency}
                   </StyledTableCell>
                   <StyledTableCell align="left" component="th" scope="row">
                     {row.commitment.toFixed(2)}

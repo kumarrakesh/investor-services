@@ -45,8 +45,9 @@ const AddFolio = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [errorName, setErrorName] = useState(false);
-  const [helperText, setHelperText] = useState(true);
+  // const [errorName, setErrorName] = useState(false);
+  // const [helperText, setHelperText] = useState(true);
+  const [currencies, setCurrencies] = useState([]);
   const [investorRow, setInvestorRow] = useState({});
   const [selectedDate, setSelectedDate] = React.useState(new Date());
   const [ogRows, setOgRows] = useState([]);
@@ -63,6 +64,7 @@ const AddFolio = () => {
       history.push('/');
     }
     getAllUsers();
+    getAllCurrencies();
   }, []);
 
   const getAllUsers = async () => {
@@ -76,6 +78,29 @@ const AddFolio = () => {
       });
       const data = await response.json();
       setOgRows(data.data);
+      console.log(data.data);
+    } catch (e) {
+      console.log(e);
+    }
+    setLoading(false);
+  };
+  const getAllCurrencies = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API}/api/avaliable/currency`,
+        {
+          method: 'GET',
+          headers: {
+            'x-access-token': token
+          }
+        }
+      );
+      const data = await response.json();
+      if (data.status) {
+        setCurrencies(data.data);
+        setValues({ ...values, currency: data.data[0] });
+      } else setCurrencies(['USD', 'GBP']);
       console.log(data.data);
     } catch (e) {
       console.log(e);
@@ -398,6 +423,7 @@ const AddFolio = () => {
               <TextField
                 required
                 disabled={!flag}
+                type="number"
                 id="outlined-adornment-amount"
                 value={values.commitment}
                 onChange={handleChange('commitment')}
@@ -427,8 +453,11 @@ const AddFolio = () => {
                 required
                 className="add-folio-searchbar"
               >
-                <MenuItem value={'USD'}>USD</MenuItem>
-                <MenuItem value={'GBP'}>GBP</MenuItem>
+                {currencies.map((currency) => (
+                  <MenuItem key={currency} value={currency}>
+                    {currency}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
