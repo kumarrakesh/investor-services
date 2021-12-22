@@ -514,7 +514,7 @@ export default Investments;
 //                         ? 'Contribution'
 //                         : row.type == 2
 //                         ? 'Yield Payment'
-//                         : 'Redemtion'}
+//                         : 'Redemption'}
 //                     </StyledTableCell>
 //                     <StyledTableCell align="left" component="th" scope="row">
 //                       {row.type == 1 ? row.amount : '-'}

@@ -4,7 +4,7 @@
 }
 
 #grievances-admin-container {
-  padding: 3rem 3.5rem 0rem 4rem;
+  padding: 3rem 2.5rem 0rem 2.5rem;
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
@@ -42,10 +42,10 @@
   justify-content: space-between;
 }
 
-.gr-ad-inv-table-grievances {
-  /* max-width: 80vw; */
-  /* overflow: auto; */
-}
+/* .gr-ad-inv-table-grievances { */
+/* max-width: 80vw; */
+/* overflow: auto; */
+/* } */
 
 @media screen and (max-width: 768px) {
   .grievances-admin-main {
@@ -55,8 +55,8 @@
     margin-top: -90vh;
     padding: 2rem 1rem;
   }
-  .gr-ad-inv-table-grievances {
-    /* max-width: 100%; */
-    /* overflow: auto; */
-  }
+  /* .gr-ad-inv-table-grievances { */
+  /* max-width: 100%; */
+  /* overflow: auto; */
+  /* } */
 }

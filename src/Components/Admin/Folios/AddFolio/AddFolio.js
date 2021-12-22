@@ -141,6 +141,7 @@ const AddFolio = () => {
           '',
           'success'
         );
+        history.push('/admin/folios');
       } else
         Swal.mixin({
           customClass: {
@@ -163,7 +164,6 @@ const AddFolio = () => {
     } catch (e) {
       console.log(e);
     }
-    history.push('/admin/folios');
   };
 
   useEffect(() => {

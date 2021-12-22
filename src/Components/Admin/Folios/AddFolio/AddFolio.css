@@ -36,7 +36,7 @@
 }
 #add-folios-container {
   width: 100%;
-  padding: 3rem 4rem;
+  padding: 3rem 2.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -74,8 +74,8 @@
 .add-folios-div {
   display: flex;
   flex-direction: column !important;
-  gap: 2.5rem !important;
-  margin-top: 1.5rem;
+  gap: 2rem !important;
+  margin-top: 1rem;
 }
 
 .add-folio-registration-div svg {
