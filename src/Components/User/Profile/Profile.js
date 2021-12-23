@@ -255,7 +255,7 @@ const Profile = () => {
                   profile?.data.country,
                   profile?.data?.pincode
                 ]
-                  .filter((value) => value != '')
+                  .filter((value) => value && value?.trim().length)
                   .join(',')}
               </div>
             </div>

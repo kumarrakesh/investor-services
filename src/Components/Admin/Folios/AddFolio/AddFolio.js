@@ -326,7 +326,7 @@ const AddFolio = () => {
                       investorRow.state,
                       investorRow.country
                     ]
-                      .filter((value) => value !== '')
+                      .filter((value) => value && value?.trim().length)
                       .join(', ')
                   : 'NA'}
               </div>
