@@ -64,6 +64,7 @@ const TransactionContainer = () => {
   });
 
   const [rows, setRows] = useState([]);
+  const [folioDetail, setFolioDetail] = useState({});
   const token = JSON.parse(localStorage.getItem('token'));
   const history = useHistory();
 
@@ -255,13 +256,15 @@ const TransactionContainer = () => {
 
           <div className="folio-add-transaction-row-item">
             <div className="folio-add-transaction-row-item-label">
-              Capital Contribution
+              Pending Amount
             </div>
             <div
               className="folio-add-transaction-row-item-value"
               style={{ textTransform: 'none' }}
             >
-              {values.contribution}
+              {Object.keys(folioDetail).length === 0
+                ? values.commitment - values.contribution
+                : folioDetail.commitment - folioDetail.contribution}
             </div>
           </div>
           <div className="folio-add-transaction-row-item">
@@ -300,6 +303,7 @@ const TransactionContainer = () => {
         loading={loading}
         values={values}
         setLoading={setLoading}
+        folioDetail={setFolioDetail}
       />
 
       <Backdrop

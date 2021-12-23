@@ -103,7 +103,8 @@ export default function CustomizedTables({
   setDisplayRows,
   loading,
   setLoading,
-  values
+  values,
+  folioDetail
 }) {
   //states
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -269,6 +270,7 @@ export default function CustomizedTables({
         handleAddNewFolioTransaction={handleAddNewFolioTransaction}
         folioNumber={values.folioNumber}
         setDisplayRows={setDisplayRows}
+        folioDetail={folioDetail}
       />
       {/* </div> */}
     </>
