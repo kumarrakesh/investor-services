@@ -299,6 +299,12 @@ const AddInvestor = () => {
     event.preventDefault();
   };
 
+  useEffect(() => {
+    if (values.investorZipCode == '') {
+      setZipError(false);
+    }
+  }, [values.investorZipCode]);
+
   return (
     <div className="add-investors-main">
       {size.width > 768 ? (
