@@ -72,6 +72,7 @@ const AdNavbar = () => {
           <img src={logo} alt="tiwpe logo" />
         </div>
         <div className="navbar-top-profile-pic">
+          <div className="navbar-top-admin-label">Admin</div>
           <img src="https://via.placeholder.com/50" />
         </div>
       </div>
@@ -111,6 +112,7 @@ const AdNavbar = () => {
               <div className="prof-txt">
                 <div className="welcome">
                   <p>Welcome,</p>
+                  <div className="admin-label">Admin</div>
                 </div>
                 <div className="prof-name">Admin</div>
               </div>
