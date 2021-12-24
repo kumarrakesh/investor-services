@@ -150,14 +150,14 @@ const AddInvestor = () => {
     } else {
       setZipError(false);
     }
+
     return formIsValid;
   };
 
   const submitForm = async (e) => {
     e.preventDefault();
-    setLoading(true);
-
     if (handleValidation()) {
+      setLoading(true);
       if (flag) {
         setLoading(true);
         console.log('abcd', {
