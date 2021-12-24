@@ -98,7 +98,8 @@ const UserFolioStatement = () => {
       commitment: location?.state?.row?.commitment,
       yield: location?.state?.row?.yield,
       registrationDate: location?.state?.row?.date,
-      folioNo: location?.state?.row?.folioNumber
+      folioNo: location?.state?.row?.folioNumber,
+      currency: location?.state?.row?.currency
     });
     console.log(values);
   };

@@ -180,33 +180,7 @@ const Navbar = () => {
             margin: '2px 0px'
           }}
         />
-        <Button
-          className="nav-dashboard-btn"
-          onClick={() => {
-            history.push('/profile');
-          }}
-          style={{
-            color: location.pathname == '/profile' ? '#E95B3E' : '#8997ae',
-            backgroundColor:
-              location.pathname == '/profile' ? '#F7F9FD' : 'inherit',
-            textTransform: 'none',
-            display: 'flex'
-          }}
-        >
-          <AccountBoxIcon style={{ flex: 1 }} />
 
-          <div className="dash-name" style={{ flex: 2 }}>
-            Profile
-          </div>
-          <RightIcon style={{ flex: 1 }} />
-        </Button>
-        <Divider
-          style={{
-            backgroundColor: '#E6E6E6 ',
-            width: '100%',
-            margin: '2px 0px'
-          }}
-        />
         {/* <Button
           className="nav-dashboard-btn"
           onClick={() => {
@@ -274,6 +248,33 @@ const Navbar = () => {
           <HelpIcon style={{ flex: 1 }} />
           <div className="dash-name" style={{ flex: 2 }}>
             Queries
+          </div>
+          <RightIcon style={{ flex: 1 }} />
+        </Button>
+        <Divider
+          style={{
+            backgroundColor: '#E6E6E6 ',
+            width: '100%',
+            margin: '2px 0px'
+          }}
+        />
+        <Button
+          className="nav-dashboard-btn"
+          onClick={() => {
+            history.push('/profile');
+          }}
+          style={{
+            color: location.pathname == '/profile' ? '#E95B3E' : '#8997ae',
+            backgroundColor:
+              location.pathname == '/profile' ? '#F7F9FD' : 'inherit',
+            textTransform: 'none',
+            display: 'flex'
+          }}
+        >
+          <AccountBoxIcon style={{ flex: 1 }} />
+
+          <div className="dash-name" style={{ flex: 2 }}>
+            Profile
           </div>
           <RightIcon style={{ flex: 1 }} />
         </Button>
