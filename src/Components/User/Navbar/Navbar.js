@@ -100,8 +100,13 @@ const Navbar = () => {
             history.push('/profile');
           }}
         >
+          <div className="navbar-top-investor-pill-label">Investor</div>
           <img
-            src="https://via.placeholder.com/50"
+            src={
+              localStorage.getItem('imageURL')
+                ? localStorage.getItem('imageURL')
+                : 'https://via.placeholder.com/50'
+            }
             alt=""
             onError={() => {
               setImgURL('https://via.placeholder.com/50');
@@ -161,6 +166,7 @@ const Navbar = () => {
           <div className="prof-txt">
             <div className="welcome">
               <h4>Welcome,</h4>
+              <div className="investor-pill-label">Investor</div>
             </div>
             <div className="prof-name">
               {localStorage.getItem('username')?.toUpperCase()}

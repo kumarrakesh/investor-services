@@ -10,8 +10,6 @@
   position: relative;
   z-index: 9;
 }
-#header-logo {
-}
 
 .prof-btn {
   display: flex !important;
@@ -58,7 +56,38 @@
   height: 70px;
   border-radius: 50%;
 }
-
+.navbar-top-profile-pic img {
+  outline: 1px solid #00d1ff !important;
+  margin-left: -4px;
+}
+.navbar-top-profile-pic {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.navbar-top-investor-pill-label {
+  margin: 0px !important;
+  background-color: #00d1ff;
+  border-radius: 1rem;
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+  padding: 2px 8px;
+  font-weight: bold;
+  font-size: 12px;
+  color: white;
+  max-height: 3ch;
+  margin-top: 50%;
+  margin-right: -5px;
+}
+.investor-pill-label {
+  background-color: #00d1ff;
+  border-radius: 1rem;
+  padding: 2px 2ch;
+  font-weight: bold;
+  font-size: 11px;
+  color: white;
+  margin-left: 1ch;
+}
 .navbar-top-profile-pic {
   border-radius: 100%;
   width: 50px;
