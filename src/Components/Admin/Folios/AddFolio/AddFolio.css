@@ -67,6 +67,11 @@
   color: var(--secondary-color);
 }
 
+.input-field-helper-text {
+  margin-top: 0.3rem;
+  color: red;
+}
+
 .add-folio-find-investor-label {
   color: #5a6d8e;
   margin-bottom: 0.3rem;

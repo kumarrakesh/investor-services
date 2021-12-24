@@ -71,6 +71,8 @@ const AddInvestor = () => {
   const [investorDate, setInvestorDate] = useState(new Date());
   const [loading, setLoading] = useState(false);
   const [flag, setFlag] = useState(false);
+  const [phoneError, setPhoneError] = useState(false);
+  const [zipError, setZipError] = useState(false);
 
   const [values, setValues] = React.useState({
     investorName: '',
@@ -132,136 +134,158 @@ const AddInvestor = () => {
     }
   }, []);
 
+  const handleValidation = () => {
+    let formIsValid = true;
+
+    if (isNaN(values.phone)) {
+      formIsValid = false;
+      setPhoneError(true);
+    } else {
+      setPhoneError(false);
+    }
+
+    if (isNaN(values.investorZipCode)) {
+      formIsValid = false;
+      setZipError(true);
+    } else {
+      setZipError(false);
+    }
+    return formIsValid;
+  };
+
   const submitForm = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    if (flag) {
-      setLoading(true);
-      console.log('abcd', {
-        name: values.investorName,
-        password: values.investorPassword,
-        passport: values.investorPassport,
-        address: values.investorAddress1,
-        city: values.investorCity,
-        state: values.investorState,
-        country: values.investorCountry,
-        pincode: values.investorZipCode,
-        maturity: investorDate,
-        userId: values.Id
-      });
-      const response = await fetch(
-        `${process.env.REACT_APP_API}/api/update/profile/admin`,
-        {
-          method: 'POST',
-          body: JSON.stringify({
-            name: values.investorName,
-            password: values.investorPassword,
-            passport: values.investorPassport,
-            address: values.investorAddress1,
-            city: values.investorCity,
-            state: values.investorState,
-            country: values.investorCountry,
-            pincode: values.investorZipCode,
-            maturity: investorDate,
-            userId: values.Id,
-            phoneNo: values.phone,
-            email: values.email
-          }),
-          headers: {
-            'Content-Type': 'application/json',
-            'x-access-token': JSON.parse(localStorage.getItem('token'))
+    if (handleValidation()) {
+      if (flag) {
+        setLoading(true);
+        console.log('abcd', {
+          name: values.investorName,
+          password: values.investorPassword,
+          passport: values.investorPassport,
+          address: values.investorAddress1,
+          city: values.investorCity,
+          state: values.investorState,
+          country: values.investorCountry,
+          pincode: values.investorZipCode,
+          maturity: investorDate,
+          userId: values.Id
+        });
+        const response = await fetch(
+          `${process.env.REACT_APP_API}/api/update/profile/admin`,
+          {
+            method: 'POST',
+            body: JSON.stringify({
+              name: values.investorName,
+              password: values.investorPassword,
+              passport: values.investorPassport,
+              address: values.investorAddress1,
+              city: values.investorCity,
+              state: values.investorState,
+              country: values.investorCountry,
+              pincode: values.investorZipCode,
+              maturity: investorDate,
+              userId: values.Id,
+              phoneNo: values.phone,
+              email: values.email
+            }),
+            headers: {
+              'Content-Type': 'application/json',
+              'x-access-token': JSON.parse(localStorage.getItem('token'))
+            }
           }
-        }
-      );
-      const data = await response.json();
-      console.log(data);
-      setLoading(false);
-
-      if (data?.success) {
-        successSwal.fire(
-          'Investor "' + values.investorName + '" Updated successfully!',
-          '',
-          'success'
         );
-      } else errorSwal.fire(data.error || 'Error while updating!', '', 'error');
-    } else {
-      setLoading(true);
-      const response = await fetch(
-        `${process.env.REACT_APP_API}/api/admin/user/register`,
-        {
-          method: 'POST',
-          body: JSON.stringify({
-            name: values.investorName,
-            username: values.investorPassport,
-            password: values.investorPassword,
-            passport: values.investorPassport,
-            address: values.investorAddress1,
-            city: values.investorCity,
-            state: values.investorState,
-            country: values.investorCountry,
-            pincode: values.investorZipCode,
-            role: values.role,
-            maturity: investorDate,
-            phoneNo: values.phone,
-            email: values.email
-          }),
-          headers: {
-            'Content-Type': 'application/json',
-            'x-access-token': JSON.parse(localStorage.getItem('token'))
-          }
-        }
-      );
-      const data = await response.json();
-      console.log(data);
-      setLoading(false);
+        const data = await response.json();
+        console.log(data);
+        setLoading(false);
 
-      if (data?.success) {
-        Swal.mixin({
-          customClass: {
-            container: 'add-folio-swal-container',
-            popup: 'add-folio-swal swal-success-bg-color',
-            title: 'add-folio-swal-title'
-          },
-          imageUrl: '',
-          imageHeight: 10,
-          imageWidth: 10,
-          toast: true,
-          position: 'top',
-          showConfirmButton: false,
-          timer: 3000,
-          didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer);
-            toast.addEventListener('mouseleave', Swal.resumeTimer);
+        if (data?.success) {
+          successSwal.fire(
+            'Investor "' + values.investorName + '" Updated successfully!',
+            '',
+            'success'
+          );
+        } else
+          errorSwal.fire(data.error || 'Error while updating!', '', 'error');
+      } else {
+        setLoading(true);
+        const response = await fetch(
+          `${process.env.REACT_APP_API}/api/admin/user/register`,
+          {
+            method: 'POST',
+            body: JSON.stringify({
+              name: values.investorName,
+              username: values.investorPassport,
+              password: values.investorPassword,
+              passport: values.investorPassport,
+              address: values.investorAddress1,
+              city: values.investorCity,
+              state: values.investorState,
+              country: values.investorCountry,
+              pincode: values.investorZipCode,
+              role: values.role,
+              maturity: investorDate,
+              phoneNo: values.phone,
+              email: values.email
+            }),
+            headers: {
+              'Content-Type': 'application/json',
+              'x-access-token': JSON.parse(localStorage.getItem('token'))
+            }
           }
-        }).fire(
-          'New Investor " ' + values.investorName + ' " sucessfully added ' ||
-            'the investor!',
-          '',
-          'success'
         );
-      } else
-        Swal.mixin({
-          customClass: {
-            container: 'add-folio-swal-container',
-            popup: 'add-folio-swal swal-error-bg-color',
-            title: 'add-folio-swal-title'
-          },
-          imageUrl: '',
-          imageHeight: 10,
-          imageWidth: 10,
-          toast: true,
-          position: 'top',
-          showConfirmButton: false,
-          timer: 3000,
-          didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer);
-            toast.addEventListener('mouseleave', Swal.resumeTimer);
-          }
-        }).fire(data.error || 'Something went wrong!', '', 'error');
+        const data = await response.json();
+        console.log(data);
+        setLoading(false);
+
+        if (data?.success) {
+          Swal.mixin({
+            customClass: {
+              container: 'add-folio-swal-container',
+              popup: 'add-folio-swal swal-success-bg-color',
+              title: 'add-folio-swal-title'
+            },
+            imageUrl: '',
+            imageHeight: 10,
+            imageWidth: 10,
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer);
+              toast.addEventListener('mouseleave', Swal.resumeTimer);
+            }
+          }).fire(
+            'New Investor " ' + values.investorName + ' " sucessfully added ' ||
+              'the investor!',
+            '',
+            'success'
+          );
+        } else
+          Swal.mixin({
+            customClass: {
+              container: 'add-folio-swal-container',
+              popup: 'add-folio-swal swal-error-bg-color',
+              title: 'add-folio-swal-title'
+            },
+            imageUrl: '',
+            imageHeight: 10,
+            imageWidth: 10,
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer);
+              toast.addEventListener('mouseleave', Swal.resumeTimer);
+            }
+          }).fire(data.error || 'Something went wrong!', '', 'error');
+      }
+
+      history.push('/admin/investors');
     }
-
-    history.push('/admin/investors');
   };
 
   const handleClickShowPassword = () => {
@@ -441,6 +465,11 @@ const AddInvestor = () => {
                 autoComplete="off"
                 className="add-folio-searchbar"
               />
+              {phoneError && (
+                <small className="input-field-helper-text">
+                  Enter only digits!
+                </small>
+              )}
             </FormControl>
           </div>
 
@@ -496,7 +525,6 @@ const AddInvestor = () => {
               <small className="add-folio-find-investor-label">Zip Code</small>
               <TextField
                 id="outlined-number"
-                type="number"
                 value={values.investorZipCode}
                 onChange={handleChange('investorZipCode')}
                 InputLabelProps={{
@@ -504,6 +532,11 @@ const AddInvestor = () => {
                 }}
                 className="add-folio-searchbar"
               />
+              {zipError && (
+                <small className="input-field-helper-text">
+                  Enter only digits!
+                </small>
+              )}
             </FormControl>
           </div>
 

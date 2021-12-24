@@ -52,6 +52,9 @@ const AddFolio = () => {
   const [selectedDate, setSelectedDate] = React.useState(new Date());
   const [ogRows, setOgRows] = useState([]);
   const [flag, setFlag] = useState(false);
+  const [folioError, setFolioError] = useState(false);
+  const [yieldError, setYieldError] = useState(false);
+  const [commitmentError, setCommitmentError] = useState(false);
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
@@ -116,78 +119,108 @@ const AddFolio = () => {
     setValues({ ...values, [prop]: event.target.value });
   };
 
+  const handleValidation = () => {
+    let formIsValid = true;
+
+    if (isNaN(values.yield)) {
+      setYieldError(true);
+      formIsValid = false;
+    } else {
+      setYieldError(false);
+    }
+
+    if (isNaN(values.commitment)) {
+      setCommitmentError(true);
+      formIsValid = false;
+    } else {
+      setCommitmentError(false);
+    }
+
+    var regEx = /^[0-9a-zA-Z]+$/;
+    if (values.folioNo.match(regEx)) {
+      setFolioError(false);
+    } else {
+      setFolioError(true);
+      formIsValid = false;
+    }
+
+    return formIsValid;
+  };
+
   const submitForm = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    try {
-      const response = await fetch(
-        `${process.env.REACT_APP_API}/api/add/folio`,
-        {
-          method: 'POST',
-          body: JSON.stringify({
-            userId: investorRow.passport,
-            commitment: values.commitment,
-            yield: values.yield,
-            date: selectedDate,
-            folioNumber: values.folioNo,
-            currency: values.currency
-          }),
-          headers: {
-            'Content-Type': 'application/json',
-            'x-access-token': JSON.parse(localStorage.getItem('token'))
+    if (handleValidation()) {
+      setLoading(true);
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_API}/api/add/folio`,
+          {
+            method: 'POST',
+            body: JSON.stringify({
+              userId: investorRow.passport,
+              commitment: values.commitment,
+              yield: values.yield,
+              date: selectedDate,
+              folioNumber: values.folioNo,
+              currency: values.currency
+            }),
+            headers: {
+              'Content-Type': 'application/json',
+              'x-access-token': JSON.parse(localStorage.getItem('token'))
+            }
           }
-        }
-      );
-      const data = await response.json();
-      console.log(data);
-      setLoading(false);
-
-      if (data.status) {
-        Swal.mixin({
-          customClass: {
-            container: 'add-folio-swal-container',
-            popup: 'add-folio-swal swal-success-bg-color',
-            title: 'add-folio-swal-title'
-          },
-          imageUrl: '',
-          imageHeight: 10,
-          imageWidth: 10,
-          toast: true,
-          position: 'top',
-          showConfirmButton: false,
-          timer: 3000,
-          didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer);
-            toast.addEventListener('mouseleave', Swal.resumeTimer);
-          }
-        }).fire(
-          'New folio successfully created for ' + investorRow?.name ||
-            'the investor!',
-          '',
-          'success'
         );
-        history.push('/admin/folios');
-      } else
-        Swal.mixin({
-          customClass: {
-            container: 'add-folio-swal-container',
-            popup: 'add-folio-swal swal-error-bg-color',
-            title: 'add-folio-swal-title'
-          },
-          imageUrl: '',
-          imageHeight: 10,
-          imageWidth: 10,
-          toast: true,
-          position: 'top',
-          showConfirmButton: false,
-          timer: 3000,
-          didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer);
-            toast.addEventListener('mouseleave', Swal.resumeTimer);
-          }
-        }).fire(data.error || 'Something went wrong!', '', 'error');
-    } catch (e) {
-      console.log(e);
+        const data = await response.json();
+        console.log(data);
+        setLoading(false);
+
+        if (data.status) {
+          Swal.mixin({
+            customClass: {
+              container: 'add-folio-swal-container',
+              popup: 'add-folio-swal swal-success-bg-color',
+              title: 'add-folio-swal-title'
+            },
+            imageUrl: '',
+            imageHeight: 10,
+            imageWidth: 10,
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer);
+              toast.addEventListener('mouseleave', Swal.resumeTimer);
+            }
+          }).fire(
+            'New folio successfully created for ' + investorRow?.name ||
+              'the investor!',
+            '',
+            'success'
+          );
+          history.push('/admin/folios');
+        } else
+          Swal.mixin({
+            customClass: {
+              container: 'add-folio-swal-container',
+              popup: 'add-folio-swal swal-error-bg-color',
+              title: 'add-folio-swal-title'
+            },
+            imageUrl: '',
+            imageHeight: 10,
+            imageWidth: 10,
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer);
+              toast.addEventListener('mouseleave', Swal.resumeTimer);
+            }
+          }).fire(data.error || 'Something went wrong!', '', 'error');
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
 
@@ -282,56 +315,107 @@ const AddFolio = () => {
           )} */}
             </FormControl>
           </div>
-
-          <div className="add-folio-info">
-            <div
-              className="add-folio-info-row"
-              // style={{ borderBottom: ' 1px solid #E5E5E5' }}
-            >
-              <div className="add-folio-info-row-item">
-                <div className="add-folio-info-row-item-label">
-                  Investor Name
-                </div>
-                <div className="add-folio-info-row-item-value">
-                  {flag ? investorRow?.name : 'NA'}
-                </div>
-              </div>
-
-              <div className="add-folio-info-row-item">
-                <div className="add-folio-info-row-item-label">
-                  Passport Number
-                </div>
-                <div
-                  className="add-folio-info-row-item-value"
-                  style={{ textTransform: 'none' }}
-                >
-                  {flag ? investorRow?.passport : 'NA'}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="add-folio-info-row">
-            <div className="add-folio-info-row-item">
-              <div className="add-folio-info-row-item-label">
-                Investor Address
-              </div>
+          {size.width <= 768 ? (
+            <div className="add-folio-info">
               <div
-                className="add-folio-info-row-item-value"
-                style={{ textTransform: 'none' }}
+                className="add-folio-info-row"
+                // style={{ borderBottom: ' 1px solid #E5E5E5' }}
               >
-                {flag
-                  ? [
-                      investorRow.address,
-                      investorRow.city,
-                      investorRow.state,
-                      investorRow.country
-                    ]
-                      .filter((value) => value && value?.trim().length)
-                      .join(', ')
-                  : 'NA'}
+                <div className="add-folio-info-row-item">
+                  <div className="add-folio-info-row-item-label">
+                    Investor Name
+                  </div>
+                  <div className="add-folio-info-row-item-value">
+                    {flag ? investorRow?.name : 'NA'}
+                  </div>
+                </div>
+
+                <div className="add-folio-info-row-item">
+                  <div className="add-folio-info-row-item-label">
+                    Passport Number
+                  </div>
+                  <div
+                    className="add-folio-info-row-item-value"
+                    style={{ textTransform: 'none' }}
+                  >
+                    {flag ? investorRow?.passport : 'NA'}
+                  </div>
+                </div>
+              </div>
+
+              <div className="add-folio-info-row">
+                <div className="add-folio-info-row-item">
+                  <div className="add-folio-info-row-item-label">
+                    Investor Address
+                  </div>
+                  <div
+                    className="add-folio-info-row-item-value"
+                    style={{ textTransform: 'none' }}
+                  >
+                    {flag
+                      ? [
+                          investorRow.address,
+                          investorRow.city,
+                          investorRow.state,
+                          investorRow.country
+                        ]
+                          .filter((value) => value && value?.trim().length)
+                          .join(', ')
+                      : 'NA'}
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <div className="add-folio-info">
+              <div
+                className="add-folio-info-row"
+                // style={{ borderBottom: ' 1px solid #E5E5E5' }}
+              >
+                <div className="add-folio-info-row-item">
+                  <div className="add-folio-info-row-item-label">
+                    Investor Name
+                  </div>
+                  <div className="add-folio-info-row-item-value">
+                    {flag ? investorRow?.name : 'NA'}
+                  </div>
+                </div>
+
+                <div className="add-folio-info-row-item">
+                  <div className="add-folio-info-row-item-label">
+                    Passport Number
+                  </div>
+                  <div
+                    className="add-folio-info-row-item-value"
+                    style={{ textTransform: 'none' }}
+                  >
+                    {flag ? investorRow?.passport : 'NA'}
+                  </div>
+                </div>
+
+                <div className="add-folio-info-row-item">
+                  <div className="add-folio-info-row-item-label">
+                    Investor Address
+                  </div>
+                  <div
+                    className="add-folio-info-row-item-value"
+                    style={{ textTransform: 'none' }}
+                  >
+                    {flag
+                      ? [
+                          investorRow.address,
+                          investorRow.city,
+                          investorRow.state,
+                          investorRow.country
+                        ]
+                          .filter((value) => value && value?.trim().length)
+                          .join(', ')
+                      : 'NA'}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
 
           <div className="add-folio-input-1">
             <FormControl variant="standard" sx={{ width: '100%' }}>
@@ -347,6 +431,11 @@ const AddFolio = () => {
                 style={{ backgroundColor: 'white', color: '#132f5e' }}
                 className="add-folio-searchbar"
               />
+              {folioError && (
+                <small className="input-field-helper-text">
+                  Enter only alpha-numeric values!
+                </small>
+              )}
             </FormControl>
 
             <FormControl
@@ -405,7 +494,6 @@ const AddFolio = () => {
                 required
                 disabled={!flag}
                 id="outlined-number"
-                type="number"
                 value={values.yield}
                 onChange={handleChange('yield')}
                 InputLabelProps={{
@@ -414,6 +502,11 @@ const AddFolio = () => {
                 style={{ backgroundColor: 'white', color: '#132f5e' }}
                 className="add-folio-searchbar"
               />
+              {yieldError && (
+                <small className="input-field-helper-text">
+                  Enter only digits!
+                </small>
+              )}
             </FormControl>
 
             <FormControl fullWidth sx={{ width: '100%' }}>
@@ -423,10 +516,10 @@ const AddFolio = () => {
               <TextField
                 required
                 disabled={!flag}
-                type="number"
                 id="outlined-adornment-amount"
                 value={values.commitment}
                 onChange={handleChange('commitment')}
+                // helperText="Some important text"
                 // startAdornment={
                 //   <InputAdornment position="start">
                 //     <AttachMoneyIcon />
@@ -442,6 +535,11 @@ const AddFolio = () => {
                 style={{ backgroundColor: 'white', color: '#132f5e' }}
                 className="add-folio-searchbar"
               />
+              {commitmentError && (
+                <small className="input-field-helper-text">
+                  Enter only digits!
+                </small>
+              )}
             </FormControl>
           </div>
           <div className="add-folio-input-3">
