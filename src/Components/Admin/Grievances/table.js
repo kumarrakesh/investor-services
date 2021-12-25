@@ -75,9 +75,7 @@ const statusGiver = (status) => {
     );
   }
   return (
-    <div
-      style={{ color: 'var(--secondary-color)', display: 'flex', gap: '1ch' }}
-    >
+    <div style={{ color: '#FE0000', display: 'flex', gap: '1ch' }}>
       <svg
         width="20"
         height="20"

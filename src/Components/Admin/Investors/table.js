@@ -15,7 +15,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: '#F6F8FA !important',
     color: 'var(--secondary-color)',
-    padding: '1rem',
+    padding: '0.75rem',
     fontSize: '14px',
     fontWeight: 700,
     borderBottom: '1px solid #CECECE'
@@ -23,7 +23,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
     color: 'var(--secondary-color)',
-    padding: '0.6rem 1rem',
+    padding: '0.6rem 0.75rem',
     border: 'none'
   }
 }));
@@ -73,9 +73,11 @@ export default function CustomizedTables({ displayRows, setUpdate, loading }) {
           <TableHead>
             <TableRow>
               <StyledTableCell>Date</StyledTableCell>
-              <StyledTableCell align="left">Investor Name</StyledTableCell>
+              <StyledTableCell align="left">Investor&nbsp;Name</StyledTableCell>
               <StyledTableCell align="left">Address</StyledTableCell>
-              <StyledTableCell align="left">Passport Number</StyledTableCell>
+              <StyledTableCell align="left">
+                Passport&nbsp;Number
+              </StyledTableCell>
               {/* <StyledTableCell align="center">Invested Amount</StyledTableCell>
               <StyledTableCell align="center">
                 Current Invested Value

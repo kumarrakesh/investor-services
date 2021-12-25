@@ -54,7 +54,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: '#F6F8FA !important',
     color: 'var(--secondary-color)',
-    padding: '1rem',
+    padding: '0.75rem',
     fontSize: '14px',
     fontWeight: 700,
     borderBottom: '1px solid #CECECE'
@@ -62,7 +62,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
     color: 'var(--secondary-color)',
-    padding: '0.6rem 1rem',
+    padding: '0.6rem 0.75rem',
     border: 'none'
   }
 }));
@@ -267,13 +267,13 @@ export default function CustomizedTables({
               {/* <StyledTableCell align="left">
                 Investor Passport
               </StyledTableCell> */}
-              <StyledTableCell align="left">Investor Name</StyledTableCell>
-              <StyledTableCell align="left">Passport No.</StyledTableCell>
+              <StyledTableCell align="left">Investor&nbsp;Name</StyledTableCell>
+              <StyledTableCell align="left">Passport&nbsp;No.</StyledTableCell>
               <StyledTableCell align="left">Currency</StyledTableCell>
               <StyledTableCell align="left">Commitment</StyledTableCell>
               <StyledTableCell align="left">Contribution</StyledTableCell>
               {/* <StyledTableCell align="left">Distribution</StyledTableCell> */}
-              <StyledTableCell align="left">Pending Amount</StyledTableCell>
+              <StyledTableCell align="left">Pending&nbsp;Amt.</StyledTableCell>
               <StyledTableCell align="left">Action</StyledTableCell>
             </TableRow>
           </TableHead>
@@ -599,7 +599,9 @@ export default function CustomizedTables({
                         }}
                       >
                         {/* <AddIcon sx={{ marginRight: '5px' }} /> */}
-                        {role == 'folio' ? 'Add Transaction' : 'View Detail'}
+                        {role == 'folio'
+                          ? 'Add\u00A0Transaction'
+                          : 'View Detail'}
                       </Button>
                     }
                   </StyledTableCell>
