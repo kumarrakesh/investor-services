@@ -264,7 +264,7 @@ const UserFolioStatement = () => {
             backgroundColor: 'white',
             color: 'var(--primary-color)',
             textTransform: 'none',
-            width: '22%',
+            width: 'fit-content',
             marginTop: '0.8rem',
             marginBottom: '1.8rem',
             height: '2.9rem'
@@ -272,7 +272,7 @@ const UserFolioStatement = () => {
           onClick={handleDownloadPdf}
         >
           <FileDownloadOutlinedIcon sx={{ marginRight: '10px' }} />
-          Download Statement
+          Download&nbsp;Statement
         </Button>
 
         <CustomizedTables displayRows={displayRows} loading={loading} />

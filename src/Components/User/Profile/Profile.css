@@ -51,7 +51,8 @@
   background: #ffffff;
   border-radius: 8px;
   box-shadow: 0px 4px 11px 3px #0000000d;
-  width: 90%;
+  width: 100%;
+  max-width: 1000px;
 }
 
 .profile-info-row {
@@ -89,17 +90,17 @@
   }
 
   .profile-container-content {
-    margin-top: -90vh;
-    padding: 3rem 3rem;
+    margin-top: -99vh;
+    padding: 2rem 1rem !important;
   }
 
   .profile-pic-edit-btn-holder {
-    width: 80vw !important;
+    width: 100% !important;
     gap: 4rem;
   }
 
   .profile-info {
-    width: 80vw;
+    width: 100% !important;
   }
 }
 
