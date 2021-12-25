@@ -131,6 +131,7 @@ const AdNavbar = () => {
           className="nav-dashboard-btn"
           onClick={() => {
             history.push('/admin/investors');
+            setNavbarOpen(!navbarOpen);
           }}
           style={{
             color: location.pathname.startsWith('/admin/investor')
@@ -169,6 +170,7 @@ const AdNavbar = () => {
           className="nav-dashboard-btn"
           onClick={() => {
             history.push('/admin/folios');
+            setNavbarOpen(!navbarOpen);
           }}
           style={{
             color: location.pathname.startsWith('/admin/folios')
@@ -231,6 +233,7 @@ const AdNavbar = () => {
           className="nav-dashboard-btn"
           onClick={() => {
             history.push('/admin/folioStatements');
+            setNavbarOpen(!navbarOpen);
           }}
           style={{
             color: location.pathname.startsWith('/admin/folioStatements')
