@@ -90,7 +90,8 @@ const AddMultipleNewTransaction = ({
   handleAddNewFolioTransaction,
   folioNumber,
   setDisplayRows,
-  folioDetail
+  folioDetail,
+  setLoading
 }) => {
   //states
   const [toBeAddedStatements, setToBeAddedStatements] = useState([]);
@@ -105,7 +106,8 @@ const AddMultipleNewTransaction = ({
         type: '1',
         date: new Date(),
         amount: 0,
-        key: count + 100000
+        key: count + 100000,
+        hasError: false
       }
     ]);
     setCount(count + 1);
@@ -144,6 +146,7 @@ const AddMultipleNewTransaction = ({
               folioNumber={folioNumber}
               setDisplayRows={setDisplayRows}
               folioDetail={folioDetail}
+              setLoading={setLoading}
             />
           </div>
         )}
@@ -158,7 +161,8 @@ export const AddMultipleNewTransactionTable = ({
   handleShowAddMultipleNewTransaction,
   folioNumber,
   setDisplayRows,
-  folioDetail
+  folioDetail,
+  setLoading
 }) => {
   const tableRef = React.createRef();
   const handleDateChange = (params) => {
@@ -166,54 +170,78 @@ export const AddMultipleNewTransactionTable = ({
     // setSelectedDate(newValue);
   };
 
-  const handlePostMultipleTransactions = async () => {
-    const response = await fetch(
-      `${process.env.REACT_APP_API}/api/add/folio/transaction`,
-      {
-        method: 'POST',
-        body: JSON.stringify({ folioNumber, statements: toBeAddedStatements }),
-        headers: {
-          'x-access-token': JSON.parse(localStorage.getItem('token')),
-          'Content-Type': 'application/json'
-        }
+  const handleValidation = () => {
+    let formIsValid = true;
+    let testData = [...toBeAddedStatements];
+    for (let i = 0; i < testData.length; i++) {
+      if (isNaN(testData[i].amount)) {
+        testData[i].hasError = true;
+        formIsValid = false;
+      } else {
+        testData[i].hasError = false;
       }
-    );
-    const data = await response.json();
-    console.log(data);
-    folioDetail(data.data);
-    if (!data.status)
-      errorSwal.fire(
-        data.message || data.error || "Couldn't add the transaction",
-        '',
-        'error'
-      );
-    else {
-      successSwal.fire(
-        'Transaction' +
-          (toBeAddedStatements.length > 1 ? 's' : '') +
-          ' recorded!',
-        '',
-        'success'
-      );
-      setToBeAddedStatements([]);
-      const response1 = await fetch(
-        `${process.env.REACT_APP_API}/api/get/folio/transaction`,
+    }
+    setToBeAddedStatements(testData);
+    return formIsValid;
+  };
+
+  const handlePostMultipleTransactions = async () => {
+    if (handleValidation()) {
+      setLoading(true);
+      const response = await fetch(
+        `${process.env.REACT_APP_API}/api/add/folio/transaction`,
         {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-access-token': JSON.parse(localStorage.getItem('token'))
-          },
           body: JSON.stringify({
-            folioNumber
-          })
+            folioNumber,
+            statements: toBeAddedStatements
+          }),
+          headers: {
+            'x-access-token': JSON.parse(localStorage.getItem('token')),
+            'Content-Type': 'application/json'
+          }
         }
       );
-      const data1 = await response1.json();
-      // console.log('fg' + data1);
-      setDisplayRows(data1.data);
-      console.log(toBeAddedStatements);
-      // setToBeAddedStatements([]);
+      const data = await response.json();
+      console.log(data);
+      folioDetail(data.data);
+      if (!data.status)
+        errorSwal.fire(
+          data.message || data.error || "Couldn't add the transaction",
+          '',
+          'error'
+        );
+      else {
+        successSwal.fire(
+          'Transaction' +
+            (toBeAddedStatements.length > 1 ? 's' : '') +
+            ' recorded!',
+          '',
+          'success'
+        );
+        setToBeAddedStatements([]);
+        const response1 = await fetch(
+          `${process.env.REACT_APP_API}/api/get/folio/transaction`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-access-token': JSON.parse(localStorage.getItem('token'))
+            },
+            body: JSON.stringify({
+              folioNumber
+            })
+          }
+        );
+        const data1 = await response1.json();
+        // console.log('fg' + data1);
+        setDisplayRows(data1.data);
+        console.log(toBeAddedStatements);
+        // setToBeAddedStatements([]);
+      }
+      setLoading(false);
+    } else {
+      console.log('Error!');
     }
   };
   return (
@@ -319,26 +347,32 @@ export const AddMultipleNewTransactionTable = ({
                   verticalAlign: 'top'
                 }}
               >
-                <small className="add-folio-find-investor-label">
-                  Transaction Value *
-                </small>
-                <TextField
-                  required
-                  type="number"
-                  id="outlined-required"
-                  sx={{ width: '100%', minWidth: 70 }}
-                  value={toBeAddedStatements[index].investorPassportNumber}
-                  inputProps={{ style: { fontSize: '1rem' } }}
-                  InputLabelProps={{
-                    style: { fontSize: '0.8rem' }
-                  }}
-                  onChange={(e) => {
-                    let newToBeAddedStatements = [...toBeAddedStatements];
-                    newToBeAddedStatements[index].amount = e.target.value;
-                    setToBeAddedStatements(newToBeAddedStatements);
-                  }}
-                  className="add-folio-searchbar"
-                />
+                <FormControl variant="standard" sx={{ width: '100%' }}>
+                  <small className="add-folio-find-investor-label">
+                    Transaction Value *
+                  </small>
+                  <TextField
+                    required
+                    id="outlined-required"
+                    sx={{ width: '100%', minWidth: 70 }}
+                    value={toBeAddedStatements[index].investorPassportNumber}
+                    inputProps={{ style: { fontSize: '1rem' } }}
+                    InputLabelProps={{
+                      style: { fontSize: '0.8rem' }
+                    }}
+                    onChange={(e) => {
+                      let newToBeAddedStatements = [...toBeAddedStatements];
+                      newToBeAddedStatements[index].amount = e.target.value;
+                      setToBeAddedStatements(newToBeAddedStatements);
+                    }}
+                    className="add-folio-searchbar"
+                  />
+                  {row.hasError && (
+                    <small className="input-field-helper-text">
+                      Enter only digits!
+                    </small>
+                  )}
+                </FormControl>
                 <div
                   style={{
                     display: 'flex',
