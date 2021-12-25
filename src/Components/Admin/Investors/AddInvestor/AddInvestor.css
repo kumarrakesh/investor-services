@@ -9,6 +9,7 @@
   gap: 0rem;
   background-color: var(--light-blue-bg);
   width: 100%;
+  overflow: auto;
 }
 
 .add-investors-title-div {

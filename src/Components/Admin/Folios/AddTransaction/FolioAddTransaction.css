@@ -7,9 +7,10 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 3rem 2.5rem 0rem 2.5rem !important;
+  padding: 3rem 2.5rem 3rem 2.5rem !important;
   /* padding: 3rem 3.5rem 0rem 4rem !important; */
   background-color: var(--light-blue-bg);
+  overflow: auto;
 }
 
 .folio-add-transaction-header {
