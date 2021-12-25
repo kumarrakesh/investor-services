@@ -271,6 +271,7 @@ export default function CustomizedTables({
         folioNumber={values.folioNumber}
         setDisplayRows={setDisplayRows}
         folioDetail={folioDetail}
+        setLoading={setLoading}
       />
       {/* </div> */}
     </>
