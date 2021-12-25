@@ -331,13 +331,15 @@ const Grievances = () => {
           )}
         </div> */}
       </div>
-      <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={loading}
-        onClick={() => {}}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
+      {loading && (
+        <Backdrop
+          sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={loading}
+          onClick={() => {}}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      )}
     </div>
   );
 };

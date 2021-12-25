@@ -325,13 +325,15 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={loading}
-        onClick={() => {}}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
+      {loading && (
+        <Backdrop
+          sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={loading}
+          onClick={() => {}}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      )}
       <Dialog open={showImageDialog} onClose={handleCloseImageDialog}>
         <DialogTitle>Select an image to upload</DialogTitle>
         <DialogContent>
