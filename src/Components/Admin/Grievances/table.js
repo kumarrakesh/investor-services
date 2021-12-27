@@ -291,61 +291,123 @@ export default function CustomizedTables({
           maxWidth="sm"
           fullWidth
         >
-          <DialogTitle>Add a message</DialogTitle>
-          <DialogContent>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Add a message to mark as resolved"
-              type="text"
-              fullWidth
-              variant="standard"
-              value={message}
-              onChange={handleChangeMessage}
-            />
+          <DialogTitle style={{ color: '#132F5E' }}>Add comment</DialogTitle>
+          <DialogContent sx={{ margin: 0, padding: 0 }}>
+            <div className="query-dialog-details">
+              <div className="query-dialog-details-row">
+                <div className="query-dialog-details-row-label">Query ID</div>
+                <div className="query-dialog-details-row-data">
+                  #{dialogData.queryId}
+                </div>
+              </div>
+              <div className="query-dialog-details-row">
+                <div className="query-dialog-details-row-label"> From</div>
+                <div className="query-dialog-details-row-data">
+                  {dialogData.user?.name || 'NA'}
+                </div>
+              </div>
+              <div className="query-dialog-details-row">
+                <div className="query-dialog-details-row-label">
+                  Query Subject
+                </div>
+                <div className="query-dialog-details-row-data">
+                  {dialogData.subject || 'NA'}
+                </div>
+              </div>
+              <div className="query-dialog-details-row">
+                <div className="query-dialog-details-row-label">
+                  Query Detail
+                </div>
+                <div className="query-dialog-details-row-data">
+                  {dialogData.description || 'NA'}
+                </div>
+              </div>
+            </div>
+            <div
+              className="query-dialog-details"
+              style={{ backgroundColor: 'white' }}
+            >
+              <div className="query-dialog-details-row">
+                <div className="query-dialog-details-row-label">Status</div>
+                <div className="query-dialog-details-row-data">
+                  {statusGiver(dialogData.isResolved)}
+                </div>
+              </div>
+              <div className="query-dialog-details-row">
+                <div className="query-dialog-details-row-label">
+                  Added comment
+                </div>
+                <div className="query-dialog-details-row-data">
+                  {dialogData.reply || <i>Not added yet</i>}
+                </div>
+              </div>
+              <div
+                className="query-dialog-details-row"
+                style={{ alignItems: 'flex-start' }}
+              >
+                <div className="query-dialog-details-row-label">
+                  Update&nbsp;comment
+                </div>
+                <div className="query-dialog-details-row-data">
+                  <TextField
+                    autoFocus
+                    // margin="dense"
+                    id="name"
+                    type="text"
+                    fullWidth
+                    // variant="standard"
+                    value={message}
+                    onChange={handleChangeMessage}
+                    multiline
+                    rows={2}
+                    className="add-folio-searchbar-multiline"
+                  />
+                </div>
+              </div>
+            </div>
           </DialogContent>
           <div
             style={{
               width: '100%',
               display: 'flex',
               alignContent: 'center',
-              justifyContent: 'center',
+              justifyContent: 'flex-end',
               gap: 20,
               padding: '1rem'
             }}
           >
-            <button
+            <Button
               onClick={handleCloseDialog}
               variant="outlined"
               style={{
-                padding: '1rem',
-                borderRadius: '0.5rem',
-                margin: 0,
-                border: 'none',
-                fontSize: '1rem'
+                padding: '0.4rem 2rem',
+                borderRadius: '4px',
+                border: '1px solid var(--primary-color)',
+                color: 'var(--primary-color)',
+                backgroundColor: 'white',
+                fontSize: '1rem',
+                fontWeight: '500'
               }}
+              className="add-multiple-new-transaction-button"
             >
               Cancel
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={handleSaveQuery}
               disabled={!message.length}
               variant="outlined"
-              style={{
+              className="submit-multiple-new-transaction-button"
+              sx={{
                 backgroundColor: message.length
-                  ? 'var(--primary-color)'
-                  : '#eee',
-                color: message.length ? 'white' : '#bbb',
-                padding: '1rem',
-                borderRadius: '0.5rem',
-                margin: 0,
-                border: 'none',
-                fontSize: '1rem'
+                  ? 'var(--primary-color) !important'
+                  : 'hsl(10deg, 35%, 70%) !important',
+                color: message.length
+                  ? 'white'
+                  : 'hsl(10deg, 10%, 90%) !important'
               }}
             >
-              {dialogData?.reply ? 'Update Message' : 'Mark as resolved'}
-            </button>
+              {dialogData?.reply ? 'Update Message' : 'Submit'}
+            </Button>
           </div>
         </Dialog>
       </Paper>
