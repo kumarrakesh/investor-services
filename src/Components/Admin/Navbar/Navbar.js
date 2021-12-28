@@ -12,7 +12,8 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import HelpIcon from '@mui/icons-material/Help';
 import Swal from 'sweetalert2';
 import './Navbar.css';
-import logo from '../../../assets/images/logo.jpeg';
+import logo from '../../../assets/images/TCG-Logo.png';
+import placeholderImage from '../../../assets/images/placeholder-human.jpg';
 import useWindowSize from '../../../utils/useWindowSize';
 
 const AdNavbar = () => {
@@ -69,11 +70,11 @@ const AdNavbar = () => {
             history.push('/admin/investors');
           }}
         >
-          <img src={logo} alt="tiwpe logo" />
+          <img src={logo} alt="tiwpe logo" style={{ maxWidth: 128 }} />
         </div>
         <div className="navbar-top-profile-pic">
           <div className="navbar-top-admin-label">Admin</div>
-          <img src="https://via.placeholder.com/50" />
+          <img src={placeholderImage} />
         </div>
       </div>
 
@@ -90,7 +91,7 @@ const AdNavbar = () => {
         {size.width > 770 && (
           <>
             <div id="header-logo">
-              <img src={logo} alt="tiwpe logo" />
+              <img src={logo} alt="tiwpe logo" style={{ maxWidth: 192 }} />
             </div>
 
             <Divider
@@ -106,7 +107,7 @@ const AdNavbar = () => {
               style={{ color: '#E95B3E', textTransform: 'none' }}
             >
               <div className="pic">
-                <img src="https://via.placeholder.com/50" alt="" />
+                <img src={placeholderImage} alt="profile pic" />
               </div>
 
               <div className="prof-txt">

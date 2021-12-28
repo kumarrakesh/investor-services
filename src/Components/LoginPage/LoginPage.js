@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router';
 import './LoginPage.css';
-import logo from '../../assets/images/tiwpe-logo.png';
+import logo from '../../assets/images/TCG-Logo.png';
 import { UserContext } from '../../userContext';
 import Swal from 'sweetalert2';
 import CircularProgress from '@mui/material/CircularProgress';

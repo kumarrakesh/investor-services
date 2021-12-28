@@ -83,16 +83,20 @@ export default function CustomizedTables({
               }}
             >
               <StyledTableCell>Date</StyledTableCell>
-              <StyledTableCell align="left">Folio No.</StyledTableCell>
+              <StyledTableCell align="left">Folio&nbsp;No.</StyledTableCell>
               <StyledTableCell align="left">Currency</StyledTableCell>
               {/* {fundname == 'All' ? ( */}
-              <StyledTableCell align="left">Capital Commitment</StyledTableCell>
+              <StyledTableCell align="left">
+                Capital&nbsp;Commitment
+              </StyledTableCell>
               {/* ) : null} */}
               <StyledTableCell align="left">Contribution</StyledTableCell>
               <StyledTableCell align="left">
-                Pending Contribution
+                Pending&nbsp;Contribution
               </StyledTableCell>
-              <StyledTableCell align="left">Expected Yield</StyledTableCell>
+              <StyledTableCell align="left">
+                Expected&nbsp;Yield
+              </StyledTableCell>
               <StyledTableCell align="left">Action</StyledTableCell>
             </TableRow>
           </TableHead>

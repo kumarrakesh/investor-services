@@ -144,7 +144,7 @@ const AddInvestor = () => {
       setPhoneError(false);
     }
 
-    if (isNaN(values.investorZipCode)) {
+    if (values.investorZipCode.trim() && isNaN(+values.investorZipCode)) {
       formIsValid = false;
       setZipError(true);
     } else {

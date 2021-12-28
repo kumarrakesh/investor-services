@@ -291,7 +291,7 @@ export default function CustomizedTables({
           maxWidth="sm"
           fullWidth
         >
-          <DialogTitle style={{ color: '#132F5E' }}>Add comment</DialogTitle>
+          <DialogTitle style={{ color: '#132F5E' }}>Add Comment</DialogTitle>
           <DialogContent sx={{ margin: 0, padding: 0 }}>
             <div className="query-dialog-details">
               <div className="query-dialog-details-row">
@@ -333,20 +333,22 @@ export default function CustomizedTables({
                   {statusGiver(dialogData.isResolved)}
                 </div>
               </div>
-              <div className="query-dialog-details-row">
-                <div className="query-dialog-details-row-label">
-                  Added comment
+              {dialogData.isResolved && (
+                <div className="query-dialog-details-row">
+                  <div className="query-dialog-details-row-label">
+                    Added comment
+                  </div>
+                  <div className="query-dialog-details-row-data">
+                    {dialogData.reply || <i>Not added yet</i>}
+                  </div>
                 </div>
-                <div className="query-dialog-details-row-data">
-                  {dialogData.reply || <i>Not added yet</i>}
-                </div>
-              </div>
+              )}
               <div
                 className="query-dialog-details-row"
                 style={{ alignItems: 'flex-start' }}
               >
                 <div className="query-dialog-details-row-label">
-                  Update&nbsp;comment
+                  {dialogData.isResolved ? 'Update comment' : 'Add comment'}
                 </div>
                 <div className="query-dialog-details-row-data">
                   <TextField

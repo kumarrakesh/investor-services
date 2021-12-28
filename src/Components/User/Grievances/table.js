@@ -124,7 +124,7 @@ export default function CustomizedTables({ rows, loading }) {
                 {new Date(row.date).toLocaleDateString('en-GB')}
               </StyledTableCell>
               <StyledTableCell component="th" scope="row">
-                #{row._id}
+                #{row.queryId}
               </StyledTableCell>
               <StyledTableCell component="th" scope="row">
                 {row.subject}

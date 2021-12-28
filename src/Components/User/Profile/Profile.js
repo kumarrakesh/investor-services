@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 import Swal from 'sweetalert2';
 import './Profile.css';
+import placeholderImage from '../../../assets/images/placeholder-human.jpg';
 const errorSwal = Swal.mixin({
   customClass: {
     container: 'add-folio-swal-container',
@@ -69,7 +70,7 @@ const Profile = () => {
     },
     AmountInvested: 0
   });
-  const [imgURL, setImgURL] = useState('https://via.placeholder.com/50');
+  const [imgURL, setImgURL] = useState(placeholderImage);
   const [showImageDialog, setShowImageDialog] = useState(false);
 
   useEffect(() => {
@@ -165,13 +166,13 @@ const Profile = () => {
           details?.data?.profilePic
             ? `${process.env.REACT_APP_API}/api/profilePic/` +
                 details?.data?.profilePic
-            : 'https://via.placeholder.com/50'
+            : placeholderImage
         );
-      else setImgURL('https://via.placeholder.com/50');
+      else setImgURL(placeholderImage);
       setLoading(false);
     } catch (err) {
       console.log(err);
-      setImgURL('https://via.placeholder.com/50');
+      setImgURL(placeholderImage);
     }
 
     localStorage.setItem(
@@ -179,7 +180,7 @@ const Profile = () => {
       details?.data?.profilePic
         ? `${process.env.REACT_APP_API}/api/profilePic/` +
             details?.data?.profilePic
-        : 'https://via.placeholder.com/50'
+        : placeholderImage
     );
     setLoading(false);
   };
@@ -198,7 +199,7 @@ const Profile = () => {
                 !loading ? { display: 'inline-block' } : { display: 'none' }
               }
               onError={() => {
-                setImgURL('https://via.placeholder.com/50');
+                setImgURL(placeholderImage);
               }}
             />
           </div>

@@ -14,7 +14,8 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import MenuIcon from '@mui/icons-material/Menu';
 import HelpIcon from '@mui/icons-material/Help';
-import logo from '../../../assets/images/logo.jpeg';
+import logo from '../../../assets/images/TCG-Logo.png';
+import placeholderImage from '../../../assets/images/placeholder-human.jpg';
 
 const Navbar = () => {
   const navbarOpenStyles = {
@@ -28,7 +29,7 @@ const Navbar = () => {
     transform: 'translateX(0%)'
   };
   //states
-  const [imgURL, setImgURL] = useState('https://via.placeholder.com/50');
+  const [imgURL, setImgURL] = useState(placeholderImage);
   const [navbarOpen, setNavbarOpen] = useState(false);
   //hooks
   const size = useWindowSize();
@@ -42,7 +43,7 @@ const Navbar = () => {
       localStorage.getItem('imageURL') ==
         `${process.env.REACT_APP_API}/api/profilePic/undefined`
     ) {
-      setImgURL('https://via.placeholder.com/50');
+      setImgURL(placeholderImage);
     } else setImgURL(localStorage.getItem('imageURL'));
     // setImgURL(localStorage.getItem('username'));
   }, []);
@@ -92,7 +93,7 @@ const Navbar = () => {
             history.push('/dashboard');
           }}
         >
-          <img src={logo} alt="tiwpe logo" />
+          <img src={logo} alt="tiwpe logo" style={{ maxWidth: 128 }} />
         </div>
         <div
           className="navbar-top-profile-pic"
@@ -105,11 +106,11 @@ const Navbar = () => {
             src={
               localStorage.getItem('imageURL')
                 ? localStorage.getItem('imageURL')
-                : 'https://via.placeholder.com/50'
+                : placeholderImage
             }
             alt=""
             onError={() => {
-              setImgURL('https://via.placeholder.com/50');
+              setImgURL(placeholderImage);
             }}
           />
         </div>
@@ -128,7 +129,7 @@ const Navbar = () => {
         {size.width > 770 && (
           <>
             <div id="header-logo">
-              <img src={logo} alt="tiwpe logo" />
+              <img src={logo} alt="tiwpe logo" style={{ maxWidth: 192 }} />
             </div>
 
             <Divider
@@ -154,11 +155,11 @@ const Navbar = () => {
               src={
                 localStorage.getItem('imageURL')
                   ? localStorage.getItem('imageURL')
-                  : 'https://via.placeholder.com/50'
+                  : placeholderImage
               }
               alt=""
               onError={() => {
-                setImgURL('https://via.placeholder.com/50');
+                setImgURL(placeholderImage);
               }}
             />
           </div>
