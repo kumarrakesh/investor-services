@@ -99,11 +99,11 @@ export default function CustomizedTables({ rows, loading }) {
       <Table stickyHeader aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Date of Query</StyledTableCell>
-            <StyledTableCell>Query ID</StyledTableCell>
-            <StyledTableCell>Query Subject</StyledTableCell>
+            <StyledTableCell>Date&nbsp;of&nbsp;Query</StyledTableCell>
+            <StyledTableCell>Query&nbsp;ID</StyledTableCell>
+            <StyledTableCell>Query&nbsp;Subject</StyledTableCell>
             <StyledTableCell>Status</StyledTableCell>
-            <StyledTableCell>Resolution Message</StyledTableCell>
+            <StyledTableCell>Resolution&nbsp;Message</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody

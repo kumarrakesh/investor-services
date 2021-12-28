@@ -222,10 +222,14 @@ export default function CustomizedTables({
           <Table stickyHeader aria-label="customized table">
             <TableHead style={{ border: '1px solid red' }}>
               <TableRow>
-                <StyledTableCell>Date Added</StyledTableCell>
-                <StyledTableCell>Query ID</StyledTableCell>
-                <StyledTableCell align="left">Query Subject</StyledTableCell>
-                <StyledTableCell align="left">Investor Name</StyledTableCell>
+                <StyledTableCell>Date&nbsp;Added</StyledTableCell>
+                <StyledTableCell>Query&nbsp;ID</StyledTableCell>
+                <StyledTableCell align="left">
+                  Query&nbsp;Subject
+                </StyledTableCell>
+                <StyledTableCell align="left">
+                  Investor&nbsp;Name
+                </StyledTableCell>
                 <StyledTableCell align="left">Status</StyledTableCell>
                 <StyledTableCell align="left">Action</StyledTableCell>
               </TableRow>

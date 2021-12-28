@@ -601,7 +601,7 @@ export default function CustomizedTables({
                         {/* <AddIcon sx={{ marginRight: '5px' }} /> */}
                         {role == 'folio'
                           ? 'Add\u00A0Transaction'
-                          : 'View Detail'}
+                          : 'View\u00A0Detail'}
                       </Button>
                     }
                   </StyledTableCell>
