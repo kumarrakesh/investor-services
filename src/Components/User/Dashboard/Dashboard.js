@@ -187,7 +187,7 @@ const Dashboard = () => {
                         handleShowFolioData(row);
                       }}
                     >
-                      View Detail
+                      View&nbsp;Detail
                     </Button>
                   </div>
                 </div>

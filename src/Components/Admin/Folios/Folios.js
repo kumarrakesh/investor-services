@@ -296,7 +296,9 @@ const Folios = ({ role }) => {
                           }
                         }}
                       >
-                        {role == 'folio' ? 'Add Transaction' : 'View Detail'}
+                        {role == 'folio'
+                          ? 'Add\u00A0Transaction'
+                          : 'View\u00A0Detail'}
                       </Button>
                     </div>
                   </div>
