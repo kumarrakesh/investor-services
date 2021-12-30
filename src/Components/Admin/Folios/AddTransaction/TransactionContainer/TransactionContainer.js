@@ -239,10 +239,26 @@ const TransactionContainer = () => {
   };
 
   const handleSubmitEditTransaction = async () => {
-    if (isNaN(+toBeAddedStatements.amount)) {
-      setToBeAddedStatements({ ...toBeAddedStatements, hasError: true });
-      return;
-    } else setToBeAddedStatements({ ...toBeAddedStatements, hasError: false });
+    let hasNarrationError = false;
+    let hasError = false;
+    if (
+      isNaN(+toBeAddedStatements.amount) ||
+      !toBeAddedStatements.amount.length
+    )
+      hasError = true;
+
+    if (
+      !toBeAddedStatements.narration ||
+      !toBeAddedStatements.narration?.length
+    )
+      hasNarrationError = true;
+
+    setToBeAddedStatements({
+      ...toBeAddedStatements,
+      hasNarrationError,
+      hasError
+    });
+    if (hasNarrationError || hasError) return;
     setLoading(true);
     try {
       const response = await fetch(
@@ -562,7 +578,7 @@ const TransactionContainer = () => {
                     />
                     {toBeAddedStatements.hasError && (
                       <small className="input-field-helper-text">
-                        Enter only digits!
+                        Please provide a number *
                       </small>
                     )}
                   </FormControl>
@@ -604,6 +620,11 @@ const TransactionContainer = () => {
                       }}
                       className="add-folio-searchbar"
                     />
+                    {toBeAddedStatements.hasNarrationError && (
+                      <small className="input-field-helper-text">
+                        This field is required*
+                      </small>
+                    )}
                   </FormControl>
                   <div
                     style={{
