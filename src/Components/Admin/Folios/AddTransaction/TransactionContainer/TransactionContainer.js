@@ -80,7 +80,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
-    backgroundColor: 'white !important',
+    backgroundColor: 'white',
     border: 'none !important',
     outline: 'none'
   },
@@ -239,6 +239,10 @@ const TransactionContainer = () => {
   };
 
   const handleSubmitEditTransaction = async () => {
+    if (isNaN(+toBeAddedStatements.amount)) {
+      setToBeAddedStatements({ ...toBeAddedStatements, hasError: true });
+      return;
+    } else setToBeAddedStatements({ ...toBeAddedStatements, hasError: false });
     setLoading(true);
     try {
       const response = await fetch(
