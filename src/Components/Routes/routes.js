@@ -16,6 +16,7 @@ import Folios from '../Admin/Folios/Folios';
 import AddFolio from '../Admin/Folios/AddFolio/AddFolio';
 import FolioStatements from '../Admin/Folios Statements/FolioStatements';
 import FolioAddTransaction from '../Admin/Folios/AddTransaction/FolioAddTransaction';
+import FolioEditTransaction from '../Admin/Folios/FolioEditTransaction/FolioEditTransaction';
 import UserFolioStatement from '../User/Dashboard/UserFolioStatement/UserFolioStatement';
 import ViewDetail from '../Admin/Folios Statements/ViewDetail';
 
@@ -88,6 +89,10 @@ const Routes = () => {
 
       <Route exact path="/admin/folios/addTransaction">
         <FolioAddTransaction />
+      </Route>
+
+      <Route exact path="/admin/folios/editTransaction">
+        <FolioEditTransaction />
       </Route>
 
       <Route exact path="/admin/folioStatements">
