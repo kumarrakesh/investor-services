@@ -13,7 +13,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: '#F6F8FA !important',
     color: 'var(--secondary-color)',
-    padding: '1rem',
+    padding: '0.75rem',
     fontSize: '14px',
     fontWeight: 700,
     borderBottom: '1px solid #CECECE'
@@ -21,7 +21,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
     color: 'var(--secondary-color)',
-    padding: '0.6rem 1rem',
+    padding: '0.6rem 0.75rem',
     border: 'none'
   }
 }));
@@ -44,7 +44,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     outline: 'none'
   }
 }));
-
 const statusGiver = (status) => {
   if (status) {
     return (

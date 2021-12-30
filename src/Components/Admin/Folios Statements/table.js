@@ -24,25 +24,37 @@ import {
 } from '@mui/material';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: '#E6E8EA !important',
-    color: 'var(--secondary-color)'
+    backgroundColor: '#F6F8FA !important',
+    color: 'var(--secondary-color)',
+    padding: '0.75rem',
+    fontSize: '14px',
+    fontWeight: 700,
+    borderBottom: '1px solid #CECECE'
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
-    color: 'var(--secondary-color)'
+    color: 'var(--secondary-color)',
+    padding: '0.6rem 0.75rem',
+    border: 'none'
   }
 }));
+// border: '1px solid black'
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
-    backgroundColor: 'white !important'
+    backgroundColor: 'white !important',
+    border: 'none !important',
+    outline: 'none'
   },
   '&:nth-of-type(even)': {
-    backgroundColor: 'var(--light-blue-bg)'
+    backgroundColor: '#F6F8FA',
+    border: 'none !important',
+    outline: 'none'
   },
   // hide last border
   '&:last-child td, &:last-child th': {
-    border: 0
+    border: 'none !important',
+    outline: 'none'
   }
 }));
 const errorSwal = Swal.mixin({

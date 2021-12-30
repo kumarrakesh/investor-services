@@ -13,18 +13,16 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: '#F6F8FA !important',
     color: 'var(--secondary-color)',
-    padding: '1rem',
+    padding: '0.75rem',
     fontSize: '14px',
     fontWeight: 700,
-    borderBottom: '1px solid #CECECE',
-    height: '3.2rem'
+    borderBottom: '1px solid #CECECE'
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
     color: 'var(--secondary-color)',
-    padding: '0.6rem 1rem',
-    border: 'none',
-    height: '3.2rem'
+    padding: '0.6rem 0.75rem',
+    border: 'none'
   }
 }));
 // border: '1px solid black'
