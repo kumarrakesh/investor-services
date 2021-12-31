@@ -242,8 +242,8 @@ const TransactionContainer = () => {
     let hasNarrationError = false;
     let hasError = false;
     if (
-      isNaN(+toBeAddedStatements.amount) ||
-      !toBeAddedStatements.amount.length
+      isNaN(toBeAddedStatements.amount) ||
+      !String(toBeAddedStatements.amount).length
     )
       hasError = true;
 
@@ -314,13 +314,7 @@ const TransactionContainer = () => {
             history.location.state.row.editHistory.length - 1
           ]
         : history.location.state.row;
-      console.log('ahkjsdg');
       setToBeAddedStatements({
-        date: data.date,
-        type: String(data.type),
-        amount: data.amount
-      });
-      console.log({
         date: data.date,
         type: String(data.type),
         amount: data.amount
@@ -489,7 +483,9 @@ const TransactionContainer = () => {
                       inputFormat="dd/MM/yyyy"
                       value={toBeAddedStatements.date}
                       onChange={(date) => {
-                        let newToBeAddedStatements = { ...toBeAddedStatements };
+                        let newToBeAddedStatements = {
+                          ...toBeAddedStatements
+                        };
                         newToBeAddedStatements.date = date;
                         setToBeAddedStatements(newToBeAddedStatements);
                         //   console.log('here', date);
@@ -534,7 +530,9 @@ const TransactionContainer = () => {
                       variant="outlined"
                       value={toBeAddedStatements.type}
                       onChange={(e) => {
-                        let newToBeAddedStatements = { ...toBeAddedStatements };
+                        let newToBeAddedStatements = {
+                          ...toBeAddedStatements
+                        };
                         newToBeAddedStatements.type = e.target.value;
                         setToBeAddedStatements(newToBeAddedStatements);
                       }}
@@ -570,9 +568,19 @@ const TransactionContainer = () => {
                         style: { fontSize: '0.8rem' }
                       }}
                       onChange={(e) => {
-                        let newToBeAddedStatements = { ...toBeAddedStatements };
+                        let newToBeAddedStatements = {
+                          ...toBeAddedStatements
+                        };
                         newToBeAddedStatements.amount = e.target.value;
                         setToBeAddedStatements(newToBeAddedStatements);
+                      }}
+                      onKeyPress={(e) => {
+                        // if key is enter
+                        if (e.key === 'Enter') {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          handleSubmitEditTransaction();
+                        }
                       }}
                       className="add-folio-searchbar"
                     />
@@ -614,9 +622,19 @@ const TransactionContainer = () => {
                         style: { fontSize: '0.8rem' }
                       }}
                       onChange={(e) => {
-                        let newToBeAddedStatements = { ...toBeAddedStatements };
+                        let newToBeAddedStatements = {
+                          ...toBeAddedStatements
+                        };
                         newToBeAddedStatements.narration = e.target.value;
                         setToBeAddedStatements(newToBeAddedStatements);
+                      }}
+                      onKeyPress={(e) => {
+                        // if key is enter
+                        if (e.key === 'Enter') {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          handleSubmitEditTransaction();
+                        }
                       }}
                       className="add-folio-searchbar"
                     />
