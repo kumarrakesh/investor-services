@@ -268,7 +268,14 @@ export default function CustomizedTables({
                   </StyledTableRow>
                 )}
               {history.location.pathname == '/admin/folios/editTransaction' &&
-                !displayRows.editHistory?.length && (
+                ![
+                  ...displayRows.editHistory,
+                  {
+                    type: displayRows.type,
+                    date: displayRows.date,
+                    amount: displayRows.amount
+                  }
+                ]?.length && (
                   <StyledTableRow>
                     <StyledTableCell component="th" scope="row">
                       {loading ? 'Loading...' : 'No transactions...'}
@@ -276,7 +283,15 @@ export default function CustomizedTables({
                   </StyledTableRow>
                 )}
               {history.location.pathname == '/admin/folios/editTransaction' &&
-                displayRows.editHistory?.map((oldRow) => {
+                [
+                  ...displayRows.editHistory,
+                  {
+                    type: displayRows.type,
+                    date: displayRows.date,
+                    amount: displayRows.amount,
+                    narration: 'Initial Transaction'
+                  }
+                ]?.map((oldRow) => {
                   let flag = oldRow?.editHistory?.length;
 
                   let row = { ...oldRow };
