@@ -75,29 +75,31 @@ export default function CustomizedTables({ displayRows, loading }) {
                   </StyledTableCell>
                 </StyledTableRow>
               )}
-              {displayRows.map((row) => (
-                <StyledTableRow key={row._id}>
-                  <StyledTableCell component="th" scope="row">
-                    {new Date(row.date).toLocaleDateString('en-GB')}
-                  </StyledTableCell>
-                  <StyledTableCell align="left" component="th" scope="row">
-                    {row.type == 1
-                      ? 'Contribution'
-                      : row.type == 2
-                      ? 'Yield Payment'
-                      : 'Redemption'}
-                  </StyledTableCell>
-                  <StyledTableCell align="left" component="th" scope="row">
-                    {row.type == 1 ? ' ' + row.amount : ''}
-                  </StyledTableCell>
-                  <StyledTableCell align="left" component="th" scope="row">
-                    {row.type == 2 ? ' ' + row.amount : ''}
-                  </StyledTableCell>
-                  <StyledTableCell align="left" component="th" scope="row">
-                    {row.type == 3 ? ' ' + row.amount : ''}
-                  </StyledTableCell>
-                </StyledTableRow>
-              ))}
+              {displayRows
+                .filter((el) => el.status != 'INVALID')
+                .map((row) => (
+                  <StyledTableRow key={row._id}>
+                    <StyledTableCell component="th" scope="row">
+                      {new Date(row.date).toLocaleDateString('en-GB')}
+                    </StyledTableCell>
+                    <StyledTableCell align="left" component="th" scope="row">
+                      {row.type == 1
+                        ? 'Contribution'
+                        : row.type == 2
+                        ? 'Yield Payment'
+                        : 'Redemption'}
+                    </StyledTableCell>
+                    <StyledTableCell align="left" component="th" scope="row">
+                      {row.type == 1 ? ' ' + row.amount : ''}
+                    </StyledTableCell>
+                    <StyledTableCell align="left" component="th" scope="row">
+                      {row.type == 2 ? ' ' + row.amount : ''}
+                    </StyledTableCell>
+                    <StyledTableCell align="left" component="th" scope="row">
+                      {row.type == 3 ? ' ' + row.amount : ''}
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
             </TableBody>
           </Table>
         </TableContainer>

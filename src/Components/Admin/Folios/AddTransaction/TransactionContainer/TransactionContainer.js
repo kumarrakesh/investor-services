@@ -300,6 +300,44 @@ const TransactionContainer = () => {
       setLoading(false);
     }
   };
+  const handleInvalidateTransaction = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API}/api/invalid/folio/transaction`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': token
+          },
+
+          body: JSON.stringify({
+            transactionId: location?.state?.row?._id
+          })
+        }
+      );
+      const data = await response.json();
+      if (data.status) {
+        successSwal.fire('Transaction Invalidated', '', 'success');
+        setLoading(false);
+        history.push({
+          pathname: '/admin/folioStatements/viewDetail',
+          state: {
+            from: history.location.state.from,
+            row: history.location.state.folio
+          }
+        });
+        setToBeAddedStatements({});
+      } else {
+        errorSwal.fire('something went wrong', '', 'error');
+        setLoading(false);
+      }
+    } catch (e) {
+      console.log(e);
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     if (
@@ -663,6 +701,16 @@ const TransactionContainer = () => {
               padding: '1rem'
             }}
           >
+            {history.location.state.row?.canInvalidate && (
+              <Button
+                variant="outlined"
+                onClick={handleInvalidateTransaction}
+                className="invalidate-multiple-new-transaction-button"
+              >
+                Invalidate
+              </Button>
+            )}
+
             <Button
               variant="outlined"
               onClick={handleSubmitEditTransaction}
