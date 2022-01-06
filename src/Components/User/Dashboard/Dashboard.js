@@ -89,16 +89,17 @@ const Dashboard = () => {
         <h1 className="stats">Dashboard</h1>
 
         <div className="statement-summary">
-          <div className="statement-summary-col">
+          <div className="statement-summary-col dashboard-summary-col">
             <div className="statement-summary-name">Total Folios</div>
             <div className="statement-summary-val">{displayRows.length}</div>
             <div className="statement-summary-val">
               {size.width <= 768 && (
                 <div
                   style={{
-                    fontSize: '1.5rem',
+                    fontSize: '20px',
                     color: 'var(--secondary-color)',
-                    fontWeight: '400'
+                    fontWeight: '400',
+                    marginTop: '1rem'
                   }}
                 >
                   Folios

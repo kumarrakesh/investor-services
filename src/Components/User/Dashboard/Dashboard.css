@@ -49,6 +49,9 @@
   display: flex;
   gap: 4rem;
 }
+.dashboard-summary-col {
+  gap: 5px !important;
+}
 .statement-summary-col {
   display: flex;
   /* gap: 0.8rem; */
@@ -60,7 +63,9 @@
   font-size: 0.875;
   color: var(--secondary-color);
 }
-
+.dashboard-card-mobile-container {
+  margin-top: -1rem;
+}
 .statement-summary-val {
   font-weight: 500;
   font-size: 1.5rem;
