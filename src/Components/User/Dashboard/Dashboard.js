@@ -88,7 +88,7 @@ const Dashboard = () => {
       <div className="statement-container">
         <h1 className="stats">Dashboard</h1>
 
-        <div className="statement-summary" style={{ marginLeft: '0.5rem' }}>
+        <div className="statement-summary">
           <div className="statement-summary-col">
             <div className="statement-summary-name">Total Folios</div>
             <div className="statement-summary-val">{displayRows.length}</div>
@@ -137,27 +137,37 @@ const Dashboard = () => {
                     <div
                       className="dashboard-card-mobile-header"
                       style={{
+                        display: 'flex',
                         textAlign: 'right',
                         flex: '1.5 !important',
                         fontSize: '14px',
-                        marginTop: '1rem',
                         flexDirection: 'column',
-                        alignItems: 'flex-end'
+                        alignItems: 'flex-end',
+                        gap: '0.5rem'
                       }}
                     >
-                      <div className="dashboard-card-mobile-body-row-item">
+                      <div
+                        className="dashboard-card-mobile-body-row-item"
+                        style={{ gap: '1rem' }}
+                      >
                         Contri.
                         <span style={{ color: '#333', fontWeight: 500 }}>
                           {row.contribution}
                         </span>
                       </div>
-                      <div className="dashboard-card-mobile-body-row-item">
+                      <div
+                        className="dashboard-card-mobile-body-row-item"
+                        style={{ gap: '1rem' }}
+                      >
                         Commit.
                         <span style={{ color: '#333', fontWeight: 500 }}>
                           {row.commitment}
                         </span>
                       </div>
-                      <div className="dashboard-card-mobile-body-row-item">
+                      <div
+                        className="dashboard-card-mobile-body-row-item"
+                        style={{ gap: '1rem' }}
+                      >
                         Expected Yield
                         <span style={{ color: '#333', fontWeight: 500 }}>
                           {row.yield}%
@@ -170,7 +180,7 @@ const Dashboard = () => {
                     style={{
                       display: 'flex',
                       justifyContent: 'flex-end',
-                      marginTop: '0.3rem'
+                      marginTop: '14px'
                     }}
                   >
                     <Button
