@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
-
+import useWindowSize from '../../../../utils/useWindowSize';
 const errorSwal = Swal.mixin({
   customClass: {
     container: 'add-folio-swal-container',
@@ -50,6 +50,7 @@ const successSwal = Swal.mixin({
 });
 
 const UserFolioStatement = () => {
+  const size = useWindowSize();
   const [displayRows, setDisplayRows] = useState([]);
   const [rows, setRows] = useState([]);
   const token = JSON.parse(localStorage.getItem('token'));
@@ -274,8 +275,11 @@ const UserFolioStatement = () => {
           <FileDownloadOutlinedIcon sx={{ marginRight: '10px' }} />
           Download&nbsp;Statement
         </Button>
-
-        <CustomizedTables displayRows={displayRows} loading={loading} />
+        {size.width <= 768 ? (
+          <h1>asd</h1>
+        ) : (
+          <CustomizedTables displayRows={displayRows} loading={loading} />
+        )}
       </div>
       {loading && (
         <Backdrop
