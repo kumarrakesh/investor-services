@@ -84,6 +84,22 @@ Button:visited {
     margin-top: -100vh;
     padding: 2rem 1rem !important;
   }
+  #grievances-header-label {
+    font-size: 20px;
+  }
+
+  .query-container {
+    background-color: transparent;
+    outline: none;
+    padding: 0rem;
+    border-radius: 5px;
+  }
+  .send-btn-div {
+    justify-content: center;
+  }
+  .send-btn {
+    border: none !important;
+  }
 }
 
 .Mui-selected {
