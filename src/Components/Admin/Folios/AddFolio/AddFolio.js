@@ -298,7 +298,6 @@ const AddFolio = () => {
                 value={investorRow}
                 onChange={(event, newValue) => {
                   setInvestorRow(newValue);
-                  console.log(newValue);
                 }}
                 getOptionLabel={(option) => {
                   if (option?.passport)
@@ -560,19 +559,17 @@ const AddFolio = () => {
             </FormControl>
           </div>
 
-          <div className="add-folios-btn-div">
+          <div id="add-inv-btn">
             <Button
               id="add-folios-btn"
               type="submit"
               variant="contained"
               disabled={!flag}
               style={{
-                display: 'flex',
                 color: 'white',
                 textTransform: 'none',
                 width: '14rem',
-                backgroundColor: '#E95B3E',
-                marginLeft: '3.5rem'
+                backgroundColor: '#E95B3E'
               }}
             >
               Add Folio

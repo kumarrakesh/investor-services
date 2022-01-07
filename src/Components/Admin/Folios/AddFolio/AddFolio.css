@@ -163,12 +163,10 @@
   transition: all 0.1s ease !important;
   background-color: #e95b3e !important;
   text-transform: none !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-size: 0.95rem !important;
-  padding: 0rem 2rem !important;
+
   height: 2.8rem;
+  margin: auto;
 }
 
 @media screen and (max-width: 768px) {
@@ -196,6 +194,11 @@
   }
 
   .add-folios-btn-div {
+    display: flex;
+    justify-content: center;
+  }
+
+  #add-folion-btn-sec {
     display: flex;
     justify-content: center !important;
   }

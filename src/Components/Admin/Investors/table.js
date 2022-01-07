@@ -93,7 +93,7 @@ export default function CustomizedTables({ displayRows, setUpdate, loading }) {
                 </StyledTableCell>
               </StyledTableRow>
             )}
-            {displayRows.map((row) => (
+            {displayRows?.map((row) => (
               <StyledTableRow key={row._id}>
                 <StyledTableCell component="th" scope="row">
                   {new Date(row.dateOfCreation).toLocaleDateString('en-GB')}

@@ -74,6 +74,11 @@
   color: #333;
   font-size: 0.9rem;
 }
+
+.grievances-admin-number-header {
+  display: flex;
+  gap: 4rem;
+}
 @media screen and (max-width: 768px) {
   .grievances-admin-main {
     flex-direction: column;
@@ -86,4 +91,8 @@
   /* max-width: 100%; */
   /* overflow: auto; */
   /* } */
+  .grievances-admin-number-header {
+    display: flex;
+    justify-content: space-between;
+  }
 }

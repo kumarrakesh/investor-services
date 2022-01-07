@@ -109,21 +109,6 @@
   overflow: scroll;
 }
 
-@media screen and (max-width: 768px) {
-  .folio-searchbar {
-    background-color: white !important;
-    width: 100% !important;
-  }
-  .folios-main {
-    flex-direction: column;
-  }
-
-  #folios-container {
-    margin-top: -100vh;
-    padding: 2rem 1rem;
-  }
-}
-
 .folio-card-mobile-container {
   background-color: white;
   margin: 0.5rem;
@@ -168,4 +153,28 @@
   flex-direction: column;
   flex: 1;
   gap: 0.4rem;
+}
+
+#folio-card-pending-amt-item {
+  text-align: right;
+}
+
+@media screen and (max-width: 768px) {
+  .folio-searchbar {
+    background-color: white !important;
+    width: 100% !important;
+  }
+  .folios-main {
+    flex-direction: column;
+  }
+
+  #folios-container {
+    margin-top: -100vh;
+    padding: 2rem 1rem;
+  }
+
+  .folio-oneline {
+    display: flex;
+    justify-content: space-between;
+  }
 }

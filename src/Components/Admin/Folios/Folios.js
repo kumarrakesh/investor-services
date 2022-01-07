@@ -76,6 +76,7 @@ const Folios = ({ role }) => {
       setLoading(false);
     }, 250);
   };
+
   useEffect(() => {
     if (!folioNumber || folioNumber.length < 1) {
       setDisplayRows(ogRows);
@@ -247,7 +248,10 @@ const Folios = ({ role }) => {
                           </span>
                         </p>
 
-                        <p className="folio-card-mobile-body-row-item">
+                        <p
+                          className="folio-card-mobile-body-row-item"
+                          id="folio-card-pending-amt-item"
+                        >
                           <span style={{ color: '#666' }}>Pending Amt. </span>
                           <span
                             style={{

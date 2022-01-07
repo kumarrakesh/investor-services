@@ -338,112 +338,223 @@ const TransactionContainer = () => {
   }, []);
 
   return (
-    <div>
+    <div className="folio-transaction-container-main">
       {history.location.pathname != '/admin/folios/editTransaction' && (
         <>
-          <div className="folio-add-transaction">
-            <h3 className="folio-add-transaction-heading">Investor Details</h3>
-            <div className="folio-add-transaction-row">
-              <div className="folio-add-transaction-row-item">
-                <div className="folio-add-transaction-row-item-label">
-                  Investor Name
+          {size.width > 768 ? (
+            <div className="folio-add-transaction">
+              <h3 className="folio-add-transaction-heading">
+                Investor Details
+              </h3>
+              <div className="folio-add-transaction-row">
+                <div className="folio-add-transaction-row-item">
+                  <div className="folio-add-transaction-row-item-label">
+                    Investor Name
+                  </div>
+                  <div className="folio-add-transaction-row-item-value">
+                    {values.investorName}
+                  </div>
                 </div>
-                <div className="folio-add-transaction-row-item-value">
-                  {values.investorName}
-                </div>
-              </div>
 
-              <div className="folio-add-transaction-row-item">
-                <div className="folio-add-transaction-row-item-label">
-                  Folio No.
+                <div className="folio-add-transaction-row-item">
+                  <div className="folio-add-transaction-row-item-label">
+                    Folio No.
+                  </div>
+                  <div
+                    className="folio-add-transaction-row-item-value"
+                    style={{ textTransform: 'none' }}
+                  >
+                    {values.folioNumber}
+                  </div>
                 </div>
-                <div
-                  className="folio-add-transaction-row-item-value"
-                  style={{ textTransform: 'none' }}
-                >
-                  {values.folioNumber}
-                </div>
-              </div>
 
-              <div className="folio-add-transaction-row-item">
-                <div className="folio-add-transaction-row-item-label">
-                  Registration Date
+                <div className="folio-add-transaction-row-item">
+                  <div className="folio-add-transaction-row-item-label">
+                    Registration Date
+                  </div>
+                  <div
+                    className="folio-add-transaction-row-item-value"
+                    style={{ textTransform: 'none' }}
+                  >
+                    {new Date(values.registrationDate).toLocaleDateString(
+                      'en-GB'
+                    )}
+                  </div>
                 </div>
-                <div
-                  className="folio-add-transaction-row-item-value"
-                  style={{ textTransform: 'none' }}
-                >
-                  {new Date(values.registrationDate).toLocaleDateString(
-                    'en-GB'
-                  )}
+                <div className="folio-add-transaction-row-item">
+                  <div className="folio-add-transaction-row-item-label">
+                    Yield (%)
+                  </div>
+                  <div className="folio-add-transaction-row-item-value">
+                    {values.yield}
+                  </div>
                 </div>
               </div>
-              <div className="folio-add-transaction-row-item">
-                <div className="folio-add-transaction-row-item-label">
-                  Yield (%)
+              <div
+                className="folio-add-transaction-row"
+                // style={{ borderBottom: ' 1px solid #E5E5E5' }}
+              >
+                <div className="folio-add-transaction-row-item">
+                  <div className="folio-add-transaction-row-item-label">
+                    Capital Commitment
+                  </div>
+                  <div
+                    className="folio-add-transaction-row-item-value"
+                    style={{ textTransform: 'none' }}
+                  >
+                    {values.commitment}
+                  </div>
                 </div>
-                <div className="folio-add-transaction-row-item-value">
-                  {values.yield}
+
+                <div className="folio-add-transaction-row-item">
+                  <div className="folio-add-transaction-row-item-label">
+                    Pending Amount
+                  </div>
+                  <div
+                    className="folio-add-transaction-row-item-value"
+                    style={{ textTransform: 'none' }}
+                  >
+                    {Object.keys(folioDetail).length === 0
+                      ? values.commitment - values.contribution
+                      : folioDetail.commitment - folioDetail.contribution}
+                  </div>
+                </div>
+                <div className="folio-add-transaction-row-item">
+                  <div className="folio-add-transaction-row-item-label">
+                    Currency
+                  </div>
+                  <div className="folio-add-transaction-row-item-value">
+                    {values.currency}
+                  </div>
                 </div>
               </div>
             </div>
+          ) : (
+            <div className="folio-add-transaction" id="folio-summary-div">
+              <h3 className="folio-add-transaction-heading">
+                Investor Details
+              </h3>
+              <div className="folio-add-transaction-row">
+                <div className="folio-add-transaction-row-item">
+                  <div className="folio-add-transaction-row-item-label">
+                    Investor Name
+                  </div>
+                  <div className="folio-add-transaction-row-item-value">
+                    {values.investorName}
+                  </div>
+                </div>
 
-            <div
-              className="folio-add-transaction-row"
-              // style={{ borderBottom: ' 1px solid #E5E5E5' }}
+                <div
+                  className="folio-add-transaction-row-item"
+                  id="folio-add-item-right"
+                >
+                  <div className="folio-add-transaction-row-item-label">
+                    Folio No.
+                  </div>
+                  <div
+                    className="folio-add-transaction-row-item-value"
+                    style={{ textTransform: 'none' }}
+                  >
+                    {values.folioNumber}
+                  </div>
+                </div>
+              </div>
+
+              <div className="folio-add-transaction-row">
+                <div className="folio-add-transaction-row-item">
+                  <div className="folio-add-transaction-row-item-label">
+                    Registration Date
+                  </div>
+                  <div
+                    className="folio-add-transaction-row-item-value"
+                    style={{ textTransform: 'none' }}
+                  >
+                    {new Date(values.registrationDate).toLocaleDateString(
+                      'en-GB'
+                    )}
+                  </div>
+                </div>
+                <div
+                  className="folio-add-transaction-row-item"
+                  id="folio-add-item-right"
+                >
+                  <div className="folio-add-transaction-row-item-label">
+                    Yield (%)
+                  </div>
+                  <div className="folio-add-transaction-row-item-value">
+                    {values.yield}
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className="folio-add-transaction-row"
+                // style={{ borderBottom: ' 1px solid #E5E5E5' }}
+              >
+                <div className="folio-add-transaction-row-item">
+                  <div className="folio-add-transaction-row-item-label">
+                    Capital Commitment
+                  </div>
+                  <div
+                    className="folio-add-transaction-row-item-value"
+                    style={{ textTransform: 'none' }}
+                  >
+                    {values.commitment}
+                  </div>
+                </div>
+
+                <div
+                  className="folio-add-transaction-row-item"
+                  id="folio-add-item-right"
+                >
+                  <div className="folio-add-transaction-row-item-label">
+                    Pending Amount
+                  </div>
+                  <div
+                    className="folio-add-transaction-row-item-value"
+                    style={{ textTransform: 'none' }}
+                  >
+                    {Object.keys(folioDetail).length === 0
+                      ? values.commitment - values.contribution
+                      : folioDetail.commitment - folioDetail.contribution}
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className="folio-add-transaction-row"
+                // style={{ borderBottom: ' 1px solid #E5E5E5' }}
+              >
+                <div className="folio-add-transaction-row-item">
+                  <div className="folio-add-transaction-row-item-label">
+                    Currency
+                  </div>
+                  <div className="folio-add-transaction-row-item-value">
+                    {values.currency}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div className="folio-add-transaction-folio-statement-label">
+            <Button
+              variant="contained"
+              style={{
+                backgroundColor: 'white',
+                color: 'var(--primary-color)',
+                textTransform: 'none',
+                width: size.width > 768 ? '22%' : '60%',
+                marginTop: '1.2rem',
+                marginBottom: '0.8rem',
+                height: '2.9rem'
+              }}
+              onClick={handleDownloadPdf}
             >
-              <div className="folio-add-transaction-row-item">
-                <div className="folio-add-transaction-row-item-label">
-                  Capital Commitment
-                </div>
-                <div
-                  className="folio-add-transaction-row-item-value"
-                  style={{ textTransform: 'none' }}
-                >
-                  {values.commitment}
-                </div>
-              </div>
-
-              <div className="folio-add-transaction-row-item">
-                <div className="folio-add-transaction-row-item-label">
-                  Pending Amount
-                </div>
-                <div
-                  className="folio-add-transaction-row-item-value"
-                  style={{ textTransform: 'none' }}
-                >
-                  {Object.keys(folioDetail).length === 0
-                    ? values.commitment - values.contribution
-                    : folioDetail.commitment - folioDetail.contribution}
-                </div>
-              </div>
-              <div className="folio-add-transaction-row-item">
-                <div className="folio-add-transaction-row-item-label">
-                  Currency
-                </div>
-                <div className="folio-add-transaction-row-item-value">
-                  {values.currency}
-                </div>
-              </div>
-            </div>
+              <FileDownloadOutlinedIcon sx={{ marginRight: '10px' }} />
+              Download Statement
+            </Button>
           </div>
-
-          <Button
-            variant="contained"
-            style={{
-              backgroundColor: 'white',
-              color: 'var(--primary-color)',
-              textTransform: 'none',
-              width: '22%',
-              marginTop: '1.2rem',
-              marginBottom: '0.8rem',
-              height: '2.9rem'
-            }}
-            onClick={handleDownloadPdf}
-          >
-            <FileDownloadOutlinedIcon sx={{ marginRight: '10px' }} />
-            Download Statement
-          </Button>
         </>
       )}
       {history.location.pathname == '/admin/folios/editTransaction' && (
@@ -691,7 +802,7 @@ const TransactionContainer = () => {
           setLoading={setLoading}
           folioDetail={setFolioDetail}
         />
-      ) : (
+      ) : size.width > 768 ? (
         <CustomizedTables
           setDisplayRows={setDisplayRows}
           displayRows={displayRows}
@@ -700,6 +811,64 @@ const TransactionContainer = () => {
           setLoading={setLoading}
           folioDetail={setFolioDetail}
         />
+      ) : (
+        <div className="transaction-card-mobile-container">
+          {displayRows?.map((row) => {
+            console.log(row);
+            return (
+              <div className="transaction-card-mobile" key={row._id}>
+                <div className="transaction-card-mobile-header-top">
+                  <div className="transaction-card-mobile-header-folio-date">
+                    {new Date(row.date).toLocaleDateString('en-GB')}
+                  </div>
+                </div>
+
+                <div className="transaction-card-mobile-header">
+                  <div className="transaction-card-mobile-header-name">
+                    {row.type == 1
+                      ? 'Capital Contribution'
+                      : row.type == 2
+                      ? 'Yield Payment'
+                      : 'Redemption'}
+                  </div>
+
+                  <div>{row.amount}</div>
+                </div>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                    marginTop: '0.5rem'
+                  }}
+                >
+                  <Button
+                    variant="contained"
+                    style={{
+                      color: 'var(--primary-color)',
+                      backgroundColor: 'white',
+                      border: '1px solid var(--primary-color)',
+                      fontSize: '0.8rem',
+                      padding: '0.4rem 2rem',
+                      textTransform: 'none'
+                    }}
+                    onClick={() => {
+                      history.push({
+                        pathname: '/admin/folios/editTransaction',
+                        state: {
+                          row: row,
+                          from: history.location.pathname,
+                          folio: history.location.state.row
+                        }
+                      });
+                    }}
+                  >
+                    Edit Transaction
+                  </Button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       )}
 
       {loading && (

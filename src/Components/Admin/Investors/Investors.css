@@ -118,4 +118,9 @@
     margin-top: -100vh;
     padding: 2rem 1rem;
   }
+
+  .investors-overview-div {
+    display: flex;
+    justify-content: space-between;
+  }
 }
