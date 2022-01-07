@@ -30,6 +30,19 @@
   border-width: 2px !important;
   border-radius: 5px !important;
 }
+.invalidate-multiple-new-transaction-button {
+  color: var(--primary-color) !important;
+  text-transform: none !important;
+  margin-top: 1.5rem !important;
+  padding: 0.4rem 3rem !important;
+  border-color: var(--primary-color) !important;
+  font-weight: 500 !important;
+  font-size: 1rem !important;
+  border-width: 2px !important;
+  background-color: white !important;
+  /* min-width: 18ch !important; */
+  border-radius: 5px !important;
+}
 .submit-multiple-new-transaction-button {
   color: white !important;
   text-transform: none !important;

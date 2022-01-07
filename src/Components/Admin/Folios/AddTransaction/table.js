@@ -334,8 +334,19 @@ export default function CustomizedTables({
                 })}
               {history.location.pathname != '/admin/folios/editTransaction' &&
                 displayRows.map((oldRow) => {
+                  var rowStyles = {};
                   let flag = oldRow?.editHistory?.length;
-
+                  if (flag > 0)
+                    rowStyles = {
+                      backgroundColor: 'hsl(15deg, 5%, 90%)',
+                      cursor: 'pointer'
+                    };
+                  if (oldRow.status == 'INVALID')
+                    rowStyles = {
+                      backgroundColor: 'hsl(355deg,50%,90%)',
+                      fontWeight: 800,
+                      cursor: 'pointer'
+                    };
                   let row = { ...oldRow };
                   if (row?.editHistory?.length) {
                     row = row.editHistory[row.editHistory.length - 1];
@@ -343,14 +354,7 @@ export default function CustomizedTables({
                   return (
                     <StyledTableRow
                       key={row._id}
-                      style={
-                        flag > 0
-                          ? {
-                              backgroundColor: 'hsl(15, 5%, 90%)',
-                              cursor: 'pointer'
-                            }
-                          : {}
-                      }
+                      style={rowStyles}
                       title="See history"
                       onClick={() => {
                         handleShowHistoryDialog(oldRow);

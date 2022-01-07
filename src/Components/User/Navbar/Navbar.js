@@ -54,6 +54,7 @@ const Navbar = () => {
 
   const GoToGrievances = () => {
     history.push('/queries');
+    setNavbarOpen(false);
   };
 
   const handleLogout = () => {
@@ -91,6 +92,7 @@ const Navbar = () => {
           id="navbar-top-header-logo"
           onClick={() => {
             history.push('/dashboard');
+            setNavbarOpen(false);
           }}
         >
           <img src={logo} alt="tiwpe logo" style={{ maxWidth: 128 }} />
@@ -99,6 +101,7 @@ const Navbar = () => {
           className="navbar-top-profile-pic"
           onClick={() => {
             history.push('/profile');
+            setNavbarOpen(false);
           }}
         >
           <div className="navbar-top-investor-pill-label">Investor</div>
@@ -212,6 +215,7 @@ const Navbar = () => {
           className="nav-dashboard-btn"
           onClick={() => {
             history.push('/dashboard');
+            setNavbarOpen(false);
           }}
           style={{
             color: location.pathname.startsWith('/dashboard')
@@ -263,6 +267,7 @@ const Navbar = () => {
           className="nav-dashboard-btn"
           onClick={() => {
             history.push('/profile');
+            setNavbarOpen(false);
           }}
           style={{
             color: location.pathname == '/profile' ? '#E95B3E' : '#8997ae',
