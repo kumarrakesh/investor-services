@@ -130,127 +130,16 @@ const AdminGrievances = () => {
           />
         </FormControl>
 
-        {size.width <= 768 ? (
-          <div className="folio-card-mobile-container">
-            {displayRows.map((row) => {
-              console.log(row);
-              return (
-                <div className="folio-card-mobile" key={row._id}>
-                  <div className="folio-card-mobile-header-top">
-                    <div className="folio-card-mobile-header-folio-date">
-                      {new Date(row.date).toLocaleDateString('en-GB')}
-                    </div>
-                    <div
-                      style={{
-                        height: '5px',
-                        width: '5px',
-                        backgroundColor: 'gray',
-                        borderRadius: '1rem'
-                      }}
-                    ></div>
-                    <p className="folio-card-mobile-header-name">
-                      {row.folioNumber}
-                    </p>
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <div
-                      className="folio-card-mobile-header"
-                      style={{ flexDirection: 'row', flex: '1.3' }}
-                    >
-                      <div className="folio-card-mobile-header-name">
-                        {row.user?.name}
-                      </div>
-                      <p className="folio-card-mobile-header-folio">
-                        {row.user?.passport}
-                      </p>
-                    </div>
-
-                    <div
-                      className="folio-card-mobile-header"
-                      style={{
-                        textAlign: 'left',
-                        flex: '1',
-                        fontSize: '14px',
-                        marginTop: '0.5rem'
-                      }}
-                    >
-                      <p className="folio-card-mobile-body-row-item">
-                        <span style={{ color: '#666' }}>Commit. </span>
-                        <span>
-                          {' '}
-                          {Math.round((row.commitment + Number.EPSILON) * 100) /
-                            100}
-                        </span>
-                      </p>
-                      <p className="folio-card-mobile-body-row-item">
-                        <span style={{ color: '#666' }}>Tot. Contri. </span>
-                        <span>
-                          {' '}
-                          {Math.round(
-                            (row.contribution + Number.EPSILON) * 100
-                          ) / 100}
-                        </span>
-                      </p>
-
-                      <p
-                        className="folio-card-mobile-body-row-item"
-                        id="folio-card-pending-amt-item"
-                      >
-                        <span style={{ color: '#666' }}>Pending Amt. </span>
-                        <span
-                          style={{
-                            color: '#333333'
-                          }}
-                        >
-                          {' '}
-                          {Math.round(
-                            (row.commitment -
-                              row.contribution +
-                              Number.EPSILON) *
-                              100
-                          ) / 100}
-                        </span>
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'flex-end',
-                      marginTop: '0.3rem'
-                    }}
-                  >
-                    <Button
-                      variant="contained"
-                      style={{
-                        color: 'var(--primary-color)',
-                        backgroundColor: 'white',
-                        border: '1px solid var(--primary-color)',
-                        fontSize: '0.7rem',
-                        width: '9rem',
-                        textTransform: 'none'
-                      }}
-                      onClick={() => {}}
-                    >
-                      {row.isResolved ? 'Update' : 'Resolve'}
-                    </Button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        ) : (
-          <div className="gr-ad-inv-table-grievances">
-            <CustomizedTables
-              rows={queries}
-              displayRows={displayRows}
-              setDisplayRows={setDisplayRows}
-              setUpdate={setUpdate}
-              setLoading={setLoading}
-              loading={loading}
-            />
-          </div>
-        )}
+        <div className="gr-ad-inv-table-grievances">
+          <CustomizedTables
+            rows={queries}
+            displayRows={displayRows}
+            setDisplayRows={setDisplayRows}
+            setUpdate={setUpdate}
+            setLoading={setLoading}
+            loading={loading}
+          />
+        </div>
       </div>
       {loading && (
         <Backdrop

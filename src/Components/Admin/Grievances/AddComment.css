@@ -1,0 +1,37 @@
+.query-main-top {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1.5rem 1.5rem;
+  background-color: #ebebeb;
+}
+
+.query-main-top-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.query-main-top-row-title {
+  font-weight: bold;
+  color: #132f5e;
+  font-size: 0.9rem;
+}
+
+.query-main-top-row-value {
+  font-size: 0.9rem;
+  color: #333333;
+}
+
+#add-comment-details-row-data {
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .query-dialog-details-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+}

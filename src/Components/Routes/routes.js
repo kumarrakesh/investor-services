@@ -19,6 +19,7 @@ import FolioAddTransaction from '../Admin/Folios/AddTransaction/FolioAddTransact
 import FolioEditTransaction from '../Admin/Folios/FolioEditTransaction/FolioEditTransaction';
 import UserFolioStatement from '../User/Dashboard/UserFolioStatement/UserFolioStatement';
 import ViewDetail from '../Admin/Folios Statements/ViewDetail';
+import AddComment from '../Admin/Grievances/AddComment';
 
 const Routes = () => {
   return (
@@ -102,6 +103,10 @@ const Routes = () => {
 
       <Route exact path="/admin/folioStatements/viewDetail">
         <ViewDetail />
+      </Route>
+
+      <Route exact path="/admin/queries/addComment">
+        <AddComment />
       </Route>
     </Switch>
   );

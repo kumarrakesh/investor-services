@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import {
@@ -17,6 +18,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import SearchBar from 'material-ui-search-bar';
 import Swal from 'sweetalert2';
+import useWindowSize from '../../../utils/useWindowSize';
 const errorSwal = Swal.mixin({
   customClass: {
     container: 'add-folio-swal-container',
@@ -143,14 +145,24 @@ export default function CustomizedTables({
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogData, setDialogData] = useState({});
   const [message, setMessage] = useState('');
+  const size = useWindowSize();
+  const history = useHistory();
   //hooks
   //handlers
 
   const handleOpenDialog = (row) => {
     // console.log(row);
-    setDialogData(row);
-    setDialogOpen(true);
-    setMessage(row.reply || '');
+    if (size.width > 768) {
+      setDialogData(row);
+      setDialogOpen(true);
+      setMessage(row.reply || '');
+    } else {
+      console.log(row);
+      history.push({
+        pathname: '/admin/queries/addComment',
+        state: { row }
+      });
+    }
   };
 
   const handleCloseDialog = (row) => {
@@ -213,210 +225,287 @@ export default function CustomizedTables({
 
   return (
     <>
-      <Paper>
-        <TableContainer
-          component={Paper}
-          sx={{ maxHeight: '62vh', borderRadius: 2 }}
-          style={{ boxShadow: '0px 0px 0px 1px #CECECE' }}
-        >
-          <Table stickyHeader aria-label="customized table">
-            <TableHead style={{ border: '1px solid red' }}>
-              <TableRow>
-                <StyledTableCell>Date&nbsp;Added</StyledTableCell>
-                <StyledTableCell>Query&nbsp;ID</StyledTableCell>
-                <StyledTableCell align="left">
-                  Query&nbsp;Subject
-                </StyledTableCell>
-                <StyledTableCell align="left">
-                  Investor&nbsp;Name
-                </StyledTableCell>
-                <StyledTableCell align="left">Status</StyledTableCell>
-                <StyledTableCell align="left">Action</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {!displayRows.length && (
-                <StyledTableRow>
-                  <StyledTableCell component="th" scope="row">
-                    {loading ? 'Loading...' : 'No queries...'}
-                  </StyledTableCell>
-                </StyledTableRow>
-              )}
-              {displayRows.map((row) => (
-                <StyledTableRow key={row._id}>
-                  <StyledTableCell component="th" scope="row">
+      {' '}
+      {size.width <= 768 ? (
+        <div className="folio-card-mobile-container">
+          {displayRows.map((row) => {
+            console.log(row);
+            return (
+              <div className="folio-card-mobile" key={row._id}>
+                <div
+                  className="folio-card-mobile-header-top"
+                  id="grievances-card-header-top"
+                >
+                  <div className="folio-card-mobile-header-folio-date">
                     {new Date(row.date).toLocaleDateString('en-GB')}
-                  </StyledTableCell>
-                  <StyledTableCell align="left" component="th" scope="row">
-                    {row.queryId}
-                  </StyledTableCell>
-                  <StyledTableCell align="left" component="th" scope="row">
-                    {row.subject}
-                  </StyledTableCell>
-                  <StyledTableCell align="left" component="th" scope="row">
-                    {row.user.name}
-                  </StyledTableCell>
-                  <StyledTableCell align="left" component="th" scope="row">
-                    {statusGiver(row.isResolved)}
-                  </StyledTableCell>
-                  <StyledTableCell align="left" component="th" scope="row">
-                    {
-                      <Button
-                        onClick={() => {
-                          handleOpenDialog(row);
-                        }}
-                        variant="contained"
-                        style={{
-                          border: '1px solid var(--primary-color)',
-                          backgroundColor: row.isResolved
-                            ? 'white'
-                            : 'var(--primary-color)',
-                          textTransform: 'none',
-                          color: row.isResolved
-                            ? 'var(--primary-color)'
-                            : 'white',
-                          padding: '4px 8px',
-                          fontSize: '0.75rem',
-                          width: '7rem'
-                        }}
-                      >
-                        {row.isResolved ? 'Update' : 'Resolve'}
-                      </Button>
-                    }
-                  </StyledTableCell>
-                </StyledTableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <Dialog
-          open={dialogOpen}
-          onClose={handleCloseDialog}
-          maxWidth="sm"
-          fullWidth
-        >
-          <DialogTitle style={{ color: '#132F5E' }}>Add Comment</DialogTitle>
-          <DialogContent sx={{ margin: 0, padding: 0 }}>
-            <div className="query-dialog-details">
-              <div className="query-dialog-details-row">
-                <div className="query-dialog-details-row-label">Query ID</div>
-                <div className="query-dialog-details-row-data">
-                  #{dialogData.queryId}
+                  </div>
+                  <div style={{ fontSize: '0.9rem' }}>#{row._id}</div>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  <div
+                    className="folio-card-mobile-header"
+                    style={{ display: 'flex', flexDirection: 'column' }}
+                  >
+                    <div className="folio-card-mobile-header-name">
+                      Query Subject
+                    </div>
+                    <p className="folio-card-mobile-header-folio">
+                      {row.subject}
+                    </p>
+                  </div>
+
+                  <div
+                    className="folio-card-mobile-header"
+                    style={{ display: 'flex', flexDirection: 'column' }}
+                  >
+                    <div className="folio-card-mobile-header-name">
+                      Investor Name
+                    </div>
+                    <p className="folio-card-mobile-header-folio">
+                      {row.user.name}
+                    </p>
+                  </div>
+                </div>
+
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    marginTop: '0.3rem',
+                    alignItems: 'center'
+                  }}
+                >
+                  <div>{statusGiver(row.isResolved)}</div>
+                  <Button
+                    variant="contained"
+                    style={{
+                      color: row.isResolved ? 'var(--primary-color)' : 'white',
+                      backgroundColor: row.isResolved
+                        ? 'white'
+                        : 'var(--primary-color)',
+                      border: '1px solid var(--primary-color)',
+                      fontSize: '0.7rem',
+                      width: '9rem',
+                      textTransform: 'none'
+                    }}
+                    onClick={() => {
+                      handleOpenDialog(row);
+                    }}
+                  >
+                    {row.isResolved ? 'Update' : 'Resolve'}
+                  </Button>
                 </div>
               </div>
-              <div className="query-dialog-details-row">
-                <div className="query-dialog-details-row-label"> From</div>
-                <div className="query-dialog-details-row-data">
-                  {dialogData.user?.name || 'NA'}
+            );
+          })}
+        </div>
+      ) : (
+        <Paper>
+          <TableContainer
+            component={Paper}
+            sx={{ maxHeight: '62vh', borderRadius: 2 }}
+            style={{ boxShadow: '0px 0px 0px 1px #CECECE' }}
+          >
+            <Table stickyHeader aria-label="customized table">
+              <TableHead style={{ border: '1px solid red' }}>
+                <TableRow>
+                  <StyledTableCell>Date&nbsp;Added</StyledTableCell>
+                  <StyledTableCell>Query&nbsp;ID</StyledTableCell>
+                  <StyledTableCell align="left">
+                    Query&nbsp;Subject
+                  </StyledTableCell>
+                  <StyledTableCell align="left">
+                    Investor&nbsp;Name
+                  </StyledTableCell>
+                  <StyledTableCell align="left">Status</StyledTableCell>
+                  <StyledTableCell align="left">Action</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {!displayRows.length && (
+                  <StyledTableRow>
+                    <StyledTableCell component="th" scope="row">
+                      {loading ? 'Loading...' : 'No queries...'}
+                    </StyledTableCell>
+                  </StyledTableRow>
+                )}
+                {displayRows.map((row) => (
+                  <StyledTableRow key={row._id}>
+                    <StyledTableCell component="th" scope="row">
+                      {new Date(row.date).toLocaleDateString('en-GB')}
+                    </StyledTableCell>
+                    <StyledTableCell align="left" component="th" scope="row">
+                      #{row._id}
+                    </StyledTableCell>
+                    <StyledTableCell align="left" component="th" scope="row">
+                      {row.subject}
+                    </StyledTableCell>
+                    <StyledTableCell align="left" component="th" scope="row">
+                      {row.user.name}
+                    </StyledTableCell>
+                    <StyledTableCell align="left" component="th" scope="row">
+                      {statusGiver(row.isResolved)}
+                    </StyledTableCell>
+                    <StyledTableCell align="left" component="th" scope="row">
+                      {
+                        <Button
+                          onClick={() => {
+                            handleOpenDialog(row);
+                          }}
+                          variant="contained"
+                          style={{
+                            border: '1px solid var(--primary-color)',
+                            backgroundColor: row.isResolved
+                              ? 'white'
+                              : 'var(--primary-color)',
+                            textTransform: 'none',
+                            color: row.isResolved
+                              ? 'var(--primary-color)'
+                              : 'white',
+                            padding: '4px 8px',
+                            fontSize: '0.75rem',
+                            width: '7rem'
+                          }}
+                        >
+                          {row.isResolved ? 'Update' : 'Resolve'}
+                        </Button>
+                      }
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <Dialog
+            open={dialogOpen}
+            onClose={handleCloseDialog}
+            maxWidth="sm"
+            fullWidth
+          >
+            <DialogTitle style={{ color: '#132F5E' }}>Add Comment</DialogTitle>
+            <DialogContent sx={{ margin: 0, padding: 0 }}>
+              <div className="query-dialog-details">
+                <div className="query-dialog-details-row">
+                  <div className="query-dialog-details-row-label">Query ID</div>
+                  <div className="query-dialog-details-row-data">
+                    #{dialogData.queryId}
+                  </div>
                 </div>
-              </div>
-              <div className="query-dialog-details-row">
-                <div className="query-dialog-details-row-label">
-                  Query Subject
+                <div className="query-dialog-details-row">
+                  <div className="query-dialog-details-row-label"> From</div>
+                  <div className="query-dialog-details-row-data">
+                    {dialogData.user?.name || 'NA'}
+                  </div>
                 </div>
-                <div className="query-dialog-details-row-data">
-                  {dialogData.subject || 'NA'}
-                </div>
-              </div>
-              <div className="query-dialog-details-row">
-                <div className="query-dialog-details-row-label">
-                  Query Detail
-                </div>
-                <div className="query-dialog-details-row-data">
-                  {dialogData.description || 'NA'}
-                </div>
-              </div>
-            </div>
-            <div
-              className="query-dialog-details"
-              style={{ backgroundColor: 'white' }}
-            >
-              <div className="query-dialog-details-row">
-                <div className="query-dialog-details-row-label">Status</div>
-                <div className="query-dialog-details-row-data">
-                  {statusGiver(dialogData.isResolved)}
-                </div>
-              </div>
-              {dialogData.isResolved && (
                 <div className="query-dialog-details-row">
                   <div className="query-dialog-details-row-label">
-                    Added comment
+                    Query Subject
                   </div>
                   <div className="query-dialog-details-row-data">
-                    {dialogData.reply || <i>Not added yet</i>}
+                    {dialogData.subject || 'NA'}
                   </div>
                 </div>
-              )}
-              <div
-                className="query-dialog-details-row"
-                style={{ alignItems: 'flex-start' }}
-              >
-                <div className="query-dialog-details-row-label">
-                  {dialogData.isResolved ? 'Update comment' : 'Add comment'}
-                </div>
-                <div className="query-dialog-details-row-data">
-                  <TextField
-                    autoFocus
-                    // margin="dense"
-                    id="name"
-                    type="text"
-                    fullWidth
-                    // variant="standard"
-                    value={message}
-                    onChange={handleChangeMessage}
-                    multiline
-                    rows={2}
-                    className="add-folio-searchbar-multiline"
-                  />
+                <div className="query-dialog-details-row">
+                  <div className="query-dialog-details-row-label">
+                    Query Detail
+                  </div>
+                  <div className="query-dialog-details-row-data">
+                    {dialogData.description || 'NA'}
+                  </div>
                 </div>
               </div>
-            </div>
-          </DialogContent>
-          <div
-            style={{
-              width: '100%',
-              display: 'flex',
-              alignContent: 'center',
-              justifyContent: 'flex-end',
-              gap: 20,
-              padding: '1rem'
-            }}
-          >
-            <Button
-              onClick={handleCloseDialog}
-              variant="outlined"
+              <div
+                className="query-dialog-details"
+                style={{ backgroundColor: 'white' }}
+              >
+                <div className="query-dialog-details-row">
+                  <div className="query-dialog-details-row-label">Status</div>
+                  <div className="query-dialog-details-row-data">
+                    {statusGiver(dialogData.isResolved)}
+                  </div>
+                </div>
+                {dialogData.isResolved && (
+                  <div className="query-dialog-details-row">
+                    <div className="query-dialog-details-row-label">
+                      Added comment
+                    </div>
+                    <div className="query-dialog-details-row-data">
+                      {dialogData.reply || <i>Not added yet</i>}
+                    </div>
+                  </div>
+                )}
+                <div
+                  className="query-dialog-details-row"
+                  style={{ alignItems: 'flex-start' }}
+                >
+                  <div className="query-dialog-details-row-label">
+                    {dialogData.isResolved ? 'Update comment' : 'Add comment'}
+                  </div>
+                  <div className="query-dialog-details-row-data">
+                    <TextField
+                      autoFocus
+                      // margin="dense"
+                      id="name"
+                      type="text"
+                      fullWidth
+                      // variant="standard"
+                      value={message}
+                      onChange={handleChangeMessage}
+                      multiline
+                      rows={2}
+                      className="add-folio-searchbar-multiline"
+                    />
+                  </div>
+                </div>
+              </div>
+            </DialogContent>
+            <div
               style={{
-                padding: '0.4rem 2rem',
-                borderRadius: '4px',
-                border: '1px solid var(--primary-color)',
-                color: 'var(--primary-color)',
-                backgroundColor: 'white',
-                fontSize: '1rem',
-                fontWeight: '500'
-              }}
-              className="add-multiple-new-transaction-button"
-            >
-              Cancel
-            </Button>
-            <Button
-              onClick={handleSaveQuery}
-              disabled={!message.length}
-              variant="outlined"
-              className="submit-multiple-new-transaction-button"
-              sx={{
-                backgroundColor: message.length
-                  ? 'var(--primary-color) !important'
-                  : 'hsl(10deg, 35%, 70%) !important',
-                color: message.length
-                  ? 'white'
-                  : 'hsl(10deg, 10%, 90%) !important'
+                width: '100%',
+                display: 'flex',
+                alignContent: 'center',
+                justifyContent: 'flex-end',
+                gap: 20,
+                padding: '1rem'
               }}
             >
-              {dialogData?.reply ? 'Update Message' : 'Submit'}
-            </Button>
-          </div>
-        </Dialog>
-      </Paper>
+              <Button
+                onClick={handleCloseDialog}
+                variant="outlined"
+                style={{
+                  padding: '0.4rem 2rem',
+                  borderRadius: '4px',
+                  border: '1px solid var(--primary-color)',
+                  color: 'var(--primary-color)',
+                  backgroundColor: 'white',
+                  fontSize: '1rem',
+                  fontWeight: '500'
+                }}
+                className="add-multiple-new-transaction-button"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={handleSaveQuery}
+                disabled={!message.length}
+                variant="outlined"
+                className="submit-multiple-new-transaction-button"
+                sx={{
+                  backgroundColor: message.length
+                    ? 'var(--primary-color) !important'
+                    : 'hsl(10deg, 35%, 70%) !important',
+                  color: message.length
+                    ? 'white'
+                    : 'hsl(10deg, 10%, 90%) !important'
+                }}
+              >
+                {dialogData?.reply ? 'Update Message' : 'Submit'}
+              </Button>
+            </div>
+          </Dialog>
+        </Paper>
+      )}
     </>
   );
 }
