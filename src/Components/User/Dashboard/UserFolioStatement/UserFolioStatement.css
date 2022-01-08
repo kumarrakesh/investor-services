@@ -73,6 +73,6 @@
     flex-wrap: wrap;
   }
   .user-folio-transaction-row {
-    flex-direction: column;
+    flex-wrap: wrap;
   }
 }

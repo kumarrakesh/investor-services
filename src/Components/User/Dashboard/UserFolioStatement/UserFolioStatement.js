@@ -278,7 +278,13 @@ const UserFolioStatement = () => {
         {size.width <= 768 ? (
           <div>
             <h3 className="folio-overview">Folio&nbsp;Statement</h3>
-            {!displayRows.length && <h2>No transactions...</h2>}
+            {!displayRows.length && (
+              <h2
+                style={{ marginTop: '1rem', color: 'var(--secondary-color)' }}
+              >
+                No transactions...
+              </h2>
+            )}
             <div
               style={{
                 backgroundColor: 'white',
