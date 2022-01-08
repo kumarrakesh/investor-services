@@ -195,7 +195,7 @@ const UserFolioStatement = () => {
       <div className="user-folio-transaction-container">
         <div className="user-folio-transaction-header">
           <h1 className="user-folio-transaction-header-label">
-            Folio Transaction{' '}
+            Folio Transaction
           </h1>
           <IconButton
             size="large"
@@ -276,7 +276,70 @@ const UserFolioStatement = () => {
           Download&nbsp;Statement
         </Button>
         {size.width <= 768 ? (
-          <h1>asd</h1>
+          <div>
+            <h3 className="folio-overview">Folio&nbsp;Statement</h3>
+            {!displayRows.length && <h2>No transactions...</h2>}
+            <div
+              style={{
+                backgroundColor: 'white',
+                borderRadius: '8px',
+                boxShadow: '0px 4px 11px 3px #0000000D',
+                marginTop: '1rem'
+              }}
+            >
+              {displayRows.length > 0 &&
+                displayRows.map((el, index) => (
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      padding: '20px',
+                      borderBottom: '1px solid #E5E5E5',
+                      gap: '10px'
+                    }}
+                  >
+                    <div style={{ display: 'flex', width: '100%' }}>
+                      <span
+                        style={{
+                          fontSize: '16px',
+                          fontWeight: 700
+                        }}
+                      >
+                        {new Date(el.date).toLocaleDateString('en-GB')}
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        width: '100%',
+                        justifyContent: 'space-between'
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontSize: '16px',
+                          fontWeight: 400
+                        }}
+                      >
+                        {el.type == 1
+                          ? 'Contribution'
+                          : el.type == 2
+                          ? 'Yield Payment'
+                          : 'Redemption'}
+                      </span>
+                      <span
+                        style={{
+                          fontSize: '16px',
+                          fontWeight: 500
+                        }}
+                      >
+                        {el.amount}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+            </div>
+          </div>
         ) : (
           <CustomizedTables displayRows={displayRows} loading={loading} />
         )}

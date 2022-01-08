@@ -65,11 +65,14 @@
   }
 
   .user-folio-transaction-container {
-    margin-top: -90vh;
+    margin-top: -99vh;
     padding: 2rem 1rem;
   }
 
   .user-folio-transaction {
     flex-wrap: wrap;
+  }
+  .user-folio-transaction-row {
+    flex-direction: column;
   }
 }
