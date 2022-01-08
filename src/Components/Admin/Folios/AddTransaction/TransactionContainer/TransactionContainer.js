@@ -24,6 +24,7 @@ import {
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { LocalizationProvider, DesktopDatePicker } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import AddMultipleTransactionMobile from '../AddMultipleTransactionMobile/AddMultipleTransactionMobile';
 const errorSwal = Swal.mixin({
   customClass: {
     container: 'add-folio-swal-container',
@@ -860,63 +861,80 @@ const TransactionContainer = () => {
           folioDetail={setFolioDetail}
         />
       ) : (
-        <div className="transaction-card-mobile-container">
-          {displayRows?.map((row) => {
-            console.log(row);
-            return (
-              <div className="transaction-card-mobile" key={row._id}>
-                <div className="transaction-card-mobile-header-top">
-                  <div className="transaction-card-mobile-header-folio-date">
-                    {new Date(row.date).toLocaleDateString('en-GB')}
-                  </div>
-                </div>
-
-                <div className="transaction-card-mobile-header">
-                  <div className="transaction-card-mobile-header-name">
-                    {row.type == 1
-                      ? 'Capital Contribution'
-                      : row.type == 2
-                      ? 'Yield Payment'
-                      : 'Redemption'}
+        <>
+          {!displayRows.length && (
+            <h3 style={{ color: 'var(--secondary-color)' }}>
+              No transactions...
+            </h3>
+          )}
+          <div className="transaction-card-mobile-container">
+            {displayRows?.map((row) => {
+              // console.log(row);
+              return (
+                <div className="transaction-card-mobile" key={row._id}>
+                  <div className="transaction-card-mobile-header-top">
+                    <div className="transaction-card-mobile-header-folio-date">
+                      {new Date(row.date).toLocaleDateString('en-GB')}
+                    </div>
                   </div>
 
-                  <div>{row.amount}</div>
-                </div>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'flex-end',
-                    marginTop: '0.5rem'
-                  }}
-                >
-                  <Button
-                    variant="contained"
+                  <div className="transaction-card-mobile-header">
+                    <div className="transaction-card-mobile-header-name transaction-card-mobile-header-name-a">
+                      {row.type == 1
+                        ? 'Capital Contribution'
+                        : row.type == 2
+                        ? 'Yield Payment'
+                        : 'Redemption'}
+                    </div>
+
+                    <div className="transaction-card-mobile-header-amount">
+                      {row.amount}
+                    </div>
+                  </div>
+                  <div
                     style={{
-                      color: 'var(--primary-color)',
-                      backgroundColor: 'white',
-                      border: '1px solid var(--primary-color)',
-                      fontSize: '0.8rem',
-                      padding: '0.4rem 2rem',
-                      textTransform: 'none'
-                    }}
-                    onClick={() => {
-                      history.push({
-                        pathname: '/admin/folios/editTransaction',
-                        state: {
-                          row: row,
-                          from: history.location.pathname,
-                          folio: history.location.state.row
-                        }
-                      });
+                      display: 'flex',
+                      justifyContent: 'flex-end',
+                      marginTop: '0.5rem'
                     }}
                   >
-                    Edit Transaction
-                  </Button>
+                    <Button
+                      variant="contained"
+                      style={{
+                        color: 'var(--primary-color)',
+                        backgroundColor: 'white',
+                        border: '1px solid var(--primary-color)',
+                        fontSize: '0.8rem',
+                        padding: '0.4rem 2rem',
+                        textTransform: 'none'
+                      }}
+                      onClick={() => {
+                        history.push({
+                          pathname: '/admin/folios/editTransaction',
+                          state: {
+                            row: row,
+                            from: history.location.pathname,
+                            folio: history.location.state.row
+                          }
+                        });
+                      }}
+                    >
+                      Edit Transaction
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+
+          <AddMultipleTransactionMobile
+            setLoading={setLoading}
+            errorSwal={errorSwal}
+            successSwal={successSwal}
+            setDisplayRows={setDisplayRows}
+            folioNumber={values.folioNumber}
+          />
+        </>
       )}
 
       {loading && (

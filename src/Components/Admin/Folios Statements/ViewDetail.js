@@ -21,7 +21,10 @@ const ViewDetail = () => {
       <div>
         <AdNavbar style={{ height: '100% !important' }} />
       </div>
-      <div className="folio-add-transaction-container">
+      <div
+        className="folio-add-transaction-container"
+        style={{ marginTop: '-99vh' }}
+      >
         <div className="folio-add-transaction-header">
           <h1 className="folio-add-transaction-header-label">
             {location?.state?.row?.user.name}'s Folio Statements
