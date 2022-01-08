@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import './Grievances.css';
 import { UserContext } from '../../../userContext';
 import Navbar from '../Navbar/Navbar';
@@ -79,6 +79,7 @@ function TabPanel(props) {
 }
 const Grievances = () => {
   const history = useHistory();
+  const location = useLocation();
   const token = JSON.parse(localStorage.getItem('token'));
 
   const [subject, setSubject] = useState('');
@@ -97,6 +98,14 @@ const Grievances = () => {
       history.push('/');
     }
   }, []);
+
+  useEffect(() => {
+    if (location?.state?.flag) {
+      setValue(location.state.flag);
+      handleRespone();
+      history.replace({ ...history.location, state: { flag: 0 } });
+    }
+  }, [location]);
 
   const handleSendQuery = async () => {
     try {

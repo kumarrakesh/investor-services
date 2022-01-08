@@ -1,13 +1,28 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import {
+  Table,
+  TableBody,
+  Dialog,
+  DialogContent,
+  DialogActions,
+  DialogTitle,
+  Button,
+  TextField
+} from '@mui/material';
+
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
+
+import useWindowSize from '../../../utils/useWindowSize';
 import SearchBar from 'material-ui-search-bar';
+import './Grievances.css';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -85,59 +100,285 @@ const statusGiver = (status) => {
 };
 
 export default function CustomizedTables({ rows, loading }) {
+  const size = useWindowSize();
+  const history = useHistory();
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogData, setDialogData] = useState({});
+  const [message, setMessage] = useState('');
+
+  const handleCloseDialog = (row) => {
+    setDialogOpen(false);
+  };
+
+  const handleOpenDialog = (row) => {
+    // console.log(row);
+    if (size.width > 768) {
+      setDialogData(row);
+      setDialogOpen(true);
+    } else {
+      console.log(row);
+      history.push({
+        pathname: '/queries/viewQuery',
+        state: { row }
+      });
+    }
+  };
   return (
-    <TableContainer
-      id="query-table"
-      component={Paper}
-      sx={{
-        maxHeight: '69vh',
-        border: '1px solid #CECECE',
-        borderRadius: '8px'
-      }}
-    >
-      <Table stickyHeader aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Date&nbsp;of&nbsp;Query</StyledTableCell>
-            <StyledTableCell>Query&nbsp;ID</StyledTableCell>
-            <StyledTableCell>Query&nbsp;Subject</StyledTableCell>
-            <StyledTableCell>Status</StyledTableCell>
-            <StyledTableCell>Resolution&nbsp;Message</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody
-          style={{
-            border: '1px solid #CECECE'
-          }}
-        >
-          {!rows.length && (
-            <StyledTableRow>
-              <StyledTableCell component="th" scope="row">
-                {loading ? 'Loading...' : 'No Queries...'}
-              </StyledTableCell>
-            </StyledTableRow>
-          )}
-          {rows.map((row) => (
-            <StyledTableRow key={row._id}>
-              <StyledTableCell component="th" scope="row">
-                {new Date(row.date).toLocaleDateString('en-GB')}
-              </StyledTableCell>
-              <StyledTableCell component="th" scope="row">
-                #{row.queryId}
-              </StyledTableCell>
-              <StyledTableCell component="th" scope="row">
-                {row.subject}
-              </StyledTableCell>
-              <StyledTableCell component="th" scope="row">
-                {statusGiver(row.isResolved)}
-              </StyledTableCell>
-              <StyledTableCell component="th" scope="row">
-                {row.reply ? row?.reply : 'Not Resolved'}
-              </StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      {size.width <= 768 ? (
+        <div className="folio-card-mobile-container">
+          {rows.map((row) => {
+            console.log(row);
+            return (
+              <div className="folio-card-mobile" key={row._id}>
+                <div
+                  className="folio-card-mobile-header-top"
+                  id="grievances-card-header-top"
+                >
+                  <div className="folio-card-mobile-header-folio-date">
+                    {new Date(row.date).toLocaleDateString('en-GB')}
+                  </div>
+                  <div style={{ fontSize: '0.9rem' }}>#{row.queryId}</div>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  <div
+                    className="folio-card-mobile-header"
+                    style={{ display: 'flex', flexDirection: 'column' }}
+                  >
+                    <div className="folio-card-mobile-header-name">
+                      Query Subject
+                    </div>
+                    <p className="folio-card-mobile-header-folio">
+                      {row.subject}
+                    </p>
+                  </div>
+
+                  <div
+                    className="folio-card-mobile-header"
+                    style={{ display: 'flex', flexDirection: 'column' }}
+                  >
+                    <div className="folio-card-mobile-header-name">
+                      Resolution Message
+                    </div>
+                    <p className="folio-card-mobile-header-folio">
+                      {row.reply
+                        ? row.reply.length > 20
+                          ? row?.reply.slice(0, 20) + '..'
+                          : row.reply
+                        : 'Not Resolved'}
+                    </p>
+                  </div>
+                </div>
+
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    marginTop: '0.3rem',
+                    alignItems: 'center'
+                  }}
+                >
+                  <div>{statusGiver(row.isResolved)}</div>
+                  <Button
+                    onClick={() => {
+                      handleOpenDialog(row);
+                    }}
+                    variant="contained"
+                    style={{
+                      border: '1px solid var(--primary-color)',
+                      backgroundColor: 'white',
+                      textTransform: 'none',
+                      color: 'var(--primary-color)',
+                      padding: '4px 8px',
+                      fontSize: '0.75rem',
+                      width: '7rem'
+                    }}
+                  >
+                    View Detail
+                  </Button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <Paper>
+          <TableContainer
+            id="query-table"
+            component={Paper}
+            sx={{
+              maxHeight: '69vh',
+              border: '1px solid #CECECE',
+              borderRadius: '8px'
+            }}
+          >
+            <Table stickyHeader aria-label="customized table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell>Date&nbsp;of&nbsp;Query</StyledTableCell>
+                  <StyledTableCell>Query&nbsp;ID</StyledTableCell>
+                  <StyledTableCell>Query&nbsp;Subject</StyledTableCell>
+                  <StyledTableCell>Status</StyledTableCell>
+                  <StyledTableCell>Resolution&nbsp;Message</StyledTableCell>
+                  <StyledTableCell align="left">Action</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody
+                style={{
+                  border: '1px solid #CECECE'
+                }}
+              >
+                {!rows.length && (
+                  <StyledTableRow>
+                    <StyledTableCell component="th" scope="row">
+                      {loading ? 'Loading...' : 'No Queries...'}
+                    </StyledTableCell>
+                  </StyledTableRow>
+                )}
+                {rows.map((row) => (
+                  <StyledTableRow key={row._id}>
+                    <StyledTableCell component="th" scope="row">
+                      {new Date(row.date).toLocaleDateString('en-GB')}
+                    </StyledTableCell>
+                    <StyledTableCell component="th" scope="row">
+                      #{row.queryId}
+                    </StyledTableCell>
+                    <StyledTableCell component="th" scope="row">
+                      {row.subject}
+                    </StyledTableCell>
+                    <StyledTableCell component="th" scope="row">
+                      {statusGiver(row.isResolved)}
+                    </StyledTableCell>
+                    <StyledTableCell component="th" scope="row">
+                      {row.reply
+                        ? row.reply.length > 20
+                          ? row?.reply.slice(0, 20) + '..'
+                          : row.reply
+                        : 'Not Resolved'}
+                    </StyledTableCell>
+                    <StyledTableCell align="left" component="th" scope="row">
+                      {
+                        <Button
+                          onClick={() => {
+                            handleOpenDialog(row);
+                          }}
+                          variant="contained"
+                          style={{
+                            border: '1px solid var(--primary-color)',
+                            backgroundColor: 'white',
+                            textTransform: 'none',
+                            color: 'var(--primary-color)',
+                            padding: '4px 8px',
+                            fontSize: '0.75rem',
+                            width: '7rem'
+                          }}
+                        >
+                          View Detail
+                        </Button>
+                      }
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <Dialog
+            open={dialogOpen}
+            // onClose={handleCloseDialog}
+            maxWidth="sm"
+            fullWidth
+          >
+            <DialogTitle
+              className="dialog-title-div"
+              style={{
+                display: 'flex',
+                padding: '0 1rem',
+                alignItems: 'center',
+                color: '#132F5E',
+                justifyContent: 'space-between'
+              }}
+            >
+              <h2 className="add-folio-title" style={{ fontSize: '1.2rem' }}>
+                Query Detail
+              </h2>
+              <IconButton
+                size="large"
+                style={{ color: '#132f5e' }}
+                onClick={handleCloseDialog}
+              >
+                <CloseIcon fontSize="medium" />
+              </IconButton>
+            </DialogTitle>
+            <DialogContent sx={{ margin: 0, padding: 0 }}>
+              <div className="query-dialog-details">
+                <div className="query-dialog-details-row">
+                  <div
+                    className="query-dialog-details-row-label"
+                    id="query-view-details-row-label"
+                  >
+                    Query ID
+                  </div>
+                  <div className="query-dialog-details-row-data">
+                    #{dialogData.queryId}
+                  </div>
+                </div>
+
+                <div className="query-dialog-details-row">
+                  <div
+                    className="query-dialog-details-row-label"
+                    id="query-view-details-row-label"
+                  >
+                    Query Subject
+                  </div>
+                  <div className="query-dialog-details-row-data">
+                    {dialogData.subject || 'NA'}
+                  </div>
+                </div>
+                <div className="query-dialog-details-row">
+                  <div
+                    className="query-dialog-details-row-label"
+                    id="query-view-details-row-label"
+                  >
+                    Query Detail
+                  </div>
+                  <div className="query-dialog-details-row-data">
+                    {dialogData.description || 'NA'}
+                  </div>
+                </div>
+              </div>
+              <div
+                className="query-dialog-details"
+                style={{ backgroundColor: 'white' }}
+              >
+                <div className="query-dialog-details-row">
+                  <div
+                    className="query-dialog-details-row-label"
+                    id="query-view-details-row-label"
+                  >
+                    Status
+                  </div>
+                  <div className="query-dialog-details-row-data">
+                    {statusGiver(dialogData.isResolved)}
+                  </div>
+                </div>
+
+                <div className="query-dialog-details-row">
+                  <div
+                    className="query-dialog-details-row-label"
+                    id="query-view-details-row-label"
+                  >
+                    Resolution Message
+                  </div>
+                  <div className="query-dialog-details-row-data">
+                    {dialogData.reply || <i>Not added yet</i>}
+                  </div>
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
+        </Paper>
+      )}
+    </>
   );
 }

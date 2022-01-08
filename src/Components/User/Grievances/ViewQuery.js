@@ -3,7 +3,6 @@ import { useHistory, useLocation } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import { TextField, Button, Backdrop, CircularProgress } from '@mui/material';
-import './AddComment.css';
 import Swal from 'sweetalert2';
 import useWindowSize from '../../../utils/useWindowSize';
 import { width } from '@mui/system';
@@ -85,47 +84,13 @@ const statusGiver = (status) => {
   );
 };
 
-const AddComment = () => {
+const ViewQuery = () => {
   const size = useWindowSize();
   const history = useHistory();
   const location = useLocation();
   const [row, setRow] = useState({});
   const [message, setMessage] = useState('');
   const [loading, setLoading] = React.useState(false);
-
-  const handleChangeMessage = (e) => {
-    setMessage(e.target.value);
-  };
-
-  const handleClosePage = () => {
-    history.push('/admin/queries');
-  };
-
-  const handleSaveQuery = async (e, row) => {
-    setLoading(true);
-    const response = await fetch(
-      `${process.env.REACT_APP_API}/api/query/update`,
-      {
-        method: 'POST',
-        body: JSON.stringify({
-          queryId: location.state.row._id,
-          reply: message,
-          isResolved: true
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-          'x-access-token': JSON.parse(localStorage.getItem('token'))
-        }
-      }
-    );
-    const data = await response.json();
-    setLoading(false);
-    if (data.status) {
-      successSwal.fire('Updated the Query!', '', 'success');
-      history.push('/admin/queries');
-    } else errorSwal.fire('Error while updating', data?.error, 'error');
-    // console.log(data);
-  };
 
   useEffect(() => {
     if (location?.state?.row) {
@@ -139,22 +104,23 @@ const AddComment = () => {
         <IconButton
           size="large"
           style={{ color: '#132f5e' }}
-          onClick={handleClosePage}
+          onClick={() => {
+            let flag = 1;
+            history.push({
+              pathname: '/queries',
+              state: { flag }
+            });
+          }}
         >
           <CloseIcon fontSize="large" />
         </IconButton>
-        <h2 className="add-folio-title">Add Comment</h2>
+        <h2 className="add-folio-title">Query Detail</h2>
       </div>
 
       <div className="query-main-top">
         <div className="query-main-top-row">
           <div className="query-main-top-row-title">Query ID</div>
           <div className="query-main-top-row-value">#{row?.queryId}</div>
-        </div>
-
-        <div className="query-main-top-row">
-          <div className="query-main-top-row-title">From</div>
-          <div className="query-main-top-row-value">{row?.user?.name}</div>
         </div>
 
         <div className="query-main-top-row">
@@ -180,86 +146,15 @@ const AddComment = () => {
             {statusGiver(row.isResolved)}
           </div>
         </div>
-        {row.isResolved && (
-          <div className="query-dialog-details-row">
-            <div className="query-dialog-details-row-label">Added comment</div>
-            <div className="query-dialog-details-row-data">
-              {row.reply || <i>Not added yet</i>}
-            </div>
-          </div>
-        )}
-        <div
-          className="query-dialog-details-row"
-          style={{ alignItems: 'flex-start' }}
-        >
+
+        <div className="query-dialog-details-row">
           <div className="query-dialog-details-row-label">
-            {row.isResolved ? 'Update comment' : 'Add comment'}
+            Resolution Message
           </div>
-          <div
-            className="query-dialog-details-row-data"
-            id="add-comment-details-row-data"
-          >
-            <TextField
-              autoFocus
-              // margin="dense"
-              id="name"
-              type="text"
-              fullWidth
-              // variant="standard"
-              value={message}
-              onChange={handleChangeMessage}
-              multiline
-              rows={2}
-              sx={{ width: '100%' }}
-              className="add-folio-searchbar-multiline"
-            />
+          <div className="query-dialog-details-row-data">
+            {row.reply || <i>Not added yet</i>}
           </div>
         </div>
-      </div>
-
-      <div
-        style={{
-          width: '100%',
-          display: 'flex',
-          alignContent: 'center',
-          justifyContent: 'space-between',
-          gap: 20,
-          padding: '1rem',
-          flex: '1'
-        }}
-      >
-        <Button
-          onClick={handleClosePage}
-          variant="outlined"
-          style={{
-            borderRadius: '4px',
-            border: '1px solid var(--primary-color)',
-            color: 'var(--primary-color)',
-            backgroundColor: 'white',
-            fontSize: '1rem',
-            fontWeight: '500',
-            width: size.width > 400 ? '10rem' : '9rem'
-          }}
-          // className="add-multiple-new-transaction-button"
-        >
-          Cancel
-        </Button>
-        <Button
-          onClick={handleSaveQuery}
-          disabled={!message.length}
-          variant="outlined"
-          // className="submit-multiple-new-transaction-button"
-          sx={{
-            borderRadius: '4px',
-            backgroundColor: message.length
-              ? 'var(--primary-color) !important'
-              : 'hsl(10deg, 35%, 70%) !important',
-            color: message.length ? 'white' : 'hsl(10deg, 10%, 90%) !important',
-            width: size.width > 400 ? '10rem' : '9rem'
-          }}
-        >
-          {row?.reply ? 'Update' : 'Submit'}
-        </Button>
       </div>
 
       {loading && (
@@ -275,4 +170,4 @@ const AddComment = () => {
   );
 };
 
-export default AddComment;
+export default ViewQuery;

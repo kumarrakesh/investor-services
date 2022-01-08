@@ -20,6 +20,7 @@ import FolioEditTransaction from '../Admin/Folios/FolioEditTransaction/FolioEdit
 import UserFolioStatement from '../User/Dashboard/UserFolioStatement/UserFolioStatement';
 import ViewDetail from '../Admin/Folios Statements/ViewDetail';
 import AddComment from '../Admin/Grievances/AddComment';
+import ViewQuery from '../User/Grievances/ViewQuery';
 
 const Routes = () => {
   return (
@@ -46,6 +47,10 @@ const Routes = () => {
 
       <Route exact path="/queries">
         <Grievances />
+      </Route>
+
+      <Route exact path="/queries/viewQuery">
+        <ViewQuery />
       </Route>
 
       <Route exact path="/admin/dashboard">

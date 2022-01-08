@@ -113,7 +113,11 @@ const AdminGrievances = () => {
               <TextField
                 {...params}
                 className="folio-searchbar"
-                placeholder="Search by Query ID or Investor's Name"
+                placeholder={
+                  size.width <= 350
+                    ? 'Search by Query ID or Name'
+                    : "Search by Query ID or Investor's Name"
+                }
               />
             )}
             value={selectedQuery}

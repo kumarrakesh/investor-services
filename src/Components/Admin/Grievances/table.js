@@ -19,6 +19,9 @@ import Paper from '@mui/material/Paper';
 import SearchBar from 'material-ui-search-bar';
 import Swal from 'sweetalert2';
 import useWindowSize from '../../../utils/useWindowSize';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
+
 const errorSwal = Swal.mixin({
   customClass: {
     container: 'add-folio-swal-container',
@@ -239,7 +242,7 @@ export default function CustomizedTables({
                   <div className="folio-card-mobile-header-folio-date">
                     {new Date(row.date).toLocaleDateString('en-GB')}
                   </div>
-                  <div style={{ fontSize: '0.9rem' }}>#{row._id}</div>
+                  <div style={{ fontSize: '0.9rem' }}>#{row.queryId}</div>
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -383,7 +386,18 @@ export default function CustomizedTables({
             maxWidth="sm"
             fullWidth
           >
-            <DialogTitle style={{ color: '#132F5E' }}>Add Comment</DialogTitle>
+            <DialogTitle style={{ color: '#132F5E' }}>
+              <div className="add-folio-header">
+                <h2 className="add-folio-title">Add Comment</h2>
+                <IconButton
+                  size="large"
+                  style={{ color: '#132f5e' }}
+                  onClick={handleCloseDialog}
+                >
+                  <CloseIcon fontSize="large" />
+                </IconButton>
+              </div>
+            </DialogTitle>
             <DialogContent sx={{ margin: 0, padding: 0 }}>
               <div className="query-dialog-details">
                 <div className="query-dialog-details-row">

@@ -75,6 +75,13 @@ Button:visited {
   margin-top: 0.5rem;
 }
 
+.dialog-title-div {
+  padding: 0;
+}
+
+#query-view-details-row-label {
+  flex: 1.5;
+}
 @media screen and (max-width: 768px) {
   .grievances-header-container {
     flex-direction: column !important;
